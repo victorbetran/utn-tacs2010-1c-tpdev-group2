@@ -28,8 +28,8 @@ public class Pedido {
 	//********************************************
 	/**Cancela un pedido, cancelando sus piezas y cambiando su estado a <i>CANCELADO</i>.*/
 	public void cancelar() {
-		this.cancelarPiezas();
 		this.estado.setCancelado();
+		this.cancelarPiezas();
 	}
 
 	/**Devuelve el Estado del Pedido.*/
