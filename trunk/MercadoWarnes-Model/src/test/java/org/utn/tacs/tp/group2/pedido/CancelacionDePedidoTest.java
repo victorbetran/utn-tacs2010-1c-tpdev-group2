@@ -19,7 +19,12 @@ public class CancelacionDePedidoTest {
 	 */
 	@Test public void cancelarUnPedidoEnCurso(){
 		this.pedido.cancelar();
+		
+		//Al cancelar un pedido el estado del mismo debe ser cancelado.
 		Assert.assertTrue(this.pedido.getEstado().equals(EstadoPedido.getEstadoCancelado()));
+		
+		//El pedido no debe poseer piezas al ser cancelado.
+		Assert.assertEquals(0, this.pedido.getPiezas().size());
 	}
 
 	/**
