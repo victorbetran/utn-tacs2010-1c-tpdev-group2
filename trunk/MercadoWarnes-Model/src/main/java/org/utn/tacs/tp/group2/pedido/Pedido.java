@@ -48,6 +48,14 @@ public class Pedido {
 		this.venderPiezas();
 		this.estado.setEfectivo();
 	}
+	
+	/**
+	 * Agrega una pieza a la lista de piezas del pedido.
+	 * @param pieza: una pieza para agregar al pedido.
+	 */
+	public void agregarPieza(Pieza pieza) {
+		this.piezas.add(pieza);		
+	}
 
 	
 	//********************************************
@@ -63,7 +71,6 @@ public class Pedido {
 		this.piezas.clear();
 	}
 	
-	
 	/**
 	 * Setea el estado de las piezas a Vendidas.
 	 */
@@ -72,5 +79,18 @@ public class Pedido {
 			pieza.setVendida();
 		}
 	}
+	
+	//********************************************
+	//** GETTERS AND SETTERS
+	//********************************************
+	public List<Pieza> getPiezas() {
+		return piezas;
+	}
+	
+	public void setPiezas(List<Pieza> piezas) {
+		this.piezas = piezas;
+	}
+
+
 
 }
