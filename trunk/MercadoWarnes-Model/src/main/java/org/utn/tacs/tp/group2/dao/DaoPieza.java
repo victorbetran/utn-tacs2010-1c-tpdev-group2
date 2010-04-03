@@ -5,7 +5,7 @@ package org.utn.tacs.tp.group2.dao;
  * @author ale
  *
  */
-public class PiezaDao {
+public class DaoPieza {
 
 
 }
