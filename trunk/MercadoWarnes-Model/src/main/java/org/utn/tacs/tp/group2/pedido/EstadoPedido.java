@@ -69,7 +69,7 @@ public class EstadoPedido {
 	 * Retorna un estado <b>EN CURSO</b>.
 	 */
 	public static EstadoPedido getEstadoEnCurso() {
-		return new EstadoPedido();
+		return new EstadoPedido().setEnCurso();
 	}
 	
 	/**
