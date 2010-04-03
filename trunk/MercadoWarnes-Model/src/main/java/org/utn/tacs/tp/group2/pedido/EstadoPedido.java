@@ -25,11 +25,9 @@ public class EstadoPedido {
 	//** PUBLIC CONSTRUCTOR
 	//********************************************
 	/**
-	 * Cuando se construye el estado, se lo inicializa en su estado natural default, <b>En CURSO</b>.
+	 * Constructor protegido, para no permitir su instanciacion por fuera de la clase.
 	 */
-	public EstadoPedido() {
-		this.estado = EN_CURSO;
-	}
+	protected EstadoPedido() {}
 	
 	
 	//********************************************
@@ -50,7 +48,7 @@ public class EstadoPedido {
 		if(this.estado == EFECTIVO) 
 			throw new PedidoException("No se puede cancelar un pedido efectivizado.");
 		if(this.estado == CANCELADO) 
-			throw new PedidoException("El pedido ya ha sido cancelado, no puede volver a cancelarse");		
+			throw new PedidoException("El pedido ya ha sido cancelado, no puede volver a cancelarse.");		
 		this.estado = CANCELADO; 
 		return this;
 	}
@@ -63,6 +61,10 @@ public class EstadoPedido {
 		return this;
 	}
 
+	
+	//********************************************
+	//** PUBLIC CLASS METHODS
+	//********************************************
 	/**
 	 * Retorna un estado <b>EN CURSO</b>.
 	 */

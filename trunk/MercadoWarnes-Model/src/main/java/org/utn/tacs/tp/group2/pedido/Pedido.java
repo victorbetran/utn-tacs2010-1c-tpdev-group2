@@ -19,7 +19,7 @@ public class Pedido {
 	//********************************************
 	public Pedido() {
 		this.piezas = new ArrayList<Pieza>();
-		this.estado = new EstadoPedido();
+		this.estado = EstadoPedido.getEstadoEnCurso();
 	}
 	
 	
@@ -45,7 +45,7 @@ public class Pedido {
 	 *  Efectiviza un pedido, vendiendo sus piezas y cambiando su estado a <i>EFECTIVO</i>.
 	 */	
 	public void efectivizar() {
-		// TODO: Determinar que hacer con las piezas cuando el pedido se efectiviza
+		this.venderPiezas();
 		this.estado.setEfectivo();
 	}
 
@@ -57,8 +57,20 @@ public class Pedido {
 	 * Setea el estado de las piezas a Disponible.
 	 */
 	private void cancelarPiezas() {
-		//TODO: implementar el cancelado de las piezas.
+		for(Pieza pieza : this.piezas){
+			//pieza.setDisponible();
+		}
 		this.piezas.clear();
+	}
+	
+	
+	/**
+	 * Setea el estado de las piezas a Vendidas.
+	 */
+	private void venderPiezas() {
+		for(Pieza pieza : this.piezas){
+			//pieza.setVendida();
+		}
 	}
 
 }

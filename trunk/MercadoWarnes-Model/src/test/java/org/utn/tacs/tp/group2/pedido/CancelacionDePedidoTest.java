@@ -1,15 +1,13 @@
 package org.utn.tacs.tp.group2.pedido;
 
-
 import junit.framework.Assert;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.utn.tacs.tp.group2.exceptions.PedidoException;
 
-public class ManejoDePedidoTest {
 
+public class CancelacionDePedidoTest {
 	private Pedido pedido;
 	
 	@Before
@@ -42,9 +40,4 @@ public class ManejoDePedidoTest {
 		this.pedido.cancelar();
 		this.pedido.cancelar();
 	}
-	
-	@After
-	public void tearDown() throws Exception {
-	}
-
 }
