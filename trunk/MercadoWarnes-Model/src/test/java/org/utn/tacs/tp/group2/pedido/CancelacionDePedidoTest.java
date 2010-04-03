@@ -19,7 +19,7 @@ public class CancelacionDePedidoTest {
 	 * Cancela un pedido recientemente creado, es decir, un pedido <b>EN CURSO</b>
 	 */
 	@Test public void cancelarUnPedidoEnCurso(){
-		pedido.cancelar();
+		this.pedido.cancelar();
 		Assert.assertTrue(this.pedido.getEstado().equals(EstadoPedido.getEstadoCancelado()));
 	}
 
