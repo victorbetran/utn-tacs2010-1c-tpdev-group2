@@ -6,12 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.utn.tacs.tp.group2.exceptions.PedidoException;
 
-
 public class CancelacionDePedidoTest {
+	
 	private Pedido pedido;
 	
-	@Before
-	public void setUp(){
+	@Before	public void setUp(){
 		this.pedido = new Pedido();
 	}
 
