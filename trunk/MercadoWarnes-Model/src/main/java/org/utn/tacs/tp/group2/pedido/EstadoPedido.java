@@ -15,14 +15,18 @@ public class EstadoPedido {
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
-	/**Estado del pedido.*/
+	/**
+	 * Estado del pedido.
+	 */
 	private String estado;
 	
 	
 	//********************************************
 	//** PUBLIC CONSTRUCTOR
 	//********************************************
-	/**Cuando se construye el estado, se lo inicializa en su estado natural default, <b>En CURSO</b>.*/
+	/**
+	 * Cuando se construye el estado, se lo inicializa en su estado natural default, <b>En CURSO</b>.
+	 */
 	public EstadoPedido() {
 		this.estado = EN_CURSO;
 	}
@@ -31,37 +35,51 @@ public class EstadoPedido {
 	//********************************************
 	//** PUBLIC METHODS
 	//********************************************
-	/**Setea el estado del pedido a <b>EN CURSO</b>.*/
+	/**
+	 * Setea el estado del pedido a <b>EN CURSO</b>.
+	 */
 	public EstadoPedido setEnCurso(){ 
 		this.estado = EN_CURSO; 
 		return this;
 	}
 	
-	/**Setea el estado del pedido a <b>CANCELADO</b>.*/
+	/**
+	 * Setea el estado del pedido a <b>CANCELADO</b>.
+	 */
 	public EstadoPedido setCancelado(){ 
 		if(this.estado == EFECTIVO) 
 			throw new PedidoException("No se puede cancelar un pedido efectivizado.");
+		if(this.estado == CANCELADO) 
+			throw new PedidoException("El pedido ya ha sido cancelado, no puede volver a cancelarse");		
 		this.estado = CANCELADO; 
 		return this;
 	}
 	
-	/**Setea el estado del pedido a <b>EFECTIVO</b>.*/
+	/**
+	 * Setea el estado del pedido a <b>EFECTIVO</b>.
+	 */
 	public EstadoPedido setEfectivo(){ 
 		this.estado = EFECTIVO; 
 		return this;
 	}
 
-	/**Retorna un estado <b>EN CURSO</b>.*/
+	/**
+	 * Retorna un estado <b>EN CURSO</b>.
+	 */
 	public static EstadoPedido getEstadoEnCurso() {
 		return new EstadoPedido();
 	}
 	
-	/**Retorna un estado <b>CANCELADO</b>.*/
+	/**
+	 * Retorna un estado <b>CANCELADO</b>.
+	 */
 	public static EstadoPedido getEstadoCancelado() {
 		return new EstadoPedido().setCancelado();
 	}
 	
-	/**Retorna un estado <b>EFECTIVO</b>.*/
+	/**
+	 * Retorna un estado <b>EFECTIVO</b>.
+	 */
 	public static EstadoPedido getEstadoEfectivo() {
 		return new EstadoPedido().setEfectivo();
 	}

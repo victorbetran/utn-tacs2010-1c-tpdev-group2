@@ -26,18 +26,24 @@ public class Pedido {
 	//********************************************
 	//** PUBLIC METHODS
 	//********************************************
-	/**Cancela un pedido, cancelando sus piezas y cambiando su estado a <i>CANCELADO</i>.*/
+	/**
+	 * Cancela un pedido, cancelando sus piezas y cambiando su estado a <i>CANCELADO</i>.
+	 */
 	public void cancelar() {
 		this.estado.setCancelado();
 		this.cancelarPiezas();
 	}
 
-	/**Devuelve el Estado del Pedido.*/
+	/**
+	 * Devuelve el Estado del Pedido.
+	 */
 	public EstadoPedido getEstado() {
 		return this.estado;
 	}
 	
-	/**Efectiviza un pedido, vendiendo sus piezas y cambiando su estado a <i>EFECTIVO</i>.*/	
+	/**
+	 *  Efectiviza un pedido, vendiendo sus piezas y cambiando su estado a <i>EFECTIVO</i>.
+	 */	
 	public void efectivizar() {
 		// TODO: Determinar que hacer con las piezas cuando el pedido se efectiviza
 		this.estado.setEfectivo();
@@ -47,13 +53,12 @@ public class Pedido {
 	//********************************************
 	//** PRIVATE METHOD
 	//********************************************
-	/**Setea el estado de las piezas a Disponible.*/
+	/**
+	 * Setea el estado de las piezas a Disponible.
+	 */
 	private void cancelarPiezas() {
 		//TODO: implementar el cancelado de las piezas.
 		this.piezas.clear();
 	}
-
-
-
 
 }
