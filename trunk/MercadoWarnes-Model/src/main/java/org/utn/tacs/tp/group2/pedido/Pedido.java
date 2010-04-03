@@ -58,7 +58,7 @@ public class Pedido {
 	 */
 	private void cancelarPiezas() {
 		for(Pieza pieza : this.piezas){
-			//pieza.setDisponible();
+			pieza.setDisponible();
 		}
 		this.piezas.clear();
 	}
@@ -69,7 +69,7 @@ public class Pedido {
 	 */
 	private void venderPiezas() {
 		for(Pieza pieza : this.piezas){
-			//pieza.setVendida();
+			pieza.setVendida();
 		}
 	}
 
