@@ -46,25 +46,34 @@ public class PiezaTest {
 	 * Una pieza que no fue reservada no puede ser vendida.
 	 */
 	@Test(expected=PiezaNoReservadaException.class)
-	public void venderUnaPiezaDisponible() {
-		Assert.assertTrue(this.pieza.isDisponible());
+	public void venderUnaPiezaDisponible() {		
 		this.pieza.setVendida();
 	}
 	
 	/**
-	 * Una pieza sólo puede venderse si fue vendida.
+	 * Una pieza sólo puede venderse si fue reservada.
 	 */
 	@Test public void venderUnaPiezaReservada() {
 		this.pieza.setReservada();
-		Assert.assertTrue(this.pieza.isReservada());
 		this.pieza.setVendida();
+		Assert.assertTrue(this.pieza.isVendida());
+	}
+	
+	/**
+	 * Vender una pieza ya vendida.
+	 */
+	
+	@Test(expected=PiezaVendidaException.class)
+	public void venderUnaPiezaYaVendida() {
+		this.pieza.setReservada();
+		this.pieza.setVendida();
+		this.pieza.setVendida();		
 	}
 	
 	/**
 	 * Una pieza sólo puede reservarse si esta disponible.
 	 */
-	@Test public void reservarUnaPiezaDisponible() {
-		Assert.assertTrue(this.pieza.isDisponible());
+	@Test public void reservarUnaPiezaDisponible() {		
 		this.pieza.setReservada();
 		Assert.assertTrue(this.pieza.isReservada());
 	}
