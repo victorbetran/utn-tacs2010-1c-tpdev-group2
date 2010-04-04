@@ -1,12 +1,12 @@
 package org.utn.tacs.tp.group2.pieza;
 
-
 public class Pieza {
 	
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
 	private EstadoPieza estado;
+	
 	
 	//********************************************
 	//** PUBLIC CONSTRUCTOR
@@ -15,6 +15,10 @@ public class Pieza {
 		this.estado = EstadoPieza.getEstadoDisponible();
 	}
 	
+	
+	//********************************************
+	//** PUBLIC METHODS
+	//********************************************
 	/**
 	 * Establece a la pieza como Disponible.
 	 */
@@ -40,19 +44,28 @@ public class Pieza {
 	 * Devuelve el estado de la pieza.
 	 */
 	public EstadoPieza getEstado() {
-		return estado;
+		return this.estado;
 	}
 	
+	/**
+	 * Determina si la pieza se encuentra reservada.
+	 */
 	public boolean isReservada() {
 		return this.getEstado().isReservada();
 	}
 
+	/**
+	 * Determina si la pieza se encuentra disponible.
+	 */
 	public boolean isDisponible() {
 		return this.getEstado().isDisponible();
 	}
-
-	//********************************************
-	//** PRIVATE METHODS
-	//********************************************
 	
+	/**
+	 * Determina si la pieza se encuentra vendida.
+	 */
+	public boolean isVendida() {
+		return this.getEstado().isVendida();
+	}
+
 }

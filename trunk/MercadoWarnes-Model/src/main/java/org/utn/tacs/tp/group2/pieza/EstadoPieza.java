@@ -2,10 +2,17 @@ package org.utn.tacs.tp.group2.pieza;
 
 public class EstadoPieza {
 
+	//********************************************
+	//** CLASS VARIABLES
+	//********************************************
 	private static final String DISPONIBLE = "DISPONIBLE";
 	private static final String RESERVADA = "RESERVADA";
 	private static final String VENDIDA = "VENDIDA";	
 
+	
+	//********************************************
+	//** ATRIBUTTES
+	//********************************************
 	/**
 	 * Estado de la pieza
 	 */
@@ -15,6 +22,7 @@ public class EstadoPieza {
 	 * Constructor protegido, para no permitir su instanciacion por fuera de la clase.
 	 */
 	protected EstadoPieza() {}
+	
 	
 	//********************************************
 	//** PUBLIC METHODS
@@ -45,7 +53,6 @@ public class EstadoPieza {
 	
 	/**
 	 * Informa si la pieza está disponible.
-	 * @return
 	 */
 	public boolean isDisponible() {
 		return this.estado.equals(DISPONIBLE);
@@ -53,10 +60,16 @@ public class EstadoPieza {
 	
 	/**
 	 * Informa si la pieza está reservada.
-	 * @return
 	 */	
 	public boolean isReservada() {
 		return this.estado.equals(RESERVADA);
+	}
+	
+	/**
+	 * Informa si la pieza está vendida.
+	 */	
+	public boolean isVendida() {
+		return this.estado.equals(VENDIDA);
 	}
 	
 	//********************************************
@@ -83,6 +96,7 @@ public class EstadoPieza {
 		return new EstadoPieza().setVendida();
 	}
 	
+	
 	//********************************************
 	//** OVERWRITTEN METHODS
 	//********************************************
@@ -98,9 +112,10 @@ public class EstadoPieza {
 		return estadoPieza.estado.equals(this.estado);
 	}
 
-	@Override
-	public String toString() {
+	@Override public String toString() {
 		return this.estado;
 	}
+
+
 
 }

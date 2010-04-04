@@ -8,20 +8,29 @@ import org.utn.tacs.tp.group2.exceptions.PedidoException;
 
 public class CancelacionDePedidoTest {
 	
+	//********************************************
+	//** ATRIBUTTES
+	//********************************************
 	private Pedido pedido;
 	
+	
+	//********************************************
+	//** CONTEXT
+	//********************************************
 	@Before
 	public void setUp(){
 		this.pedido = new Pedido();
 	}
 
+	
+	//********************************************
+	//** TESTS
+	//********************************************
 	/**
 	 * Cancela un pedido recientemente creado, es decir, un pedido <b>EN CURSO</b>
 	 */
-	@Test
-	public void cancelarUnPedidoEnCurso(){
+	@Test public void cancelarUnPedidoEnCurso(){
 		this.pedido.cancelar();
-		
 		Assert.assertTrue(this.pedido.isCancelado());
 		Assert.assertEquals(0, this.pedido.getPiezas().size());
 	}

@@ -88,7 +88,6 @@ public class EstadoPedido {
 	
 	/**
 	 * Informa si el estado es cancelado.
-	 * @return
 	 */
 	public boolean isCancelado() {
 		return this.estado.equals(CANCELADO);
@@ -97,10 +96,13 @@ public class EstadoPedido {
 	//********************************************
 	//** OVERWRITTEN METHODS
 	//********************************************
-	@Override
-	public boolean equals(Object obj) {
-		if(obj == this) return true;
-		if(!(obj instanceof EstadoPedido)) return false;
+	@Override public boolean equals(Object obj) {
+		if(obj == this){
+			return true;
+		}
+		if(!(obj instanceof EstadoPedido)){ 
+			return false;
+		}
 		EstadoPedido estadoPedido = (EstadoPedido) obj;
 		return estadoPedido.estado.equals(this.estado);
 	}
