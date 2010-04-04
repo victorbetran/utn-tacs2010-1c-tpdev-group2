@@ -1,8 +1,14 @@
 package org.utn.tacs.tp.group2.pedido;
 
-import org.utn.tacs.tp.group2.exceptions.PedidoException;
+import org.utn.tacs.tp.group2.exceptions.PedidoCanceladoException;
+import org.utn.tacs.tp.group2.exceptions.PedidoEfectivizadoException;
 
-public class EstadoPedido {
+/**
+ * Al ser el estado de un pedido algo inherente al pedido, no esta bueno que pueda accederse
+ * desde el exterior, por lo que el estado es ahora una clase "privada", es decir, su scope
+ * solo se mantiene dentro del package.
+ */
+class EstadoPedido {
 
 	//********************************************
 	//** CLASS ATRIBUTTES
@@ -20,6 +26,11 @@ public class EstadoPedido {
 	 */
 	private String estado;
 	
+	/**
+	 * Pedido al cual pertenece el estado.
+	 */
+	private Pedido pedido;
+	
 	
 	//********************************************
 	//** PUBLIC CONSTRUCTOR
@@ -27,7 +38,9 @@ public class EstadoPedido {
 	/**
 	 * Constructor protegido, para no permitir su instanciacion por fuera de la clase.
 	 */
-	protected EstadoPedido() {}
+	protected EstadoPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
 	
 	
 	//********************************************
@@ -46,9 +59,9 @@ public class EstadoPedido {
 	 */
 	public EstadoPedido setCancelado(){ 
 		if(this.estado == EFECTIVO) 
-			throw new PedidoException("No se puede cancelar un pedido efectivizado.");
+			throw new PedidoEfectivizadoException(this.pedido);
 		if(this.estado == CANCELADO) 
-			throw new PedidoException("El pedido ya ha sido cancelado, no puede volver a cancelarse.");		
+			throw new PedidoCanceladoException(this.pedido);		
 		this.estado = CANCELADO; 
 		return this;
 	}
@@ -57,10 +70,32 @@ public class EstadoPedido {
 	 * Setea el estado del pedido a <b>EFECTIVO</b>.
 	 */
 	public EstadoPedido setEfectivo(){ 
+		if(this.estado == CANCELADO) 
+			throw new PedidoCanceladoException(this.pedido);	
 		this.estado = EFECTIVO; 
 		return this;
 	}
 
+	/**
+	 * Informa si el estado es cancelado.
+	 */
+	public boolean isCancelado() {
+		return this.estado.equals(CANCELADO);
+	}
+	
+	/**
+	 * Informa si el estado es efectivo.
+	 */
+	public boolean isEfectivo() {
+		return this.estado.equals(EFECTIVO);
+	}
+	
+	/**
+	 * Informa si el estado es en curso.
+	 */
+	public boolean isEnCurso() {
+		return this.estado.equals(EN_CURSO);
+	}
 	
 	//********************************************
 	//** PUBLIC CLASS METHODS
@@ -68,30 +103,24 @@ public class EstadoPedido {
 	/**
 	 * Retorna un estado <b>EN CURSO</b>.
 	 */
-	public static EstadoPedido getEstadoEnCurso() {
-		return new EstadoPedido().setEnCurso();
+	public static EstadoPedido getEstadoEnCursoFor(Pedido pedido) {
+		return new EstadoPedido(pedido).setEnCurso();
 	}
 	
 	/**
 	 * Retorna un estado <b>CANCELADO</b>.
 	 */
-	public static EstadoPedido getEstadoCancelado() {
-		return new EstadoPedido().setCancelado();
+	public static EstadoPedido getEstadoCanceladoFor(Pedido pedido) {
+		return new EstadoPedido(pedido).setCancelado();
 	}
 	
 	/**
 	 * Retorna un estado <b>EFECTIVO</b>.
 	 */
-	public static EstadoPedido getEstadoEfectivo() {
-		return new EstadoPedido().setEfectivo();
+	public static EstadoPedido getEstadoEfectivoFor(Pedido pedido) {
+		return new EstadoPedido(pedido).setEfectivo();
 	}
 	
-	/**
-	 * Informa si el estado es cancelado.
-	 */
-	public boolean isCancelado() {
-		return this.estado.equals(CANCELADO);
-	}
 	
 	//********************************************
 	//** OVERWRITTEN METHODS
@@ -106,5 +135,8 @@ public class EstadoPedido {
 		EstadoPedido estadoPedido = (EstadoPedido) obj;
 		return estadoPedido.estado.equals(this.estado);
 	}
+
+
+
 
 }

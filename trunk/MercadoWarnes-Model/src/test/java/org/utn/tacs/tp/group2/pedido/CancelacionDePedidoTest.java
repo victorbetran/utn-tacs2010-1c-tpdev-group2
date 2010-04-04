@@ -4,7 +4,8 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.exceptions.PedidoException;
+import org.utn.tacs.tp.group2.exceptions.PedidoCanceladoException;
+import org.utn.tacs.tp.group2.exceptions.PedidoEfectivizadoException;
 
 public class CancelacionDePedidoTest {
 	
@@ -38,16 +39,17 @@ public class CancelacionDePedidoTest {
 	/**
 	 * Cancela un pedido que fue efectifizado, es decir, un pedido <b>EFECTIVO</b>.
 	 */
-	@Test (expected=PedidoException.class)
+	@Test (expected=PedidoEfectivizadoException.class)
 	public void cancelarUnPedidoEfectivo(){
 		this.pedido.efectivizar();
+		Assert.assertTrue(this.pedido.isEfectivo());
 		this.pedido.cancelar();
 	}
 	
 	/**
 	 * Cancela un pedido que había sido cancelado previamente, es decir, un pedido <b>CANCELADO</b>.
 	 */
-	@Test (expected=PedidoException.class)
+	@Test (expected=PedidoCanceladoException.class)
 	public void cancelarUnPedidoCancelado(){
 		this.pedido.cancelar();
 		this.pedido.cancelar();

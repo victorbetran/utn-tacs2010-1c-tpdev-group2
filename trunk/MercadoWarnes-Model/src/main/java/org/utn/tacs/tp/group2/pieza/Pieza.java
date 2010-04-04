@@ -1,18 +1,20 @@
 package org.utn.tacs.tp.group2.pieza;
 
+
 public class Pieza {
 	
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
 	private EstadoPieza estado;
+	private String id = "Pieza";
 	
 	
 	//********************************************
 	//** PUBLIC CONSTRUCTOR
 	//********************************************
 	public Pieza() {
-		this.estado = EstadoPieza.getEstadoDisponible();
+		this.estado = EstadoPieza.getEstadoDisponibleFor(this);
 	}
 	
 	
@@ -67,5 +69,12 @@ public class Pieza {
 	public boolean isVendida() {
 		return this.getEstado().isVendida();
 	}
-
+	
+	//********************************************
+	//** OVERWRITTEN METHODS
+	//********************************************
+	@Override public String toString() {
+		return this.id;
+	}
+	
 }

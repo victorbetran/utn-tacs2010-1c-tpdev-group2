@@ -11,6 +11,7 @@ public class Pedido {
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
+	private String id = "Pedido";
 	private List<Pieza> piezas;
 	private EstadoPedido estado;
 	
@@ -20,7 +21,7 @@ public class Pedido {
 	//********************************************
 	public Pedido() {
 		this.piezas = new ArrayList<Pieza>();
-		this.estado = EstadoPedido.getEstadoEnCurso();
+		this.estado = EstadoPedido.getEstadoEnCursoFor(this);
 	}
 	
 	
@@ -36,13 +37,6 @@ public class Pedido {
 	}
 
 	/**
-	 * Devuelve el Estado del Pedido.
-	 */
-	public EstadoPedido getEstado() {
-		return this.estado;
-	}
-	
-	/**
 	 *  Efectiviza un pedido, vendiendo sus piezas y cambiando su estado a <i>EFECTIVO</i>.
 	 */	
 	public void efectivizar() {
@@ -51,18 +45,37 @@ public class Pedido {
 	}
 	
 	/**
-	 * Agrega una pieza al pedido.
+	 * Agrega una pieza al pedido, controlando que pueda ser agregada y finalemente
+	 * cambiando su estado a reservada.
 	 * @param pieza: una pieza para agregar al pedido.
 	 * @return Pedido: El objeto al que se le está enviando el mensaje.
 	 */
 	public Pedido addPieza(Pieza pieza){
 		controlarDisponibilidadDePieza(pieza);
 		this.piezas.add(pieza);
+		pieza.setReservada();
 		return this;
 	}
 	
+	/**
+	 * Determina si el Pedido fue Cancelado.
+	 */
+	public boolean isEfectivo() {
+		return this.estado.isEfectivo();
+	}
+	
+	/**
+	 * Determina si el Pedido fue Cancelado.
+	 */
 	public boolean isCancelado() {
-		return this.getEstado().isCancelado();
+		return this.estado.isCancelado();
+	}
+	
+	/**
+	 * Determina si el Pedido fue Cancelado.
+	 */
+	public boolean isEnCurso() {
+		return this.estado.isEnCurso();
 	}
 	
 	//********************************************
@@ -92,7 +105,7 @@ public class Pedido {
 	 */
 	private void controlarDisponibilidadDePieza(Pieza pieza) {
 		if(!pieza.isDisponible()){
-			throw new InclusionDePiezaNoPermitidaException("No puede incluirse una pieza en estado: " + pieza.getEstado());
+			throw new InclusionDePiezaNoPermitidaException(pieza);
 		}
 		
 	}
@@ -110,6 +123,13 @@ public class Pedido {
 	
 	public void setPiezas(List<Pieza> piezas) {
 		this.piezas = piezas;
+	}
+	
+	//********************************************
+	//** OVERWRITTEN METHODS
+	//********************************************
+	@Override public String toString() {
+		return this.id;
 	}
 
 }

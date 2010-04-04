@@ -1,6 +1,14 @@
 package org.utn.tacs.tp.group2.pieza;
 
-public class EstadoPieza {
+import org.utn.tacs.tp.group2.exceptions.PiezaNoReservadaException;
+import org.utn.tacs.tp.group2.exceptions.PiezaVendidaException;
+
+/**
+ * Al ser el estado de una pieza algo inherente a la pieza, no esta bueno que pueda accederse
+ * desde el exterior, por lo que el estado es ahora una clase "privada", es decir, su scope
+ * solo se mantiene dentro del package.
+ */
+class EstadoPieza {
 
 	//********************************************
 	//** CLASS VARIABLES
@@ -17,11 +25,22 @@ public class EstadoPieza {
 	 * Estado de la pieza
 	 */
 	private String estado;
+	
+	/**
+	 * Pieza a la cual corresponde el estado.
+	 */
+	private Pieza pieza;
 
+	
+	//********************************************
+	//** CONSTRUCTOR
+	//********************************************
 	/**
 	 * Constructor protegido, para no permitir su instanciacion por fuera de la clase.
 	 */
-	protected EstadoPieza() {}
+	protected EstadoPieza(Pieza pieza) {
+		this.pieza = pieza;
+	}
 	
 	
 	//********************************************
@@ -31,6 +50,8 @@ public class EstadoPieza {
 	 * Setea el estado de la pieza a <b>DISPONIBLE</b>.
 	 */
 	public EstadoPieza setDisponible(){ 
+		if(this.estado == VENDIDA)
+			throw new PiezaVendidaException(this.pieza);
 		this.estado = DISPONIBLE; 
 		return this;
 	}
@@ -38,7 +59,9 @@ public class EstadoPieza {
 	/**
 	 * Setea el estado de la pieza a <b>RESERVADA</b>.
 	 */
-	public EstadoPieza setReservada(){ 
+	public EstadoPieza setReservada(){
+		if(this.estado == VENDIDA)
+			throw new PiezaVendidaException(this.pieza);
 		this.estado = RESERVADA; 
 		return this;
 	}
@@ -47,6 +70,8 @@ public class EstadoPieza {
 	 * Setea el estado de la pieza a <b>VENDIDA</b>.
 	 */
 	public EstadoPieza setVendida(){ 
+		if(this.estado == DISPONIBLE)
+			throw new PiezaNoReservadaException(this.pieza);
 		this.estado = VENDIDA; 
 		return this;
 	}
@@ -78,22 +103,22 @@ public class EstadoPieza {
 	/**
 	 * Retorna un estado <b>DISPONIBLE</b>.
 	 */
-	public static EstadoPieza getEstadoDisponible() {
-		return new EstadoPieza().setDisponible();
+	public static EstadoPieza getEstadoDisponibleFor(Pieza pieza) {
+		return new EstadoPieza(pieza).setDisponible();
 	}
 	
 	/**
 	 * Retorna un estado <b>RESERVADA</b>.
 	 */
-	public static EstadoPieza getEstadoReservada() {
-		return new EstadoPieza().setReservada();
+	public static EstadoPieza getEstadoReservadaFor(Pieza pieza) {
+		return new EstadoPieza(pieza).setReservada();
 	}
 	
 	/**
 	 * Retorna un estado <b>VENDIDA</b>.
 	 */
-	public static EstadoPieza getEstadoVendida() {
-		return new EstadoPieza().setVendida();
+	public static EstadoPieza getEstadoVendidaFor(Pieza pieza) {
+		return new EstadoPieza(pieza).setVendida();
 	}
 	
 	
