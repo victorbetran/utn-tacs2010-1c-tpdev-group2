@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.utn.tacs.tp.group2.exceptions.InclusionDePiezaNoPermitidaException;
+import org.utn.tacs.tp.group2.exceptions.PedidoEfectivizadoException;
+import org.utn.tacs.tp.group2.exceptions.PedidoSinPiezasException;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class Pedido {
@@ -40,6 +42,10 @@ public class Pedido {
 	 *  Efectiviza un pedido, vendiendo sus piezas y cambiando su estado a <i>EFECTIVO</i>.
 	 */	
 	public void efectivizar() {
+		if (this.piezas.isEmpty())
+			throw new PedidoSinPiezasException(this);
+		if (this.isEfectivo())
+			throw new PedidoEfectivizadoException(this);
 		this.venderPiezas();
 		this.estado.setEfectivo();
 	}
@@ -131,5 +137,8 @@ public class Pedido {
 	@Override public String toString() {
 		return this.id;
 	}
+
+
+	
 
 }
