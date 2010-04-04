@@ -27,15 +27,6 @@ public class PiezaTest {
 		}
 	}
 	
-	/**
-	 * Reserva una pieza.
-	 */
-	@Test
-	public void reservarUnaPieza(){
-		this.pieza.setReservada();
-		Assert.assertTrue(this.pieza.isReservada());
-	}
-
 	
 	/**
 	 * Reservar varias piezas.
