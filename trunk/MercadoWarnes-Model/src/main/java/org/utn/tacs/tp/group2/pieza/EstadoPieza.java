@@ -72,6 +72,8 @@ class EstadoPieza {
 	public EstadoPieza setVendida(){ 
 		if(this.estado == DISPONIBLE)
 			throw new PiezaNoReservadaException(this.pieza);
+		if(this.estado == VENDIDA)
+			throw new PiezaVendidaException(this.pieza);
 		this.estado = VENDIDA; 
 		return this;
 	}
