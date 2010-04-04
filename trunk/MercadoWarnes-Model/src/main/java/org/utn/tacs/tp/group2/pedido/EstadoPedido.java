@@ -86,6 +86,13 @@ public class EstadoPedido {
 		return new EstadoPedido().setEfectivo();
 	}
 	
+	/**
+	 * Informa si el estado es cancelado.
+	 * @return
+	 */
+	public boolean isCancelado() {
+		return this.estado.equals(CANCELADO);
+	}
 	
 	//********************************************
 	//** OVERWRITTEN METHODS
@@ -97,5 +104,5 @@ public class EstadoPedido {
 		EstadoPedido estadoPedido = (EstadoPedido) obj;
 		return estadoPedido.estado.equals(this.estado);
 	}
-	
+
 }

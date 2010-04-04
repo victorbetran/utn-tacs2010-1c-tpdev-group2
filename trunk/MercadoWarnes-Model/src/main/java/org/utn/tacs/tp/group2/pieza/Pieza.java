@@ -14,7 +14,7 @@ public class Pieza {
 	public Pieza() {
 		this.estado = EstadoPieza.getEstadoDisponible();
 	}
-
+	
 	/**
 	 * Establece a la pieza como Disponible.
 	 */
@@ -42,7 +42,17 @@ public class Pieza {
 	public EstadoPieza getEstado() {
 		return estado;
 	}
+	
+	public boolean isReservada() {
+		return this.getEstado().isReservada();
+	}
 
+	public boolean isDisponible() {
+		return this.getEstado().isDisponible();
+	}
 
-
+	//********************************************
+	//** PRIVATE METHODS
+	//********************************************
+	
 }

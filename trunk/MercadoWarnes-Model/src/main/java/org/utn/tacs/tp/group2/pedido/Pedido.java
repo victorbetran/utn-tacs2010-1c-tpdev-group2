@@ -3,6 +3,7 @@ package org.utn.tacs.tp.group2.pedido;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.utn.tacs.tp.group2.exceptions.InclusionDePiezaNoPermitidaException;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class Pedido {
@@ -50,13 +51,19 @@ public class Pedido {
 	}
 	
 	/**
-	 * Agrega una pieza a la lista de piezas del pedido.
+	 * Agrega una pieza al pedido.
 	 * @param pieza: una pieza para agregar al pedido.
+	 * @return Pedido: El objeto al que se le está enviando el mensaje.
 	 */
-	public void agregarPieza(Pieza pieza) {
-		this.piezas.add(pieza);		
+	public Pedido addPieza(Pieza pieza){
+		controlarDisponibilidadDePieza(pieza);
+		this.piezas.add(pieza);
+		return this;
 	}
-
+	
+	public boolean isCancelado() {
+		return this.getEstado().isCancelado();
+	}
 	
 	//********************************************
 	//** PRIVATE METHOD
@@ -80,17 +87,29 @@ public class Pedido {
 		}
 	}
 	
+	/**
+	 * Si el estado de la pieza no permite ser incluída en un pedido, lanzará una excepción.
+	 */
+	private void controlarDisponibilidadDePieza(Pieza pieza) {
+		if(!pieza.isDisponible()){
+			throw new InclusionDePiezaNoPermitidaException("No puede incluirse una pieza en estado: " + pieza.getEstado());
+		}
+		
+	}
+	
 	//********************************************
 	//** GETTERS AND SETTERS
 	//********************************************
+	/**
+	 * Devuelve el conjunto de piezas que conforman el pedido.
+	 * @return
+	 */
 	public List<Pieza> getPiezas() {
-		return piezas;
+		return this.piezas;
 	}
 	
 	public void setPiezas(List<Pieza> piezas) {
 		this.piezas = piezas;
 	}
-
-
 
 }

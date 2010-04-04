@@ -13,16 +13,16 @@ import org.junit.Test;
 public class PiezaTest {
 
 	private Pieza pieza;
-	private List<Pieza> listaPiezas;
+	private List<Pieza> listadoDePiezas;
 	
 	@Before
 	public void setUp() {
 		this.pieza = new Pieza();		
-		listaPiezas = new ArrayList<Pieza>();
+		listadoDePiezas = new ArrayList<Pieza>();
 		
 		//Agrego 10 piezas a la lista de piezas
 		for (int i = 0; i < 10; i++) {
-			listaPiezas.add(new Pieza());
+			listadoDePiezas.add(new Pieza());
 		}
 	}
 	
@@ -31,8 +31,17 @@ public class PiezaTest {
 	 */
 	@Test
 	public void reservarUnaPieza(){
-		pieza.setReservada();		
-		Assert.assertTrue(this.pieza.getEstado().equals(EstadoPieza.getEstadoReservada()));
+		pieza.setReservada();
+		Assert.assertTrue(this.pieza.isReservada());
+	}
+
+	/**
+	 * Pone como vendida una pieza y luego verifica que no esté reservada.
+	 */
+	@Test
+	public void controlarPiezaVendidaNoEsteReservada(){
+		pieza.setVendida();
+		Assert.assertTrue(!this.pieza.isReservada());
 	}
 	
 	/**
@@ -40,12 +49,12 @@ public class PiezaTest {
 	 */
 	@Test
 	public void reservarVariasPiezas(){
-		for (Pieza pieza : listaPiezas) {
+		for (Pieza pieza : listadoDePiezas) {
 			pieza.setReservada();
 		}
 		
-		for (Pieza pieza : listaPiezas) {
-			Assert.assertTrue(pieza.getEstado().equals(EstadoPieza.getEstadoReservada()));
+		for (Pieza pieza : listadoDePiezas) {
+			Assert.assertTrue(pieza.isReservada());
 		}
 	}
 

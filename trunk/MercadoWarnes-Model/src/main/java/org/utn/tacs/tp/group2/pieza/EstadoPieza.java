@@ -1,9 +1,5 @@
 package org.utn.tacs.tp.group2.pieza;
 
-
-
-
-
 public class EstadoPieza {
 
 	private static final String DISPONIBLE = "DISPONIBLE";
@@ -47,6 +43,22 @@ public class EstadoPieza {
 		return this;
 	}
 	
+	/**
+	 * Informa si la pieza está disponible.
+	 * @return
+	 */
+	public boolean isDisponible() {
+		return this.estado.equals(DISPONIBLE);
+	}
+	
+	/**
+	 * Informa si la pieza está reservada.
+	 * @return
+	 */	
+	public boolean isReservada() {
+		return this.estado.equals(RESERVADA);
+	}
+	
 	//********************************************
 	//** PUBLIC CLASS METHODS
 	//********************************************
@@ -85,4 +97,10 @@ public class EstadoPieza {
 		EstadoPieza estadoPieza = (EstadoPieza) obj;
 		return estadoPieza.estado.equals(this.estado);
 	}
+
+	@Override
+	public String toString() {
+		return this.estado;
+	}
+
 }
