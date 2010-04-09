@@ -54,7 +54,7 @@ public class ManejoDePedidoTest {
 	 */
 	@Test
 	public void agregarUnaListaDePiezasAUnPedido(){
-		this.pedido.setPiezas(this.listadoPiezasParaAgregar);
+		this.pedido.addPiezas(this.listadoPiezasParaAgregar);
 		
 		List<Pieza> listaPiezasDelPedido = this.pedido.getPiezas();
 		

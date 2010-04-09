@@ -1,13 +1,52 @@
 package org.utn.tacs.tp.group2.pieza;
 
+import java.math.BigDecimal;
+
 
 public class Pieza {
 	
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
+	/**
+	 * Estado en que se encuentra la pieza.
+	 */
 	private EstadoPieza estado;
-	private String id = "Pieza";
+	
+	/**
+	 * Identificador de la pieza.
+	 */
+	@SuppressWarnings("unused")
+	private String id = "1";
+	
+	/**
+	 * Código único de la pieza.
+	 */
+	private String codigo = "Pieza";
+	
+	/**
+	 * Descripcion de la pieza.
+	 */
+	@SuppressWarnings("unused")
+	private String descripcion = "Pieza";
+	
+	/**
+	 * Categoría de la pieza.
+	 */
+	@SuppressWarnings("unused")
+	private CategoriaPieza categoria;
+	
+	/**
+	 * Auto al cual pertenece la pieza.
+	 */
+	@SuppressWarnings("unused")
+	private Auto autoOrigen;
+	
+	/**
+	 * Precio de la Pieza.
+	 */
+	@SuppressWarnings("unused")
+	private BigDecimal precio;
 	
 	
 	//********************************************
@@ -15,6 +54,7 @@ public class Pieza {
 	//********************************************
 	public Pieza() {
 		this.estado = EstadoPieza.getEstadoDisponibleFor(this);
+		this.categoria = CategoriaPieza.getCategoriaStandard();
 	}
 	
 	
@@ -70,11 +110,12 @@ public class Pieza {
 		return this.getEstado().isVendida();
 	}
 	
+	
 	//********************************************
 	//** OVERWRITTEN METHODS
 	//********************************************
 	@Override public String toString() {
-		return this.id;
+		return this.codigo;
 	}
 	
 }

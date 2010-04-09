@@ -64,6 +64,14 @@ public class Pedido {
 	}
 	
 	/**
+	 * Agrega un conjunto de pieza al pedido.
+	 */
+	public void addPiezas(List<Pieza> piezas) {
+		for(Pieza pieza: piezas)
+			this.addPieza(pieza);
+	}
+	
+	/**
 	 * Determina si el Pedido fue Cancelado.
 	 */
 	public boolean isEfectivo() {
@@ -83,6 +91,7 @@ public class Pedido {
 	public boolean isEnCurso() {
 		return this.estado.isEnCurso();
 	}
+	
 	
 	//********************************************
 	//** PRIVATE METHOD
@@ -126,10 +135,7 @@ public class Pedido {
 	public List<Pieza> getPiezas() {
 		return this.piezas;
 	}
-	
-	public void setPiezas(List<Pieza> piezas) {
-		this.piezas = piezas;
-	}
+
 	
 	//********************************************
 	//** OVERWRITTEN METHODS

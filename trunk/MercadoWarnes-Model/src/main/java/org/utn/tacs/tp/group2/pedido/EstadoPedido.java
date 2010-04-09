@@ -3,12 +3,7 @@ package org.utn.tacs.tp.group2.pedido;
 import org.utn.tacs.tp.group2.exceptions.PedidoCanceladoException;
 import org.utn.tacs.tp.group2.exceptions.PedidoEfectivizadoException;
 
-/**
- * Al ser el estado de un pedido algo inherente al pedido, no esta bueno que pueda accederse
- * desde el exterior, por lo que el estado es ahora una clase "privada", es decir, su scope
- * solo se mantiene dentro del package.
- */
-class EstadoPedido {
+public class EstadoPedido {
 
 	//********************************************
 	//** CLASS ATRIBUTTES
@@ -58,9 +53,9 @@ class EstadoPedido {
 	 * Setea el estado del pedido a <b>CANCELADO</b>.
 	 */
 	public EstadoPedido setCancelado(){ 
-		if(this.estado == EFECTIVO) 
+		if(this.estado.equals(EFECTIVO)) 
 			throw new PedidoEfectivizadoException(this.pedido);
-		if(this.estado == CANCELADO) 
+		if(this.estado.equals(CANCELADO))
 			throw new PedidoCanceladoException(this.pedido);		
 		this.estado = CANCELADO; 
 		return this;
@@ -70,7 +65,7 @@ class EstadoPedido {
 	 * Setea el estado del pedido a <b>EFECTIVO</b>.
 	 */
 	public EstadoPedido setEfectivo(){ 
-		if(this.estado == CANCELADO) 
+		if(this.estado.equals(CANCELADO)) 
 			throw new PedidoCanceladoException(this.pedido);	
 		this.estado = EFECTIVO; 
 		return this;
@@ -126,6 +121,9 @@ class EstadoPedido {
 	//** OVERWRITTEN METHODS
 	//********************************************
 	@Override public boolean equals(Object obj) {
+		if(obj == null){
+			return false;
+		}
 		if(obj == this){
 			return true;
 		}

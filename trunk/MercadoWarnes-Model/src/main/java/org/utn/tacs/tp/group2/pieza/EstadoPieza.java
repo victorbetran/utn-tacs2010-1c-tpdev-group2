@@ -3,12 +3,7 @@ package org.utn.tacs.tp.group2.pieza;
 import org.utn.tacs.tp.group2.exceptions.PiezaNoReservadaException;
 import org.utn.tacs.tp.group2.exceptions.PiezaVendidaException;
 
-/**
- * Al ser el estado de una pieza algo inherente a la pieza, no esta bueno que pueda accederse
- * desde el exterior, por lo que el estado es ahora una clase "privada", es decir, su scope
- * solo se mantiene dentro del package.
- */
-class EstadoPieza {
+public class EstadoPieza {
 
 	//********************************************
 	//** CLASS VARIABLES
@@ -129,6 +124,8 @@ class EstadoPieza {
 	//********************************************
 	@Override
 	public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
 		if(obj == this){
 			return true;
 		}

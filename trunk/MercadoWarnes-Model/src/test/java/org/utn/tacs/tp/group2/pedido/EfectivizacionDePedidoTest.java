@@ -35,11 +35,13 @@ public class EfectivizacionDePedidoTest {
 		this.pedido.efectivizar();
 		Assert.assertTrue(pieza1.isVendida() && pieza2.isVendida());
 	}
+	
 	@Test(expected=PedidoSinPiezasException.class) 
 	public void efectivizarPedidoSinPiezas()
 	{
 		this.pedido.efectivizar();		
 	}
+	
 	@Test(expected=PedidoEfectivizadoException.class) 
 	public void efectivizarPedidoYaEfectivizado()
 	{
