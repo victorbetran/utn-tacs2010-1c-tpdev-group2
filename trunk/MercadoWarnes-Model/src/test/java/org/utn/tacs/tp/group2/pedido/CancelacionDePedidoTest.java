@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.utn.tacs.tp.group2.exceptions.PedidoCanceladoException;
 import org.utn.tacs.tp.group2.exceptions.PedidoEfectivizadoException;
+import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class CancelacionDePedidoTest {
 	
@@ -41,6 +42,7 @@ public class CancelacionDePedidoTest {
 	 */
 	@Test (expected=PedidoEfectivizadoException.class)
 	public void cancelarUnPedidoEfectivo(){
+		this.pedido.addPieza(new Pieza());
 		this.pedido.efectivizar();
 		Assert.assertTrue(this.pedido.isEfectivo());
 		this.pedido.cancelar();
