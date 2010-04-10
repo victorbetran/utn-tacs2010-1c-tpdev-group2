@@ -125,6 +125,27 @@ public class Pedido {
 		
 	}
 	
+	/**
+	 * Indica si el pedido contiene a una pieza.
+	 * @param pieza: pieza en cuestión.
+	 * @return
+	 */
+	public boolean contienePieza(Pieza pieza){
+		return this.piezas.contains(pieza);
+	}
+	
+	/**
+	 * Indica si el pedido está conteniendo alguna pieza.
+	 * @return
+	 */
+	public boolean tienePiezas(){
+		return !this.piezas.isEmpty();
+	}
+	
+	public int cantidadDePiezasAsignadas(){
+		return this.piezas.size();
+	}
+	
 	//********************************************
 	//** GETTERS AND SETTERS
 	//********************************************
@@ -133,7 +154,11 @@ public class Pedido {
 	 * @return
 	 */
 	public List<Pieza> getPiezas() {
-		return this.piezas;
+		List<Pieza> toReturn = new ArrayList<Pieza>();
+		for (Pieza pieza : this.piezas) {
+			toReturn.add(pieza);
+		}
+		return toReturn;
 	}
 
 	
@@ -143,8 +168,5 @@ public class Pedido {
 	@Override public String toString() {
 		return this.id;
 	}
-
-
-	
 
 }

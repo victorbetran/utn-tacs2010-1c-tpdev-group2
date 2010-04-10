@@ -26,29 +26,36 @@ public class CreacionDePedidoTest {
 		pedido = new Pedido();
 	}
 	
+	/**
+	 * Controla que a una pieza no disponible no se le permita ser agregada a un pedido.
+	 */
 	@Test(expected=InclusionDePiezaNoPermitidaException.class)
 	public void agregarPiezaNoDisponible(){
 		pedido.addPieza(piezaNoDisponible);
 	}
 	
+	/**
+	 * Controla la adición de una pieza a un pedido.
+	 */
 	public void agregarPieza(){
 		pedido.addPieza(piezaDisponible);
 	
 		List<Pieza> piezasDelPedido = pedido.getPiezas();
 		
-		Assert.assertTrue(piezasDelPedido.size() == 1);
-		Assert.assertEquals(piezasDelPedido.get(0), piezaDisponible);
+		Assert.assertEquals("El pedido contiene mas piezas de las que le fueron asignadas.",pedido.cantidadDePiezasAsignadas(),1);
+		Assert.assertEquals("El pedido contiene una pieza diferente a la que le fue agregada.",piezasDelPedido.get(0), piezaDisponible);
 	}
 
+	/**
+	 * Controla la adición de piezas a un pedido.
+	 */
 	public void agregarPiezas(){
 		pedido.addPieza(piezaDisponible);
 		pedido.addPieza(otraPiezaDisponible);
 	
-		List<Pieza> piezasDelPedido = pedido.getPiezas();
-		
-		Assert.assertTrue(piezasDelPedido.size() == 2);
-		Assert.assertTrue(piezasDelPedido.contains(piezaDisponible));
-		Assert.assertTrue(piezasDelPedido.contains(otraPiezaDisponible));
+		Assert.assertEquals("El pedido contiene mas piezas de las que le fueron asignadas.",pedido.cantidadDePiezasAsignadas(),2);
+		Assert.assertTrue("El pedido no contiene una pieza que le fue agregada.",pedido.contienePieza(piezaDisponible));
+		Assert.assertTrue("El pedido no contiene una pieza que le fue agregada.",pedido.contienePieza(otraPiezaDisponible));
 	}
 	
 }

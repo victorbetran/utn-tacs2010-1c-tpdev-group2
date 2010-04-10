@@ -33,8 +33,8 @@ public class CancelacionDePedidoTest {
 	 */
 	@Test public void cancelarUnPedidoEnCurso(){
 		this.pedido.cancelar();
-		Assert.assertTrue(this.pedido.isCancelado());
-		Assert.assertEquals(0, this.pedido.getPiezas().size());
+		Assert.assertTrue("El pedido no se ha cancelado correctamente.",this.pedido.isCancelado());
+		Assert.assertFalse("El pedido se ha cancelado pero aún contiene piezas.",this.pedido.tienePiezas());
 	}
 	
 	/**
@@ -44,7 +44,6 @@ public class CancelacionDePedidoTest {
 	public void cancelarUnPedidoEfectivo(){
 		this.pedido.addPieza(new Pieza());
 		this.pedido.efectivizar();
-		Assert.assertTrue(this.pedido.isEfectivo());
 		this.pedido.cancelar();
 	}
 	

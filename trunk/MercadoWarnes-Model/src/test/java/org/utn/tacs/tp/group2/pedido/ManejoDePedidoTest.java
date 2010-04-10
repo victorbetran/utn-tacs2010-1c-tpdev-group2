@@ -1,9 +1,6 @@
 package org.utn.tacs.tp.group2.pedido;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import junit.framework.Assert;
 
 import org.junit.Before;
@@ -16,7 +13,6 @@ public class ManejoDePedidoTest {
 	private Pieza pieza1;
 	private Pieza pieza2;
 	private Pieza pieza3;
-	private List<Pieza> listadoPiezasParaAgregar;
 	
 	@Before
 	public void setUp(){
@@ -25,11 +21,6 @@ public class ManejoDePedidoTest {
 		this.pieza1 = new Pieza();
 		this.pieza2 = new Pieza();
 		this.pieza3 = new Pieza();
-		
-		this.listadoPiezasParaAgregar = new ArrayList<Pieza>();
-		this.listadoPiezasParaAgregar.add(this.pieza1);
-		this.listadoPiezasParaAgregar.add(this.pieza2);
-		this.listadoPiezasParaAgregar.add(this.pieza3);
 	}
 
 	/**
@@ -41,26 +32,20 @@ public class ManejoDePedidoTest {
 		this.pedido.addPieza(this.pieza2);
 		this.pedido.addPieza(this.pieza3);
 		
-		List<Pieza> listaPiezas = this.pedido.getPiezas();
-		
-		Assert.assertTrue(listaPiezas.size() == 3);
-		Assert.assertTrue(listaPiezas.contains(this.pieza1));
-		Assert.assertTrue(listaPiezas.contains(this.pieza2));
-		Assert.assertTrue(listaPiezas.contains(this.pieza3));		
+		Assert.assertEquals("El pedido tiene mas piezas de las que le fueron agregadas",pedido.cantidadDePiezasAsignadas(),3);
+		Assert.assertTrue("La pieza fue agregada al pedido pero el mismo no la contiene.",pedido.contienePieza(this.pieza1));
+		Assert.assertTrue("La pieza fue agregada al pedido pero el mismo no la contiene.",pedido.contienePieza(this.pieza2));
+		Assert.assertTrue("La pieza fue agregada al pedido pero el mismo no la contiene.",pedido.contienePieza(this.pieza3));
 	}
 	
 	/**
-	 * Agrega una lista de piezas a un pedido.
+	 * Agrega una pieza al pedido y la efectiviza.
 	 */
 	@Test
-	public void agregarUnaListaDePiezasAUnPedido(){
-		this.pedido.addPiezas(this.listadoPiezasParaAgregar);
-		
-		List<Pieza> listaPiezasDelPedido = this.pedido.getPiezas();
-		
-		for(Pieza pieza : listaPiezasDelPedido){
-			Assert.assertTrue(this.listadoPiezasParaAgregar.contains(pieza));
-		}
+	public void efectivizarPedido(){
+		this.pedido.addPieza(this.pieza1);
+		this.pedido.efectivizar();
+		Assert.assertTrue("El pedido no se ha efectivizado correctamente.",this.pedido.isEfectivo());
 	}
-
+	
 }

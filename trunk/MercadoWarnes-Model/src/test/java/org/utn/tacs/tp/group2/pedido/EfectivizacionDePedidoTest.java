@@ -12,10 +12,14 @@ import org.utn.tacs.tp.group2.pieza.Pieza;
 public class EfectivizacionDePedidoTest {
 
 	private Pedido pedido;
+	private Pieza unaPieza;
+	private Pieza otraPieza;
 	
 	@Before
 	public void setUp() throws Exception {
 		this.pedido = new Pedido();
+		unaPieza = new Pieza();
+		otraPieza = new Pieza();
 	}
 
 	/**
@@ -23,10 +27,9 @@ public class EfectivizacionDePedidoTest {
 	 */
 	@Test
 	public void efectivizarPedido() {
-		Pieza pieza1 = new Pieza();
-		this.pedido.addPieza(pieza1);
+		this.pedido.addPieza(unaPieza);
 		this.pedido.efectivizar();
-		Assert.assertTrue(this.pedido.isEfectivo());
+		Assert.assertTrue("No se ha efectivizado correctamente el pedido.",this.pedido.isEfectivo());
 	}
 
 	/**
@@ -35,12 +38,10 @@ public class EfectivizacionDePedidoTest {
 	 */
 	@Test
 	public void efectivizarPedidoVerificandoPiezasVendidas() {
-		Pieza pieza1 = new Pieza();
-		Pieza pieza2 = new Pieza();
-		this.pedido.addPieza(pieza1);
-		this.pedido.addPieza(pieza2);
+		this.pedido.addPieza(unaPieza);
+		this.pedido.addPieza(otraPieza);
 		this.pedido.efectivizar();
-		Assert.assertTrue(pieza1.isVendida() && pieza2.isVendida());
+		Assert.assertTrue(unaPieza.isVendida() && otraPieza.isVendida());
 	}
 
 	/**
@@ -58,8 +59,7 @@ public class EfectivizacionDePedidoTest {
 	 */
 	@Test(expected = PedidoEfectivizadoException.class)
 	public void efectivizarPedidoYaEfectivizado() {
-		Pieza pieza1 = new Pieza();
-		this.pedido.addPieza(pieza1);
+		this.pedido.addPieza(unaPieza);
 		this.pedido.efectivizar();
 		this.pedido.efectivizar();
 	}
