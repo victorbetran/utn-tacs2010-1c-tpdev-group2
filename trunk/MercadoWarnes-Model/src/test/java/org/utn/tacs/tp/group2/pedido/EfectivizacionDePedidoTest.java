@@ -17,38 +17,51 @@ public class EfectivizacionDePedidoTest {
 	public void setUp() throws Exception {
 		this.pedido = new Pedido();
 	}
-	
-	@Test public void efectivizarPedido()
-	{
-		Pieza pieza1=new Pieza();		
-		this.pedido.addPieza(pieza1);		
+
+	/**
+	 * Chequea que el estado de un pedido cambie a EFECTIVO.
+	 */
+	@Test
+	public void efectivizarPedido() {
+		Pieza pieza1 = new Pieza();
+		this.pedido.addPieza(pieza1);
 		this.pedido.efectivizar();
 		Assert.assertTrue(this.pedido.isEfectivo());
 	}
-	
-	@Test public void efectivizarPedidoConPiezasVendidas()
-	{
-		Pieza pieza1=new Pieza();
-		Pieza pieza2=new Pieza();		
+
+	/**
+	 * Verifica que las piezas de un pedido queden VENDIDAS ante la
+	 * efectivización del pedido.
+	 */
+	@Test
+	public void efectivizarPedidoVerificandoPiezasVendidas() {
+		Pieza pieza1 = new Pieza();
+		Pieza pieza2 = new Pieza();
 		this.pedido.addPieza(pieza1);
 		this.pedido.addPieza(pieza2);
 		this.pedido.efectivizar();
 		Assert.assertTrue(pieza1.isVendida() && pieza2.isVendida());
 	}
-	
-	@Test(expected=PedidoSinPiezasException.class) 
-	public void efectivizarPedidoSinPiezas()
-	{
-		this.pedido.efectivizar();		
-	}
-	
-	@Test(expected=PedidoEfectivizadoException.class) 
-	public void efectivizarPedidoYaEfectivizado()
-	{
-		Pieza pieza1=new Pieza();		
-		this.pedido.addPieza(pieza1);		
+
+	/**
+	 * Intenta efectivizar un pedido que no tiene agregadas piezas, por lo que
+	 * tira una Exception (PedidoSinPiezasException).
+	 */
+	@Test(expected = PedidoSinPiezasException.class)
+	public void efectivizarPedidoSinPiezas() {
 		this.pedido.efectivizar();
-		this.pedido.efectivizar();	
+	}
+
+	/**
+	 * Intenta efectivizar un pedido que fue previamente efectivizado, por lo
+	 * que tira una Exception (PedidoEfectivizadoException).
+	 */
+	@Test(expected = PedidoEfectivizadoException.class)
+	public void efectivizarPedidoYaEfectivizado() {
+		Pieza pieza1 = new Pieza();
+		this.pedido.addPieza(pieza1);
+		this.pedido.efectivizar();
+		this.pedido.efectivizar();
 	}
 
 }
