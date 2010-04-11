@@ -19,12 +19,7 @@ public class EstadoPedido {
 	/**
 	 * Estado del pedido.
 	 */
-	private String estado;
-	
-	/**
-	 * Pedido al cual pertenece el estado.
-	 */
-	private Pedido pedido;
+	String estado;
 	
 	
 	//********************************************
@@ -33,8 +28,8 @@ public class EstadoPedido {
 	/**
 	 * Constructor protegido, para no permitir su instanciacion por fuera de la clase.
 	 */
-	protected EstadoPedido(Pedido pedido) {
-		this.pedido = pedido;
+	protected EstadoPedido(String estado) {
+		this.estado = estado;
 	}
 	
 	
@@ -44,7 +39,11 @@ public class EstadoPedido {
 	/**
 	 * Setea el estado del pedido a <b>EN CURSO</b>.
 	 */
-	public EstadoPedido setEnCurso(){ 
+	public EstadoPedido setEnCurso(Pedido pedido){ 
+		if(this.estado.equals(EFECTIVO)) 
+			throw new PedidoEfectivizadoException(pedido);
+		if(this.estado.equals(CANCELADO))
+			throw new PedidoCanceladoException(pedido);		
 		this.estado = EN_CURSO; 
 		return this;
 	}
@@ -52,11 +51,11 @@ public class EstadoPedido {
 	/**
 	 * Setea el estado del pedido a <b>CANCELADO</b>.
 	 */
-	public EstadoPedido setCancelado(){ 
+	public EstadoPedido setCancelado(Pedido pedido){ 
 		if(this.estado.equals(EFECTIVO)) 
-			throw new PedidoEfectivizadoException(this.pedido);
+			throw new PedidoEfectivizadoException(pedido);
 		if(this.estado.equals(CANCELADO))
-			throw new PedidoCanceladoException(this.pedido);		
+			throw new PedidoCanceladoException(pedido);		
 		this.estado = CANCELADO; 
 		return this;
 	}
@@ -64,9 +63,9 @@ public class EstadoPedido {
 	/**
 	 * Setea el estado del pedido a <b>EFECTIVO</b>.
 	 */
-	public EstadoPedido setEfectivo(){ 
+	public EstadoPedido setEfectivo(Pedido pedido){ 
 		if(this.estado.equals(CANCELADO)) 
-			throw new PedidoCanceladoException(this.pedido);	
+			throw new PedidoCanceladoException(pedido);	
 		this.estado = EFECTIVO; 
 		return this;
 	}
@@ -98,22 +97,22 @@ public class EstadoPedido {
 	/**
 	 * Retorna un estado <b>EN CURSO</b>.
 	 */
-	public static EstadoPedido getEstadoEnCursoFor(Pedido pedido) {
-		return new EstadoPedido(pedido).setEnCurso();
+	public static EstadoPedido getEnCurso() {
+		return new EstadoPedido(EN_CURSO);
 	}
 	
 	/**
 	 * Retorna un estado <b>CANCELADO</b>.
 	 */
-	public static EstadoPedido getEstadoCanceladoFor(Pedido pedido) {
-		return new EstadoPedido(pedido).setCancelado();
+	public static EstadoPedido getCancelado() {
+		return new EstadoPedido(CANCELADO);
 	}
 	
 	/**
 	 * Retorna un estado <b>EFECTIVO</b>.
 	 */
-	public static EstadoPedido getEstadoEfectivoFor(Pedido pedido) {
-		return new EstadoPedido(pedido).setEfectivo();
+	public static EstadoPedido getEfectivo() {
+		return new EstadoPedido(EFECTIVO);
 	}
 	
 	

@@ -13,7 +13,7 @@ public class Pedido {
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
-	private String id = "Pedido";
+	private String id;
 	private List<Pieza> piezas;
 	private EstadoPedido estado;
 	
@@ -23,7 +23,7 @@ public class Pedido {
 	//********************************************
 	public Pedido() {
 		this.piezas = new ArrayList<Pieza>();
-		this.estado = EstadoPedido.getEstadoEnCursoFor(this);
+		this.estado = EstadoPedido.getEnCurso();
 	}
 	
 	
@@ -34,7 +34,7 @@ public class Pedido {
 	 * Cancela un pedido, cancelando sus piezas y cambiando su estado a <i>CANCELADO</i>.
 	 */
 	public void cancelar() {
-		this.estado.setCancelado();
+		this.estado.setCancelado(this);
 		this.cancelarPiezas();
 	}
 
@@ -47,7 +47,7 @@ public class Pedido {
 		if (this.isEfectivo())
 			throw new PedidoEfectivizadoException(this);
 		this.venderPiezas();
-		this.estado.setEfectivo();
+		this.estado.setEfectivo(this);
 	}
 	
 	/**
@@ -100,6 +100,9 @@ public class Pedido {
 	 * Setea el estado de las piezas a Disponible.
 	 */
 	private void cancelarPiezas() {
+		//TODO: no se pueden cancelar las piezas ya vendida, por lo que
+		//si se llegara a cancelar alguna, el estado de las misma quedara
+		//inconsistente.
 		for(Pieza pieza : this.piezas){
 			pieza.setDisponible();
 		}
@@ -110,6 +113,8 @@ public class Pedido {
 	 * Setea el estado de las piezas a Vendidas.
 	 */
 	private void venderPiezas() {
+		//TODO: si alguna de las piezas es vendida y luego se dispara
+		//excepcion, las piezas quedan en estado inconsistente.
 		for(Pieza pieza : this.piezas){
 			pieza.setVendida();
 		}
@@ -154,7 +159,6 @@ public class Pedido {
 	//********************************************
 	/**
 	 * Devuelve el conjunto de piezas que conforman el pedido.
-	 * @return
 	 */
 	public List<Pieza> getPiezas() {
 		List<Pieza> toReturn = new ArrayList<Pieza>();
@@ -164,6 +168,19 @@ public class Pedido {
 		return toReturn;
 	}
 
+	/**
+	 * Devuelve el estado del pedido.
+	 */
+	public EstadoPedido getEstado() {
+		return this.estado;
+	}
+	
+	/**
+	 * Devuelve el id del pedido.
+	 */
+	public String getId() {
+		return this.id;
+	}
 	
 	//********************************************
 	//** OVERWRITTEN METHODS

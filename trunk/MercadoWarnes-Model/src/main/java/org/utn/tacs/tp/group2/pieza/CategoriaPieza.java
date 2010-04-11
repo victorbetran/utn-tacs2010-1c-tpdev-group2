@@ -8,6 +8,7 @@ public class CategoriaPieza {
 	private static final String STANDARD = "STANDARD";
 	private static final String CLASSIC = "CLASSIC";
 	private static final String GOLD = "GOLD";
+	private static final String PREMIUM = "PREMIUM";
 	
 	
 	//********************************************
@@ -16,7 +17,6 @@ public class CategoriaPieza {
 	/**
 	 * Categoria a la cual pertenece <i>this</i> Categoria.
 	 */
-	@SuppressWarnings("unused")
 	private String tipoCategoria;	
 	
 	
@@ -37,21 +37,45 @@ public class CategoriaPieza {
 	/**
 	 * Retorna una categoria <b>STANDARD</b>.
 	 */
-	public static CategoriaPieza getCategoriaStandard() {
+	public static CategoriaPieza getStandar() {
 		return new CategoriaPieza(STANDARD);
 	}
 	
 	/**
 	 * Retorna una categoria <b>CLASSIC</b>.
 	 */
-	public static CategoriaPieza getCategoriaClassic() {
+	public static CategoriaPieza getClassic() {
 		return new CategoriaPieza(CLASSIC);
 	}
 	
 	/**
 	 * Retorna una categoria <b>GOLD</b>.
 	 */
-	public static CategoriaPieza getCategoriaGold() {
+	public static CategoriaPieza getGold() {
 		return new CategoriaPieza(GOLD);
+	}
+	
+	/**
+	 * Retorna una categoria <b>PREMIUM</b>.
+	 */
+	public static CategoriaPieza getPremium() {
+		return new CategoriaPieza(PREMIUM);
+	}
+	
+	
+	//********************************************
+	//** OVERWRITTEN METHODS
+	//********************************************
+	@Override public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		if(obj == this){
+			return true;
+		}
+		if(!(obj instanceof CategoriaPieza)){
+			return false;
+		}
+		CategoriaPieza categoriaPieza = (CategoriaPieza) obj;
+		return this.tipoCategoria.equals(categoriaPieza.tipoCategoria);
 	}
 }

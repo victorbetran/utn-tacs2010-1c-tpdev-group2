@@ -21,20 +21,15 @@ public class EstadoPieza {
 	 */
 	private String estado;
 	
-	/**
-	 * Pieza a la cual corresponde el estado.
-	 */
-	private Pieza pieza;
 
-	
 	//********************************************
 	//** CONSTRUCTOR
 	//********************************************
 	/**
 	 * Constructor protegido, para no permitir su instanciacion por fuera de la clase.
 	 */
-	protected EstadoPieza(Pieza pieza) {
-		this.pieza = pieza;
+	protected EstadoPieza(String estado) {
+		this.estado = estado;
 	}
 	
 	
@@ -44,9 +39,9 @@ public class EstadoPieza {
 	/**
 	 * Setea el estado de la pieza a <b>DISPONIBLE</b>.
 	 */
-	public EstadoPieza setDisponible(){ 
+	public EstadoPieza setDisponible(Pieza pieza){ 
 		if(this.estado == VENDIDA)
-			throw new PiezaVendidaException(this.pieza);
+			throw new PiezaVendidaException(pieza);
 		this.estado = DISPONIBLE; 
 		return this;
 	}
@@ -54,9 +49,9 @@ public class EstadoPieza {
 	/**
 	 * Setea el estado de la pieza a <b>RESERVADA</b>.
 	 */
-	public EstadoPieza setReservada(){
+	public EstadoPieza setReservada(Pieza pieza){
 		if(this.estado == VENDIDA)
-			throw new PiezaVendidaException(this.pieza);
+			throw new PiezaVendidaException(pieza);
 		this.estado = RESERVADA; 
 		return this;
 	}
@@ -64,11 +59,11 @@ public class EstadoPieza {
 	/**
 	 * Setea el estado de la pieza a <b>VENDIDA</b>.
 	 */
-	public EstadoPieza setVendida(){ 
+	public EstadoPieza setVendida(Pieza pieza){ 
 		if(this.estado == DISPONIBLE)
-			throw new PiezaNoReservadaException(this.pieza);
+			throw new PiezaNoReservadaException(pieza);
 		if(this.estado == VENDIDA)
-			throw new PiezaVendidaException(this.pieza);
+			throw new PiezaVendidaException(pieza);
 		this.estado = VENDIDA; 
 		return this;
 	}
@@ -100,30 +95,29 @@ public class EstadoPieza {
 	/**
 	 * Retorna un estado <b>DISPONIBLE</b>.
 	 */
-	public static EstadoPieza getEstadoDisponibleFor(Pieza pieza) {
-		return new EstadoPieza(pieza).setDisponible();
+	public static EstadoPieza getDisponible() {
+		return new EstadoPieza(DISPONIBLE);
 	}
 	
 	/**
 	 * Retorna un estado <b>RESERVADA</b>.
 	 */
-	public static EstadoPieza getEstadoReservadaFor(Pieza pieza) {
-		return new EstadoPieza(pieza).setReservada();
+	public static EstadoPieza getReservada() {
+		return new EstadoPieza(RESERVADA);
 	}
 	
 	/**
 	 * Retorna un estado <b>VENDIDA</b>.
 	 */
-	public static EstadoPieza getEstadoVendidaFor(Pieza pieza) {
-		return new EstadoPieza(pieza).setVendida();
+	public static EstadoPieza getVendida() {
+		return new EstadoPieza(VENDIDA);
 	}
 	
 	
 	//********************************************
 	//** OVERWRITTEN METHODS
 	//********************************************
-	@Override
-	public boolean equals(Object obj) {
+	@Override public boolean equals(Object obj) {
 		if(obj == null)
 			return false;
 		if(obj == this){

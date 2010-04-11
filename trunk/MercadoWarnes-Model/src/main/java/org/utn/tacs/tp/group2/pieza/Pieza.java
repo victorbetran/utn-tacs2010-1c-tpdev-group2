@@ -2,50 +2,17 @@ package org.utn.tacs.tp.group2.pieza;
 
 import java.math.BigDecimal;
 
-
 public class Pieza {
 	
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
-	/**
-	 * Estado en que se encuentra la pieza.
-	 */
 	private EstadoPieza estado;
-	
-	/**
-	 * Identificador de la pieza.
-	 */
-	@SuppressWarnings("unused")
-	private String id = "1";
-	
-	/**
-	 * Código único de la pieza.
-	 */
-	private String codigo = "Pieza";
-	
-	/**
-	 * Descripcion de la pieza.
-	 */
-	@SuppressWarnings("unused")
-	private String descripcion = "Pieza";
-	
-	/**
-	 * Categoría de la pieza.
-	 */
-	@SuppressWarnings("unused")
+	private String id;
+	private String codigo;
+	private String descripcion;
 	private CategoriaPieza categoria;
-	
-	/**
-	 * Auto al cual pertenece la pieza.
-	 */
-	@SuppressWarnings("unused")
 	private Auto autoOrigen;
-	
-	/**
-	 * Precio de la Pieza.
-	 */
-	@SuppressWarnings("unused")
 	private BigDecimal precio;
 	
 	
@@ -53,8 +20,8 @@ public class Pieza {
 	//** PUBLIC CONSTRUCTOR
 	//********************************************
 	public Pieza() {
-		this.estado = EstadoPieza.getEstadoDisponibleFor(this);
-		this.categoria = CategoriaPieza.getCategoriaStandard();
+		this.estado = EstadoPieza.getDisponible();
+		this.categoria = CategoriaPieza.getStandar();
 	}
 	
 	
@@ -65,21 +32,21 @@ public class Pieza {
 	 * Establece a la pieza como Disponible.
 	 */
 	public void setDisponible() {
-		this.estado.setDisponible();		
+		this.estado.setDisponible(this);		
 	}
 	
 	/**
 	 * Establece a la pieza como Reservada.
 	 */
 	public void setReservada() {
-		this.estado.setReservada();
+		this.estado.setReservada(this);
 	}
 	
 	/**
 	 * Establece a la pieza como Vendida.
 	 */
 	public void setVendida() {
-		this.estado.setVendida();		
+		this.estado.setVendida(this);		
 	}
 
 	/**
@@ -93,29 +60,93 @@ public class Pieza {
 	 * Determina si la pieza se encuentra reservada.
 	 */
 	public boolean isReservada() {
-		return this.getEstado().isReservada();
+		return this.estado.isReservada();
 	}
 
 	/**
 	 * Determina si la pieza se encuentra disponible.
 	 */
 	public boolean isDisponible() {
-		return this.getEstado().isDisponible();
+		return this.estado.isDisponible();
 	}
 	
 	/**
 	 * Determina si la pieza se encuentra vendida.
 	 */
 	public boolean isVendida() {
-		return this.getEstado().isVendida();
+		return this.estado.isVendida();
 	}
 	
+	/**
+	 * Determina si una pieza se encuentra en un estado particular.
+	 */
+	public boolean isInEstado(EstadoPieza estado) {
+		return this.estado.equals(estado);
+	}
+	
+	/**
+	 * Determina si la pieza pertenece a una categoria.
+	 */
+	public boolean perteneceA(CategoriaPieza categoria){
+		return this.categoria.equals(categoria);
+	}
 	
 	//********************************************
 	//** OVERWRITTEN METHODS
 	//********************************************
 	@Override public String toString() {
 		return this.codigo;
+	}
+	
+
+	//********************************************
+	//** GETTERS & SETTERS
+	//********************************************
+	public String getId() { 
+		return this.id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public CategoriaPieza getCategoria() {
+		return this.categoria;
+	}
+	public Pieza setCategoria(CategoriaPieza categoria) {
+		this.categoria = categoria;
+		return this;
+	}
+
+	public String getCodigo() {
+		return this.codigo;
+	}
+	public Pieza setCodigo(String codigo) {
+		this.codigo = codigo;
+		return this;
+	}
+
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+	public Pieza setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+		return this;
+	}
+
+	public Auto getAutoOrigen() {
+		return this.autoOrigen;
+	}
+	public Pieza setAutoOrigen(Auto autoOrigen) {
+		this.autoOrigen = autoOrigen;
+		return this;
+	}
+
+	public BigDecimal getPrecio() {
+		return this.precio;
+	}
+	public Pieza setPrecio(BigDecimal precio) {
+		this.precio = precio;
+		return this;
 	}
 	
 }

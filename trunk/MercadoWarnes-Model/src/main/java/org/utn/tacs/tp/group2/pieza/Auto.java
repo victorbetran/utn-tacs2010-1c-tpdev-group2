@@ -16,6 +16,23 @@ public class Auto {
 
 	
 	//********************************************
+	//** OVERWRITTEN METHODS
+	//********************************************
+	@Override public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		if(obj == this){
+			return true;
+		}
+		if(!(obj instanceof Auto)){
+			return false;
+		}
+		Auto auto = (Auto) obj;
+		return auto.patente.equals(this.patente);
+	}
+	
+	
+	//********************************************
 	//** GETTERS & SETTERS
 	//********************************************
 	public String getPatente() { 
@@ -47,6 +64,14 @@ public class Auto {
 	}
 	public Auto setFechaDeDesguace(Date fechaDeDesguace) {
 		this.fechaDeDesguace = fechaDeDesguace;
+		return this;
+	}
+	
+	public List<Pieza> getPiezas() {
+		return this.piezas;
+	}
+	public Auto setPiezas(List<Pieza> piezas) {
+		this.piezas = piezas;
 		return this;
 	}
 	
