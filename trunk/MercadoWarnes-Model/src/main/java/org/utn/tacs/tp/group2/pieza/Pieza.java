@@ -7,21 +7,24 @@ public class Pieza {
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
-	private EstadoPieza estado;
 	private String id;
 	private String codigo;
+	private EstadoPieza estado;
 	private String descripcion;
 	private CategoriaPieza categoria;
 	private Auto autoOrigen;
 	private BigDecimal precio;
 	
+	private volatile int hashCode;
+	
 	
 	//********************************************
 	//** PUBLIC CONSTRUCTOR
 	//********************************************
-	public Pieza() {
+	public Pieza(String codigo) {
 		this.estado = EstadoPieza.getDisponible();
 		this.categoria = CategoriaPieza.getStandar();
+		this.codigo = codigo;
 	}
 	
 	
@@ -98,19 +101,31 @@ public class Pieza {
 		return this.codigo;
 	}
 	
-	@Override public boolean equals(Object obj) {
-		if(obj == null){
-			return false;
-		}
-		if(obj == this){
-			return true;
-		}
-		if(!(obj instanceof Pieza)){
-			return false;
-		}
-		Pieza pieza = (Pieza) obj;
-		return this.id.equals(pieza.id);
-	}
+//	@Override public boolean equals(Object obj) {
+//		if(obj == null){
+//			return false;
+//		}
+//		if(obj == this){
+//			return true;
+//		}
+//		if(!(obj instanceof Pieza)){
+//			return false;
+//		}
+//		Pieza pieza = (Pieza) obj;
+//		return this.id.equals(pieza.id);
+//	}
+//	
+//	@Override public int hashCode() {
+//		int result = this.hashCode;
+//		if(result == 0){
+//			result = 17;
+//			result = 31 * result * this.estado.hashCode();
+//			result = 31 * result * this.categoria.hashCode();
+//			result = 31 * result * this.codigo.hashCode();
+//			this.hashCode = result;
+//		}
+//		return result;
+//	}
 	
 
 	//********************************************

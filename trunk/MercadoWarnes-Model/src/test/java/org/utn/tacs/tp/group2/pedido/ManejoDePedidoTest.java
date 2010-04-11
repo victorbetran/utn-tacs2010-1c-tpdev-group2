@@ -18,9 +18,9 @@ public class ManejoDePedidoTest {
 	public void setUp(){
 		this.pedido = new Pedido();
 		
-		this.pieza1 = new Pieza();
-		this.pieza2 = new Pieza();
-		this.pieza3 = new Pieza();
+		this.pieza1 = new Pieza("A-123");
+		this.pieza2 = new Pieza("B-369");
+		this.pieza3 = new Pieza("C-147");
 	}
 
 	/**

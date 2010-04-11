@@ -58,8 +58,8 @@ public class Pedido {
 	 */
 	public Pedido addPieza(Pieza pieza){
 		controlarDisponibilidadDePieza(pieza);
-		this.piezas.add(pieza);
 		pieza.setReservada();
+		this.piezas.add(pieza);
 		return this;
 	}
 	
@@ -148,7 +148,6 @@ public class Pedido {
 	
 	/**
 	 * Indica el numero de piezas que ha sigo asignado al pedido.
-	 * @return
 	 */
 	public int cantidadDePiezasAsignadas(){
 		return this.piezas.size();

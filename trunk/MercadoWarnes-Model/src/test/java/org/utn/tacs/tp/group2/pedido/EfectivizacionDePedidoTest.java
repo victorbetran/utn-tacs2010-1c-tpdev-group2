@@ -18,8 +18,8 @@ public class EfectivizacionDePedidoTest {
 	@Before
 	public void setUp() throws Exception {
 		this.pedido = new Pedido();
-		unaPieza = new Pieza();
-		otraPieza = new Pieza();
+		unaPieza = new Pieza("P-987");
+		otraPieza = new Pieza("6-985");
 	}
 
 	/**

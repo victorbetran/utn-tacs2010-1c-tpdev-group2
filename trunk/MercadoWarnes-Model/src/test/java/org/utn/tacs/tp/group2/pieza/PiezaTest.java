@@ -18,12 +18,12 @@ public class PiezaTest {
 	
 	@Before
 	public void setUp() {
-		this.pieza = new Pieza();		
+		this.pieza = new Pieza("L-963");		
 		this.listadoDePiezas = new ArrayList<Pieza>();
 		
 		//Agrego 10 piezas a la lista de piezas
 		for (int i = 0; i < 10; i++) {
-			this.listadoDePiezas.add(new Pieza());
+			this.listadoDePiezas.add(new Pieza("V-546"));
 		}
 	}
 	

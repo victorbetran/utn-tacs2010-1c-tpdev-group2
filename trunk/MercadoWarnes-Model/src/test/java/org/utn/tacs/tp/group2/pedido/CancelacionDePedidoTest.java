@@ -42,7 +42,7 @@ public class CancelacionDePedidoTest {
 	 */
 	@Test (expected=PedidoEfectivizadoException.class)
 	public void cancelarUnPedidoEfectivo(){
-		this.pedido.addPieza(new Pieza());
+		this.pedido.addPieza(new Pieza("Z-456"));
 		this.pedido.efectivizar();
 		this.pedido.cancelar();
 	}
