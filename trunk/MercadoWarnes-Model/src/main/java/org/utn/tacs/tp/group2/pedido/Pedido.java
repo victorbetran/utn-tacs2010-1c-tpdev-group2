@@ -122,7 +122,6 @@ public class Pedido {
 		if(!pieza.isDisponible()){
 			throw new InclusionDePiezaNoPermitidaException(pieza);
 		}
-		
 	}
 	
 	/**
@@ -142,6 +141,10 @@ public class Pedido {
 		return !this.piezas.isEmpty();
 	}
 	
+	/**
+	 * Indica el numero de piezas que ha sigo asignado al pedido.
+	 * @return
+	 */
 	public int cantidadDePiezasAsignadas(){
 		return this.piezas.size();
 	}
