@@ -19,7 +19,7 @@ public class EstadoPedido {
 	/**
 	 * Estado del pedido.
 	 */
-	String estado;
+	private String estado;
 	
 	
 	//********************************************
@@ -132,8 +132,5 @@ public class EstadoPedido {
 		EstadoPedido estadoPedido = (EstadoPedido) obj;
 		return estadoPedido.estado.equals(this.estado);
 	}
-
-
-
 
 }

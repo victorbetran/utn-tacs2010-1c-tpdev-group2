@@ -100,7 +100,7 @@ public class Pedido {
 	 * Setea el estado de las piezas a Disponible.
 	 */
 	private void cancelarPiezas() {
-		//TODO: no se pueden cancelar las piezas ya vendida, por lo que
+		//TODO: no se pueden cancelar las piezas ya vendidas, por lo que
 		//si se llegara a cancelar alguna, el estado de las misma quedara
 		//inconsistente.
 		for(Pieza pieza : this.piezas){
@@ -182,11 +182,26 @@ public class Pedido {
 		return this.id;
 	}
 	
+	
 	//********************************************
 	//** OVERWRITTEN METHODS
 	//********************************************
 	@Override public String toString() {
 		return this.id;
+	}
+	
+	@Override public boolean equals(Object obj) {
+		if(obj == null){
+			return false;
+		}
+		if(obj == this){
+			return true;
+		}
+		if(!(obj instanceof Pedido)){ 
+			return false;
+		}
+		Pedido pedido = (Pedido) obj;
+		return this.id.equals(pedido.id);
 	}
 
 }
