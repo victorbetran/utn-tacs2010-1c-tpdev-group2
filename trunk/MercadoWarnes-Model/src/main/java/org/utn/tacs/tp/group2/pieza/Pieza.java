@@ -2,6 +2,8 @@ package org.utn.tacs.tp.group2.pieza;
 
 import java.math.BigDecimal;
 
+import org.utn.tacs.tp.group2.dao.IDAsignator;
+
 public class Pieza {
 	
 	//********************************************
@@ -22,6 +24,7 @@ public class Pieza {
 	//** PUBLIC CONSTRUCTOR
 	//********************************************
 	public Pieza(String codigo) {
+		this.id = IDAsignator.getInstance().getId();
 		this.estado = EstadoPieza.getDisponible();
 		this.categoria = CategoriaPieza.getStandar();
 		this.codigo = codigo;
@@ -101,31 +104,29 @@ public class Pieza {
 		return this.codigo;
 	}
 	
-//	@Override public boolean equals(Object obj) {
-//		if(obj == null){
-//			return false;
-//		}
-//		if(obj == this){
-//			return true;
-//		}
-//		if(!(obj instanceof Pieza)){
-//			return false;
-//		}
-//		Pieza pieza = (Pieza) obj;
-//		return this.id.equals(pieza.id);
-//	}
-//	
-//	@Override public int hashCode() {
-//		int result = this.hashCode;
-//		if(result == 0){
-//			result = 17;
-//			result = 31 * result * this.estado.hashCode();
-//			result = 31 * result * this.categoria.hashCode();
-//			result = 31 * result * this.codigo.hashCode();
-//			this.hashCode = result;
-//		}
-//		return result;
-//	}
+	@Override public boolean equals(Object obj) {
+		if(obj == null){
+			return false;
+		}
+		if(obj == this){
+			return true;
+		}
+		if(!(obj instanceof Pieza)){
+			return false;
+		}
+		Pieza pieza = (Pieza) obj;
+		return this.id.equals(pieza.id);
+	}
+	
+	@Override public int hashCode() {
+		int result = this.hashCode;
+		if(result == 0){
+			result = 17;
+			result = 31 * result * this.id.hashCode();
+			this.hashCode = result;
+		}
+		return result;
+	}
 	
 
 	//********************************************

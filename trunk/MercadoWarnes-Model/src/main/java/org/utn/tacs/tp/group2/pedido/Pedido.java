@@ -3,6 +3,7 @@ package org.utn.tacs.tp.group2.pedido;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.utn.tacs.tp.group2.dao.IDAsignator;
 import org.utn.tacs.tp.group2.exceptions.InclusionDePiezaNoPermitidaException;
 import org.utn.tacs.tp.group2.exceptions.PedidoEfectivizadoException;
 import org.utn.tacs.tp.group2.exceptions.PedidoSinPiezasException;
@@ -17,11 +18,14 @@ public class Pedido {
 	private List<Pieza> piezas;
 	private EstadoPedido estado;
 	
+	private volatile int hashCode;
+	
 	
 	//********************************************
 	//** PUBLIC CONSTRUCTOR
 	//********************************************
 	public Pedido() {
+		this.id = IDAsignator.getInstance().getId();
 		this.piezas = new ArrayList<Pieza>();
 		this.estado = EstadoPedido.getEnCurso();
 	}
@@ -201,6 +205,16 @@ public class Pedido {
 		}
 		Pedido pedido = (Pedido) obj;
 		return this.id.equals(pedido.id);
+	}
+	
+	@Override public int hashCode() {
+		int result = this.hashCode;
+		if(result == 0){
+			result = 17;
+			result = 31 * result * this.id.hashCode();
+			this.hashCode = result;
+		}
+		return result;
 	}
 
 }
