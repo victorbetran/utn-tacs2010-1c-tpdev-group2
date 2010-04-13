@@ -3,7 +3,6 @@ package org.utn.tacs.tp.group2.pieza;
 import java.math.BigDecimal;
 
 import org.utn.tacs.tp.group2.dao.IDAsignator;
-import org.utn.tacs.tp.group2.pedido.Pedido;
 
 public class Pieza {
 	
