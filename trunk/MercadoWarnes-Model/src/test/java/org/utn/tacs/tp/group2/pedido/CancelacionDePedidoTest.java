@@ -4,7 +4,6 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.exceptions.CancelarPedidoException;
 import org.utn.tacs.tp.group2.exceptions.PedidoCanceladoException;
 import org.utn.tacs.tp.group2.exceptions.PedidoEfectivizadoException;
 import org.utn.tacs.tp.group2.pieza.Pieza;
@@ -35,7 +34,7 @@ public class CancelacionDePedidoTest {
 	@Test public void cancelarUnPedidoEnCurso(){
 		this.pedido.cancelar();
 		Assert.assertTrue("El pedido no se ha cancelado correctamente.",this.pedido.isCancelado());
-		Assert.assertFalse("El pedido se ha cancelado pero aún contiene piezas.",this.pedido.tienePiezas());
+		Assert.assertFalse("El pedido se ha cancelado pero aï¿½n contiene piezas.",this.pedido.tienePiezas());
 	}
 	
 	/**
@@ -49,7 +48,7 @@ public class CancelacionDePedidoTest {
 	}
 	
 	/**
-	 * Cancela un pedido que había sido cancelado previamente, es decir, un pedido <b>CANCELADO</b>.
+	 * Cancela un pedido que habï¿½a sido cancelado previamente, es decir, un pedido <b>CANCELADO</b>.
 	 */
 	@Test (expected=PedidoCanceladoException.class)
 	public void cancelarUnPedidoCancelado(){
