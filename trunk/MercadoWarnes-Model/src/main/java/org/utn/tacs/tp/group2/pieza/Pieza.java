@@ -3,6 +3,7 @@ package org.utn.tacs.tp.group2.pieza;
 import java.math.BigDecimal;
 
 import org.utn.tacs.tp.group2.dao.IDAsignator;
+import org.utn.tacs.tp.group2.pedido.Pedido;
 
 public class Pieza {
 	
@@ -37,22 +38,25 @@ public class Pieza {
 	/**
 	 * Establece a la pieza como Disponible.
 	 */
-	public void setDisponible() {
-		this.estado.setDisponible(this);		
+	public Pieza setDisponible() {
+		this.estado.setDisponible(this);	
+		return this;
 	}
 	
 	/**
 	 * Establece a la pieza como Reservada.
 	 */
-	public void setReservada() {
+	public Pieza setReservada() {
 		this.estado.setReservada(this);
+		return this;
 	}
 	
 	/**
 	 * Establece a la pieza como Vendida.
 	 */
-	public void setVendida() {
-		this.estado.setVendida(this);		
+	public Pieza setVendida() {
+		this.estado.setVendida(this);
+		return this;
 	}
 
 	/**
@@ -96,6 +100,7 @@ public class Pieza {
 	public boolean perteneceA(CategoriaPieza categoria){
 		return this.categoria.equals(categoria);
 	}
+	
 	
 	//********************************************
 	//** OVERWRITTEN METHODS

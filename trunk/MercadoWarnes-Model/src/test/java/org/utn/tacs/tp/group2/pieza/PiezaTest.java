@@ -8,8 +8,8 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.exceptions.PiezaNoReservadaException;
-import org.utn.tacs.tp.group2.exceptions.PiezaVendidaException;
+import org.utn.tacs.tp.group2.exceptions.ReservarPiezaException;
+import org.utn.tacs.tp.group2.exceptions.VenderPiezaException;
 
 public class PiezaTest {
 
@@ -32,7 +32,7 @@ public class PiezaTest {
 	 * Una pieza que no fue reservada no puede ser vendida. Una pieza
 	 * DISPONIBLE, implica que no está RESERVADA.
 	 */
-	@Test(expected = PiezaNoReservadaException.class)
+	@Test(expected = VenderPiezaException.class)
 	public void venderUnaPiezaDisponible() {
 		this.pieza.setVendida();
 	}
@@ -52,7 +52,7 @@ public class PiezaTest {
 	 */
 	@Test
 	public void venderVariasPiezasReservadas() {
-		for (Pieza pieza : listadoDePiezas) {
+		for (Pieza pieza : this.listadoDePiezas) {
 			pieza.setReservada();
 			pieza.setVendida();
 			Assert.assertTrue("La pieza no ha sido correctamente vendida.",pieza.isVendida());
@@ -62,7 +62,7 @@ public class PiezaTest {
 	/**
 	 * Vender una pieza ya vendida.
 	 */
-	@Test(expected = PiezaVendidaException.class)
+	@Test(expected = VenderPiezaException.class)
 	public void venderUnaPiezaYaVendida() {
 		this.pieza.setReservada();
 		this.pieza.setVendida();
@@ -95,7 +95,7 @@ public class PiezaTest {
 	/**
 	 * Una pieza vendida no puede reservarse.
 	 */
-	@Test(expected = PiezaVendidaException.class)
+	@Test(expected = ReservarPiezaException.class)
 	public void reservarUnaPiezaVendida() {
 		this.pieza.setReservada();
 		this.pieza.setVendida();

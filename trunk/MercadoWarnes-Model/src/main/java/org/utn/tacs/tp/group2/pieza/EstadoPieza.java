@@ -1,7 +1,8 @@
 package org.utn.tacs.tp.group2.pieza;
 
-import org.utn.tacs.tp.group2.exceptions.PiezaNoReservadaException;
 import org.utn.tacs.tp.group2.exceptions.PiezaVendidaException;
+import org.utn.tacs.tp.group2.exceptions.ReservarPiezaException;
+import org.utn.tacs.tp.group2.exceptions.VenderPiezaException;
 
 public class EstadoPieza {
 
@@ -38,33 +39,37 @@ public class EstadoPieza {
 	//********************************************
 	/**
 	 * Setea el estado de la pieza a <b>DISPONIBLE</b>.
+	 * Una pieza no puede pasar a estar disponible si esta Vendida.
 	 */
 	public EstadoPieza setDisponible(Pieza pieza){ 
-		if(this.estado == VENDIDA)
+		if(!pieza.isVendida())
+			this.estado = DISPONIBLE; 
+		else
 			throw new PiezaVendidaException(pieza);
-		this.estado = DISPONIBLE; 
 		return this;
 	}
 	
 	/**
 	 * Setea el estado de la pieza a <b>RESERVADA</b>.
+	 * Una pieza puede pasar a estar Reservada sólo si esta Disponible y no esta Vendida.
 	 */
 	public EstadoPieza setReservada(Pieza pieza){
-		if(this.estado == VENDIDA)
-			throw new PiezaVendidaException(pieza);
-		this.estado = RESERVADA; 
+		if(pieza.isDisponible() && !pieza.isVendida())
+			this.estado = RESERVADA;
+		else
+			throw new ReservarPiezaException(pieza);
 		return this;
 	}
 	
 	/**
 	 * Setea el estado de la pieza a <b>VENDIDA</b>.
+	 * Una pieza puede venderse únicamente si se encuentra reservada.
 	 */
 	public EstadoPieza setVendida(Pieza pieza){ 
-		if(this.estado == DISPONIBLE)
-			throw new PiezaNoReservadaException(pieza);
-		if(this.estado == VENDIDA)
-			throw new PiezaVendidaException(pieza);
-		this.estado = VENDIDA; 
+		if(pieza.isReservada())
+			this.estado = VENDIDA; 
+		else
+			throw new VenderPiezaException(pieza);
 		return this;
 	}
 	

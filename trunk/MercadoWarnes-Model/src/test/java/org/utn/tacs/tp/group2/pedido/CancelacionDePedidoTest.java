@@ -4,6 +4,7 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.utn.tacs.tp.group2.exceptions.CancelarPedidoException;
 import org.utn.tacs.tp.group2.exceptions.PedidoCanceladoException;
 import org.utn.tacs.tp.group2.exceptions.PedidoEfectivizadoException;
 import org.utn.tacs.tp.group2.pieza.Pieza;
