@@ -9,6 +9,7 @@ public class EstadoPieza {
 	//********************************************
 	//** CLASS VARIABLES
 	//********************************************
+	//TODO: hacer un refactor aca e implementar un State
 	private static final String DISPONIBLE = "DISPONIBLE";
 	private static final String RESERVADA = "RESERVADA";
 	private static final String VENDIDA = "VENDIDA";	

@@ -8,6 +8,7 @@ public class EstadoPedido {
 	//********************************************
 	//** CLASS ATRIBUTTES
 	//********************************************
+	//TODO: hacer un refactor aca e implementar un State
 	private static final String EN_CURSO = "EN_CURSO";
 	private static final String CANCELADO = "CANCELADO";
 	private static final String EFECTIVO = "EFECTIVO";
