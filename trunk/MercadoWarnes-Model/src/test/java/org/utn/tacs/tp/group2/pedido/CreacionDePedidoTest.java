@@ -20,7 +20,7 @@ public class CreacionDePedidoTest {
 		
 		this.piezaDisponible = new Pieza("W-894");
 		this.otraPiezaDisponible = new Pieza("K-666");
-		this.piezaNoDisponible = new Pieza("N-000").setReservada();
+		this.piezaNoDisponible = new Pieza("N-000").toReservada();
 		this.pedido = new Pedido();
 	}
 	

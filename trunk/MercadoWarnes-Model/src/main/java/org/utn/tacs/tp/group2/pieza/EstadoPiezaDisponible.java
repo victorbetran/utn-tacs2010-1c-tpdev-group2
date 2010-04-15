@@ -28,17 +28,17 @@ public class EstadoPiezaDisponible extends EstadoPieza{
 	}
 
 	@Override
-	public EstadoPieza setDisponible() {
+	public EstadoPieza toDisponible() {
 		return this;
 	}
 
 	@Override
-	public EstadoPieza setReservada() {
+	public EstadoPieza toReservada() {
 		return new EstadoPiezaReservada(this.pieza);
 	}
 
 	@Override
-	public EstadoPieza setVendida() {
+	public EstadoPieza toVendida() {
 		throw new PiezaNoReservadaException(this.pieza);
 	}
 

@@ -37,24 +37,24 @@ public class Pieza {
 	/**
 	 * Establece a la pieza como Disponible.
 	 */
-	public Pieza setDisponible() {
-		this.estado = this.estado.setDisponible();	
+	public Pieza toDisponible() {
+		this.estado = this.estado.toDisponible();	
 		return this;
 	}
 	
 	/**
 	 * Establece a la pieza como Reservada.
 	 */
-	public Pieza setReservada() {
-		this.estado = this.estado.setReservada();
+	public Pieza toReservada() {
+		this.estado = this.estado.toReservada();
 		return this;
 	}
 	
 	/**
 	 * Establece a la pieza como Vendida.
 	 */
-	public Pieza setVendida() {
-		this.estado = this.estado.setVendida();
+	public Pieza toVendida() {
+		this.estado = this.estado.toVendida();
 		return this;
 	}
 

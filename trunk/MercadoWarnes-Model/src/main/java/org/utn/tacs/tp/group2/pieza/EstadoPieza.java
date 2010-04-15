@@ -36,40 +36,19 @@ public abstract class EstadoPieza {
 	 * Setea el estado de la pieza a <b>DISPONIBLE</b>.
 	 * Una pieza no puede pasar a estar disponible si esta Vendida.
 	 */
-	public abstract EstadoPieza setDisponible();
-//	{ 
-//		if(!pieza.isVendida())
-//			this.estado = DISPONIBLE; 
-//		else
-//			throw new PiezaVendidaException(pieza);
-//		return this;
-//	}
+	public abstract EstadoPieza toDisponible();
 	
 	/**
 	 * Setea el estado de la pieza a <b>RESERVADA</b>.
 	 * Una pieza puede pasar a estar Reservada sólo si esta Disponible y no esta Vendida.
 	 */
-	public abstract EstadoPieza setReservada();
-//	{
-//		if(pieza.isDisponible() && !pieza.isVendida())
-//			this.estado = RESERVADA;
-//		else
-//			throw new ReservarPiezaException(pieza);
-//		return this;
-//	}
+	public abstract EstadoPieza toReservada();
 	
 	/**
 	 * Setea el estado de la pieza a <b>VENDIDA</b>.
 	 * Una pieza puede venderse únicamente si se encuentra reservada.
 	 */
-	public abstract EstadoPieza setVendida();
-//	{ 
-//		if(pieza.isReservada())
-//			this.estado = VENDIDA; 
-//		else
-//			throw new VenderPiezaException(pieza);
-//		return this;
-//	}
+	public abstract EstadoPieza toVendida();
 	
 	/**
 	 * Informa si la pieza está disponible.

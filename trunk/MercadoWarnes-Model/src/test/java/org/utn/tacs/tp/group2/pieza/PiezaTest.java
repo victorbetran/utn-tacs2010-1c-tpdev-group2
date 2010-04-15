@@ -34,7 +34,7 @@ public class PiezaTest {
 	 */
 	@Test(expected = PiezaNoReservadaException.class)
 	public void venderUnaPiezaDisponible() {
-		this.pieza.setVendida();
+		this.pieza.toVendida();
 	}
 
 	/**
@@ -42,8 +42,8 @@ public class PiezaTest {
 	 */
 	@Test
 	public void venderUnaPiezaReservada() {
-		this.pieza.setReservada();
-		this.pieza.setVendida();
+		this.pieza.toReservada();
+		this.pieza.toVendida();
 		Assert.assertTrue("La pieza no ha sido correctamente vendida.",this.pieza.isVendida());
 	}
 
@@ -53,8 +53,8 @@ public class PiezaTest {
 	@Test
 	public void venderVariasPiezasReservadas() {
 		for (Pieza pieza : this.listadoDePiezas) {
-			pieza.setReservada();
-			pieza.setVendida();
+			pieza.toReservada();
+			pieza.toVendida();
 			Assert.assertTrue("La pieza no ha sido correctamente vendida.",pieza.isVendida());
 		}
 	}
@@ -64,9 +64,9 @@ public class PiezaTest {
 	 */
 	@Test(expected = PiezaVendidaException.class)
 	public void venderUnaPiezaYaVendida() {
-		this.pieza.setReservada();
-		this.pieza.setVendida();
-		this.pieza.setVendida();
+		this.pieza.toReservada();
+		this.pieza.toVendida();
+		this.pieza.toVendida();
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class PiezaTest {
 	 */
 	@Test
 	public void reservarUnaPiezaDisponible() {
-		this.pieza.setReservada();
+		this.pieza.toReservada();
 		Assert.assertTrue("La pieza no ha sido correctamente reservada.",this.pieza.isReservada());
 	}
 	
@@ -84,7 +84,7 @@ public class PiezaTest {
 	@Test
 	public void reservarVariasPiezas() {
 		for (Pieza pieza : this.listadoDePiezas) {
-			pieza.setReservada();
+			pieza.toReservada();
 		}
 		
 		for (Pieza pieza : this.listadoDePiezas) {
@@ -97,9 +97,9 @@ public class PiezaTest {
 	 */
 	@Test(expected = PiezaVendidaException.class)
 	public void reservarUnaPiezaVendida() {
-		this.pieza.setReservada();
-		this.pieza.setVendida();
-		this.pieza.setReservada();
+		this.pieza.toReservada();
+		this.pieza.toVendida();
+		this.pieza.toReservada();
 	}
 
 }
