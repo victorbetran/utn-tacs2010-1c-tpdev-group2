@@ -11,9 +11,9 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.dao.DAOFactory;
 import org.utn.tacs.tp.group2.dao.PiezaDAO;
 import org.utn.tacs.tp.group2.exceptions.PiezaInexistenteException;
+import org.utn.tacs.tp.group2.mocks.MockDAOFactory;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.CategoriaPieza;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
@@ -48,7 +48,7 @@ public class ConsultarPiezasTest {
 	public void setUp() throws Exception {
 		
 		//Obtengo el DAO
-		this.dao = DAOFactory.getPiezaDAO();
+		this.dao = MockDAOFactory.getPiezaDAO();
 		
 		//Creo una lista de 2 piezas
 		List<Pieza> listadoDe2Piezas = new ArrayList<Pieza>();
