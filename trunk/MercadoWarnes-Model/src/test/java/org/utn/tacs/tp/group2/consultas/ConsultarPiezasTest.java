@@ -61,11 +61,11 @@ public class ConsultarPiezasTest {
 		this.autoMockCon3Piezas = createAutoMock("ZZZ666", listadoDe3Piezas);
 		
 		//Creo las piezas - 3 Reservadas - 1 Disponible - 1 Vendida
-		Pieza piezaMock1 = createPiezaMock("1111", "A-001", CategoriaPieza.getClassic(), this.autoMockCon2Piezas, EstadoPieza.getVendida());
-		Pieza piezaMock2 = createPiezaMock("2222", "A-002", CategoriaPieza.getStandar(), this.autoMockCon2Piezas, EstadoPieza.getReservada());
-		Pieza piezaMock3 = createPiezaMock("3333", "A-003", CategoriaPieza.getGold(), this.autoMockCon3Piezas, EstadoPieza.getDisponible());
-		Pieza piezaMock4 = createPiezaMock("4444", "A-004", CategoriaPieza.getGold(), this.autoMockCon3Piezas, EstadoPieza.getReservada());
-		Pieza piezaMock5 = createPiezaMock("5555", "A-005", CategoriaPieza.getGold(), this.autoMockCon3Piezas, EstadoPieza.getReservada());
+		Pieza piezaMock1 = createPiezaMock("1111", "A-001", CategoriaPieza.getClassic(), this.autoMockCon2Piezas, EstadoPieza.getVendida(null));
+		Pieza piezaMock2 = createPiezaMock("2222", "A-002", CategoriaPieza.getStandar(), this.autoMockCon2Piezas, EstadoPieza.getReservada(null));
+		Pieza piezaMock3 = createPiezaMock("3333", "A-003", CategoriaPieza.getGold(), this.autoMockCon3Piezas, EstadoPieza.getDisponible(null));
+		Pieza piezaMock4 = createPiezaMock("4444", "A-004", CategoriaPieza.getGold(), this.autoMockCon3Piezas, EstadoPieza.getReservada(null));
+		Pieza piezaMock5 = createPiezaMock("5555", "A-005", CategoriaPieza.getGold(), this.autoMockCon3Piezas, EstadoPieza.getReservada(null));
 		
 		//Agrego las piezas al listado de piezas
 		listadoDe2Piezas.add(piezaMock1);
@@ -133,10 +133,10 @@ public class ConsultarPiezasTest {
 	 */
 	@Test 
 	public void consultarPiezasDisponiblesPorCategoria(){
-		List<Pieza> piezasDisponiblesGold = this.dao.findByEstadoAndCategoria(EstadoPieza.getDisponible(), CategoriaPieza.getGold());
-		List<Pieza> piezasDisponiblesClassic = this.dao.findByEstadoAndCategoria(EstadoPieza.getDisponible(), CategoriaPieza.getClassic());
-		List<Pieza> piezasDisponiblesStandar = this.dao.findByEstadoAndCategoria(EstadoPieza.getDisponible(), CategoriaPieza.getStandar());
-		List<Pieza> piezasDisponiblesPremium = this.dao.findByEstadoAndCategoria(EstadoPieza.getDisponible(), CategoriaPieza.getPremium());
+		List<Pieza> piezasDisponiblesGold = this.dao.findByEstadoAndCategoria(EstadoPieza.getDisponible(null), CategoriaPieza.getGold());
+		List<Pieza> piezasDisponiblesClassic = this.dao.findByEstadoAndCategoria(EstadoPieza.getDisponible(null), CategoriaPieza.getClassic());
+		List<Pieza> piezasDisponiblesStandar = this.dao.findByEstadoAndCategoria(EstadoPieza.getDisponible(null), CategoriaPieza.getStandar());
+		List<Pieza> piezasDisponiblesPremium = this.dao.findByEstadoAndCategoria(EstadoPieza.getDisponible(null), CategoriaPieza.getPremium());
 		
 		Assert.assertTrue(piezasDisponiblesGold.size() == 1);
 		Assert.assertTrue(piezasDisponiblesClassic.size() == 0);
@@ -160,7 +160,7 @@ public class ConsultarPiezasTest {
 	 */
 	@Test 
 	public void consultarPiezasReservadas(){
-		List<Pieza> piezasReservadas = this.dao.findByEstado(EstadoPieza.getReservada());
+		List<Pieza> piezasReservadas = this.dao.findByEstado(EstadoPieza.getReservada(null));
 		Assert.assertTrue(piezasReservadas.size() == this.CANTIDAD_PIEZAS_RESERVADAS);
 	}
 	
@@ -169,8 +169,8 @@ public class ConsultarPiezasTest {
 	 */
 	@Test 
 	public void consultarPiezasVendidasDeUnAuto(){
-		List<Pieza> piezasVendidasDeAuto1 = this.dao.findByEstadoAndAuto(EstadoPieza.getVendida(), this.autoMockCon2Piezas);
-		List<Pieza> piezasVendidasDeAuto2 = this.dao.findByEstadoAndAuto(EstadoPieza.getVendida(), this.autoMockCon3Piezas);
+		List<Pieza> piezasVendidasDeAuto1 = this.dao.findByEstadoAndAuto(EstadoPieza.getVendida(null), this.autoMockCon2Piezas);
+		List<Pieza> piezasVendidasDeAuto2 = this.dao.findByEstadoAndAuto(EstadoPieza.getVendida(null), this.autoMockCon3Piezas);
 		
 		Assert.assertTrue(piezasVendidasDeAuto1.size() == 1);
 		Assert.assertTrue(piezasVendidasDeAuto2.size() == 0);

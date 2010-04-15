@@ -8,8 +8,8 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.exceptions.ReservarPiezaException;
-import org.utn.tacs.tp.group2.exceptions.VenderPiezaException;
+import org.utn.tacs.tp.group2.exceptions.PiezaNoReservadaException;
+import org.utn.tacs.tp.group2.exceptions.PiezaVendidaException;
 
 public class PiezaTest {
 
@@ -32,7 +32,7 @@ public class PiezaTest {
 	 * Una pieza que no fue reservada no puede ser vendida. Una pieza
 	 * DISPONIBLE, implica que no está RESERVADA.
 	 */
-	@Test(expected = VenderPiezaException.class)
+	@Test(expected = PiezaNoReservadaException.class)
 	public void venderUnaPiezaDisponible() {
 		this.pieza.setVendida();
 	}
@@ -62,7 +62,7 @@ public class PiezaTest {
 	/**
 	 * Vender una pieza ya vendida.
 	 */
-	@Test(expected = VenderPiezaException.class)
+	@Test(expected = PiezaVendidaException.class)
 	public void venderUnaPiezaYaVendida() {
 		this.pieza.setReservada();
 		this.pieza.setVendida();
@@ -95,7 +95,7 @@ public class PiezaTest {
 	/**
 	 * Una pieza vendida no puede reservarse.
 	 */
-	@Test(expected = ReservarPiezaException.class)
+	@Test(expected = PiezaVendidaException.class)
 	public void reservarUnaPiezaVendida() {
 		this.pieza.setReservada();
 		this.pieza.setVendida();

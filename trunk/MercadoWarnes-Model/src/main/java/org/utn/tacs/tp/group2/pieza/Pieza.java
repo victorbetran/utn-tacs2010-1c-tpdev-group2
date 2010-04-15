@@ -25,7 +25,7 @@ public class Pieza {
 	//********************************************
 	public Pieza(String codigo) {
 		this.id = IDAsignator.getInstance().getId();
-		this.estado = EstadoPieza.getDisponible();
+		this.estado = EstadoPieza.getDisponible(this);
 		this.categoria = CategoriaPieza.getStandar();
 		this.codigo = codigo;
 	}
@@ -38,7 +38,7 @@ public class Pieza {
 	 * Establece a la pieza como Disponible.
 	 */
 	public Pieza setDisponible() {
-		this.estado.setDisponible(this);	
+		this.estado = this.estado.setDisponible();	
 		return this;
 	}
 	
@@ -46,7 +46,7 @@ public class Pieza {
 	 * Establece a la pieza como Reservada.
 	 */
 	public Pieza setReservada() {
-		this.estado.setReservada(this);
+		this.estado = this.estado.setReservada();
 		return this;
 	}
 	
@@ -54,7 +54,7 @@ public class Pieza {
 	 * Establece a la pieza como Vendida.
 	 */
 	public Pieza setVendida() {
-		this.estado.setVendida(this);
+		this.estado = this.estado.setVendida();
 		return this;
 	}
 

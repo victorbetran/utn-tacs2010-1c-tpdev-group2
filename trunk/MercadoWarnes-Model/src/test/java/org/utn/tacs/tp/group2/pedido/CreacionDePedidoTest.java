@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.exceptions.ReservarPiezaException;
+import org.utn.tacs.tp.group2.exceptions.PiezaReservadaException;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class CreacionDePedidoTest {
@@ -28,7 +28,7 @@ public class CreacionDePedidoTest {
 	/**
 	 * Controla que a una pieza no disponible no se le permita ser agregada a un pedido.
 	 */
-	@Test(expected=ReservarPiezaException.class)
+	@Test(expected=PiezaReservadaException.class)
 	public void agregarPiezaNoDisponible(){
 		this.pedido.addPieza(this.piezaNoDisponible);
 	}

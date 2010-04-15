@@ -1,27 +1,18 @@
 package org.utn.tacs.tp.group2.pieza;
 
-import org.utn.tacs.tp.group2.exceptions.PiezaVendidaException;
-import org.utn.tacs.tp.group2.exceptions.ReservarPiezaException;
-import org.utn.tacs.tp.group2.exceptions.VenderPiezaException;
+/**
+ * Clase abstracta que representa el estado de una pieza. Existen 3
+ * estado posible: Disponible, Reservada, Vendida.
+ */
+public abstract class EstadoPieza {
 
-public class EstadoPieza {
-
-	//********************************************
-	//** CLASS VARIABLES
-	//********************************************
-	//TODO: hacer un refactor aca e implementar un State
-	private static final String DISPONIBLE = "DISPONIBLE";
-	private static final String RESERVADA = "RESERVADA";
-	private static final String VENDIDA = "VENDIDA";	
-
-	
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
-	/**
-	 * Estado de la pieza
-	 */
-	private String estado;
+	protected Pieza pieza;
+	protected String descripcion;
+	
+	private volatile int hashCode;
 	
 
 	//********************************************
@@ -29,9 +20,12 @@ public class EstadoPieza {
 	//********************************************
 	/**
 	 * Constructor protegido, para no permitir su instanciacion por fuera de la clase.
+	 * @param descripcion 
+	 * @param pieza 
 	 */
-	protected EstadoPieza(String estado) {
-		this.estado = estado;
+	protected EstadoPieza(Pieza pieza, String descripcion) {
+		this.descripcion = descripcion;
+		this.pieza = pieza;
 	}
 	
 	
@@ -42,81 +36,80 @@ public class EstadoPieza {
 	 * Setea el estado de la pieza a <b>DISPONIBLE</b>.
 	 * Una pieza no puede pasar a estar disponible si esta Vendida.
 	 */
-	public EstadoPieza setDisponible(Pieza pieza){ 
-		if(!pieza.isVendida())
-			this.estado = DISPONIBLE; 
-		else
-			throw new PiezaVendidaException(pieza);
-		return this;
-	}
+	public abstract EstadoPieza setDisponible();
+//	{ 
+//		if(!pieza.isVendida())
+//			this.estado = DISPONIBLE; 
+//		else
+//			throw new PiezaVendidaException(pieza);
+//		return this;
+//	}
 	
 	/**
 	 * Setea el estado de la pieza a <b>RESERVADA</b>.
 	 * Una pieza puede pasar a estar Reservada sólo si esta Disponible y no esta Vendida.
 	 */
-	public EstadoPieza setReservada(Pieza pieza){
-		if(pieza.isDisponible() && !pieza.isVendida())
-			this.estado = RESERVADA;
-		else
-			throw new ReservarPiezaException(pieza);
-		return this;
-	}
+	public abstract EstadoPieza setReservada();
+//	{
+//		if(pieza.isDisponible() && !pieza.isVendida())
+//			this.estado = RESERVADA;
+//		else
+//			throw new ReservarPiezaException(pieza);
+//		return this;
+//	}
 	
 	/**
 	 * Setea el estado de la pieza a <b>VENDIDA</b>.
 	 * Una pieza puede venderse únicamente si se encuentra reservada.
 	 */
-	public EstadoPieza setVendida(Pieza pieza){ 
-		if(pieza.isReservada())
-			this.estado = VENDIDA; 
-		else
-			throw new VenderPiezaException(pieza);
-		return this;
-	}
+	public abstract EstadoPieza setVendida();
+//	{ 
+//		if(pieza.isReservada())
+//			this.estado = VENDIDA; 
+//		else
+//			throw new VenderPiezaException(pieza);
+//		return this;
+//	}
 	
 	/**
 	 * Informa si la pieza está disponible.
 	 */
-	public boolean isDisponible() {
-		return this.estado.equals(DISPONIBLE);
-	}
+	public abstract boolean isDisponible();
 	
 	/**
 	 * Informa si la pieza está reservada.
 	 */	
-	public boolean isReservada() {
-		return this.estado.equals(RESERVADA);
-	}
+	public abstract boolean isReservada();
 	
 	/**
 	 * Informa si la pieza está vendida.
 	 */	
-	public boolean isVendida() {
-		return this.estado.equals(VENDIDA);
-	}
+	public abstract boolean isVendida();
+	
 	
 	//********************************************
 	//** PUBLIC CLASS METHODS
 	//********************************************
 	/**
 	 * Retorna un estado <b>DISPONIBLE</b>.
+	 * @param pieza 
 	 */
-	public static EstadoPieza getDisponible() {
-		return new EstadoPieza(DISPONIBLE);
+	public static EstadoPieza getDisponible(Pieza pieza) {
+		return new EstadoPiezaDisponible(pieza);
 	}
 	
 	/**
 	 * Retorna un estado <b>RESERVADA</b>.
 	 */
-	public static EstadoPieza getReservada() {
-		return new EstadoPieza(RESERVADA);
+	public static EstadoPieza getReservada(Pieza pieza) {
+		return new EstadoPiezaReservada(pieza);
 	}
 	
 	/**
 	 * Retorna un estado <b>VENDIDA</b>.
 	 */
-	public static EstadoPieza getVendida() {
-		return new EstadoPieza(VENDIDA);
+	public static EstadoPieza getVendida(Pieza pieza) {
+		return new EstadoPiezaVendida(pieza);
 	}
 	
 	
@@ -134,13 +127,23 @@ public class EstadoPieza {
 			return false;
 		}
 		EstadoPieza estadoPieza = (EstadoPieza) obj;
-		return estadoPieza.estado.equals(this.estado);
+		return this.descripcion.equals(estadoPieza.descripcion);
 	}
 
 	@Override public String toString() {
-		return this.estado;
+		return this.descripcion;
 	}
-
+	
+	@Override public int hashCode() {
+		int result = this.hashCode;
+		if(result == 0){
+			result = 17;
+			result = 31 * result * this.pieza.hashCode();
+			result = 31 * result * this.descripcion.hashCode();
+			this.hashCode = result;
+		}
+		return result;
+	}
 
 
 }
