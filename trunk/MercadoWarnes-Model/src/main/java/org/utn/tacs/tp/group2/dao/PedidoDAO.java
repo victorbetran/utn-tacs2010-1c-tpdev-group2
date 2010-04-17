@@ -18,7 +18,7 @@ public interface PedidoDAO {
 	Pedido findByID(String id);
 
 	/**
-	 * Guarda un pedido en la BD
+	 * Guarda un pedido en la BD.
 	 */
 	void save(Pedido pedido);
 }
