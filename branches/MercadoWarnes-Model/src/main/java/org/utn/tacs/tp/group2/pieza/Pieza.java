@@ -37,7 +37,7 @@ public class Pieza {
 	/**
 	 * Establece a la pieza como Disponible.
 	 */
-	public Pieza toDisponible() {
+	public Pieza disponibilizar() {
 		this.estado = this.estado.gotoDisponible();	
 		return this;
 	}
@@ -45,7 +45,7 @@ public class Pieza {
 	/**
 	 * Establece a la pieza como Reservada.
 	 */
-	public Pieza toReservada() {
+	public Pieza reservar() {
 		this.estado = this.estado.gotoReservada();
 		return this;
 	}
@@ -53,7 +53,7 @@ public class Pieza {
 	/**
 	 * Establece a la pieza como Vendida.
 	 */
-	public Pieza toVendida() {
+	public Pieza vender() {
 		this.estado = this.estado.gotoVendida();
 		return this;
 	}

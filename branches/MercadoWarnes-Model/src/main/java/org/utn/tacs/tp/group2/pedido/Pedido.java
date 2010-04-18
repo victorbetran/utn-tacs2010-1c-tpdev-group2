@@ -68,7 +68,7 @@ public class Pedido {
 	 * @return Pedido: El objeto al que se le está enviando el mensaje.
 	 */
 	public Pedido addPieza(Pieza pieza){
-		pieza.toReservada();
+		pieza.reservar();
 		this.piezas.add(pieza);
 		return this;
 	}
@@ -135,7 +135,7 @@ public class Pedido {
 	 */
 	private void disponibilizarPiezas() {
 		for(Pieza pieza : this.piezas){
-			pieza.toDisponible();
+			pieza.disponibilizar();
 		}
 		this.piezas.clear();
 	}
@@ -149,7 +149,7 @@ public class Pedido {
 		//TODO: si alguna de las piezas es vendida y luego se dispara
 		//excepcion, las piezas quedan en estado inconsistente.
 		for(Pieza pieza : this.piezas){
-			pieza.toVendida();
+			pieza.vender();
 		}
 	}
 	
