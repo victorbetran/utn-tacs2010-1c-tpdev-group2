@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.utn.tacs.tp.group2.dao.PiezaDAO;
-import org.utn.tacs.tp.group2.exceptions.PiezaInexistenteException;
+import org.utn.tacs.tp.group2.exceptions.pieza.PiezaInexistenteException;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.CategoriaPieza;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.utn.tacs.tp.group2.dao.IDAsignator;
-import org.utn.tacs.tp.group2.exceptions.PedidoEfectivizadoException;
-import org.utn.tacs.tp.group2.exceptions.PedidoSinPiezasException;
+import org.utn.tacs.tp.group2.exceptions.pedido.CancelacionDePedidoException;
+import org.utn.tacs.tp.group2.exceptions.pedido.EfectivizacionDePedidoException;
+import org.utn.tacs.tp.group2.exceptions.pedido.PedidoSinPiezasException;
+import org.utn.tacs.tp.group2.exceptions.pieza.PiezaException;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class Pedido {
@@ -26,7 +28,7 @@ public class Pedido {
 	public Pedido() {
 		this.id = IDAsignator.getInstance().getId();
 		this.piezas = new ArrayList<Pieza>();
-		this.estado = EstadoPedido.getEnCurso();
+		this.estado = EstadoPedido.getEnCurso(this);
 	}
 	
 	
@@ -37,20 +39,26 @@ public class Pedido {
 	 * Cancela un pedido, cancelando sus piezas y cambiando su estado a <i>CANCELADO</i>.
 	 */
 	public void cancelar() {
-		this.estado.setCancelado(this);
-		this.cancelarPiezas();
+		try{
+			this.disponibilizarPiezas();
+			this.estado = this.estado.gotoCancelado();
+		}
+		catch(PiezaException e){
+			throw new CancelacionDePedidoException(this, e);
+		}
 	}
 
 	/**
 	 *  Efectiviza un pedido, vendiendo sus piezas y cambiando su estado a <i>EFECTIVO</i>.
 	 */	
 	public void efectivizar() {
-		if (this.piezas.isEmpty())
-			throw new PedidoSinPiezasException(this);
-		if (this.isEfectivo())
-			throw new PedidoEfectivizadoException(this);
-		this.venderPiezas();
-		this.estado.setEfectivo(this);
+		try{
+			this.venderPiezas();
+			this.estado = this.estado.gotoEfectivo();
+		}
+		catch(PiezaException e){
+			throw new EfectivizacionDePedidoException(this, e);
+		}
 	}
 	
 	/**
@@ -125,7 +133,7 @@ public class Pedido {
 	/**
 	 * Setea el estado de las piezas a Disponible.
 	 */
-	private void cancelarPiezas() {
+	private void disponibilizarPiezas() {
 		for(Pieza pieza : this.piezas){
 			pieza.toDisponible();
 		}
@@ -136,6 +144,8 @@ public class Pedido {
 	 * Setea el estado de las piezas a Vendidas.
 	 */
 	private void venderPiezas() {
+		if (this.piezas.isEmpty())
+			throw new PedidoSinPiezasException(this);
 		//TODO: si alguna de las piezas es vendida y luego se dispara
 		//excepcion, las piezas quedan en estado inconsistente.
 		for(Pieza pieza : this.piezas){

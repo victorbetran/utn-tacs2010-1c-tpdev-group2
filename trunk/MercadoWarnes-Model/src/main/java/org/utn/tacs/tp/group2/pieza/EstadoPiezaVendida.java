@@ -1,6 +1,6 @@
 package org.utn.tacs.tp.group2.pieza;
 
-import org.utn.tacs.tp.group2.exceptions.PiezaVendidaException;
+import org.utn.tacs.tp.group2.exceptions.pieza.PiezaVendidaException;
 
 public class EstadoPiezaVendida extends EstadoPieza {
 
@@ -27,15 +27,15 @@ public class EstadoPiezaVendida extends EstadoPieza {
 		return true;
 	}
 
-	@Override public EstadoPieza toDisponible() {
+	@Override public EstadoPieza gotoDisponible() {
 		throw new PiezaVendidaException(this.pieza);
 	}
 
-	@Override public EstadoPieza toReservada() {
+	@Override public EstadoPieza gotoReservada() {
 		throw new PiezaVendidaException(this.pieza);
 	}
 
-	@Override public EstadoPieza toVendida() {
+	@Override public EstadoPieza gotoVendida() {
 		throw new PiezaVendidaException(this.pieza);
 	}
 

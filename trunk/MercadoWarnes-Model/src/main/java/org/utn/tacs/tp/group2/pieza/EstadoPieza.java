@@ -36,19 +36,19 @@ public abstract class EstadoPieza {
 	 * Setea el estado de la pieza a <b>DISPONIBLE</b>.
 	 * Una pieza no puede pasar a estar disponible si esta Vendida.
 	 */
-	public abstract EstadoPieza toDisponible();
+	public abstract EstadoPieza gotoDisponible();
 	
 	/**
 	 * Setea el estado de la pieza a <b>RESERVADA</b>.
 	 * Una pieza puede pasar a estar Reservada sólo si esta Disponible y no esta Vendida.
 	 */
-	public abstract EstadoPieza toReservada();
+	public abstract EstadoPieza gotoReservada();
 	
 	/**
 	 * Setea el estado de la pieza a <b>VENDIDA</b>.
 	 * Una pieza puede venderse únicamente si se encuentra reservada.
 	 */
-	public abstract EstadoPieza toVendida();
+	public abstract EstadoPieza gotoVendida();
 	
 	/**
 	 * Informa si la pieza está disponible.
@@ -105,8 +105,8 @@ public abstract class EstadoPieza {
 		if(!(obj instanceof EstadoPieza)){
 			return false;
 		}
-		EstadoPieza estadoPieza = (EstadoPieza) obj;
-		return this.descripcion.equals(estadoPieza.descripcion);
+		EstadoPieza otherEstado = (EstadoPieza) obj;
+		return this.descripcion.equals(otherEstado.descripcion);
 	}
 
 	@Override public String toString() {
@@ -117,7 +117,6 @@ public abstract class EstadoPieza {
 		int result = this.hashCode;
 		if(result == 0){
 			result = 17;
-			result = 31 * result * this.pieza.hashCode();
 			result = 31 * result * this.descripcion.hashCode();
 			this.hashCode = result;
 		}

@@ -5,8 +5,8 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.exceptions.PedidoEfectivizadoException;
-import org.utn.tacs.tp.group2.exceptions.PedidoSinPiezasException;
+import org.utn.tacs.tp.group2.exceptions.pedido.EfectivizacionDePedidoException;
+import org.utn.tacs.tp.group2.exceptions.pedido.PedidoSinPiezasException;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class EfectivizacionDePedidoTest {
@@ -57,9 +57,9 @@ public class EfectivizacionDePedidoTest {
 	 * Intenta efectivizar un pedido que fue previamente efectivizado, por lo
 	 * que tira una Exception (PedidoEfectivizadoException).
 	 */
-	@Test(expected = PedidoEfectivizadoException.class)
+	@Test(expected = EfectivizacionDePedidoException.class)
 	public void efectivizarPedidoYaEfectivizado() {
-		this.pedido.addPieza(unaPieza);
+		this.pedido.addPieza(this.unaPieza);
 		this.pedido.efectivizar();
 		this.pedido.efectivizar();
 	}

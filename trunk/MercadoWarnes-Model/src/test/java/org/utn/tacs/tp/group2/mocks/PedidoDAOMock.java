@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.utn.tacs.tp.group2.dao.PedidoDAO;
-import org.utn.tacs.tp.group2.exceptions.PedidoInexistenteException;
+import org.utn.tacs.tp.group2.exceptions.pedido.PedidoInexistenteException;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 

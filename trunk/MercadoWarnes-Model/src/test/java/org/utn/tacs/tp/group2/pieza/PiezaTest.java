@@ -8,8 +8,8 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.exceptions.PiezaNoReservadaException;
-import org.utn.tacs.tp.group2.exceptions.PiezaVendidaException;
+import org.utn.tacs.tp.group2.exceptions.pieza.PiezaNoReservadaException;
+import org.utn.tacs.tp.group2.exceptions.pieza.PiezaVendidaException;
 
 public class PiezaTest {
 

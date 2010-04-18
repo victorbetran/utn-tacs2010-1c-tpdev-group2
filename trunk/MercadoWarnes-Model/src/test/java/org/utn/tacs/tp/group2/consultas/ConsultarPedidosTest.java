@@ -10,7 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.utn.tacs.tp.group2.dao.PedidoDAO;
-import org.utn.tacs.tp.group2.exceptions.PedidoInexistenteException;
+import org.utn.tacs.tp.group2.exceptions.pedido.PedidoInexistenteException;
 import org.utn.tacs.tp.group2.mocks.MockDAOFactory;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
@@ -33,15 +33,15 @@ public class ConsultarPedidosTest {
 	public void setUp() throws Exception {
 		this.dao = MockDAOFactory.getPedidoDAO();
 		
-		this.dao.save(createPedidoMock("9999", EstadoPedido.getEfectivo()));
+		this.dao.save(createPedidoMock("9999", EstadoPedido.getEfectivo(null)));
 		this.CANTIDAD_PEDIDOS_EFECTIVIZADOS = 1;
 		
-		this.dao.save(createPedidoMock("8888", EstadoPedido.getEnCurso()));
-		this.dao.save(createPedidoMock("7777", EstadoPedido.getEnCurso()));
+		this.dao.save(createPedidoMock("8888", EstadoPedido.getEnCurso(null)));
+		this.dao.save(createPedidoMock("7777", EstadoPedido.getEnCurso(null)));
 		this.CANTIDAD_PEDIDOS_EN_CURSO = 2;
 		
-		this.dao.save(createPedidoMock("6666", EstadoPedido.getCancelado()));
-		this.dao.save(createPedidoMock("5555", EstadoPedido.getCancelado()));
+		this.dao.save(createPedidoMock("6666", EstadoPedido.getCancelado(null)));
+		this.dao.save(createPedidoMock("5555", EstadoPedido.getCancelado(null)));
 		this.CANTIDAD_PEDIDOS_CANCELADOS = 2;
 	}
 
@@ -71,9 +71,9 @@ public class ConsultarPedidosTest {
 	 */
 	@Test 
 	public void consultarPedidosPorEstado(){
-		List<Pedido> pedidosEfectivizados = this.dao.findByEstado(EstadoPedido.getEfectivo());
-		List<Pedido> pedidosEnCurso = this.dao.findByEstado(EstadoPedido.getEnCurso());
-		List<Pedido> pedidosCancelados = this.dao.findByEstado(EstadoPedido.getCancelado());
+		List<Pedido> pedidosEfectivizados = this.dao.findByEstado(EstadoPedido.getEfectivo(null));
+		List<Pedido> pedidosEnCurso = this.dao.findByEstado(EstadoPedido.getEnCurso(null));
+		List<Pedido> pedidosCancelados = this.dao.findByEstado(EstadoPedido.getCancelado(null));
 		
 		Assert.assertTrue(pedidosEfectivizados.size() == this.CANTIDAD_PEDIDOS_EFECTIVIZADOS);
 		Assert.assertTrue(pedidosEnCurso.size() == this.CANTIDAD_PEDIDOS_EN_CURSO);

@@ -4,8 +4,9 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.exceptions.PedidoCanceladoException;
-import org.utn.tacs.tp.group2.exceptions.PedidoEfectivizadoException;
+import org.utn.tacs.tp.group2.exceptions.pedido.CancelacionDePedidoException;
+import org.utn.tacs.tp.group2.exceptions.pedido.PedidoCanceladoException;
+import org.utn.tacs.tp.group2.exceptions.pedido.PedidoEfectivizadoException;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class CancelacionDePedidoTest {
@@ -40,7 +41,7 @@ public class CancelacionDePedidoTest {
 	/**
 	 * Cancela un pedido que fue efectifizado, es decir, un pedido <b>EFECTIVO</b>.
 	 */
-	@Test (expected=PedidoEfectivizadoException.class)
+	@Test (expected=CancelacionDePedidoException.class)
 	public void cancelarUnPedidoEfectivo(){
 		this.pedido.addPieza(new Pieza("Z-456"));
 		this.pedido.efectivizar();
