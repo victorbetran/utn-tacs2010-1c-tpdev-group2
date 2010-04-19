@@ -32,10 +32,10 @@ public class ManejoDePedidoTest {
 		this.pedido.addPieza(this.pieza2);
 		this.pedido.addPieza(this.pieza3);
 		
-		Assert.assertEquals("El pedido tiene mas piezas de las que le fueron agregadas",pedido.cantidadDePiezasAsignadas(),3);
-		Assert.assertTrue("La pieza fue agregada al pedido pero el mismo no la contiene.",pedido.contienePieza(this.pieza1));
-		Assert.assertTrue("La pieza fue agregada al pedido pero el mismo no la contiene.",pedido.contienePieza(this.pieza2));
-		Assert.assertTrue("La pieza fue agregada al pedido pero el mismo no la contiene.",pedido.contienePieza(this.pieza3));
+		Assert.assertEquals("El pedido tiene mas piezas de las que le fueron agregadas",this.pedido.cantidadDePiezasAsignadas(),3);
+		Assert.assertTrue("La pieza fue agregada al pedido pero el mismo no la contiene.",this.pedido.contienePieza(this.pieza1));
+		Assert.assertTrue("La pieza fue agregada al pedido pero el mismo no la contiene.",this.pedido.contienePieza(this.pieza2));
+		Assert.assertTrue("La pieza fue agregada al pedido pero el mismo no la contiene.",this.pedido.contienePieza(this.pieza3));
 	}
 	
 	/**

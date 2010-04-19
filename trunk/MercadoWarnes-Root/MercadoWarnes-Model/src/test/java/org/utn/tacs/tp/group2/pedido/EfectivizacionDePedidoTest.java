@@ -18,8 +18,8 @@ public class EfectivizacionDePedidoTest {
 	@Before
 	public void setUp() throws Exception {
 		this.pedido = new Pedido();
-		unaPieza = new Pieza("P-987");
-		otraPieza = new Pieza("6-985");
+		this.unaPieza = new Pieza("P-987");
+		this.otraPieza = new Pieza("6-985");
 	}
 
 	/**
@@ -27,7 +27,7 @@ public class EfectivizacionDePedidoTest {
 	 */
 	@Test
 	public void efectivizarPedido() {
-		this.pedido.addPieza(unaPieza);
+		this.pedido.addPieza(this.unaPieza);
 		this.pedido.efectivizar();
 		Assert.assertTrue("No se ha efectivizado correctamente el pedido.",this.pedido.isEfectivo());
 	}
@@ -38,10 +38,10 @@ public class EfectivizacionDePedidoTest {
 	 */
 	@Test
 	public void efectivizarPedidoVerificandoPiezasVendidas() {
-		this.pedido.addPieza(unaPieza);
-		this.pedido.addPieza(otraPieza);
+		this.pedido.addPieza(this.unaPieza);
+		this.pedido.addPieza(this.otraPieza);
 		this.pedido.efectivizar();
-		Assert.assertTrue(unaPieza.isVendida() && otraPieza.isVendida());
+		Assert.assertTrue(this.unaPieza.isVendida() && this.otraPieza.isVendida());
 	}
 
 	/**
