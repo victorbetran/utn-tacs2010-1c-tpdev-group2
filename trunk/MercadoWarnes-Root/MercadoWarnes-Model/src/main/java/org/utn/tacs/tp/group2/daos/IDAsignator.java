@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.dao;
+package org.utn.tacs.tp.group2.daos;
 /**
  * Administrador de IDs para los objetos de la aplicacion. 
  * Este objeto es momentaneo hasta que el modelo se integre a la capa

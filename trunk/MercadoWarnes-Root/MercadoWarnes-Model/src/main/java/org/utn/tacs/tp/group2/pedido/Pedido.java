@@ -3,7 +3,7 @@ package org.utn.tacs.tp.group2.pedido;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.utn.tacs.tp.group2.dao.IDAsignator;
+import org.utn.tacs.tp.group2.daos.IDAsignator;
 import org.utn.tacs.tp.group2.exceptions.pedido.CancelacionDePedidoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.EfectivizacionDePedidoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoSinPiezasException;

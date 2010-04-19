@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.dao;
+package org.utn.tacs.tp.group2.daos;
 
 import java.util.List;
 

@@ -11,7 +11,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.dao.PiezaDAO;
+import org.utn.tacs.tp.group2.daos.PiezaDAO;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaInexistenteException;
 import org.utn.tacs.tp.group2.mocks.MockDAOFactory;
 import org.utn.tacs.tp.group2.pieza.Auto;
