@@ -13,6 +13,11 @@
   <name>MercadoWarnes-Persistence</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+  	<dependency>
+      <groupId>org.utn.tacs.tp.group2</groupId>
+      <artifactId>MercadoWarnes-Model</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
     <dependency>
       <groupId>hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
