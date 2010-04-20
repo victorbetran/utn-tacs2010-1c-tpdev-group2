@@ -8,14 +8,13 @@ import org.utn.tacs.tp.group2.exceptions.pedido.EfectivizacionDePedidoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoSinPiezasException;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaException;
 import org.utn.tacs.tp.group2.pieza.Pieza;
-import org.utn.tacs.tp.group2.utils.IDGenerator;
+import org.utn.tacs.tp.group2.utils.PersistentObject;
 
-public class Pedido {
+public class Pedido extends PersistentObject{
 
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
-	private String id;
 	private List<Pieza> piezas;
 	private EstadoPedido estado;
 	
@@ -26,7 +25,7 @@ public class Pedido {
 	//** PUBLIC CONSTRUCTOR
 	//********************************************
 	public Pedido() {
-		this.id = IDGenerator.getInstance().getId();
+		super();
 		this.piezas = new ArrayList<Pieza>();
 		this.estado = EstadoPedido.getEnCurso(this);
 	}
@@ -175,19 +174,14 @@ public class Pedido {
 		return this.estado;
 	}
 	
-	/**
-	 * Devuelve el id del pedido.
-	 */
-	public String getId() {
-		return this.id;
-	}
+
 	
 	
 	//********************************************
 	//** OVERWRITTEN METHODS
 	//********************************************
 	@Override public String toString() {
-		return this.id;
+		return this.id.toString();
 	}
 	
 	@Override public boolean equals(Object obj) {

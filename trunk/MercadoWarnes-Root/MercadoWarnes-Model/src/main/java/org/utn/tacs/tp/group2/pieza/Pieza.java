@@ -2,14 +2,13 @@ package org.utn.tacs.tp.group2.pieza;
 
 import java.math.BigDecimal;
 
-import org.utn.tacs.tp.group2.utils.IDGenerator;
+import org.utn.tacs.tp.group2.utils.PersistentObject;
 
-public class Pieza {
+public class Pieza extends PersistentObject{
 	
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
-	private String id;
 	private String codigo;
 	private EstadoPieza estado;
 	private String descripcion;
@@ -24,7 +23,7 @@ public class Pieza {
 	//** PUBLIC CONSTRUCTOR
 	//********************************************
 	public Pieza(String codigo) {
-		this.id = IDGenerator.getInstance().getId();
+		super();
 		this.estado = EstadoPieza.getDisponible(this);
 		this.categoria = CategoriaPieza.getStandar();
 		this.codigo = codigo;
@@ -136,13 +135,6 @@ public class Pieza {
 	//********************************************
 	//** GETTERS & SETTERS
 	//********************************************
-	public String getId() { 
-		return this.id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	public CategoriaPieza getCategoria() {
 		return this.categoria;
 	}

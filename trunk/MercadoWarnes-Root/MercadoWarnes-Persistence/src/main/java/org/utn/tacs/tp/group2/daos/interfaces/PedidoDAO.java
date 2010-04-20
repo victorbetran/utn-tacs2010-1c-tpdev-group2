@@ -5,6 +5,8 @@ import java.util.List;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
+import com.eaio.uuid.UUID;
+
 public interface PedidoDAO {
 
 	/**
@@ -15,7 +17,7 @@ public interface PedidoDAO {
 	/**
 	 * Devuelve el pedido cuyo ID corresponde al id pasado al mensaje.
 	 */
-	Pedido findByID(String id);
+	Pedido findByID(UUID id);
 
 	/**
 	 * Guarda un pedido en la BD.
