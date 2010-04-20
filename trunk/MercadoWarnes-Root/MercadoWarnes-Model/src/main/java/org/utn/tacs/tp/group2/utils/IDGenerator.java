@@ -5,19 +5,19 @@ package org.utn.tacs.tp.group2.utils;
  * de persistencia. Luego habria que decidir qué política de generacion
  * y administracion de IDs se utilizara.
  */
-public final class UUIDGenerator {
+public final class IDGenerator {
 
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
-	private static UUIDGenerator INSTANCE;
+	private static IDGenerator INSTANCE;
 	private long seed;
 	
 	
 	//********************************************
 	//** PRIVATE CONSTRUCTOR
 	//********************************************
-	private UUIDGenerator() {
+	private IDGenerator() {
 		this.seed = 0;
 	}
 	
@@ -25,9 +25,9 @@ public final class UUIDGenerator {
 	//********************************************
 	//** PUBLIC CLASS METHODS
 	//********************************************
-	public static UUIDGenerator getInstance(){
+	public static IDGenerator getInstance(){
 		if(INSTANCE == null)
-			INSTANCE = new UUIDGenerator();
+			INSTANCE = new IDGenerator();
 		return INSTANCE;
 	}
 	

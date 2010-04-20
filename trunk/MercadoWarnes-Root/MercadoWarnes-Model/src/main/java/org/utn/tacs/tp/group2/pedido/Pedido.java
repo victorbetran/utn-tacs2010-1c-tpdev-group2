@@ -8,7 +8,7 @@ import org.utn.tacs.tp.group2.exceptions.pedido.EfectivizacionDePedidoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoSinPiezasException;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaException;
 import org.utn.tacs.tp.group2.pieza.Pieza;
-import org.utn.tacs.tp.group2.utils.UUIDGenerator;
+import org.utn.tacs.tp.group2.utils.IDGenerator;
 
 public class Pedido {
 
@@ -26,7 +26,7 @@ public class Pedido {
 	//** PUBLIC CONSTRUCTOR
 	//********************************************
 	public Pedido() {
-		this.id = UUIDGenerator.getInstance().getId();
+		this.id = IDGenerator.getInstance().getId();
 		this.piezas = new ArrayList<Pieza>();
 		this.estado = EstadoPedido.getEnCurso(this);
 	}
