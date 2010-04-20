@@ -7,6 +7,7 @@ import com.eaio.uuid.UUID;
 /**
  * Abstracción de un objeto persistente. Posee toda la lógica para que un objeto
  * de dominio pueda ser persistido.
+ * @see http://johannburkard.de/software/uuid/
  */
 public abstract class PersistentObject {
 
