@@ -9,8 +9,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.daos.implementations.MockDAOFactory;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
+import org.utn.tacs.tp.group2.daos.mocks.MockDAOFactory;
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoInexistenteException;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
@@ -31,7 +31,7 @@ public class ConsultarPedidosTest {
 	//********************************************
 	@Before
 	public void setUp() throws Exception {
-		this.dao = MockDAOFactory.getPedidoDAO();
+		this.dao = MockDAOFactory.getInstance().getPedidoDAO();
 		
 		this.dao.save(createPedidoMock("9999", EstadoPedido.getEfectivo(null)));
 		this.CANTIDAD_PEDIDOS_EFECTIVIZADOS = 1;
