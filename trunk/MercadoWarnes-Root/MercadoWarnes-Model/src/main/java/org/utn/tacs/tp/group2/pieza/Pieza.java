@@ -2,7 +2,7 @@ package org.utn.tacs.tp.group2.pieza;
 
 import java.math.BigDecimal;
 
-import org.utn.tacs.tp.group2.daos.IDAsignator;
+import org.utn.tacs.tp.group2.utils.UUIDGenerator;
 
 public class Pieza {
 	
@@ -24,7 +24,7 @@ public class Pieza {
 	//** PUBLIC CONSTRUCTOR
 	//********************************************
 	public Pieza(String codigo) {
-		this.id = IDAsignator.getInstance().getId();
+		this.id = UUIDGenerator.getInstance().getId();
 		this.estado = EstadoPieza.getDisponible(this);
 		this.categoria = CategoriaPieza.getStandar();
 		this.codigo = codigo;

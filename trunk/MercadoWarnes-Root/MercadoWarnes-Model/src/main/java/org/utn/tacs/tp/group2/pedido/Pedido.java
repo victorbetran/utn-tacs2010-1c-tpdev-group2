@@ -3,12 +3,12 @@ package org.utn.tacs.tp.group2.pedido;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.utn.tacs.tp.group2.daos.IDAsignator;
 import org.utn.tacs.tp.group2.exceptions.pedido.CancelacionDePedidoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.EfectivizacionDePedidoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoSinPiezasException;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaException;
 import org.utn.tacs.tp.group2.pieza.Pieza;
+import org.utn.tacs.tp.group2.utils.UUIDGenerator;
 
 public class Pedido {
 
@@ -26,7 +26,7 @@ public class Pedido {
 	//** PUBLIC CONSTRUCTOR
 	//********************************************
 	public Pedido() {
-		this.id = IDAsignator.getInstance().getId();
+		this.id = UUIDGenerator.getInstance().getId();
 		this.piezas = new ArrayList<Pieza>();
 		this.estado = EstadoPedido.getEnCurso(this);
 	}
