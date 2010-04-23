@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.utn.tacs.tp.group2.utils.Logueador;
 import org.utn.tacs.tp.group2.utils.PersistentObject;
 
 /**
@@ -97,6 +98,8 @@ public abstract class EstadoPedido extends PersistentObject {
 	public static EstadoPedido getEfectivo(Pedido pedido) {
 		return new EstadoPedidoEfectivo(pedido);
 	}
+	
+	
 
 	// ********************************************
 	// ** OVERWRITTEN METHODS

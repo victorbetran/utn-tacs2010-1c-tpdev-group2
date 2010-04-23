@@ -1,5 +1,7 @@
 package org.utn.tacs.tp.group2.pedido;
 
+import org.utn.tacs.tp.group2.utils.Logueador;
+
 public class EstadoPedidoEnCurso extends EstadoPedido{
 
 	//********************************************
@@ -26,7 +28,7 @@ public class EstadoPedidoEnCurso extends EstadoPedido{
 	}
 
 	@Override public EstadoPedido gotoCancelado() {
-		return new EstadoPedidoCancelado(this.pedido);
+		return new EstadoPedidoCancelado(this.pedido);		
 	}
 
 	@Override public EstadoPedido gotoEfectivo() {

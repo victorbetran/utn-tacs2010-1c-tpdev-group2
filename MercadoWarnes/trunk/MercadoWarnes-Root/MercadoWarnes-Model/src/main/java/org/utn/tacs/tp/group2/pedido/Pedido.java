@@ -1,6 +1,8 @@
 package org.utn.tacs.tp.group2.pedido;
 
 import java.util.ArrayList;
+
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,11 +16,15 @@ import org.utn.tacs.tp.group2.exceptions.pedido.EfectivizacionDePedidoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoSinPiezasException;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaException;
 import org.utn.tacs.tp.group2.pieza.Pieza;
+import org.utn.tacs.tp.group2.utils.Logueador;
 import org.utn.tacs.tp.group2.utils.PersistentObject;
 
 @Entity
 @Table(name = "PEDIDO")
 public class Pedido extends PersistentObject {
+	
+
+
 
 	// ********************************************
 	// ** ATRIBUTTES
@@ -43,6 +49,7 @@ public class Pedido extends PersistentObject {
 		super();
 		this.piezas = new ArrayList<Pieza>();
 		this.estado = EstadoPedido.getEnCurso(this);
+		Logueador.getInstancia().loguearTransaccion(this);
 	}
 
 	// ********************************************
@@ -55,6 +62,7 @@ public class Pedido extends PersistentObject {
 		try {
 			this.disponibilizarPiezas();
 			this.estado = this.estado.gotoCancelado();
+			Logueador.getInstancia().loguearTransaccion(this);
 		} catch (PiezaException e) {
 			throw new CancelacionDePedidoException(this, e);
 		}
@@ -67,6 +75,7 @@ public class Pedido extends PersistentObject {
 		try {
 			this.venderPiezas();
 			this.estado = this.estado.gotoEfectivo();
+			Logueador.getInstancia().loguearTransaccion(this);
 		} catch (PiezaException e) {
 			throw new EfectivizacionDePedidoException(this, e);
 		}
