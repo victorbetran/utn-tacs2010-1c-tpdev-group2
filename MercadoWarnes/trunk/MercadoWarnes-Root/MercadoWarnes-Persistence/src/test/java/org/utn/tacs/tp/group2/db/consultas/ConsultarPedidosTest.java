@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.consultas.db;
+package org.utn.tacs.tp.group2.db.consultas;
 
 
 public class ConsultarPedidosTest {
