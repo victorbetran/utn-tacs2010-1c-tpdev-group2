@@ -12,17 +12,20 @@
 		<property name="hibernate.connection.url">
 		    jdbc:hsqldb:file:db/tp-group2-db;shutdown=true
 		</property>
-		<property name="hibernate.connection.username">sa</property>
-		<!-- <property name="hibernate.connection.password">therightsideofthecode</property> -->
+		<property name="hibernate.connection.username">mrpojo</property>
+		<property name="hibernate.connection.password">therightsideofthecode</property>
 		
 		<property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
 		
+		<property name="hibernate.connection.pool_size">3</property>
         <!-- Use the C3P0 connection pool provider -->
-		<property name="hibernate.c3p0.min_size">5</property>
-		<property name="hibernate.c3p0.max_size">20</property>
-		<property name="hibernate.c3p0.timeout">300</property>
-		<property name="hibernate.c3p0.max_statements">50</property>
-		<property name="hibernate.c3p0.idle_test_period">3000</property>
+        <!-- 
+			<property name="hibernate.c3p0.min_size">5</property>
+			<property name="hibernate.c3p0.max_size">20</property>
+			<property name="hibernate.c3p0.timeout">300</property>
+			<property name="hibernate.c3p0.max_statements">50</property>
+			<property name="hibernate.c3p0.idle_test_period">3000</property>
+		 -->
 
 		<!-- Schema Export 	-->
 		<property name="hbm2ddl.auto">create</property>
@@ -31,8 +34,8 @@
 		<property name="show_sql">true</property>
 
 		<!-- List of annotated classes -->
-		<mapping class="org.utn.tacs.tp.group2.dtos.PedidoDTO"/>
-		<mapping class="org.utn.tacs.tp.group2.dtos.PiezaDTO"/>
+		<mapping class="org.utn.tacs.tp.group2.pedido.Pedido"/>
+		<mapping class="org.utn.tacs.tp.group2.pieza.Pieza"/>
 		
 	</session-factory>
 	

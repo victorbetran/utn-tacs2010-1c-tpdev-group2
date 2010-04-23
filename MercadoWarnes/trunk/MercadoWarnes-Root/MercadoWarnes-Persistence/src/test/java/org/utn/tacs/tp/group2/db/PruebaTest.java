@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
-public class VikoTest {
+public class PruebaTest {
 
 	@Test
 	public void cargarDatos() {

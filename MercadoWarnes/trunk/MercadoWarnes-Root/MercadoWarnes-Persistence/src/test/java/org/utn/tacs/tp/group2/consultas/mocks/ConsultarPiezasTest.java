@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.consultas;
+package org.utn.tacs.tp.group2.consultas.mocks;
 
 import static org.easymock.EasyMock.expect;
 import static org.easymock.classextension.EasyMock.createMock;

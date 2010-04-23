@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.sample;
+package org.utn.tacs.tp.group2.hibernate.utils;
 
 import org.hibernate.Session;
 
