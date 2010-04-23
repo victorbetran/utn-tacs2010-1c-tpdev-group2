@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.daos.mocks;
+package org.utn.tacs.tp.group2.mock.daos;
 
 import java.util.ArrayList;
 import java.util.List;

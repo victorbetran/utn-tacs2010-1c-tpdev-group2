@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.daos.mocks;
+package org.utn.tacs.tp.group2.mock.daos;
 
 import org.utn.tacs.tp.group2.daos.interfaces.DAOFactory;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;

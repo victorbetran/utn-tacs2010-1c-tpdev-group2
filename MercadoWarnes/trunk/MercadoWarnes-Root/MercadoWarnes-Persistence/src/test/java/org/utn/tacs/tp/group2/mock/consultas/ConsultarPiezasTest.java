@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.consultas.mocks;
+package org.utn.tacs.tp.group2.mock.consultas;
 
 import static org.easymock.EasyMock.expect;
 import static org.easymock.classextension.EasyMock.createMock;
@@ -12,8 +12,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
-import org.utn.tacs.tp.group2.daos.mocks.MockDAOFactory;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaInexistenteException;
+import org.utn.tacs.tp.group2.mock.daos.MockDAOFactory;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.CategoriaPieza;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
