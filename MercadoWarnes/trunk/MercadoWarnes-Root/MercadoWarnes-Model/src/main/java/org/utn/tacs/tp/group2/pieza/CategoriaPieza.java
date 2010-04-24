@@ -93,7 +93,6 @@ public class CategoriaPieza extends PersistentObject {
 
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 }
