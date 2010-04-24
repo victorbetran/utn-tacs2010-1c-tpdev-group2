@@ -24,8 +24,6 @@ import org.utn.tacs.tp.group2.utils.PersistentObject;
 public class Pedido extends PersistentObject {
 	
 
-
-
 	// ********************************************
 	// ** ATRIBUTTES
 	// ********************************************
@@ -33,7 +31,7 @@ public class Pedido extends PersistentObject {
 	 * Cuando se guarda o actualiza un pedido le pega a las piezas, pero si se borra, no borra a las
 	 * piezas asosiadas a el mismo
 	 */
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "pedido")
+	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private List<Pieza> piezas;
 
 	@OneToOne(cascade = CascadeType.ALL, optional = false)

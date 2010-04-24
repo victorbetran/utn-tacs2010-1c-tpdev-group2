@@ -1,46 +1,35 @@
 package org.utn.tacs.tp.group2.utils;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import com.eaio.uuid.UUID;
 
 /**
  * Abstracción de un objeto persistente. Posee toda la lógica para que un objeto
  * de dominio pueda ser persistido.
  * @see http://johannburkard.de/software/uuid/
  */
+@Entity
 public abstract class PersistentObject {
 
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
 	@Id
-	protected UUID id;
+	@GeneratedValue
+	protected Long id;
 
-
-	//********************************************
-	//** PROTECTED CONSTRUCTOR
-	//********************************************
-	protected PersistentObject() {
-		this.id = new UUID();
-	}
-	
-	
 	//********************************************
 	//** ID GETTER & SETTERS
 	//********************************************
-	/**
-	 * Devuelve el id del objeto.
-	 */
-	public UUID getId() { return this.id; }
+	public Long getId() {
+		return id;
+	}
 
-	/**
-	 * Setea el id del objeto.
-	 */
-	public void setId(UUID id) {
+	
+	public void setId(Long id) {
 		this.id = id;
 	}
-	
 	
 	//********************************************
 	//** ABSTRACT METHODS
@@ -48,4 +37,7 @@ public abstract class PersistentObject {
 	@Override public abstract boolean equals(Object obj);
 	
 	@Override public abstract int hashCode();
+
+	
+
 }
