@@ -17,7 +17,7 @@ public class Logueador {
 	
 	public Logueador()
 	{
-		DOMConfigurator.configure("configLog.xml");
+		DOMConfigurator.configure("log4j.cfg.xml");
 	}
 	public void loguearTransaccion(Pedido pedido)
 	{
