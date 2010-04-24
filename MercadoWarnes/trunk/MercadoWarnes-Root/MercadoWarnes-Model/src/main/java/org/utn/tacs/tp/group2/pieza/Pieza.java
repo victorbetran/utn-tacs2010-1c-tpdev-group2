@@ -18,24 +18,24 @@ public class Pieza extends PersistentObject {
 	// ********************************************
 	// ** ATRIBUTTES
 	// ********************************************
-	@Column(nullable = false, length = 10)
+	@Column(length = 10)
 	private String codigo;
 
 	// TODO: El estado de la pieza al final iba a conocer la pieza no? para mappearlo seria mas
 	// feliz :D
-	@OneToOne(cascade = CascadeType.ALL, optional = false)
+	@OneToOne(cascade = CascadeType.ALL)
 	private EstadoPieza estado;
 
-	@Column(nullable = false, length = 128)
+	@Column(length = 128)
 	private String descripcion;
 
-	@OneToOne(optional = false)
+	@OneToOne
 	private CategoriaPieza categoria;
 
-	@ManyToOne(optional = false)
+	@ManyToOne
 	private Auto autoOrigen;
 
-	@Column(nullable = false)
+	@Column
 	private BigDecimal precio;
 
 	// TODO: Hay que decirle que esto NO VA en la tabla

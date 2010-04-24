@@ -2,6 +2,8 @@ package org.utn.tacs.tp.group2.utils;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 /**
  * Abstracción de un objeto persistente. Posee toda la lógica para que un objeto
@@ -9,6 +11,7 @@ import javax.persistence.Id;
  * @see http://johannburkard.de/software/uuid/
  */
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class PersistentObject {
 
 	//********************************************
@@ -16,6 +19,11 @@ public abstract class PersistentObject {
 	//********************************************
 	@Id
 	protected Long id = UUIDGenerator.getInstance().getId();
+	
+	public PersistentObject(){
+		id = UUIDGenerator.getInstance().getId();
+	}
+	
 
 	//********************************************
 	//** ID GETTER & SETTERS

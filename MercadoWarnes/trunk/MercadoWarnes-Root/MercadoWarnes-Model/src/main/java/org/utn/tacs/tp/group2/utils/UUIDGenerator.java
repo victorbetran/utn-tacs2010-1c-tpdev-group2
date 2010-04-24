@@ -14,7 +14,7 @@ public class UUIDGenerator {
 	public static UUIDGenerator getInstance() {
 		if(INSTANCE == null)
 			INSTANCE = new UUIDGenerator();
-		return null;
+		return INSTANCE;
 	}
 
 	public Long getId() {

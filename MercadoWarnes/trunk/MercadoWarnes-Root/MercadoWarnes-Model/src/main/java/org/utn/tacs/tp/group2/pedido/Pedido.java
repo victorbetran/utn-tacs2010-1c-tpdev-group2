@@ -1,8 +1,6 @@
 package org.utn.tacs.tp.group2.pedido;
 
 import java.util.ArrayList;
-
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.utn.tacs.tp.group2.exceptions.pedido.CancelacionDePedidoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.EfectivizacionDePedidoException;
@@ -34,10 +33,11 @@ public class Pedido extends PersistentObject {
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private List<Pieza> piezas;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = false)
+	@OneToOne(cascade = CascadeType.ALL, mappedBy="pedido")
 	private EstadoPedido estado;
 
 	// TODO: Hay que decirle que esto NO VA en la tabla
+	@Transient
 	private volatile int hashCode;
 
 	// ********************************************
@@ -47,7 +47,7 @@ public class Pedido extends PersistentObject {
 		super();
 		this.piezas = new ArrayList<Pieza>();
 		this.estado = EstadoPedido.getEnCurso(this);
-		Logueador.getInstancia().loguearTransaccion(this);
+		//Logueador.getInstancia().loguearTransaccion(this);
 	}
 
 	// ********************************************

@@ -3,8 +3,8 @@ package org.utn.tacs.tp.group2.pedido;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import org.utn.tacs.tp.group2.utils.Logueador;
 import org.utn.tacs.tp.group2.utils.PersistentObject;
 
 /**
@@ -19,13 +19,15 @@ public abstract class EstadoPedido extends PersistentObject {
 	// ********************************************
 	// ** ATRIBUTTES
 	// ********************************************
-	@OneToOne(optional = false)
+	@OneToOne
 	protected Pedido pedido;
 
 	// TODO: un estado tiene DESCRIPCION? QUE ONDA!?
+	@Transient
 	protected String descripcion;
 
 	// TODO: Hay que decirle que esto NO VA en la tabla
+	@Transient
 	private volatile int hashCode;
 
 	// ********************************************

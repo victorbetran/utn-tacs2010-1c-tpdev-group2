@@ -12,12 +12,14 @@
 		<property name="hibernate.connection.url">
 		    jdbc:hsqldb:file:db/tp-group2-db;shutdown=true
 		</property>
-		<property name="hibernate.connection.username">mrpojo</property>
-		<property name="hibernate.connection.password">therightsideofthecode</property>
+		<property name="hibernate.connection.username">sa</property>
+		<property name="hibernate.connection.password"></property>
 		
 		<property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
 		
 		<property name="hibernate.connection.pool_size">3</property>
+		
+		<property name="show_sql">true</property>
         <!-- Use the C3P0 connection pool provider -->
         <!-- 
 			<property name="hibernate.c3p0.min_size">5</property>
@@ -28,7 +30,7 @@
 		 -->
 
 		<!-- Schema Export 	-->
-		<property name="hbm2ddl.auto">create</property>
+		<property name="hbm2ddl.auto">update</property>
 
 		<!-- Show and print nice SQL on stdout -->
 		<property name="show_sql">true</property>
