@@ -8,8 +8,8 @@ import javax.persistence.InheritanceType;
 /**
  * Abstracción de un objeto persistente. Posee toda la lógica para que un objeto
  * de dominio pueda ser persistido.
- * @see http://johannburkard.de/software/uuid/
  */
+
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class PersistentObject {
@@ -18,10 +18,10 @@ public abstract class PersistentObject {
 	//** ATRIBUTTES
 	//********************************************
 	@Id
-	protected Long id = UUIDGenerator.getInstance().getId();
+	protected Long id;
 	
-	public PersistentObject(){
-		id = UUIDGenerator.getInstance().getId();
+	protected PersistentObject(){
+		this.id = UUIDGenerator.getInstance().getId();
 	}
 	
 
@@ -29,7 +29,7 @@ public abstract class PersistentObject {
 	//** ID GETTER & SETTERS
 	//********************************************
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
