@@ -14,6 +14,7 @@ import org.utn.tacs.tp.group2.exceptions.pedido.PedidoInexistenteException;
 import org.utn.tacs.tp.group2.mock.daos.MockDAOFactory;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
+import org.utn.tacs.tp.group2.utils.UUIDGenerator;
 
 import com.eaio.uuid.UUID;
 
@@ -27,7 +28,8 @@ public class ConsultarPedidosTest {
 	private int CANTIDAD_PEDIDOS_EN_CURSO;
 	private int CANTIDAD_PEDIDOS_CANCELADOS;
 	
-	private UUID idPedido1 = new UUID();
+//	private UUID idPedido1 = new UUID();
+	private Long idPedido1 = UUIDGenerator.getInstance().getId();
 	
 	
 	//********************************************
@@ -40,12 +42,12 @@ public class ConsultarPedidosTest {
 		this.dao.save(createPedidoMock(this.idPedido1, EstadoPedido.getEfectivo(null)));
 		this.CANTIDAD_PEDIDOS_EFECTIVIZADOS = 1;
 		
-		this.dao.save(createPedidoMock(new UUID(), EstadoPedido.getEnCurso(null)));
-		this.dao.save(createPedidoMock(new UUID(), EstadoPedido.getEnCurso(null)));
+		this.dao.save(createPedidoMock(UUIDGenerator.getInstance().getId(), EstadoPedido.getEnCurso(null)));
+		this.dao.save(createPedidoMock(UUIDGenerator.getInstance().getId(), EstadoPedido.getEnCurso(null)));
 		this.CANTIDAD_PEDIDOS_EN_CURSO = 2;
 		
-		this.dao.save(createPedidoMock(new UUID(), EstadoPedido.getCancelado(null)));
-		this.dao.save(createPedidoMock(new UUID(), EstadoPedido.getCancelado(null)));
+		this.dao.save(createPedidoMock(UUIDGenerator.getInstance().getId(), EstadoPedido.getCancelado(null)));
+		this.dao.save(createPedidoMock(UUIDGenerator.getInstance().getId(), EstadoPedido.getCancelado(null)));
 		this.CANTIDAD_PEDIDOS_CANCELADOS = 2;
 	}
 
@@ -67,7 +69,7 @@ public class ConsultarPedidosTest {
 	 */
 	@Test(expected=PedidoInexistenteException.class) 
 	public void consultarUnPedidoInexistentePorID(){
-		this.dao.findByID(new UUID());
+		this.dao.findByID(UUIDGenerator.getInstance().getId());
 	}
 	
 	/**
@@ -91,7 +93,7 @@ public class ConsultarPedidosTest {
 	/**
 	 * Crea un pedido a partir de un codigo y un estado.
 	 */
-	private Pedido createPedidoMock(UUID id, EstadoPedido estado) {
+	private Pedido createPedidoMock(Long id, EstadoPedido estado) {
 		Pedido mock = createMock(Pedido.class);
 		expect(mock.getId()).andReturn(id).anyTimes();
 		expect(mock.getEstado()).andReturn(estado).anyTimes();

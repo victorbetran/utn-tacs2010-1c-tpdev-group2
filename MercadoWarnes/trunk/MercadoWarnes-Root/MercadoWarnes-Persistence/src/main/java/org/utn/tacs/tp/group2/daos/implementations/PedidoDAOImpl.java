@@ -6,7 +6,6 @@ import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
-import com.eaio.uuid.UUID;
 
 public class PedidoDAOImpl implements PedidoDAO{
 
@@ -15,7 +14,7 @@ public class PedidoDAOImpl implements PedidoDAO{
 		return null;
 	}
 
-	public Pedido findByID(UUID id) {
+	public Pedido findByID(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

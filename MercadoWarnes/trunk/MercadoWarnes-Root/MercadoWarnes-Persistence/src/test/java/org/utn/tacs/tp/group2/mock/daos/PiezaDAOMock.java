@@ -10,7 +10,6 @@ import org.utn.tacs.tp.group2.pieza.CategoriaPieza;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
-import com.eaio.uuid.UUID;
 
 public class PiezaDAOMock implements PiezaDAO{
 
@@ -55,7 +54,7 @@ public class PiezaDAOMock implements PiezaDAO{
 		this.piezas.add(pieza);
 	}
 
-	public Pieza findByID(UUID id) {
+	public Pieza findByID(Long id) {
 		Pieza result = null;
 		for(Pieza pieza : this.piezas){
 			if(pieza.getId().equals(id)){

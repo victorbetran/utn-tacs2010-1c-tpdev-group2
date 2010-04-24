@@ -37,7 +37,7 @@
 			<checksumPolicy>warn</checksumPolicy>
 		</snapshots>
 		<id>com.eaio</id>
-		<name>eaio.com repository</name>
+		<name>eaio.com.repository</name>
 		<url>http://eaio.com/maven2</url>
 	</repository>
   </repositories>

@@ -8,7 +8,6 @@ import org.utn.tacs.tp.group2.exceptions.pedido.PedidoInexistenteException;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
-import com.eaio.uuid.UUID;
 
 public class PedidoDAOMock implements PedidoDAO {
 
@@ -27,7 +26,7 @@ public class PedidoDAOMock implements PedidoDAO {
 		return result;
 	}
 
-	public Pedido findByID(UUID id) {
+	public Pedido findByID(Long id) {
 		Pedido result = null;
 		for(Pedido pedido : this.pedidos){
 			if(pedido.getId().equals(id)){

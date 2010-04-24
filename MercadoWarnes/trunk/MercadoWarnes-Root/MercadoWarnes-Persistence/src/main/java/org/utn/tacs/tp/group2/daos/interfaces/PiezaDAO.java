@@ -7,14 +7,13 @@ import org.utn.tacs.tp.group2.pieza.CategoriaPieza;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
-import com.eaio.uuid.UUID;
 
 public interface PiezaDAO {
 	
 	/**
 	 * Devuelve la pieza cuyo ID corresponde al id pasado al mensaje.
 	 */
-	Pieza findByID(UUID id);
+	Pieza findByID(Long id);
 	
 	/**
 	 * Devuelve la pieza correspondiente al código.

@@ -8,7 +8,6 @@ import org.utn.tacs.tp.group2.pieza.CategoriaPieza;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
-import com.eaio.uuid.UUID;
 
 public class PiezaDAOImpl implements PiezaDAO{
 
@@ -43,7 +42,7 @@ public class PiezaDAOImpl implements PiezaDAO{
 		return null;
 	}
 
-	public Pieza findByID(UUID id) {
+	public Pieza findByID(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

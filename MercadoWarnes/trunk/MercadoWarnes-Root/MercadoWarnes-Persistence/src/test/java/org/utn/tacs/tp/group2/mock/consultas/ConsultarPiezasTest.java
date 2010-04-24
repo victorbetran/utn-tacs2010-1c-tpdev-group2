@@ -18,6 +18,7 @@ import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.CategoriaPieza;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
+import org.utn.tacs.tp.group2.utils.UUIDGenerator;
 
 import com.eaio.uuid.UUID;
 
@@ -42,7 +43,7 @@ public class ConsultarPiezasTest {
 	private int CANTIDAD_PIEZAS_AUTO_AAA123 = 2;
 	private int CANTIDAD_PIEZAS_AUTO_ZZZ666 = 3;
 
-	private UUID idPieza = new UUID();
+	private Long idPieza = UUIDGenerator.getInstance().getId();
 	
 	//********************************************
 	//** SET UP
@@ -64,11 +65,11 @@ public class ConsultarPiezasTest {
 		this.autoMockCon3Piezas = createAutoMock("ZZZ666", listadoDe3Piezas);
 		
 		//Creo las piezas - 3 Reservadas - 1 Disponible - 1 Vendida
-		Pieza piezaMock1 = createPiezaMock(new UUID(), "A-001", CategoriaPieza.getClassic(), this.autoMockCon2Piezas, EstadoPieza.getVendida(null));
-		Pieza piezaMock2 = createPiezaMock(new UUID(), "A-002", CategoriaPieza.getStandar(), this.autoMockCon2Piezas, EstadoPieza.getReservada(null));
-		Pieza piezaMock3 = createPiezaMock(new UUID(), "A-003", CategoriaPieza.getGold(), this.autoMockCon3Piezas, EstadoPieza.getDisponible(null));
+		Pieza piezaMock1 = createPiezaMock(UUIDGenerator.getInstance().getId(), "A-001", CategoriaPieza.getClassic(), this.autoMockCon2Piezas, EstadoPieza.getVendida(null));
+		Pieza piezaMock2 = createPiezaMock(UUIDGenerator.getInstance().getId(), "A-002", CategoriaPieza.getStandar(), this.autoMockCon2Piezas, EstadoPieza.getReservada(null));
+		Pieza piezaMock3 = createPiezaMock(UUIDGenerator.getInstance().getId(), "A-003", CategoriaPieza.getGold(), this.autoMockCon3Piezas, EstadoPieza.getDisponible(null));
 		Pieza piezaMock4 = createPiezaMock(this.idPieza, "A-004", CategoriaPieza.getGold(), this.autoMockCon3Piezas, EstadoPieza.getReservada(null));
-		Pieza piezaMock5 = createPiezaMock(new UUID(), "A-005", CategoriaPieza.getGold(), this.autoMockCon3Piezas, EstadoPieza.getReservada(null));
+		Pieza piezaMock5 = createPiezaMock(UUIDGenerator.getInstance().getId(), "A-005", CategoriaPieza.getGold(), this.autoMockCon3Piezas, EstadoPieza.getReservada(null));
 		
 		//Agrego las piezas al listado de piezas
 		listadoDe2Piezas.add(piezaMock1);
@@ -103,7 +104,7 @@ public class ConsultarPiezasTest {
 	 */
 	@Test(expected=PiezaInexistenteException.class) 
 	public void consultarUnaPiezaInexistentePorID(){
-		this.dao.findByID(new UUID());
+		this.dao.findByID(UUIDGenerator.getInstance().getId());
 	}
 	
 	/**
@@ -186,7 +187,7 @@ public class ConsultarPiezasTest {
 	/**
 	 * Crea un mock de pieza con los parametros especificados.
 	 */
-	private Pieza createPiezaMock(UUID id, String codigo, CategoriaPieza categoria, Auto auto, EstadoPieza estado){
+	private Pieza createPiezaMock(Long id, String codigo, CategoriaPieza categoria, Auto auto, EstadoPieza estado){
 		Pieza mock = createNiceMock(Pieza.class);
 		expect(mock.getId()).andReturn(id).anyTimes();
 		expect(mock.getCategoria()).andReturn(categoria).anyTimes();

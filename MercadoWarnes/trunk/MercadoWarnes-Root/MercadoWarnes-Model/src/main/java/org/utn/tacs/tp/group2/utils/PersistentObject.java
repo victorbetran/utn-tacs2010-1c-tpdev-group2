@@ -1,7 +1,6 @@
 package org.utn.tacs.tp.group2.utils;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -16,8 +15,7 @@ public abstract class PersistentObject {
 	//** ATRIBUTTES
 	//********************************************
 	@Id
-	@GeneratedValue
-	protected Long id;
+	protected Long id = UUIDGenerator.getInstance().getId();
 
 	//********************************************
 	//** ID GETTER & SETTERS
@@ -26,7 +24,6 @@ public abstract class PersistentObject {
 		return id;
 	}
 
-	
 	public void setId(Long id) {
 		this.id = id;
 	}

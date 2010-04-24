@@ -1,12 +1,14 @@
 package org.utn.tacs.tp.group2.utils;
 
+import com.eaio.uuid.UUID;
+
 public class UUIDGenerator {
 
 	private static UUIDGenerator INSTANCE;
-	private long seed;
+//	private long seed;
 	
 	private UUIDGenerator() {
-		this.seed = 0;
+//		this.seed = 0;
 	}
 
 	public static UUIDGenerator getInstance() {
@@ -16,8 +18,8 @@ public class UUIDGenerator {
 	}
 
 	public Long getId() {
-		return Long.valueOf(this.seed ++);
+//		return Long.valueOf(this.seed ++);
+		return new Long(new UUID().getClockSeqAndNode());
 	}
-	
 	
 }
