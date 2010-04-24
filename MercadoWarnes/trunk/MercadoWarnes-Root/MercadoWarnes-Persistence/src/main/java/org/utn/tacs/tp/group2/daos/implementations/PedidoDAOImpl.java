@@ -10,17 +10,14 @@ import org.utn.tacs.tp.group2.pedido.Pedido;
 public class PedidoDAOImpl implements PedidoDAO{
 
 	public List<Pedido> findByEstado(EstadoPedido estado) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public Pedido findByID(Long id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public void save(Pedido pedido) {
-		// TODO Auto-generated method stub
 		
 	}
 

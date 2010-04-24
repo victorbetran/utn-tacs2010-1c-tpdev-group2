@@ -33,8 +33,8 @@ public abstract class PersistentObject {
 	//********************************************
 	@Override public abstract boolean equals(Object obj);
 	
-	@Override public abstract int hashCode();
-
-	
+	@Override public int hashCode(){
+		return this.getId().hashCode();
+	}
 
 }
