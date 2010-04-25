@@ -8,7 +8,7 @@ public class EstadoPedidoCancelado extends EstadoPedido{
 	//** PROTECTED CONSTRUCTOR
 	//********************************************
 	public EstadoPedidoCancelado(Pedido pedido) {
-		super(pedido, "Cancelado");
+		super(pedido);
 	}
 
 	

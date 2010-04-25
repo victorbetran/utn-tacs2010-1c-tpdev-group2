@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.hibernate.utils;
+package org.utn.tacs.tp.group2.daos.implementations;
 
 import org.hibernate.Session;
 

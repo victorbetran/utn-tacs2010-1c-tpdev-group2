@@ -4,7 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
-import org.utn.tacs.tp.group2.hibernate.utils.Command;
 
 public class AbstractDao {
 

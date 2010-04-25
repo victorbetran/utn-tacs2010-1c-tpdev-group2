@@ -17,13 +17,16 @@ public abstract class PersistentObject {
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
-	@Id
-	protected Long id = UUIDGenerator.getInstance().getId();
+	protected Long id;
 	
 	//********************************************
 	//** ID GETTER & SETTERS
 	//********************************************
+	@Id
 	public Long getId() {
+		if(this.id == null){
+			this.id = UUIDGenerator.getInstance().getId();
+		}
 		return this.id;
 	}
 
@@ -31,10 +34,19 @@ public abstract class PersistentObject {
 		this.id = id;
 	}
 	
-	//********************************************
-	//** ABSTRACT METHODS
-	//********************************************
 	@Override public abstract boolean equals(Object obj);
+	
+//		if (obj == null) {
+//			return false;
+//		}
+//		else if (!this.getClass().isInstance(obj)) {
+//			return false;
+//		}
+//		else if (obj == this) {
+//			return true;
+//		}else {
+//			return this.getId().equals(((PersistentObject) obj).getId());
+//		}
 	
 	@Override public int hashCode(){
 		return this.getId().hashCode();

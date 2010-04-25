@@ -38,14 +38,10 @@ public class Pieza extends PersistentObject {
 	@Column
 	private BigDecimal precio;
 
-	// TODO: Hay que decirle que esto NO VA en la tabla
-	private volatile int hashCode;
-
 	// ********************************************
 	// ** PUBLIC CONSTRUCTOR
 	// ********************************************
 	public Pieza(String codigo) {
-		super();
 		this.estado = EstadoPieza.getDisponible(this);
 		this.categoria = CategoriaPieza.getStandar();
 		this.codigo = codigo;
@@ -141,17 +137,6 @@ public class Pieza extends PersistentObject {
 		}
 		Pieza pieza = (Pieza) obj;
 		return this.id.equals(pieza.id);
-	}
-
-	@Override
-	public int hashCode() {
-		int result = this.hashCode;
-		if (result == 0) {
-			result = 17;
-			result = 31 * result * this.id.hashCode();
-			this.hashCode = result;
-		}
-		return result;
 	}
 
 	// ********************************************

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
-import org.utn.tacs.tp.group2.hibernate.utils.Command;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 

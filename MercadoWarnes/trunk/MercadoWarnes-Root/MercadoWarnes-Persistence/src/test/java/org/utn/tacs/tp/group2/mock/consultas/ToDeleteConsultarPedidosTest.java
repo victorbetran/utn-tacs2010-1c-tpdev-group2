@@ -16,7 +16,7 @@ import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 import org.utn.tacs.tp.group2.utils.UUIDGenerator;
 
-public class ConsultarPedidosTest {
+public class ToDeleteConsultarPedidosTest {
 
 	//********************************************
 	//** ATRIBUTTES

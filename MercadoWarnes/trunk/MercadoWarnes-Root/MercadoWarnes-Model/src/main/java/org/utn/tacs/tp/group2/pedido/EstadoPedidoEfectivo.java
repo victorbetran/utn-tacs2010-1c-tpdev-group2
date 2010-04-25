@@ -8,7 +8,7 @@ public class EstadoPedidoEfectivo extends EstadoPedido{
 	//** PROTECTED CONSTRUCTOR
 	//********************************************
 	public EstadoPedidoEfectivo(Pedido pedido) {
-		super(pedido, "Efectivo");
+		super(pedido);
 	}
 
 	

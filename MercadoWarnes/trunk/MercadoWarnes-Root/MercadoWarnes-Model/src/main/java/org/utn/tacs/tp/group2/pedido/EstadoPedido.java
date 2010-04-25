@@ -26,9 +26,9 @@ public abstract class EstadoPedido extends PersistentObject {
 	@Transient
 	protected String descripcion;
 
-	// TODO: Hay que decirle que esto NO VA en la tabla
-	@Transient
-	private volatile int hashCode;
+//	// TODO: Hay que decirle que esto NO VA en la tabla
+//	@Transient
+//	private volatile int hashCode;
 
 	// ********************************************
 	// ** PROTECTED CONSTRUCTOR
@@ -36,9 +36,8 @@ public abstract class EstadoPedido extends PersistentObject {
 	/**
 	 * Constructor protegido, para no permitir su instanciacion por fuera de la clase.
 	 */
-	protected EstadoPedido(Pedido pedido, String descripcion) {
+	protected EstadoPedido(Pedido pedido) {
 		this.pedido = pedido;
-		this.descripcion = descripcion;
 	}
 
 	// ********************************************
@@ -118,19 +117,19 @@ public abstract class EstadoPedido extends PersistentObject {
 			return false;
 		}
 		EstadoPedido otherEstado = (EstadoPedido) obj;
-		return (otherEstado.descripcion.equals(this.descripcion));
+		return (otherEstado.getId().equals(this.getId()));
 	}
-
-	@Override
-	public int hashCode() {
-		int result = this.hashCode;
-		if (result == 0) {
-			result = 17;
-			result = 31 * result * this.descripcion.hashCode();
-			this.hashCode = result;
-		}
-		return result;
-	}
+//
+//	@Override
+//	public int hashCode() {
+//		int result = this.hashCode;
+//		if (result == 0) {
+//			result = 17;
+//			result = 31 * result * this.descripcion.hashCode();
+//			this.hashCode = result;
+//		}
+//		return result;
+//	}
 
 	@Override
 	public String toString() {

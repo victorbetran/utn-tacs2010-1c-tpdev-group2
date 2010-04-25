@@ -47,7 +47,7 @@ public class Auto extends PersistentObject {
 			return false;
 		}
 		Auto auto = (Auto) obj;
-		return auto.patente.equals(this.patente);
+		return auto.getId().equals(this.getId());
 	}
 
 	// ********************************************
@@ -96,11 +96,6 @@ public class Auto extends PersistentObject {
 	public Auto setPiezas(List<Pieza> piezas) {
 		this.piezas = piezas;
 		return this;
-	}
-
-	@Override
-	public int hashCode() {
-		return 0;
 	}
 
 }

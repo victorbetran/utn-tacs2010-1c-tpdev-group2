@@ -1,6 +1,5 @@
 package org.utn.tacs.tp.group2.pedido;
 
-import org.utn.tacs.tp.group2.utils.Logueador;
 
 public class EstadoPedidoEnCurso extends EstadoPedido{
 
@@ -8,9 +7,8 @@ public class EstadoPedidoEnCurso extends EstadoPedido{
 	//** PROTECTED CONSTRUCTOR
 	//********************************************
 	protected EstadoPedidoEnCurso(Pedido pedido) {
-		super(pedido, "En Curso");
+		super(pedido);
 	}
-
 	
 	//********************************************
 	//** ESTADOPEDIDO OVERWRITTEN METHODS

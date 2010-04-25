@@ -20,7 +20,7 @@ import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.utils.UUIDGenerator;
 
-public class ConsultarPiezasTest {
+public class ToDeleteConsultarPiezasTest {
 
 	//********************************************
 	//** ATRIBUTTES
