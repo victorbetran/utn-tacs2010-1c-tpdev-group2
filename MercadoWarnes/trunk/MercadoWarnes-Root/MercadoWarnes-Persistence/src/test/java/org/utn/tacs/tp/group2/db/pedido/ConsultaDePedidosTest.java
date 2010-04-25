@@ -13,7 +13,6 @@ public class ConsultaDePedidosTest extends DataBaseHandlerTest{
 	Pedido pedidoPersistido;
 	Pedido pedidoPersistidoA;
 	
-	
 	@Override
 	public void setUp() {
 		super.setUp();
@@ -29,9 +28,14 @@ public class ConsultaDePedidosTest extends DataBaseHandlerTest{
 	}
 	
 	@Test
-	public void savePiezaEnDisco(){
+	public void consultarPedidoPorIDTest(){
 		Pedido pedidoObtenidoConDao = dao.findByID(pedidoPersistido.getId());
-		Assert.assertEquals("Las piezas no se corresponden, no representan lo mismo.",pedidoPersistido, pedidoObtenidoConDao);
+		Assert.assertEquals("El Pedido persistido no coincide con el accedido.",pedidoPersistido, pedidoObtenidoConDao);
+	}
+	
+	
+	public void consultarPedidoPorEstadoTest(){
+		// TODO: Implementar.
 	}
 	
 	
