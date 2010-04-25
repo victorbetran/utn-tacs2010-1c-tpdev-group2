@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaInexistenteException;
-import org.utn.tacs.tp.group2.mock.daos.MockDAOFactory;
+import org.utn.tacs.tp.group2.mock.daos.ToDeletePiezaDAOMock;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.CategoriaPieza;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
@@ -50,7 +50,7 @@ public class ToDeleteConsultarPiezasTest {
 	public void setUp() throws Exception {
 		
 		//Obtengo el DAO
-		this.dao = MockDAOFactory.getInstance().getPiezaDAO();
+		this.dao = ToDeletePiezaDAOMock.getInstance();
 		
 		//Creo una lista de 2 piezas
 		List<Pieza> listadoDe2Piezas = new ArrayList<Pieza>();

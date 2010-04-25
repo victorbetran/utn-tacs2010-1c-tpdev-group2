@@ -9,11 +9,11 @@ import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
 
-public class PedidoDAOMock implements PedidoDAO {
+public class ToDeletePedidoDAOMock extends PedidoDAO {
 
 	private List<Pedido> pedidos;
 	
-	public PedidoDAOMock() {
+	public ToDeletePedidoDAOMock() {
 		this.pedidos = new ArrayList<Pedido>();
 	}
 	

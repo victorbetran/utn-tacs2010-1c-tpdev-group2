@@ -8,13 +8,18 @@ import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
 
-public class PedidoDAOImpl extends AbstractDao implements PedidoDAO{
+public class PedidoDAOImpl extends PedidoDAO{
 
+	//********************************************
+	//** PUBIC METHODS
+	//********************************************
+	
 	public List<Pedido> findByEstado(EstadoPedido estado) {
 		return null;
 	}
 
 	private Pedido pedido;
+	@Override
 	public Pedido findByID(final Long id) {
 		doExecute(new Command(){
 
@@ -26,6 +31,7 @@ public class PedidoDAOImpl extends AbstractDao implements PedidoDAO{
 		return pedido;
 	}
 
+	@Override
 	public void save(final Pedido pedido) {
 		doExecute(new Command() {
 			

@@ -2,53 +2,64 @@ package org.utn.tacs.tp.group2.daos.interfaces;
 
 import java.util.List;
 
+import org.utn.tacs.tp.group2.daos.implementations.AbstractDao;
+import org.utn.tacs.tp.group2.daos.implementations.PiezaDAOImpl;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.CategoriaPieza;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 
-public interface PiezaDAO {
+public abstract class PiezaDAO extends AbstractDao{
+
+	private static PiezaDAO instance;
+	public static PiezaDAO getInstance(){
+		if(instance == null){
+			instance = new PiezaDAOImpl();
+		}
+		
+		return instance;
+	}
 	
 	/**
 	 * Devuelve la pieza cuyo ID corresponde al id pasado al mensaje.
 	 */
-	Pieza findByID(Long id);
+	public abstract Pieza findByID(Long id);
 	
 	/**
 	 * Devuelve la pieza correspondiente al código.
 	 */
-	Pieza findByCodigo(String codigo);
+	public abstract Pieza findByCodigo(String codigo);
 	
 	/**
 	 * Devuelve un listado con las piezas que se encuentran en un determinado estado.
 	 */
-	List<Pieza> findByEstado(EstadoPieza estado);
+	public abstract List<Pieza> findByEstado(EstadoPieza estado);
 	
 	/**
 	 * Devuelve un listado con las piezas que son de una determinada categoría.
 	 */
-	List<Pieza> findByCategoria(CategoriaPieza categoria);
+	public abstract List<Pieza> findByCategoria(CategoriaPieza categoria);
 	
 	/**
 	 * Devuelve un listado con las piezas pertenecientes a un determinado auto.
 	 */
-	List<Pieza> findByAuto(Auto auto);
+	public abstract List<Pieza> findByAuto(Auto auto);
 	
 	/**
 	 * Devuelve un listado con las piezas que se encuentran en un estado y forman parte de una categoria.
 	 */
-	List<Pieza> findByEstadoAndCategoria(EstadoPieza estado, CategoriaPieza categoria);
+	public abstract List<Pieza> findByEstadoAndCategoria(EstadoPieza estado, CategoriaPieza categoria);
 	
 	/**
 	 * Devuelve un listado con las piezas que se encuentran en un estado y pertenecen a un auto
 	 */
-	List<Pieza> findByEstadoAndAuto(EstadoPieza estado, Auto auto);
+	public abstract List<Pieza> findByEstadoAndAuto(EstadoPieza estado, Auto auto);
 	
 	/**
 	 * Guarda una pieza en la BD
 	 */
-	void save(Pieza pieza);
+	public abstract void save(Pieza pieza);
 
 	
 	

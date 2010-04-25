@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoInexistenteException;
-import org.utn.tacs.tp.group2.mock.daos.MockDAOFactory;
+import org.utn.tacs.tp.group2.mock.daos.ToDeletePedidoDAOMock;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 import org.utn.tacs.tp.group2.utils.UUIDGenerator;
@@ -35,7 +35,7 @@ public class ToDeleteConsultarPedidosTest {
 	//********************************************
 	@Before
 	public void setUp() throws Exception {
-		this.dao = MockDAOFactory.getInstance().getPedidoDAO();
+		this.dao = ToDeletePedidoDAOMock.getInstance();
 		
 		this.dao.save(createPedidoMock(this.idPedido1, EstadoPedido.getEfectivo(null)));
 		this.CANTIDAD_PEDIDOS_EFECTIVIZADOS = 1;

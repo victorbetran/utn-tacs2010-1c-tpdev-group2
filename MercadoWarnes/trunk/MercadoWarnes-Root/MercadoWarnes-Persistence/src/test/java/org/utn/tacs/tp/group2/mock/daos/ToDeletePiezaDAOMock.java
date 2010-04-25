@@ -11,11 +11,11 @@ import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 
-public class PiezaDAOMock implements PiezaDAO{
+public class ToDeletePiezaDAOMock extends PiezaDAO{
 
 	private List<Pieza> piezas;
 	
-	public PiezaDAOMock() {
+	public ToDeletePiezaDAOMock() {
 		this.piezas = new ArrayList<Pieza>();
 	}
 	
