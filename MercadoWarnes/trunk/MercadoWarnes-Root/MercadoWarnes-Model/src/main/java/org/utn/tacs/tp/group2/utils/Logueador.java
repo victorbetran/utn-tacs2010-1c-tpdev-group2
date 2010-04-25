@@ -15,7 +15,7 @@ public class Logueador {
 		return instancia;
 	}
 	
-	public Logueador()
+	private Logueador()
 	{
 		DOMConfigurator.configure("src/main/resources/log4j.cfg.xml");
 	}

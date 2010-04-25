@@ -14,23 +14,40 @@ public class ConsultaDePedidosTest extends PedidoTest{
 	public void setUp() {
 		super.setUp();
 		
-		pedidoPersistido = new Pedido();
-		dao.save(pedidoPersistido);
+		this.pedidoPersistido = new Pedido();
+		this.dao.save(this.pedidoPersistido);
 		
-		pedidoPersistidoA = new Pedido();
-		dao.save(pedidoPersistidoA);
-		
+		this.pedidoPersistidoA = new Pedido();
+		this.dao.save(this.pedidoPersistidoA);
 	}
+
 	
+	//********************************************
+	//** TEST METHODS
+	//********************************************
+	/**
+	 * Consulta un pedido existente en la BD por su ID
+	 */
 	@Test
 	public void consultarPedidoPorIDTest(){
 		Pedido pedidoObtenidoConDao = dao.findByID(pedidoPersistido.getId());
 		Assert.assertEquals("El Pedido persistido no coincide con el accedido.",pedidoPersistido, pedidoObtenidoConDao);
 	}
 	
-	
+	/**
+	 * 
+	 */
 	public void consultarPedidoPorEstadoTest(){
-		// TODO: Implementar.
+		//TODO: Implementar.
 	}
+	
+	/**
+	 * Consulta una pieza existente en la BD por su Categoria
+	 */
+	@Test 
+	public void consultarPiezasPorCategoria(){
+		//TODO: Implementar.
+	}
+
 	
 }

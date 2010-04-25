@@ -13,11 +13,11 @@ public class ConsultaDePiezasTest extends PiezaTest{
 	public void setUp() {
 		super.setUp();
 		
-		piezaPersistida = new Pieza("");
-		dao.save(piezaPersistida);
+		this.piezaPersistida = new Pieza("");
+		this.dao.save(this.piezaPersistida);
 		
-		piezaPersistidaA = new Pieza("");
-		dao.save(piezaPersistidaA);
+		this.piezaPersistidaA = new Pieza("");
+		this.dao.save(this.piezaPersistidaA);
 		
 	}
 	
@@ -27,4 +27,43 @@ public class ConsultaDePiezasTest extends PiezaTest{
 		Assert.assertEquals("La Pieza persistida no coincide con la accedida.",piezaPersistida, pedidoObtenidoConDao);
 	}
 	
+	/**
+	 * Consulta una pieza existente en la BD por su Codigo
+	 */
+	@Test 
+	public void consultarUnaPiezaPorCodigo(){
+		//TODO: Implementar
+	}
+	
+	/**
+	 * Consulta las piezas Disponibles de una determinada Categoria.
+	 */
+	@Test 
+	public void consultarPiezasDisponiblesPorCategoria(){
+		//TODO: Implementar
+	}
+	
+	/**
+	 * Consulta una pieza pertenecientes a un determinado auto.
+	 */
+	@Test 
+	public void consultarPiezasPorAuto(){
+		//TODO: Implementar
+	}
+	
+	/**
+	 * Consulta las piezas reservadas.
+	 */
+	@Test 
+	public void consultarPiezasReservadas(){
+		//TODO: Implementar
+	}
+	
+	/**
+	 * Consulta las piezas vendidas de un auto.
+	 */
+	@Test 
+	public void consultarPiezasVendidasDeUnAuto(){
+		//TODO: Implementar
+	}
 }

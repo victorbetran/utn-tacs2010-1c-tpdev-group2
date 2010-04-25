@@ -10,17 +10,19 @@ import org.utn.tacs.tp.group2.pedido.Pedido;
 
 public class PedidoDAOImpl extends PedidoDAO{
 
+	private Pedido pedido;
+	
 	//********************************************
 	//** PUBIC METHODS
 	//********************************************
-	
+	@Override
 	public List<Pedido> findByEstado(EstadoPedido estado) {
 		return null;
 	}
 
-	private Pedido pedido;
 	@Override
 	public Pedido findByID(final Long id) {
+		
 		doExecute(new Command(){
 
 			public void execute(Session session) throws Exception {
