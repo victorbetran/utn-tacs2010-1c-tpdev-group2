@@ -17,6 +17,7 @@ public class DataBaseHandlerTest {
 
 	@After
 	public void setDown() {
+		//TODO Ver bien si no hay que hacer alguna cosa para bajar/limpiar la DB.
 	}
 
 }
