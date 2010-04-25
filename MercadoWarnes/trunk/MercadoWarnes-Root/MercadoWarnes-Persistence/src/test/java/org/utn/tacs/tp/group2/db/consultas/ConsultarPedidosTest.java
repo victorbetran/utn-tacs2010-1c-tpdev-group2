@@ -1,5 +1,8 @@
 package org.utn.tacs.tp.group2.db.consultas;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AnnotationConfiguration;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,9 +23,15 @@ public class ConsultarPedidosTest {
 	//********************************************
 	//** SET UP
 	//********************************************
+	private SessionFactory sessionFactory;
 	@Before
 	public void setUp() {
-
+		sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
+		sessionFactory.close();
+	}
+	
+	@After
+	public void setDown(){
 	}
 
 	@Test
@@ -34,36 +43,36 @@ public class ConsultarPedidosTest {
 		
 		Pedido pedidoPersistido = pedidoDao.findByID(pedidoPersistible.getId());
 		
-		Assert.assertEquals(pedidoPersistible, pedidoPersistido);
+		Assert.assertEquals("Las piezas no se corresponden, no representan lo mismo.",pedidoPersistible, pedidoPersistido);
 		
 	}
 
 	//********************************************
 	//** TEST METHODS
 	//********************************************
-	/**
-	 * Consulta un pedido existente en la BD por su ID
-	 */
-	@Test 
-	public void consultarUnPedidoPorID(){
-
-	}
+//	/**
+//	 * Consulta un pedido existente en la BD por su ID
+//	 */
+//	@Test 
+//	public void consultarUnPedidoPorID(){
+//
+//	}
 	
-	/**
-	 * Consulta un pedido que no existe en la BD por su ID
-	 */
-	@Test(expected=PedidoInexistenteException.class) 
-	public void consultarUnPedidoInexistentePorID(){
-
-	}
+//	/**
+//	 * Consulta un pedido que no existe en la BD por su ID
+//	 */
+//	@Test(expected=PedidoInexistenteException.class) 
+//	public void consultarUnPedidoInexistentePorID(){
+//
+//	}
 	
-	/**
-	 * Consulta las piezas reservadas.
-	 */
-	@Test 
-	public void consultarPedidosPorEstado(){
-
-	}
+//	/**
+//	 * Consulta las piezas reservadas.
+//	 */
+//	@Test 
+//	public void consultarPedidosPorEstado(){
+//
+//	}
 
 	
 }

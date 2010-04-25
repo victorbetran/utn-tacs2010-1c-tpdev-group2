@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 import org.hibernate.Session;
 import org.junit.Test;
 import org.utn.tacs.tp.group2.hibernate.utils.HibernateUtil;
-import org.utn.tacs.tp.group2.hibernate.utils.SessionClosure;
+import org.utn.tacs.tp.group2.hibernate.utils.Command;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
 public class SampleTest extends TestCase {
@@ -15,7 +15,7 @@ public class SampleTest extends TestCase {
 	 */
 	@Test
 	public void testInitialize() {
-		HibernateUtil.doExecute(new SessionClosure() {
+		HibernateUtil.doExecute(new Command() {
 
 			public void execute(Session session) throws Exception {
 				

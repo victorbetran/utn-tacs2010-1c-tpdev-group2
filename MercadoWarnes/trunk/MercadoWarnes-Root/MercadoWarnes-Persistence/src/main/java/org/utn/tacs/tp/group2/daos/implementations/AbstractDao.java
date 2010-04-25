@@ -1,12 +1,13 @@
-package org.utn.tacs.tp.group2.hibernate.utils;
+package org.utn.tacs.tp.group2.daos.implementations;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
+import org.utn.tacs.tp.group2.hibernate.utils.Command;
 
-public class HibernateUtil {
-	
+public class AbstractDao {
+
     public static void doExecute(final Command closure) {
         SessionFactory sessionFactory = null;
         Session session = null;
@@ -36,4 +37,5 @@ public class HibernateUtil {
             }
         }
     }
+	
 }

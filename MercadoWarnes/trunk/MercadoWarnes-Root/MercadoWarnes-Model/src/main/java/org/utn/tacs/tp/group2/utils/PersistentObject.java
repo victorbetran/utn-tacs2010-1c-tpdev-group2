@@ -18,13 +18,8 @@ public abstract class PersistentObject {
 	//** ATRIBUTTES
 	//********************************************
 	@Id
-	protected Long id;
+	protected Long id = UUIDGenerator.getInstance().getId();
 	
-	protected PersistentObject(){
-		this.id = UUIDGenerator.getInstance().getId();
-	}
-	
-
 	//********************************************
 	//** ID GETTER & SETTERS
 	//********************************************
