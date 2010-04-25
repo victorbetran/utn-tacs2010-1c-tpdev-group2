@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -138,7 +137,7 @@ public class Pieza extends PersistentObject {
 			return false;
 		}
 		Pieza pieza = (Pieza) obj;
-		return this.id.equals(pieza.id);
+		return this.getId().equals(pieza.getId());
 	}
 
 	// ********************************************

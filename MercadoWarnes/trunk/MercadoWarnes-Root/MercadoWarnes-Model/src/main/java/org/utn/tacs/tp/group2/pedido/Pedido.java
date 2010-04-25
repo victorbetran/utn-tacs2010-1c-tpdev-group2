@@ -79,7 +79,7 @@ public class Pedido extends PersistentObject {
 	 * 
 	 * @param pieza
 	 *            : una pieza para agregar al pedido.
-	 * @return Pedido: El objeto al que se le está enviando el mensaje.
+	 * @return Pedido: El objeto al que se le estï¿½ enviando el mensaje.
 	 */
 	public Pedido addPieza(Pieza pieza) {
 		pieza.reservar();
@@ -120,7 +120,7 @@ public class Pedido extends PersistentObject {
 	 * Indica si el pedido contiene a una pieza.
 	 * 
 	 * @param pieza
-	 *            : pieza en cuestión.
+	 *            : pieza en cuestiï¿½n.
 	 * @return
 	 */
 	public boolean contienePieza(Pieza pieza) {
@@ -128,7 +128,7 @@ public class Pedido extends PersistentObject {
 	}
 
 	/**
-	 * Indica si el pedido está conteniendo alguna pieza.
+	 * Indica si el pedido estï¿½ conteniendo alguna pieza.
 	 * 
 	 * @return
 	 */
@@ -195,7 +195,7 @@ public class Pedido extends PersistentObject {
 	// ********************************************
 	@Override
 	public String toString() {
-		return this.id.toString();
+		return this.getId().toString();
 	}
 
 	@Override
