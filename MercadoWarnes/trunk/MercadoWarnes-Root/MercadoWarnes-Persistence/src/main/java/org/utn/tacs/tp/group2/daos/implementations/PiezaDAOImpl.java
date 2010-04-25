@@ -2,6 +2,7 @@ package org.utn.tacs.tp.group2.daos.implementations;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.CategoriaPieza;
@@ -42,14 +43,28 @@ public class PiezaDAOImpl extends PiezaDAO{
 		return null;
 	}
 	
+	private Pieza pieza;
 	@Override
-	public Pieza findByID(Long id) {
-		return null;
+	public Pieza findByID(final Long id) {
+		doExecute(new Command(){
+
+			public void execute(Session session) throws Exception {
+				pieza = (Pieza) session.load(Pieza.class, id);
+			}
+			
+		});
+		return pieza;
 	}
 
 	@Override
-	public void save(Pieza pieza) {
-		
+	public void save(final Pieza pieza) {
+		doExecute(new Command() {
+			
+			public void execute(Session session) throws Exception {
+				session.save(pieza);
+			}
+			
+		});
 	}
 
 }
