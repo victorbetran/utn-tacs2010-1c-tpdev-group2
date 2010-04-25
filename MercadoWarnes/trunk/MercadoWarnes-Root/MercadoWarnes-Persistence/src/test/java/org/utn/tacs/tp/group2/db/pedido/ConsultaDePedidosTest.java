@@ -2,22 +2,17 @@ package org.utn.tacs.tp.group2.db.pedido;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
-import org.utn.tacs.tp.group2.db.DataBaseHandlerTest;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
 
-public class ConsultaDePedidosTest extends DataBaseHandlerTest{
+public class ConsultaDePedidosTest extends PedidoTest{
 
-	PedidoDAO dao;
 	Pedido pedidoPersistido;
 	Pedido pedidoPersistidoA;
 	
 	@Override
 	public void setUp() {
 		super.setUp();
-		
-		dao = PedidoDAO.getInstance();
 		
 		pedidoPersistido = new Pedido();
 		dao.save(pedidoPersistido);
@@ -37,6 +32,5 @@ public class ConsultaDePedidosTest extends DataBaseHandlerTest{
 	public void consultarPedidoPorEstadoTest(){
 		// TODO: Implementar.
 	}
-	
 	
 }
