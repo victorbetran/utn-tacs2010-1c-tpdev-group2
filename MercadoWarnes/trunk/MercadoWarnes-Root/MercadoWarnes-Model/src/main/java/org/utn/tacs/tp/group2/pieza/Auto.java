@@ -1,11 +1,9 @@
 package org.utn.tacs.tp.group2.pieza;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.utn.tacs.tp.group2.utils.PersistentObject;
@@ -17,9 +15,6 @@ public class Auto extends PersistentObject {
 	// ********************************************
 	// ** ATRIBUTTES
 	// ********************************************
-	@OneToMany(mappedBy = "autoOrigen")
-	private List<Pieza> piezas;
-
 	@Column(nullable = false, length = 6)
 	private String patente;
 
@@ -86,15 +81,6 @@ public class Auto extends PersistentObject {
 
 	public Auto setFechaDeDesguace(Date fechaDeDesguace) {
 		this.fechaDeDesguace = fechaDeDesguace;
-		return this;
-	}
-
-	public List<Pieza> getPiezas() {
-		return this.piezas;
-	}
-
-	public Auto setPiezas(List<Pieza> piezas) {
-		this.piezas = piezas;
 		return this;
 	}
 
