@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.db.consultas;
+package org.utn.tacs.tp.group2.db.pieza;
 
 import org.utn.tacs.tp.group2.db.DataBaseHandlerTest;
 
