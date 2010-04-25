@@ -23,8 +23,7 @@ public class Pieza extends PersistentObject {
 
 	// TODO: El estado de la pieza al final iba a conocer la pieza no? para mappearlo seria mas
 	// feliz :D
-//	@OneToOne(cascade = CascadeType.ALL)
-	@Embedded
+	@OneToOne(cascade = CascadeType.ALL)
 	private EstadoPieza estado;
 
 	@Column(length = 128)
