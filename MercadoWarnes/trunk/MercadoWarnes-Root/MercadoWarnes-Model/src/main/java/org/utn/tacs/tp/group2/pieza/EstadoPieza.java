@@ -1,7 +1,10 @@
 package org.utn.tacs.tp.group2.pieza;
 
-import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -13,7 +16,8 @@ import org.utn.tacs.tp.group2.utils.PersistentObject;
  */
 @Entity
 @Table(name = "ESTADO_PIEZA")
-//TODO: SEGURO QUE LA TABLA DE ESTADOS ES ESTATICA, HAY QUE VER COMO HACER ESO
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="TIPO" ,discriminatorType=DiscriminatorType.STRING)
 public abstract class EstadoPieza extends PersistentObject {
 
 	// ********************************************
@@ -21,12 +25,6 @@ public abstract class EstadoPieza extends PersistentObject {
 	// ********************************************
 	@OneToOne(optional = false)
 	protected Pieza pieza;
-
-	@Column(nullable = false)
-	protected String descripcion;
-
-	// TODO: Ver como decirle a Hibernate que NO MAPPEE ESTO
-	private volatile int hashCode;
 
 	// ********************************************
 	// ** CONSTRUCTOR
@@ -37,8 +35,7 @@ public abstract class EstadoPieza extends PersistentObject {
 	 * @param descripcion
 	 * @param pieza
 	 */
-	protected EstadoPieza(Pieza pieza, String descripcion) {
-		this.descripcion = descripcion;
+	protected EstadoPieza(Pieza pieza) {
 		this.pieza = pieza;
 	}
 
@@ -119,23 +116,7 @@ public abstract class EstadoPieza extends PersistentObject {
 			return false;
 		}
 		EstadoPieza otherEstado = (EstadoPieza) obj;
-		return this.descripcion.equals(otherEstado.descripcion);
-	}
-
-	@Override
-	public String toString() {
-		return this.descripcion;
-	}
-
-	@Override
-	public int hashCode() {
-		int result = this.hashCode;
-		if (result == 0) {
-			result = 17;
-			result = 31 * result * this.descripcion.hashCode();
-			this.hashCode = result;
-		}
-		return result;
+		return this.getId().equals(otherEstado.getId());
 	}
 
 }

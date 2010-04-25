@@ -45,33 +45,40 @@ public class CategoriaPieza extends PersistentObject {
 	// ********************************************
 	// ** PUBLIC CLASS METHODS
 	// ********************************************
+//	/**
+//	 * Retorna una categoria <b>STANDARD</b>.
+//	 */
+//	public static CategoriaPieza getStandar() {
+//		return new CategoriaPieza(STANDARD);
+//	}
+//
+//	/**
+//	 * Retorna una categoria <b>CLASSIC</b>.
+//	 */
+//	public static CategoriaPieza getClassic() {
+//		return new CategoriaPieza(CLASSIC);
+//	}
+//
+//	/**
+//	 * Retorna una categoria <b>GOLD</b>.
+//	 */
+//	public static CategoriaPieza getGold() {
+//		return new CategoriaPieza(GOLD);
+//	}
+//
+//	/**
+//	 * Retorna una categoria <b>PREMIUM</b>.
+//	 */
+//	public static CategoriaPieza getPremium() {
+//		return new CategoriaPieza(PREMIUM);
+//	}
 	/**
 	 * Retorna una categoria <b>STANDARD</b>.
 	 */
-	public static CategoriaPieza getStandar() {
-		return new CategoriaPieza(STANDARD);
+	public static String getStandar() {
+		return STANDARD;
 	}
 
-	/**
-	 * Retorna una categoria <b>CLASSIC</b>.
-	 */
-	public static CategoriaPieza getClassic() {
-		return new CategoriaPieza(CLASSIC);
-	}
-
-	/**
-	 * Retorna una categoria <b>GOLD</b>.
-	 */
-	public static CategoriaPieza getGold() {
-		return new CategoriaPieza(GOLD);
-	}
-
-	/**
-	 * Retorna una categoria <b>PREMIUM</b>.
-	 */
-	public static CategoriaPieza getPremium() {
-		return new CategoriaPieza(PREMIUM);
-	}
 
 	// ********************************************
 	// ** OVERWRITTEN METHODS

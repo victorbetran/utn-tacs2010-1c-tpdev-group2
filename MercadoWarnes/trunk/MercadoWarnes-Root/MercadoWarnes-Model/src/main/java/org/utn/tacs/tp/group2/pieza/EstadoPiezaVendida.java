@@ -1,16 +1,20 @@
 package org.utn.tacs.tp.group2.pieza;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaVendidaException;
 
+@Entity
+@DiscriminatorValue("Vendida")
 public class EstadoPiezaVendida extends EstadoPieza {
 
 	//********************************************
 	//** CONSTRUCTOR
 	//********************************************
 	public EstadoPiezaVendida(Pieza pieza) {
-		super(pieza, "Vendida");
+		super(pieza);
 	}
-	
 	
 	//********************************************
 	//** ESTADO PIEZA METHODS

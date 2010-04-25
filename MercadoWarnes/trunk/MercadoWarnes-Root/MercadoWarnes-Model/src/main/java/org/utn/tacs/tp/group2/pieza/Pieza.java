@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,17 +23,20 @@ public class Pieza extends PersistentObject {
 
 	// TODO: El estado de la pieza al final iba a conocer la pieza no? para mappearlo seria mas
 	// feliz :D
-	@OneToOne(cascade = CascadeType.ALL)
+//	@OneToOne(cascade = CascadeType.ALL)
+	@Embedded
 	private EstadoPieza estado;
 
 	@Column(length = 128)
 	private String descripcion;
 
-	@OneToOne
-	private CategoriaPieza categoria;
+//	@OneToOne
+//	private CategoriaPieza categoria;
+	private String categoria;
 
-	@ManyToOne
-	private Auto autoOrigen;
+//	@ManyToOne
+//	private Auto autoOrigen;
+	private Auto String;
 
 	@Column
 	private BigDecimal precio;
@@ -109,12 +112,12 @@ public class Pieza extends PersistentObject {
 		return this.estado.equals(estado);
 	}
 
-	/**
-	 * Determina si la pieza pertenece a una categoria.
-	 */
-	public boolean perteneceA(CategoriaPieza categoria) {
-		return this.categoria.equals(categoria);
-	}
+//	/**
+//	 * Determina si la pieza pertenece a una categoria.
+//	 */
+//	public boolean perteneceA(CategoriaPieza categoria) {
+//		return this.categoria.equals(categoria);
+//	}
 
 	// ********************************************
 	// ** OVERWRITTEN METHODS
@@ -142,14 +145,22 @@ public class Pieza extends PersistentObject {
 	// ********************************************
 	// ** GETTERS & SETTERS
 	// ********************************************
-	public CategoriaPieza getCategoria() {
+	public String getCategoria() {
 		return this.categoria;
 	}
 
-	public Pieza setCategoria(CategoriaPieza categoria) {
+	public Pieza setCategoria(String categoria) {
 		this.categoria = categoria;
 		return this;
 	}
+//	public CategoriaPieza getCategoria() {
+//		return this.categoria;
+//	}
+//
+//	public Pieza setCategoria(CategoriaPieza categoria) {
+//		this.categoria = categoria;
+//		return this;
+//	}
 
 	public String getCodigo() {
 		return this.codigo;
@@ -169,14 +180,14 @@ public class Pieza extends PersistentObject {
 		return this;
 	}
 
-	public Auto getAutoOrigen() {
-		return this.autoOrigen;
-	}
-
-	public Pieza setAutoOrigen(Auto autoOrigen) {
-		this.autoOrigen = autoOrigen;
-		return this;
-	}
+//	public Auto getAutoOrigen() {
+//		return this.autoOrigen;
+//	}
+//
+//	public Pieza setAutoOrigen(Auto autoOrigen) {
+//		this.autoOrigen = autoOrigen;
+//		return this;
+//	}
 
 	public BigDecimal getPrecio() {
 		return this.precio;
