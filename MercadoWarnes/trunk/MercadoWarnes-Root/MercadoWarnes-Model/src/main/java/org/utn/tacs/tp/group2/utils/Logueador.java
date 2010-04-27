@@ -16,13 +16,18 @@ public class Logueador {
 	}
 	
 	private Logueador()
-	{
+	{		
 		DOMConfigurator.configure("src/main/resources/log4j.cfg.xml");
 	}
 	public void loguearTransaccion(Pedido pedido)
 	{
 		Logger logger = Logger.getLogger(Pedido.class);		
 		logger.info(pedido.getId().toString() + " , " + "Operacion: " + pedido.getEstado());	
+	}
+	public void loguearDebug(String mensaje)
+	{
+		Logger logger = Logger.getLogger("debug");		
+		logger.debug(mensaje);	
 	}
 	
 	
