@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.utn.tacs.tp.group2.utils.Logueador;
 import org.utn.tacs.tp.group2.utils.PersistentObject;
 
 @Entity
@@ -44,6 +45,7 @@ public class Pieza extends PersistentObject {
 		this.estado = EstadoPieza.getDisponible(this);
 		this.categoria = CategoriaPieza.getStandar();
 		this.codigo = codigo;
+		Logueador.getInstancia().loguearDebug("Se creo la pieza: " + this.toString());
 	}
 
 	// ********************************************
@@ -54,6 +56,7 @@ public class Pieza extends PersistentObject {
 	 */
 	public Pieza disponibilizar() {
 		this.estado = this.estado.gotoDisponible();
+		Logueador.getInstancia().loguearDebug("Se puso disponible la pieza: " + this.toString());
 		return this;
 	}
 
@@ -62,6 +65,7 @@ public class Pieza extends PersistentObject {
 	 */
 	public Pieza reservar() {
 		this.estado = this.estado.gotoReservada();
+		Logueador.getInstancia().loguearDebug("Se reservo la pieza: " + this.toString());
 		return this;
 	}
 
@@ -70,6 +74,7 @@ public class Pieza extends PersistentObject {
 	 */
 	public Pieza vender() {
 		this.estado = this.estado.gotoVendida();
+		Logueador.getInstancia().loguearDebug("Se vendio la pieza: " + this.toString());
 		return this;
 	}
 
