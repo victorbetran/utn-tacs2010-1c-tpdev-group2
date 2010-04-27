@@ -13,7 +13,7 @@ public class ConsultaDePiezasTest extends PiezaTest{
 	public void setUp() {
 		super.setUp();
 		
-		this.piezaPersistida = new Pieza("");
+		this.piezaPersistida = new Pieza("lolo");
 		this.dao.save(this.piezaPersistida);
 		
 		this.piezaPersistidaA = new Pieza("");

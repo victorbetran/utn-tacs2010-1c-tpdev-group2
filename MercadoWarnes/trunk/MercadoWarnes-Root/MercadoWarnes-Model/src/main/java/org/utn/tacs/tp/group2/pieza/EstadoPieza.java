@@ -23,7 +23,7 @@ public abstract class EstadoPieza extends PersistentObject {
 	// ********************************************
 	// ** ATRIBUTTES
 	// ********************************************
-	@OneToOne(optional = false)
+	@OneToOne(optional = false, mappedBy="estado")
 	protected Pieza pieza;
 
 	// ********************************************
@@ -49,29 +49,29 @@ public abstract class EstadoPieza extends PersistentObject {
 	public abstract EstadoPieza gotoDisponible();
 
 	/**
-	 * Setea el estado de la pieza a <b>RESERVADA</b>. Una pieza puede pasar a estar Reservada sólo
+	 * Setea el estado de la pieza a <b>RESERVADA</b>. Una pieza puede pasar a estar Reservada sï¿½lo
 	 * si esta Disponible y no esta Vendida.
 	 */
 	public abstract EstadoPieza gotoReservada();
 
 	/**
-	 * Setea el estado de la pieza a <b>VENDIDA</b>. Una pieza puede venderse únicamente si se
+	 * Setea el estado de la pieza a <b>VENDIDA</b>. Una pieza puede venderse ï¿½nicamente si se
 	 * encuentra reservada.
 	 */
 	public abstract EstadoPieza gotoVendida();
 
 	/**
-	 * Informa si la pieza está disponible.
+	 * Informa si la pieza estï¿½ disponible.
 	 */
 	public abstract boolean isDisponible();
 
 	/**
-	 * Informa si la pieza está reservada.
+	 * Informa si la pieza estï¿½ reservada.
 	 */
 	public abstract boolean isReservada();
 
 	/**
-	 * Informa si la pieza está vendida.
+	 * Informa si la pieza estï¿½ vendida.
 	 */
 	public abstract boolean isVendida();
 
@@ -112,9 +112,9 @@ public abstract class EstadoPieza extends PersistentObject {
 		if (obj == this) {
 			return true;
 		}
-		if (!(obj instanceof EstadoPieza)) {
-			return false;
-		}
+//		if (!(obj instanceof EstadoPieza)) {
+//			return false;
+//		}
 		EstadoPieza otherEstado = (EstadoPieza) obj;
 		return this.getId().equals(otherEstado.getId());
 	}
