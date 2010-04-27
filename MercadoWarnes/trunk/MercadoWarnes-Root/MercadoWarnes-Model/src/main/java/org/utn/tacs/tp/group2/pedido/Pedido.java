@@ -41,7 +41,8 @@ public class Pedido extends PersistentObject {
 	public Pedido() {
 		this.piezas = new ArrayList<Pieza>();
 		this.estado = EstadoPedido.getEnCurso(this);
-		//Logueador.getInstancia().loguearTransaccion(this);
+		Logueador.getInstancia().loguearTransaccion(this);
+		Logueador.getInstancia().loguearDebug("Se creo el pedido: " + this.toString());
 	}
 
 	// ********************************************
@@ -55,6 +56,7 @@ public class Pedido extends PersistentObject {
 			this.disponibilizarPiezas();
 			this.estado = this.estado.gotoCancelado();
 			Logueador.getInstancia().loguearTransaccion(this);
+			Logueador.getInstancia().loguearDebug("Se cancelo el pedido: " + this.toString());
 		} catch (PiezaException e) {
 			throw new CancelacionDePedidoException(this, e);
 		}
@@ -68,6 +70,7 @@ public class Pedido extends PersistentObject {
 			this.venderPiezas();
 			this.estado = this.estado.gotoEfectivo();
 			Logueador.getInstancia().loguearTransaccion(this);
+			Logueador.getInstancia().loguearDebug("Se efectivizo el pedido: " + this.toString());
 		} catch (PiezaException e) {
 			throw new EfectivizacionDePedidoException(this, e);
 		}
@@ -84,6 +87,7 @@ public class Pedido extends PersistentObject {
 	public Pedido addPieza(Pieza pieza) {
 		pieza.reservar();
 		this.piezas.add(pieza);
+		Logueador.getInstancia().loguearDebug("Se agrego la pieza: " + pieza.toString() + " al pedido: " + this.toString());
 		return this;
 	}
 
@@ -92,7 +96,10 @@ public class Pedido extends PersistentObject {
 	 */
 	public void addPiezas(List<Pieza> piezas) {
 		for (Pieza pieza : piezas)
+		{
+			Logueador.getInstancia().loguearDebug("Se agrego la pieza: " + pieza.toString() + " al pedido: " + this.toString());	
 			this.addPieza(pieza);
+		}
 	}
 
 	/**
