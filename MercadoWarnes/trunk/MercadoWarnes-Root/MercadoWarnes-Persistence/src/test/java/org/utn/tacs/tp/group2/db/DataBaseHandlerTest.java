@@ -19,8 +19,7 @@ public class DataBaseHandlerTest {
 	@After
 	public void setDown() {
 		transaction.rollback();
-		session.close();
-		SessionProvider.getInstance().setSession(null);
+		SessionProvider.getInstance().killSession();
 	}
 
 }

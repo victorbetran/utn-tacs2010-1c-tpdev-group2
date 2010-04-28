@@ -73,7 +73,6 @@ public abstract class PiezaDAO extends AbstractDao{
 
 	/**
 	 * Elimina la pieza
-	 * @param pieza
 	 */
 	public abstract void remove(Pieza pieza);
 	

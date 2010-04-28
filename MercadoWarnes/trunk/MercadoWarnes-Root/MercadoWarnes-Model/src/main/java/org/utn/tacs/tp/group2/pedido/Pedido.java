@@ -79,9 +79,7 @@ public class Pedido extends PersistentObject {
 	/**
 	 * Agrega una pieza al pedido, controlando que pueda ser agregada y finalemente cambiando su
 	 * estado a reservada.
-	 * 
-	 * @param pieza
-	 *            : una pieza para agregar al pedido.
+	 * @param pieza: una pieza para agregar al pedido.
 	 * @return Pedido: El objeto al que se le est� enviando el mensaje.
 	 */
 	public Pedido addPieza(Pieza pieza) {

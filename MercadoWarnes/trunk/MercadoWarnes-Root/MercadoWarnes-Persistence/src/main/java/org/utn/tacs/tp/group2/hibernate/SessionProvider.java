@@ -7,6 +7,7 @@ import org.hibernate.classic.Session;
 public class SessionProvider {
 
 	private static SessionProvider instance = null;
+	private Session session = null;
 	
 	private SessionProvider() {
 	}
@@ -18,7 +19,6 @@ public class SessionProvider {
 		return instance;
 	}
 
-	private Session session = null;
 
 	public Session getSession() {
 		if(session == null){
@@ -36,6 +36,13 @@ public class SessionProvider {
 
 	public void setSession(Session session) {
 		this.session = session;
+	}
+
+	public void killSession() {
+		if(this.session != null){
+			this.session.close();
+			this.session = null;
+		}
 	}
 	
 }
