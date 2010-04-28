@@ -34,20 +34,20 @@ public class ConsultaDePedidosTest extends PedidoTest{
 		Assert.assertEquals("El Pedido persistido no coincide con el accedido.",pedidoPersistido, pedidoObtenidoConDao);
 	}
 	
-	/**
-	 * 
-	 */
-	public void consultarPedidoPorEstadoTest(){
-		//TODO: Implementar.
-	}
-	
-	/**
-	 * Consulta una pieza existente en la BD por su Categoria
-	 */
-	@Test 
-	public void consultarPiezasPorCategoria(){
-		//TODO: Implementar.
-	}
+//	/**
+//	 * 
+//	 */
+//	public void consultarPedidoPorEstadoTest(){
+//		//TODO: Implementar.
+//	}
+//	
+//	/**
+//	 * Consulta una pieza existente en la BD por su Categoria
+//	 */
+//	@Test 
+//	public void consultarPiezasPorCategoria(){
+//		//TODO: Implementar.
+//	}
 
 	
 }
