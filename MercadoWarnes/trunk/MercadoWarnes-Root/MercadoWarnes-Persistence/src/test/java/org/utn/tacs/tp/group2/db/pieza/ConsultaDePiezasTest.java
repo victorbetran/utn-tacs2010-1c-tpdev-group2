@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.utn.tacs.tp.group2.pieza.EstadoPieza;
+import org.utn.tacs.tp.group2.pieza.EstadoPiezaReservada;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class ConsultaDePiezasTest extends PiezaTest{
@@ -42,7 +44,9 @@ public class ConsultaDePiezasTest extends PiezaTest{
 	 */
 	@Test 
 	public void consultarUnaPiezaPorCodigo(){
-		
+		Pieza pieza = new Pieza().setCodigo("COD1");
+		this.dao.save(pieza);
+		Assert.assertEquals(pieza.getId(),dao.findByCodigo("COD1").getId());
 	}
 	
 	/**
@@ -65,13 +69,24 @@ public class ConsultaDePiezasTest extends PiezaTest{
 //		//TODO: Implementar
 //	}
 //	
-//	/**
-//	 * Consulta las piezas reservadas.
-//	 */
-//	@Test 
-//	public void consultarPiezasReservadas(){
-//		//TODO: Implementar
-//	}
+	/**
+	 * Consulta las piezas reservadas.
+	 */
+	@Test 
+	public void consultarPiezasReservadas(){		
+		Pieza pieza1 = new Pieza().reservar();
+		Pieza pieza2 = new Pieza().reservar();
+		Pieza pieza3 = new Pieza().reservar();
+		Pieza pieza4 = new Pieza();
+		this.dao.save(pieza1);
+		this.dao.save(pieza2);
+		this.dao.save(pieza3);
+		this.dao.save(pieza4);
+		List<Pieza> piezas=this.dao.findByEstado(new EstadoPiezaReservada(pieza1));
+		Assert.assertEquals(3, piezas.size());
+		
+		
+	}
 //	
 //	/**
 //	 * Consulta las piezas vendidas de un auto.
