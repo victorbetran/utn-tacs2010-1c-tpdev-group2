@@ -1,14 +1,12 @@
 package org.utn.tacs.tp.group2.utils;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 /**
- * Abstracci�n de un objeto persistente. Posee toda la l�gica para que un objeto
+ * Abstraccion de un objeto persistente. Posee toda la l�gica para que un objeto
  * de dominio pueda ser persistido.
  */
 

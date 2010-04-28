@@ -14,10 +14,16 @@
   <url>http://maven.apache.org</url>
   <dependencies>
 	<dependency>
-		<groupId>com.eaio.uuid</groupId>
-		<artifactId>uuid</artifactId>
-		<version>3.1</version>
+		<groupId>org.easymock</groupId>
+		<artifactId>easymockclassextension</artifactId>
+		<version>2.5.2</version>
+		<scope>test</scope>
 	</dependency>
+	<dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>1.2.12</version>
+	</dependency> 
 	<dependency>
 		<groupId>org.hibernate</groupId>
 		<artifactId>hibernate-annotations</artifactId>
@@ -31,21 +37,4 @@
 		<scope>compile</scope>
     </dependency>
   </dependencies>
-  <repositories>
-	<repository>
-		<releases>
-			<enabled>true</enabled>
-			<updatePolicy>daily</updatePolicy>
-			<checksumPolicy>warn</checksumPolicy>
-		</releases>
-		<snapshots>
-			<enabled>true</enabled>
-			<updatePolicy>daily</updatePolicy>
-			<checksumPolicy>warn</checksumPolicy>
-		</snapshots>
-		<id>com.eaio</id>
-		<name>eaio.com.repository</name>
-		<url>http://eaio.com/maven2</url>
-	</repository>
-  </repositories>
 </project>
