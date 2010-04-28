@@ -5,7 +5,6 @@ import java.util.List;
 import org.utn.tacs.tp.group2.daos.implementations.AbstractDao;
 import org.utn.tacs.tp.group2.daos.implementations.PiezaDAOImpl;
 import org.utn.tacs.tp.group2.pieza.Auto;
-import org.utn.tacs.tp.group2.pieza.CategoriaPieza;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
@@ -21,13 +20,24 @@ public abstract class PiezaDAO extends AbstractDao{
 		return instance;
 	}
 	
+	// *************************************************************
+	// * DAO INTERFACE
+	// *************************************************************
+	
 	/**
 	 * Devuelve la pieza cuyo ID corresponde al id pasado al mensaje.
 	 */
 	public abstract Pieza findByID(Long id);
 	
 	/**
-	 * Devuelve la pieza correspondiente al código.
+	 * Indica si la Pieza esta persistida.
+	 * @param pieza
+	 * @return
+	 */
+	public abstract Boolean isPersisted(Pieza pieza);
+	
+	/**
+	 * Devuelve la pieza correspondiente al cï¿½digo.
 	 */
 	public abstract Pieza findByCodigo(String codigo);
 	
@@ -37,9 +47,9 @@ public abstract class PiezaDAO extends AbstractDao{
 	public abstract List<Pieza> findByEstado(EstadoPieza estado);
 	
 	/**
-	 * Devuelve un listado con las piezas que son de una determinada categoría.
+	 * Devuelve un listado con las piezas que son de una determinada categorï¿½a.
 	 */
-	public abstract List<Pieza> findByCategoria(CategoriaPieza categoria);
+	public abstract List<Pieza> findByCategoria(String categoria);
 	
 	/**
 	 * Devuelve un listado con las piezas pertenecientes a un determinado auto.
@@ -49,7 +59,7 @@ public abstract class PiezaDAO extends AbstractDao{
 	/**
 	 * Devuelve un listado con las piezas que se encuentran en un estado y forman parte de una categoria.
 	 */
-	public abstract List<Pieza> findByEstadoAndCategoria(EstadoPieza estado, CategoriaPieza categoria);
+	public abstract List<Pieza> findByEstadoAndCategoria(EstadoPieza estado, String categoria);
 	
 	/**
 	 * Devuelve un listado con las piezas que se encuentran en un estado y pertenecen a un auto
@@ -61,6 +71,10 @@ public abstract class PiezaDAO extends AbstractDao{
 	 */
 	public abstract void save(Pieza pieza);
 
-	
+	/**
+	 * Elimina la pieza
+	 * @param pieza
+	 */
+	public abstract void remove(Pieza pieza);
 	
 }

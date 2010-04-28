@@ -25,7 +25,7 @@ public class PedidoDAOImpl extends PedidoDAO{
 		
 		doExecute(new Command(){
 
-			public void execute(Session session) throws Exception {
+			public void execute(Session session) {
 				pedido = (Pedido) session.load(Pedido.class, id);
 			}
 			
@@ -37,7 +37,7 @@ public class PedidoDAOImpl extends PedidoDAO{
 	public void save(final Pedido pedido) {
 		doExecute(new Command() {
 			
-			public void execute(Session session) throws Exception {
+			public void execute(Session session) {
 				session.save(pedido);
 			}
 			

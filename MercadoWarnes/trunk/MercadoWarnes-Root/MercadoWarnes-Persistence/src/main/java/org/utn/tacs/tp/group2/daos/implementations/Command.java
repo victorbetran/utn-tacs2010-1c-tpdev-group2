@@ -4,5 +4,6 @@ import org.hibernate.Session;
 
 public interface Command {
 
-    void execute(Session session) throws Exception;
+	void execute(Session session);
+
 }
