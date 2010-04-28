@@ -13,6 +13,7 @@ import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class PiezaDAOImpl extends PiezaDAO{
 
+	private Pieza pieza;
 	@Override
 	public List<Pieza> findByAuto(Auto auto) {
 		return null;
@@ -20,6 +21,7 @@ public class PiezaDAOImpl extends PiezaDAO{
 
 	@Override
 	public List<Pieza> findByCategoria(final String categoria) {
+		
 		final List<Pieza> resultado = new ArrayList<Pieza>();
 		doExecute(new Command() { 
 			
@@ -28,6 +30,7 @@ public class PiezaDAOImpl extends PiezaDAO{
 				Query q = session.createQuery("FROM Pieza WHERE categoria = :cat"  );
 				q.setParameter("cat", categoria);
 				resultado.addAll(q.list());
+		
 			}
 		});
 		
@@ -35,13 +38,32 @@ public class PiezaDAOImpl extends PiezaDAO{
 	}
 
 	@Override
-	public Pieza findByCodigo(String codigo) {
-		return null;
+	public Pieza findByCodigo(final String codigo) {			
+			doExecute(new Command() { 
+			
+			@SuppressWarnings("unchecked")
+			public void execute(Session session) {
+				Query q = session.createQuery("FROM Pieza WHERE codigo = :cod"  );
+				q.setParameter("cod", codigo);
+				pieza=(Pieza)q.uniqueResult();
+			}
+		});
+		return pieza;
 	}
 
 	@Override
-	public List<Pieza> findByEstado(EstadoPieza estado) {
-		return null;
+	public List<Pieza> findByEstado(final EstadoPieza estado) {
+		final List<Pieza> resultado = new ArrayList<Pieza>();
+			doExecute(new Command() { 
+			
+			@SuppressWarnings("unchecked")
+			public void execute(Session session) {
+				Query q = session.createQuery("FROM Pieza WHERE estado = :est"  );
+				q.setParameter("est", estado);
+				resultado.addAll(q.list());
+			}
+		});
+			return resultado;
 	}
 
 	@Override
@@ -55,7 +77,7 @@ public class PiezaDAOImpl extends PiezaDAO{
 		return null;
 	}
 	
-	private Pieza pieza;
+	
 	@Override
 	public Pieza findByID(final Long id) {
 		doExecute(new Command(){
