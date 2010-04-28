@@ -28,12 +28,11 @@ public class Pieza extends PersistentObject {
 	@Column(length = 128)
 	private String descripcion;
 
-//	@OneToOne
-//	private CategoriaPieza categoria;
+	@Column(length = 16)	
 	private String categoria;
 
-//	@ManyToOne
-//	private Auto auto;
+	@ManyToOne
+	private Auto autoOrigen;
 
 	@Column
 	private BigDecimal precio;
@@ -43,11 +42,14 @@ public class Pieza extends PersistentObject {
 	// ********************************************
 	public Pieza(String codigo) {
 		this.estado = EstadoPieza.getDisponible(this);
-		this.categoria = CategoriaPieza.getStandar();
 		this.codigo = codigo;
 		Logueador.getInstancia().loguearDebug("Se creo la pieza: " + this.toString());
 	}
 
+	public Pieza(){
+		
+	}
+	
 	// ********************************************
 	// ** PUBLIC METHODS
 	// ********************************************
@@ -113,19 +115,19 @@ public class Pieza extends PersistentObject {
 		return this.estado.equals(estado);
 	}
 
-//	/**
-//	 * Determina si la pieza pertenece a una categoria.
-//	 */
-//	public boolean perteneceA(CategoriaPieza categoria) {
-//		return this.categoria.equals(categoria);
-//	}
+	/**
+	 * Determina si la pieza pertenece a una categoria.
+	 */
+	public boolean perteneceA(String categoria) {
+		return this.categoria.equals(categoria);
+	}
 
 	// ********************************************
 	// ** OVERWRITTEN METHODS
 	// ********************************************
 	@Override
 	public String toString() {
-		return this.codigo;
+		return this.getId().toString();
 	}
 
 	@Override
@@ -181,14 +183,14 @@ public class Pieza extends PersistentObject {
 		return this;
 	}
 
-//	public Auto getAutoOrigen() {
-//		return this.autoOrigen;
-//	}
-//
-//	public Pieza setAutoOrigen(Auto autoOrigen) {
-//		this.autoOrigen = autoOrigen;
-//		return this;
-//	}
+	public Auto getAutoOrigen() {
+		return this.autoOrigen;
+	}
+
+	public Pieza setAutoOrigen(Auto autoOrigen) {
+		this.autoOrigen = autoOrigen;
+		return this;
+	}
 
 	public BigDecimal getPrecio() {
 		return this.precio;
@@ -199,4 +201,8 @@ public class Pieza extends PersistentObject {
 		return this;
 	}
 
+	public void setEstado(EstadoPieza estado) {
+		this.estado = estado;
+	}
+	
 }

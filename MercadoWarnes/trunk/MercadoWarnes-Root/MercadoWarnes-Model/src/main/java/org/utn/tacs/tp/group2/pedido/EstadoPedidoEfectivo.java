@@ -1,7 +1,12 @@
 package org.utn.tacs.tp.group2.pedido;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoEfectivizadoException;
 
+@Entity
+@DiscriminatorValue("EFECTIVO")
 public class EstadoPedidoEfectivo extends EstadoPedido{
 
 	//********************************************

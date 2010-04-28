@@ -1,7 +1,12 @@
 package org.utn.tacs.tp.group2.pedido;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoCanceladoException;
 
+@Entity
+@DiscriminatorValue("CANCELADO")
 public class EstadoPedidoCancelado extends EstadoPedido{
 
 	//********************************************
@@ -10,7 +15,6 @@ public class EstadoPedidoCancelado extends EstadoPedido{
 	public EstadoPedidoCancelado(Pedido pedido) {
 		super(pedido);
 	}
-
 	
 	//********************************************
 	//** ESTADOPEDIDO OVERWRITTEN METHODS

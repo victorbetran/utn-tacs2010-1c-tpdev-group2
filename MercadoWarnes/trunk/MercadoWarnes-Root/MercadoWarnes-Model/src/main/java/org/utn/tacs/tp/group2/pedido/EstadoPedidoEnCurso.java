@@ -1,6 +1,10 @@
 package org.utn.tacs.tp.group2.pedido;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
+@Entity
+@DiscriminatorValue("EN_CURSO")
 public class EstadoPedidoEnCurso extends EstadoPedido{
 
 	//********************************************
@@ -9,7 +13,7 @@ public class EstadoPedidoEnCurso extends EstadoPedido{
 	protected EstadoPedidoEnCurso(Pedido pedido) {
 		super(pedido);
 	}
-	
+
 	//********************************************
 	//** ESTADOPEDIDO OVERWRITTEN METHODS
 	//********************************************

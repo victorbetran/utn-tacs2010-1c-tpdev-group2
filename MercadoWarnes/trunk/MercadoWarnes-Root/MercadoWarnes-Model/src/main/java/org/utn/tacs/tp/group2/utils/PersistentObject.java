@@ -1,12 +1,14 @@
 package org.utn.tacs.tp.group2.utils;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 /**
- * Abstracción de un objeto persistente. Posee toda la lógica para que un objeto
+ * Abstracciï¿½n de un objeto persistente. Posee toda la lï¿½gica para que un objeto
  * de dominio pueda ser persistido.
  */
 
@@ -17,16 +19,14 @@ public abstract class PersistentObject {
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
-	protected Long id;
+//	@GeneratedValue(strategy=GenerationType.TABLE)
+	@Id
+	protected Long id = UUIDGenerator.getInstance().getId();
 	
 	//********************************************
 	//** ID GETTER & SETTERS
 	//********************************************
-	@Id
 	public Long getId() {
-		if(this.id == null){
-			this.id = UUIDGenerator.getInstance().getId();
-		}
 		return this.id;
 	}
 

@@ -32,7 +32,7 @@ public class Pedido extends PersistentObject {
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private List<Pieza> piezas;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy="pedido")
+	@OneToOne(cascade = CascadeType.ALL)
 	private EstadoPedido estado;
 
 	// ********************************************

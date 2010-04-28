@@ -1,9 +1,12 @@
 package org.utn.tacs.tp.group2.pedido;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.utn.tacs.tp.group2.utils.PersistentObject;
 
@@ -12,8 +15,9 @@ import org.utn.tacs.tp.group2.utils.PersistentObject;
  * Cancelado, Efectivo.
  */
 @Entity
-@Table(name = "ESTADOPEDIDO")
-// TODO: SEGURO QUE LA TABLA DE ESTADOS ES ESTATICA, HAY QUE VER COMO HACER ESO
+@Table(name = "ESTADO_PEDIDO")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="TIPO" ,discriminatorType=DiscriminatorType.STRING)
 public abstract class EstadoPedido extends PersistentObject {
 
 	// ********************************************
@@ -22,13 +26,13 @@ public abstract class EstadoPedido extends PersistentObject {
 	@OneToOne
 	protected Pedido pedido;
 
-	// TODO: un estado tiene DESCRIPCION? QUE ONDA!?
-	@Transient
-	protected String descripcion;
+	public Pedido getPedido() {
+		return pedido;
+	}
 
-//	// TODO: Hay que decirle que esto NO VA en la tabla
-//	@Transient
-//	private volatile int hashCode;
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
 
 	// ********************************************
 	// ** PROTECTED CONSTRUCTOR
@@ -38,6 +42,9 @@ public abstract class EstadoPedido extends PersistentObject {
 	 */
 	protected EstadoPedido(Pedido pedido) {
 		this.pedido = pedido;
+	}
+	
+	public EstadoPedido() {
 	}
 
 	// ********************************************
@@ -99,8 +106,6 @@ public abstract class EstadoPedido extends PersistentObject {
 	public static EstadoPedido getEfectivo(Pedido pedido) {
 		return new EstadoPedidoEfectivo(pedido);
 	}
-	
-	
 
 	// ********************************************
 	// ** OVERWRITTEN METHODS
@@ -133,7 +138,7 @@ public abstract class EstadoPedido extends PersistentObject {
 
 	@Override
 	public String toString() {
-		return this.descripcion;
+		return this.getId().toString();
 	}
 
 }
