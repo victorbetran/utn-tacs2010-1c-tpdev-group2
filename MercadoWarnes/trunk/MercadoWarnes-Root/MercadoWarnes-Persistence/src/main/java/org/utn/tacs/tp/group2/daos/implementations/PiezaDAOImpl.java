@@ -41,7 +41,6 @@ public class PiezaDAOImpl extends PiezaDAO{
 	public Pieza findByCodigo(final String codigo) {			
 			doExecute(new Command() { 
 			
-			@SuppressWarnings("unchecked")
 			public void execute(Session session) {
 				Query q = session.createQuery("FROM Pieza WHERE codigo = :cod"  );
 				q.setParameter("cod", codigo);
@@ -52,13 +51,13 @@ public class PiezaDAOImpl extends PiezaDAO{
 	}
 
 	@Override
-	public List<Pieza> findByEstado(final EstadoPieza estado) {
+	public List<Pieza> findByEstado(final String estado) {
 		final List<Pieza> resultado = new ArrayList<Pieza>();
 			doExecute(new Command() { 
 			
 			@SuppressWarnings("unchecked")
 			public void execute(Session session) {
-				Query q = session.createQuery("FROM Pieza WHERE estado = :est"  );
+				Query q = session.createQuery("FROM Pieza WHERE estado.tipoEstado = :est"  );
 				q.setParameter("est", estado);
 				resultado.addAll(q.list());
 			}
@@ -67,14 +66,35 @@ public class PiezaDAOImpl extends PiezaDAO{
 	}
 
 	@Override
-	public List<Pieza> findByEstadoAndAuto(EstadoPieza estado, Auto auto) {
-		return null;
+	public List<Pieza> findByEstadoAndAuto(final String estado,final Auto auto) {
+		final List<Pieza> resultado = new ArrayList<Pieza>();
+		doExecute(new Command() { 
+		
+		@SuppressWarnings("unchecked")
+		public void execute(Session session) {
+			Query q = session.createQuery("FROM Pieza WHERE estado.tipoEstado = :est and auto=:aut"  );
+			q.setParameter("est", estado);
+			q.setParameter("aut", auto);
+			resultado.addAll(q.list());
+		}
+	});
+		return resultado;
 	}
 
 	@Override
-	public List<Pieza> findByEstadoAndCategoria(EstadoPieza estado,
-			String categoria) {
-		return null;
+	public List<Pieza> findByEstadoAndCategoria(final String estado,final String categoria) {
+		final List<Pieza> resultado = new ArrayList<Pieza>();
+		doExecute(new Command() { 
+		
+		@SuppressWarnings("unchecked")
+		public void execute(Session session) {
+			Query q = session.createQuery("FROM Pieza WHERE estado.tipoEstado = :est and categoria=:cat"  );
+			q.setParameter("est", estado);
+			q.setParameter("cat", categoria);
+			resultado.addAll(q.list());
+		}
+	});
+		return resultado;
 	}
 	
 	
@@ -125,5 +145,8 @@ public class PiezaDAOImpl extends PiezaDAO{
 		});
 		return value;
 	}
+
+	
+	
 
 }
