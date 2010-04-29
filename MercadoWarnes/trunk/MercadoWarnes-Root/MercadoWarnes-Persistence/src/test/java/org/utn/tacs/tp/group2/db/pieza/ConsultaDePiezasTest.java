@@ -12,33 +12,29 @@ import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class ConsultaDePiezasTest extends PiezaTest{
 
-	Pieza piezaPersistida;
-	Pieza piezaPersistidaA;
-	Pieza piezaCategoriaPremiunA;
-	Pieza piezaCategoriaPremiunB;
+	Pieza piezaPersistida1;
+	Pieza piezaPersistida2;	
+	
 	
 	@Override
 	public void setUp() {
 		super.setUp();
 		
-		this.piezaPersistida = new Pieza();
-		this.dao.save(this.piezaPersistida);
+		this.piezaPersistida1 = new Pieza("PIEZA1");
+		this.dao.save(this.piezaPersistida1);
 		
-		this.piezaPersistidaA = new Pieza();
-		this.dao.save(this.piezaPersistidaA);
+		this.piezaPersistida2 = new Pieza("PIEZA2");
+		this.dao.save(this.piezaPersistida2);
 		
-		this.piezaCategoriaPremiunA = new Pieza().setCategoria("PREMIUM");
-		this.dao.save(this.piezaCategoriaPremiunA);
+			
 		
-		this.piezaCategoriaPremiunB = new Pieza().setCategoria("PREMIUM");
-		this.dao.save(this.piezaCategoriaPremiunB);
 		
 	}
 	
 	@Test
 	public void consultarPiezaPorIDTest(){
-		Pieza piezaObtenidoConDao = dao.findByID(piezaPersistida.getId());
-		Assert.assertEquals("La Pieza persistida no coincide con la accedida.",piezaPersistida, piezaObtenidoConDao);
+		Pieza piezaObtenidoConDao = dao.findByID(piezaPersistida1.getId());
+		Assert.assertEquals("La Pieza persistida no coincide con la accedida.",piezaPersistida1, piezaObtenidoConDao);
 	}
 	
 	/**
@@ -46,9 +42,8 @@ public class ConsultaDePiezasTest extends PiezaTest{
 	 */
 	@Test 
 	public void consultarUnaPiezaPorCodigo(){
-		Pieza pieza = new Pieza().setCodigo("COD1");
-		this.dao.save(pieza);
-		Assert.assertEquals(pieza.getId(),dao.findByCodigo("COD1").getId());
+		
+		Assert.assertEquals("La Pieza persistida no coincide con la accedida.",piezaPersistida1.getId(),dao.findByCodigo("PIEZA1").getId());
 	}
 	
 	/**
@@ -56,10 +51,11 @@ public class ConsultaDePiezasTest extends PiezaTest{
 	 */
 	@Test 
 	public void consultarPiezasDisponiblesPorCategoria(){
+		
+		this.piezaPersistida1.setCategoria("PREMIUM");
+		this.piezaPersistida2.setCategoria("PREMIUM");
 		List<Pieza> piezasPersistidasFromDao = this.dao.findByCategoria("PREMIUM");
-		Assert.assertEquals(2, piezasPersistidasFromDao.size());
-		Assert.assertTrue(piezasPersistidasFromDao.contains(piezaCategoriaPremiunA));
-		Assert.assertTrue(piezasPersistidasFromDao.contains(piezaCategoriaPremiunB));
+		verficarListaResultado(piezasPersistidasFromDao);
 	}
 	
 	
@@ -69,12 +65,10 @@ public class ConsultaDePiezasTest extends PiezaTest{
 	@Test 
 	public void consultarPiezasPorAuto(){
 		Auto auto1=new Auto();		
-		Pieza pieza1=new Pieza("COD1");
-		pieza1.setAutoOrigen(auto1);		
-		Pieza pieza2=new Pieza("COD2");
-		pieza2.setAutoOrigen(auto1);		
-		List<Pieza> piezas=this.dao.findByAuto(auto1);
-		Assert.assertEquals(2, piezas.size());
+		this.piezaPersistida1.setAutoOrigen(auto1);
+		this.piezaPersistida2.setAutoOrigen(auto1);
+		List<Pieza> piezasPersistidasFromDao=this.dao.findByAuto(auto1);
+		verficarListaResultado(piezasPersistidasFromDao);
 	}
 	
 	/**
@@ -82,14 +76,10 @@ public class ConsultaDePiezasTest extends PiezaTest{
 	 */
 	@Test 
 	public void consultarPiezasReservadas(){		
-		Pieza pieza1 = new Pieza("COD1").reservar();
-		Pieza pieza2 = new Pieza("COD2").reservar();		
-		Pieza pieza3 = new Pieza("COD4");
-		this.dao.save(pieza1);
-		this.dao.save(pieza2);
-		this.dao.save(pieza3);		
-		List<Pieza> piezas=this.dao.findByEstado("RESERVADA");
-		Assert.assertEquals(2, piezas.size());	
+		this.piezaPersistida1.reservar();
+		this.piezaPersistida2.reservar();				
+		List<Pieza> piezasPersistidasFromDao=this.dao.findByEstado("RESERVADA");
+		verficarListaResultado(piezasPersistidasFromDao);
 		
 	}
 //	
@@ -99,18 +89,20 @@ public class ConsultaDePiezasTest extends PiezaTest{
 	@Test 
 	public void consultarPiezasVendidasDeUnAuto(){
 		Auto auto1=new Auto();		
-		Pieza pieza1=new Pieza("COD1").reservar();
-		pieza1.setAutoOrigen(auto1);
-		pieza1.vender();
-		Pieza pieza2=new Pieza("COD2").reservar();
-		pieza2.setAutoOrigen(auto1);
-		pieza2.vender();
-		List<Pieza> piezas=this.dao.findByEstadoAndAuto("VENDIDA", auto1);
-		Assert.assertEquals(2, piezas.size());
+		this.piezaPersistida1.reservar().vender().setAutoOrigen(auto1);
+		this.piezaPersistida2.reservar().vender().setAutoOrigen(auto1);	
+		List<Pieza> piezasPersistidasFromDao=this.dao.findByEstadoAndAuto("VENDIDA", auto1);
+		verficarListaResultado(piezasPersistidasFromDao);
 		
 		
 		
 		
 		
+	}
+
+	private void verficarListaResultado(List<Pieza> piezasPersistidasFromDao) {
+		Assert.assertEquals(2, piezasPersistidasFromDao.size());
+		Assert.assertTrue(piezasPersistidasFromDao.contains(piezaPersistida1));
+		Assert.assertTrue(piezasPersistidasFromDao.contains(piezaPersistida2));
 	}
 }
