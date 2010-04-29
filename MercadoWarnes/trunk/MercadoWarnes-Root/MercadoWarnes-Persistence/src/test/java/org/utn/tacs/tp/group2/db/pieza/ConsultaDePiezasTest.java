@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.EstadoPiezaReservada;
+import org.utn.tacs.tp.group2.pieza.EstadoPiezaVendida;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class ConsultaDePiezasTest extends PiezaTest{
@@ -60,39 +62,55 @@ public class ConsultaDePiezasTest extends PiezaTest{
 		Assert.assertTrue(piezasPersistidasFromDao.contains(piezaCategoriaPremiunB));
 	}
 	
-//	
-//	/**
-//	 * Consulta una pieza pertenecientes a un determinado auto.
-//	 */
-//	@Test 
-//	public void consultarPiezasPorAuto(){
-//		//TODO: Implementar
-//	}
-//	
+	
+	/**
+	 * Consulta una pieza pertenecientes a un determinado auto.
+	 */
+	@Test 
+	public void consultarPiezasPorAuto(){
+		Auto auto1=new Auto();		
+		Pieza pieza1=new Pieza("COD1");
+		pieza1.setAutoOrigen(auto1);		
+		Pieza pieza2=new Pieza("COD2");
+		pieza2.setAutoOrigen(auto1);		
+		List<Pieza> piezas=this.dao.findByAuto(auto1);
+		Assert.assertEquals(2, piezas.size());
+	}
+	
 	/**
 	 * Consulta las piezas reservadas.
 	 */
 	@Test 
 	public void consultarPiezasReservadas(){		
-		Pieza pieza1 = new Pieza().reservar();
-		Pieza pieza2 = new Pieza().reservar();
-		Pieza pieza3 = new Pieza().reservar();
-		Pieza pieza4 = new Pieza();
+		Pieza pieza1 = new Pieza("COD1").reservar();
+		Pieza pieza2 = new Pieza("COD2").reservar();		
+		Pieza pieza3 = new Pieza("COD4");
 		this.dao.save(pieza1);
 		this.dao.save(pieza2);
-		this.dao.save(pieza3);
-		this.dao.save(pieza4);
-		List<Pieza> piezas=this.dao.findByEstado(new EstadoPiezaReservada(pieza1));
-		Assert.assertEquals(3, piezas.size());
-		
+		this.dao.save(pieza3);		
+		List<Pieza> piezas=this.dao.findByEstado("RESERVADA");
+		Assert.assertEquals(2, piezas.size());	
 		
 	}
 //	
-//	/**
-//	 * Consulta las piezas vendidas de un auto.
-//	 */
-//	@Test 
-//	public void consultarPiezasVendidasDeUnAuto(){
-//		//TODO: Implementar
-//	}
+	/**
+	 * Consulta las piezas vendidas de un auto.
+	 */
+	@Test 
+	public void consultarPiezasVendidasDeUnAuto(){
+		Auto auto1=new Auto();		
+		Pieza pieza1=new Pieza("COD1").reservar();
+		pieza1.setAutoOrigen(auto1);
+		pieza1.vender();
+		Pieza pieza2=new Pieza("COD2").reservar();
+		pieza2.setAutoOrigen(auto1);
+		pieza2.vender();
+		List<Pieza> piezas=this.dao.findByEstadoAndAuto("VENDIDA", auto1);
+		Assert.assertEquals(2, piezas.size());
+		
+		
+		
+		
+		
+	}
 }
