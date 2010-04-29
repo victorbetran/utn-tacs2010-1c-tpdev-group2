@@ -49,7 +49,7 @@ public class EstadoPedidoCancelado extends EstadoPedido{
 		throw new PedidoCanceladoException(this.pedido);
 	}
 
-	
+	@Override
 	public String getTipoEstado() {
 		return tipoEstado;
 	}

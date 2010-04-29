@@ -81,7 +81,8 @@ public abstract class EstadoPedido extends PersistentObject {
 	/**
 	 * Informa si el estado es en curso.
 	 */
-	public abstract boolean isEnCurso();
+	public abstract boolean isEnCurso();	
+	
 
 	// ********************************************
 	// ** PUBLIC CLASS METHODS
@@ -106,6 +107,8 @@ public abstract class EstadoPedido extends PersistentObject {
 	public static EstadoPedido getEfectivo(Pedido pedido) {
 		return new EstadoPedidoEfectivo(pedido);
 	}
+	
+	public abstract String getTipoEstado();
 
 	// ********************************************
 	// ** OVERWRITTEN METHODS

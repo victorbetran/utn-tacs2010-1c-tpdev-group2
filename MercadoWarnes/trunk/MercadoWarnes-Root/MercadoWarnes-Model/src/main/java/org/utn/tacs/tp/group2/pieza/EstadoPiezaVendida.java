@@ -9,6 +9,7 @@ import org.utn.tacs.tp.group2.exceptions.pieza.PiezaVendidaException;
 @DiscriminatorValue("Vendida")
 public class EstadoPiezaVendida extends EstadoPieza {
 
+	private String tipoEstado = "VENDIDA";
 	//********************************************
 	//** CONSTRUCTOR
 	//********************************************
@@ -41,6 +42,11 @@ public class EstadoPiezaVendida extends EstadoPieza {
 
 	@Override public EstadoPieza gotoVendida() {
 		throw new PiezaVendidaException(this.pieza);
+	}
+	
+	
+	public String getTipoEstado() {
+		return tipoEstado;
 	}
 
 }

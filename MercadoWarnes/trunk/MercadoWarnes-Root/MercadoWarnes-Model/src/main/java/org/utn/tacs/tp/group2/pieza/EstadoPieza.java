@@ -74,6 +74,8 @@ public abstract class EstadoPieza extends PersistentObject {
 	 * Informa si la pieza est� vendida.
 	 */
 	public abstract boolean isVendida();
+	
+	public abstract String getTipoEstado();
 
 	// ********************************************
 	// ** PUBLIC CLASS METHODS
