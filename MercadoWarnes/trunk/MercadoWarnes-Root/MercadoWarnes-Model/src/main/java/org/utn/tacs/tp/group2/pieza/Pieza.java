@@ -31,7 +31,7 @@ public class Pieza extends PersistentObject {
 	@Column(length = 16)	
 	private String categoria;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Auto autoOrigen;
 
 	@Column

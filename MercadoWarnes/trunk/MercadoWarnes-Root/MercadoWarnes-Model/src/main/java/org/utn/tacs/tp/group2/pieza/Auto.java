@@ -22,9 +22,9 @@ public class Auto extends PersistentObject {
 	private String modelo;
 
 	@Column(nullable = false)
-	private String anio;
+	private Integer anio;
 
-	@Column(nullable = false)
+	@Column()
 	private Date fechaDeDesguace;
 
 	// ********************************************
@@ -66,11 +66,11 @@ public class Auto extends PersistentObject {
 		return this;
 	}
 
-	public String getAnio() {
+	public Integer getAnio() {
 		return this.anio;
 	}
 
-	public Auto setAnio(String anio) {
+	public Auto setAnio(Integer anio) {
 		this.anio = anio;
 		return this;
 	}

@@ -20,10 +20,9 @@ public class PiezaDAOImpl extends PiezaDAO{
 			
 			@SuppressWarnings("unchecked")
 			public void execute(Session session) {
-				Query q = session.createQuery("FROM Pieza as pieza INNER JOIN pieza.autoOrigen as auto WHERE auto = :aut"  );
+				Query q = session.createQuery("from Pieza as pieza inner join fetch pieza.autoOrigen WHERE pieza.autoOrigen = :aut");
 				q.setParameter("aut", auto);
 				resultado.addAll(q.list());
-		
 			}
 		});
 		

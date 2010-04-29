@@ -9,11 +9,11 @@ import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class ConsultaDePiezasTest extends PiezaTest {
 
-	Pieza piezaPersistida1;
-
-	Pieza piezaPersistida2;
-
-	Auto auto1;
+	private Pieza piezaPersistida1;
+	private Pieza piezaPersistida2;
+	
+	private Auto auto1;
+	private Auto auto2;
 
 	@Override
 	public void setUp() {
@@ -25,8 +25,16 @@ public class ConsultaDePiezasTest extends PiezaTest {
 		this.piezaPersistida2 = new Pieza("PIEZA2");
 		this.dao.save(this.piezaPersistida2);
 
-		this.auto1 = new Auto();
+		auto1 = new Auto();
+		auto1.setModelo("AK-47");
+		auto1.setAnio(2009);
+		auto1.setPatente("EXP-074");
 
+		auto2 = new Auto();
+		auto2.setModelo("FAST");
+		auto2.setAnio(2001);
+		auto2.setPatente("BMW-001");
+		
 	}
 
 	@Test
@@ -56,6 +64,32 @@ public class ConsultaDePiezasTest extends PiezaTest {
 		verficarListaResultado(piezasPersistidasFromDao);
 	}
 
+	/**
+	 * Consulta una pieza segun el auto a la que pertenece.
+	 */
+	@Test
+	public void consultarPiezaPorAuto(){
+		this.piezaPersistida1.setAutoOrigen(auto1);
+		
+		List<Pieza> piezasFromDao = this.dao.findByAuto(auto1);
+		Assert.assertEquals(1,piezasFromDao.size());
+		Assert.assertTrue(piezasFromDao.contains(piezaPersistida1));
+	}
+
+	/**
+	 * Consulta un conjunto de piezas segun el auto a la que pertenecen.
+	 */
+	@Test
+	public void consultarPiezasPorAuto(){
+		this.piezaPersistida1.setAutoOrigen(auto1);
+		this.piezaPersistida2.setAutoOrigen(auto1);
+		
+		List<Pieza> piezasFromDao = this.dao.findByAuto(auto1);
+		Assert.assertEquals(2,piezasFromDao.size());
+		Assert.assertTrue(piezasFromDao.contains(piezaPersistida1));
+		Assert.assertTrue(piezasFromDao.contains(piezaPersistida2));
+	}
+	
 	/**
 	 * Consulta las piezas reservadas.
 	 */
