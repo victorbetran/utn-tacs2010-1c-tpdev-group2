@@ -7,7 +7,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pieza.Auto;
-import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 
@@ -15,8 +14,20 @@ public class PiezaDAOImpl extends PiezaDAO{
 
 	private Pieza pieza;
 	@Override
-	public List<Pieza> findByAuto(Auto auto) {
-		return null;
+	public List<Pieza> findByAuto(final Auto auto) {
+		final List<Pieza> resultado = new ArrayList<Pieza>();
+		doExecute(new Command() { 
+			
+			@SuppressWarnings("unchecked")
+			public void execute(Session session) {
+				Query q = session.createQuery("FROM Pieza WHERE autoOrigen = :aut"  );
+				q.setParameter("aut", auto);
+				resultado.addAll(q.list());
+		
+			}
+		});
+		
+		return resultado;
 	}
 
 	@Override
