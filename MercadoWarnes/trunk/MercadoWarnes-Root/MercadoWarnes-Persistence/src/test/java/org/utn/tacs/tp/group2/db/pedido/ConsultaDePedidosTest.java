@@ -57,10 +57,18 @@ public class ConsultaDePedidosTest extends PedidoTest {
 	 */
 	@Test
 	public void consultarPedidosPorEstadoEnCurso() {
-		List<Pedido> pedidos = dao.findByEstadoEnCurso();
-		Assert.assertEquals(NUMERO_PEDIDOS_ENCURSO, pedidos.size());
+		List<Pedido> pedidos = dao.findByEstado("EN_CURSO");
+		Assert.assertEquals(NUMERO_PEDIDOS_CANCELADOS, pedidos.size());
 		Assert.assertTrue(pedidos.contains(pedidoPersistido1));
 		Assert.assertTrue(pedidos.contains(pedidoPersistido2));
+	}
+	
+	@Test
+	public void consultarPedidosPorEstadoCancelado() {
+		List<Pedido> pedidos = dao.findByEstado("CANCELADO");
+		Assert.assertEquals(NUMERO_PEDIDOS_ENCURSO, pedidos.size());
+		Assert.assertTrue(pedidos.contains(pedidoPersistidoCancelado1));
+		Assert.assertTrue(pedidos.contains(pedidoPersistidoCancelado2));
 	}
 
 }

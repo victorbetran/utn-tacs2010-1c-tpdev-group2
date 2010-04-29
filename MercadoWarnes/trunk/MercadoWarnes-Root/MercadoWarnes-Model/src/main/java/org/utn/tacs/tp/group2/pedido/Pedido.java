@@ -20,7 +20,6 @@ import org.utn.tacs.tp.group2.utils.PersistentObject;
 @Entity
 @Table(name = "PEDIDO")
 public class Pedido extends PersistentObject {
-	
 
 	// ********************************************
 	// ** ATRIBUTTES
@@ -32,7 +31,7 @@ public class Pedido extends PersistentObject {
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private List<Pieza> piezas;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
 	private EstadoPedido estado;
 
 	// ********************************************
@@ -79,13 +78,16 @@ public class Pedido extends PersistentObject {
 	/**
 	 * Agrega una pieza al pedido, controlando que pueda ser agregada y finalemente cambiando su
 	 * estado a reservada.
-	 * @param pieza: una pieza para agregar al pedido.
+	 * 
+	 * @param pieza
+	 *            : una pieza para agregar al pedido.
 	 * @return Pedido: El objeto al que se le est� enviando el mensaje.
 	 */
 	public Pedido addPieza(Pieza pieza) {
 		pieza.reservar();
 		this.piezas.add(pieza);
-		Logueador.getInstancia().loguearDebug("Se agrego la pieza: " + pieza.toString() + " al pedido: " + this.toString());
+		Logueador.getInstancia().loguearDebug(
+				"Se agrego la pieza: " + pieza.toString() + " al pedido: " + this.toString());
 		return this;
 	}
 
@@ -93,9 +95,9 @@ public class Pedido extends PersistentObject {
 	 * Agrega un conjunto de pieza al pedido.
 	 */
 	public void addPiezas(List<Pieza> piezas) {
-		for (Pieza pieza : piezas)
-		{
-			Logueador.getInstancia().loguearDebug("Se agrego la pieza: " + pieza.toString() + " al pedido: " + this.toString());	
+		for (Pieza pieza : piezas) {
+			Logueador.getInstancia().loguearDebug(
+					"Se agrego la pieza: " + pieza.toString() + " al pedido: " + this.toString());
 			this.addPieza(pieza);
 		}
 	}
@@ -214,7 +216,7 @@ public class Pedido extends PersistentObject {
 		if (!(obj instanceof Pedido)) {
 			return false;
 		}
-		
+
 		Pedido pedido = (Pedido) obj;
 		return this.getId().equals(pedido.getId());
 	}

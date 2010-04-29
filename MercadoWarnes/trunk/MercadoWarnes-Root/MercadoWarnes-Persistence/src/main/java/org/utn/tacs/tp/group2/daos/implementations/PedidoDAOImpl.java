@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
-import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
 public class PedidoDAOImpl extends PedidoDAO {
@@ -16,11 +15,6 @@ public class PedidoDAOImpl extends PedidoDAO {
 	// ********************************************
 	// ** PUBIC METHODS
 	// ********************************************
-	@Override
-	public List<Pedido> findByEstado(EstadoPedido estado) {
-		return null;
-	}
-
 	@Override
 	public Pedido findByID(final Long id) {
 
@@ -73,17 +67,15 @@ public class PedidoDAOImpl extends PedidoDAO {
 	}
 
 	@Override
-	public List<Pedido> findByEstadoEnCurso() {
+	public List<Pedido> findByEstado(final String tipoEstado) {
 		final List<Pedido> resultado = new ArrayList<Pedido>();
 		doExecute(new Command() {
 
 			@SuppressWarnings("unchecked")
 			public void execute(Session session) {
-				Query q = session.createQuery("FROM Pedido WHERE estado.tipoEstado = :tipo");
-				String tipo = null;
-				q.setParameter("tipo", "EN_CURSO");
+				Query q = session.createQuery("FROM Pedido WHERE estado.tipoEstado = :tipoEstado");
+				q.setParameter("tipoEstado", tipoEstado);
 				resultado.addAll(q.list());
-
 			}
 		});
 
