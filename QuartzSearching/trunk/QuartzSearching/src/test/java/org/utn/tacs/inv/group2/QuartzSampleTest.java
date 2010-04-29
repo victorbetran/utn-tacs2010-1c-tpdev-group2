@@ -2,7 +2,6 @@ package org.utn.tacs.inv.group2;
 
 import java.util.Date;
 
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -20,10 +19,10 @@ public class QuartzSampleTest {
             // Grab the Scheduler instance from the Factory 
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
 
-            //reset log4j config for FileAppender
-            PropertyConfigurator.configure("../resources/log4j.properties");
-
-            
+//            //reset log4j config for FileAppender
+//            PropertyConfigurator.configure("../resources/log4j.properties");
+//
+//            
             // and start it off
             scheduler.start();
 
