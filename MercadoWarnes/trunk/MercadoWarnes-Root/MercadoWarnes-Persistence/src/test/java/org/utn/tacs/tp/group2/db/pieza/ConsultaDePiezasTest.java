@@ -1,5 +1,6 @@
 package org.utn.tacs.tp.group2.db.pieza;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -13,7 +14,8 @@ import org.utn.tacs.tp.group2.pieza.Pieza;
 public class ConsultaDePiezasTest extends PiezaTest{
 
 	Pieza piezaPersistida1;
-	Pieza piezaPersistida2;	
+	Pieza piezaPersistida2;
+	Auto auto1;
 	
 	
 	@Override
@@ -25,6 +27,11 @@ public class ConsultaDePiezasTest extends PiezaTest{
 		
 		this.piezaPersistida2 = new Pieza("PIEZA2");
 		this.dao.save(this.piezaPersistida2);
+		
+		this.auto1=new Auto();
+		
+		
+		
 		
 			
 		
@@ -63,11 +70,10 @@ public class ConsultaDePiezasTest extends PiezaTest{
 	 * Consulta una pieza pertenecientes a un determinado auto.
 	 */
 	@Test 
-	public void consultarPiezasPorAuto(){
-		Auto auto1=new Auto();		
-		this.piezaPersistida1.setAutoOrigen(auto1);
-		this.piezaPersistida2.setAutoOrigen(auto1);
-		List<Pieza> piezasPersistidasFromDao=this.dao.findByAuto(auto1);
+	public void consultarPiezasPorAuto(){			
+		this.piezaPersistida1.setAutoOrigen(this.auto1);
+		this.piezaPersistida2.setAutoOrigen(this.auto1);
+		List<Pieza> piezasPersistidasFromDao=this.dao.findByAuto(this.auto1);
 		verficarListaResultado(piezasPersistidasFromDao);
 	}
 	
