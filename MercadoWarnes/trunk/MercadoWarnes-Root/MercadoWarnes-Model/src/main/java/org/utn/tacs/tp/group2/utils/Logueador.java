@@ -23,7 +23,7 @@ public class Logueador {
 	public void loguearTransaccion(Pedido pedido)
 	{
 		Logger logger = Logger.getLogger(Pedido.class);		
-		logger.info(pedido.getId().toString() + " , " + "Operacion: " + pedido.getEstado());	
+		logger.info(pedido.getId().toString() + " , " + "Operacion: " + pedido.GetDescripcionEstado());	
 	}
 	
 	public void loguearDebug(String mensaje)

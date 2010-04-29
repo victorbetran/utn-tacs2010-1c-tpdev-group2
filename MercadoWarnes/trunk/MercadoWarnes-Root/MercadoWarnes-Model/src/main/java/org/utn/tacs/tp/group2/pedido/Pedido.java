@@ -175,6 +175,12 @@ public class Pedido extends PersistentObject {
 			pieza.vender();
 		}
 	}
+	/**
+	 * Devuelve el nombre del estado en el que se encuentra el pedido
+	 */
+	public String GetDescripcionEstado() {
+		return this.getEstado().getTipoEstado();
+	}
 
 	// ********************************************
 	// ** GETTERS AND SETTERS
@@ -220,5 +226,7 @@ public class Pedido extends PersistentObject {
 		Pedido pedido = (Pedido) obj;
 		return this.getId().equals(pedido.getId());
 	}
+
+	
 
 }
