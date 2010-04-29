@@ -1,9 +1,9 @@
 package org.utn.tacs.tp.group2.db.pieza;
 
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
-import org.utn.tacs.tp.group2.db.DataBaseHandlerTest;
+import org.utn.tacs.tp.group2.db.DataBaseHandler;
 
-public abstract class PiezaTest extends DataBaseHandlerTest{
+public abstract class PiezaTest extends DataBaseHandler{
 
 	protected PiezaDAO dao; 
 	@Override
