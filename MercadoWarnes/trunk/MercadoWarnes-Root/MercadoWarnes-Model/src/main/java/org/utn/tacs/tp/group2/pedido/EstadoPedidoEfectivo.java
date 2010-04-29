@@ -9,6 +9,8 @@ import org.utn.tacs.tp.group2.exceptions.pedido.PedidoEfectivizadoException;
 @DiscriminatorValue("EFECTIVO")
 public class EstadoPedidoEfectivo extends EstadoPedido{
 
+	private String tipoEstado = "EFECTIVO";
+	
 	//********************************************
 	//** PROTECTED CONSTRUCTOR
 	//********************************************
@@ -44,6 +46,10 @@ public class EstadoPedidoEfectivo extends EstadoPedido{
 	@Override
 	public EstadoPedido gotoEnCurso() {
 		throw new PedidoEfectivizadoException(this.pedido);
+	}
+
+	public String getTipoEstado() {
+		return tipoEstado;
 	}
 
 }

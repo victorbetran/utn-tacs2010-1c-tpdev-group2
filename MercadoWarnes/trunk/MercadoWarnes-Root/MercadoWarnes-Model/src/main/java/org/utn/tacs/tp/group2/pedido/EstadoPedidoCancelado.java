@@ -9,6 +9,9 @@ import org.utn.tacs.tp.group2.exceptions.pedido.PedidoCanceladoException;
 @DiscriminatorValue("CANCELADO")
 public class EstadoPedidoCancelado extends EstadoPedido{
 
+	
+	private String tipoEstado = "CANCELADO";
+	
 	//********************************************
 	//** PROTECTED CONSTRUCTOR
 	//********************************************
@@ -44,6 +47,11 @@ public class EstadoPedidoCancelado extends EstadoPedido{
 	@Override
 	public EstadoPedido gotoEnCurso() {
 		throw new PedidoCanceladoException(this.pedido);
+	}
+
+	
+	public String getTipoEstado() {
+		return tipoEstado;
 	}
 
 }

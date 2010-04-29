@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("EN_CURSO")
 public class EstadoPedidoEnCurso extends EstadoPedido{
+	
+	private String tipoEstado = "EN_CURSO";
 
 	//********************************************
 	//** PROTECTED CONSTRUCTOR
@@ -39,6 +41,10 @@ public class EstadoPedidoEnCurso extends EstadoPedido{
 
 	@Override public EstadoPedido gotoEnCurso() {
 		return this;
+	}
+
+	public String getTipoEstado() {
+		return tipoEstado;
 	}
 
 }

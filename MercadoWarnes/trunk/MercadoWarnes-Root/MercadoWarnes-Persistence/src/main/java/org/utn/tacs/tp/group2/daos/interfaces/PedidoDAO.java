@@ -49,4 +49,11 @@ public abstract class PedidoDAO extends AbstractDao {
 	 */
 	public abstract void delete(Pedido pedido);
 
+	/**
+	 * Carga todos los pedido con estado en curso.
+	 * 
+	 * @return una lista de pedidos
+	 */
+	public abstract List<Pedido> findByEstadoEnCurso();
+
 }
