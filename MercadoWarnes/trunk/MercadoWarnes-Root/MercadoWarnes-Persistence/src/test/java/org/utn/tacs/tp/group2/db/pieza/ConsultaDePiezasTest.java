@@ -30,8 +30,7 @@ public class ConsultaDePiezasTest extends PiezaTest{
 		
 		this.auto1=new Auto();
 		
-		
-		
+			
 		
 			
 		
@@ -66,16 +65,7 @@ public class ConsultaDePiezasTest extends PiezaTest{
 	}
 	
 	
-	/**
-	 * Consulta una pieza pertenecientes a un determinado auto.
-	 */
-	@Test 
-	public void consultarPiezasPorAuto(){			
-		this.piezaPersistida1.setAutoOrigen(this.auto1);
-		this.piezaPersistida2.setAutoOrigen(this.auto1);
-		List<Pieza> piezasPersistidasFromDao=this.dao.findByAuto(this.auto1);
-		verficarListaResultado(piezasPersistidasFromDao);
-	}
+	
 	
 	/**
 	 * Consulta las piezas reservadas.
@@ -88,23 +78,7 @@ public class ConsultaDePiezasTest extends PiezaTest{
 		verficarListaResultado(piezasPersistidasFromDao);
 		
 	}
-//	
-	/**
-	 * Consulta las piezas vendidas de un auto.
-	 */
-	@Test 
-	public void consultarPiezasVendidasDeUnAuto(){
-		Auto auto1=new Auto();		
-		this.piezaPersistida1.reservar().vender().setAutoOrigen(auto1);
-		this.piezaPersistida2.reservar().vender().setAutoOrigen(auto1);	
-		List<Pieza> piezasPersistidasFromDao=this.dao.findByEstadoAndAuto("VENDIDA", auto1);
-		verficarListaResultado(piezasPersistidasFromDao);
-		
-		
-		
-		
-		
-	}
+
 
 	private void verficarListaResultado(List<Pieza> piezasPersistidasFromDao) {
 		Assert.assertEquals(2, piezasPersistidasFromDao.size());
