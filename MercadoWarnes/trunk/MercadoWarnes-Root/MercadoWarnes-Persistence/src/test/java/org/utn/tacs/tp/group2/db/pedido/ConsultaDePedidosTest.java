@@ -12,6 +12,8 @@ public class ConsultaDePedidosTest extends PedidoTest {
 
 	private static final int NUMERO_PEDIDOS_CANCELADOS = 2;
 
+	private static final int NUMERO_PEDIDOS_EFECTIVOS = 0;
+	
 	Pedido pedidoPersistido1;
 
 	Pedido pedidoPersistido2;
@@ -53,22 +55,33 @@ public class ConsultaDePedidosTest extends PedidoTest {
 	}
 
 	/**
-	 * 
+	 * Consulta pedidos que tiene de estado en curso.
 	 */
 	@Test
 	public void consultarPedidosPorEstadoEnCurso() {
 		List<Pedido> pedidos = dao.findByEstado("EN_CURSO");
-		Assert.assertEquals(NUMERO_PEDIDOS_CANCELADOS, pedidos.size());
+		Assert.assertEquals(NUMERO_PEDIDOS_ENCURSO, pedidos.size());
 		Assert.assertTrue(pedidos.contains(pedidoPersistido1));
 		Assert.assertTrue(pedidos.contains(pedidoPersistido2));
 	}
 	
+	/**
+	 * Consulta pedidos que tiene de estado cancelado.
+	 */
 	@Test
 	public void consultarPedidosPorEstadoCancelado() {
 		List<Pedido> pedidos = dao.findByEstado("CANCELADO");
-		Assert.assertEquals(NUMERO_PEDIDOS_ENCURSO, pedidos.size());
+		Assert.assertEquals(NUMERO_PEDIDOS_CANCELADOS, pedidos.size());
 		Assert.assertTrue(pedidos.contains(pedidoPersistidoCancelado1));
 		Assert.assertTrue(pedidos.contains(pedidoPersistidoCancelado2));
 	}
 
+	/**
+	 * Consulta pedidos que tiene de estado efectivo.
+	 */
+	@Test
+	public void consultarPedidosPorEstadoEfectivo() {
+		List<Pedido> pedidos = dao.findByEstado("EFECTIVO");
+		Assert.assertEquals(NUMERO_PEDIDOS_EFECTIVOS, pedidos.size());
+	}
 }
