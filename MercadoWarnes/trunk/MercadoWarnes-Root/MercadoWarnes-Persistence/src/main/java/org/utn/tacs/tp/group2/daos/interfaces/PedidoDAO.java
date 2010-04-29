@@ -7,18 +7,18 @@ import org.utn.tacs.tp.group2.daos.implementations.PedidoDAOImpl;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
-
-public abstract class PedidoDAO extends AbstractDao{
+public abstract class PedidoDAO extends AbstractDao {
 
 	private static PedidoDAO instance = null;
-	public static PedidoDAO getInstance(){
-		if(instance == null){
+
+	public static PedidoDAO getInstance() {
+		if (instance == null) {
 			instance = new PedidoDAOImpl();
 		}
-		
+
 		return instance;
 	}
-	
+
 	/**
 	 * Devuelve un listado con los pedidos que se encuentran en un determinado estado.
 	 */
@@ -33,5 +33,20 @@ public abstract class PedidoDAO extends AbstractDao{
 	 * Guarda un pedido en la BD.
 	 */
 	public abstract void save(Pedido pedido);
-	
+
+	/**
+	 * Indica si el pedido se ha persistido.
+	 * 
+	 * @param pedido
+	 * @return
+	 */
+	public abstract Boolean isPersisted(Pedido pedido);
+
+	/**
+	 * Elimina el pedido de la DB.
+	 * 
+	 * @param pedido
+	 */
+	public abstract void delete(Pedido pedido);
+
 }
