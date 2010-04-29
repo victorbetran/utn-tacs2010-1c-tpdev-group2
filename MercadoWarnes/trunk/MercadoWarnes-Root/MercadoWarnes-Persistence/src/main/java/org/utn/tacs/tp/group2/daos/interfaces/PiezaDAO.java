@@ -44,7 +44,7 @@ public abstract class PiezaDAO extends AbstractDao{
 	/**
 	 * Devuelve un listado con las piezas que se encuentran en un determinado estado.
 	 */
-	public abstract List<Pieza> findByEstado(EstadoPieza estado);
+	public abstract List<Pieza> findByEstado(String estado);
 	
 	/**
 	 * Devuelve un listado con las piezas que son de una determinada categor�a.
@@ -59,12 +59,12 @@ public abstract class PiezaDAO extends AbstractDao{
 	/**
 	 * Devuelve un listado con las piezas que se encuentran en un estado y forman parte de una categoria.
 	 */
-	public abstract List<Pieza> findByEstadoAndCategoria(EstadoPieza estado, String categoria);
+	public abstract List<Pieza> findByEstadoAndCategoria(String estado, String categoria);
 	
 	/**
 	 * Devuelve un listado con las piezas que se encuentran en un estado y pertenecen a un auto
 	 */
-	public abstract List<Pieza> findByEstadoAndAuto(EstadoPieza estado, Auto auto);
+	public abstract List<Pieza> findByEstadoAndAuto(String estado, Auto auto);
 	
 	/**
 	 * Guarda una pieza en la BD
@@ -75,5 +75,9 @@ public abstract class PiezaDAO extends AbstractDao{
 	 * Elimina la pieza
 	 */
 	public abstract void remove(Pieza pieza);
+
+	
+		
+	
 	
 }
