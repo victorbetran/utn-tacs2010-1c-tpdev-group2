@@ -80,12 +80,8 @@ public class Pieza extends PersistentObject {
 		return this;
 	}
 
-	/**
-	 * Devuelve el estado de la pieza.
-	 */
-	public EstadoPieza getEstado() {
-		return this.estado;
-	}
+	
+	
 
 	/**
 	 * Determina si la pieza se encuentra reservada.
@@ -199,6 +195,9 @@ public class Pieza extends PersistentObject {
 	public Pieza setPrecio(BigDecimal precio) {
 		this.precio = precio;
 		return this;
+	}
+	public EstadoPieza getEstado() {
+		return this.estado;
 	}
 
 	public void setEstado(EstadoPieza estado) {

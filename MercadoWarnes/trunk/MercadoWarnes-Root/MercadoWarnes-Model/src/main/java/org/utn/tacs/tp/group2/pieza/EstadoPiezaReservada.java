@@ -45,7 +45,7 @@ public class EstadoPiezaReservada extends EstadoPieza {
 	public EstadoPieza gotoVendida() {
 		return new EstadoPiezaVendida(this.pieza);
 	}
-	
+	@Override
 	public String getTipoEstado() {
 		return tipoEstado;
 	}

@@ -47,7 +47,7 @@ public class EstadoPiezaDisponible extends EstadoPieza{
 	public EstadoPieza gotoVendida() {
 		throw new PiezaNoReservadaException(this.pieza);
 	}
-	
+	@Override
 	public String getTipoEstado() {
 		return tipoEstado;
 	}

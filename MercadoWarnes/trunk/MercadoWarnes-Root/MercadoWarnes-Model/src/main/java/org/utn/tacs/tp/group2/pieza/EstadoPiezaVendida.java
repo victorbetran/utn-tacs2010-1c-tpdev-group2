@@ -44,7 +44,7 @@ public class EstadoPiezaVendida extends EstadoPieza {
 		throw new PiezaVendidaException(this.pieza);
 	}
 	
-	
+	@Override
 	public String getTipoEstado() {
 		return tipoEstado;
 	}
