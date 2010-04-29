@@ -130,7 +130,7 @@ public class PiezaDAOImpl extends PiezaDAO{
 			}
 			
 		});
-	}
+	}	
 
 	@Override
 	public void remove(final Pieza pieza) {
