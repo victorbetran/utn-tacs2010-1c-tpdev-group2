@@ -70,14 +70,13 @@ public abstract class PiezaDAO extends AbstractDao{
 	 * Guarda una pieza en la BD
 	 */
 	public abstract void save(Pieza pieza);
-
+	
+	
 	/**
 	 * Elimina la pieza
 	 */
 	public abstract void remove(Pieza pieza);
 
-	
 		
-	
 	
 }
