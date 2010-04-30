@@ -59,8 +59,7 @@ public class ConsultaDePiezasTest extends PiezaTest {
 		this.piezaPersistida1.setCategoria("PREMIUM");
 		this.piezaPersistida2.setCategoria("PREMIUM");
 		
-		List<Pieza> piezasPersistidasFromDao = this.dao.findByCategoria("PREMIUM");
-		assertList(piezasPersistidasFromDao, this.piezaPersistida1,this.piezaPersistida2);
+		assertList(this.dao.findByCategoria("PREMIUM"), this.piezaPersistida1,this.piezaPersistida2);
 	}
 
 	/**
@@ -71,8 +70,7 @@ public class ConsultaDePiezasTest extends PiezaTest {
 		this.piezaPersistida1.setAutoOrigen(auto1);
 		this.piezaPersistida2.setAutoOrigen(auto2);
 		
-		List<Pieza> piezasFromDao = this.dao.findByAuto(auto1);
-		assertList(piezasFromDao, this.piezaPersistida1);
+		assertList(this.dao.findByAuto(auto1), this.piezaPersistida1);
 	}
 
 	/**
@@ -83,8 +81,7 @@ public class ConsultaDePiezasTest extends PiezaTest {
 		this.piezaPersistida1.setAutoOrigen(auto1);
 		this.piezaPersistida2.setAutoOrigen(auto1);
 		
-		List<Pieza> piezasFromDao = this.dao.findByAuto(auto1);
-		assertList(piezasFromDao, this.piezaPersistida1, this.piezaPersistida2);
+		assertList(this.dao.findByAuto(auto1), this.piezaPersistida1, this.piezaPersistida2);
 	}
 	
 	/**
@@ -95,8 +92,7 @@ public class ConsultaDePiezasTest extends PiezaTest {
 		this.piezaPersistida1.reservar();
 		this.piezaPersistida2.reservar();
 		
-		List<Pieza> piezasPersistidasFromDao = this.dao.findByEstado("RESERVADA");
-		assertList(piezasPersistidasFromDao, this.piezaPersistida1, this.piezaPersistida2);
+		assertList(this.dao.findByEstado("RESERVADA"), this.piezaPersistida1, this.piezaPersistida2);
 	}
 
 	// *******************************************************************************
