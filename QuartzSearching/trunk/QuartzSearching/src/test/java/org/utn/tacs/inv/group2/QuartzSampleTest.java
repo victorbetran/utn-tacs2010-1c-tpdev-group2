@@ -19,10 +19,11 @@ public class QuartzSampleTest {
             // Grab the Scheduler instance from the Factory 
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
 
-//            //reset log4j config for FileAppender
-//            PropertyConfigurator.configure("../resources/log4j.properties");
-//
-//            
+            //NO HACE FALTA LA CONFIGURACION DESDE LA VERSION 1.8.0
+            //reset log4j config for FileAppender
+//            PropertyConfigurator.configure("src/main/resources/log4j.properties");
+
+            
             // and start it off
             scheduler.start();
 
