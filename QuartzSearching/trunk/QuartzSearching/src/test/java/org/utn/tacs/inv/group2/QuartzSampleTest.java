@@ -22,7 +22,6 @@ public class QuartzSampleTest {
             //NO HACE FALTA LA CONFIGURACION DESDE LA VERSION 1.8.0
             //reset log4j config for FileAppender
 //            PropertyConfigurator.configure("src/main/resources/log4j.properties");
-
             
             // and start it off
             scheduler.start();

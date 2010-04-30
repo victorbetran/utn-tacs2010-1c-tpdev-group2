@@ -14,7 +14,7 @@ public class MyJobClass implements Job{
 	
 	public void execute(JobExecutionContext context)
 			throws JobExecutionException {
-		log.debug("SE INICIO EL TRABAJO!!!");
+		log.info("SE INICIO EL TRABAJO!!!");
 	}
 
 }
