@@ -3,13 +3,12 @@ package org.utn.tacs.tp.group2.pieza;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.utn.tacs.tp.group2.utils.PersistentObject;
+import javax.persistence.Transient;
 
 /**
  * Clase abstracta que representa el estado de una pieza. Existen 3 estado posible: Disponible,
@@ -21,47 +20,25 @@ import org.utn.tacs.tp.group2.utils.PersistentObject;
 @Table(name = "ESTADO_PIEZA")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="TIPO" ,discriminatorType=DiscriminatorType.STRING)
-public abstract class EstadoPieza extends PersistentObject {
+public abstract class EstadoPieza {
 
-	// ********************************************
-	// ** ATRIBUTTES
-	// ********************************************
-	@OneToOne(optional = false, mappedBy="estado")
-	protected Pieza pieza;
-
-	// ********************************************
-	// ** CONSTRUCTOR
-	// ********************************************
-	/**
-	 * Constructor protegido, para no permitir su instanciacion por fuera de la clase.
-	 * 
-	 * @param descripcion
-	 * @param pieza
-	 */
-	protected EstadoPieza(Pieza pieza) {
-		this.pieza = pieza;
-	}
-
-	// ********************************************
-	// ** PUBLIC METHODS
-	// ********************************************
 	/**
 	 * Setea el estado de la pieza a <b>DISPONIBLE</b>. Una pieza no puede pasar a estar disponible
 	 * si esta Vendida.
 	 */
-	public abstract EstadoPieza gotoDisponible();
+	public abstract EstadoPieza gotoDisponible(Pieza pieza);
 
 	/**
 	 * Setea el estado de la pieza a <b>RESERVADA</b>. Una pieza puede pasar a estar Reservada s�lo
 	 * si esta Disponible y no esta Vendida.
 	 */
-	public abstract EstadoPieza gotoReservada();
+	public abstract EstadoPieza gotoReservada(Pieza pieza);
 
 	/**
 	 * Setea el estado de la pieza a <b>VENDIDA</b>. Una pieza puede venderse �nicamente si se
 	 * encuentra reservada.
 	 */
-	public abstract EstadoPieza gotoVendida();
+	public abstract EstadoPieza gotoVendida(Pieza pieza);
 
 	/**
 	 * Informa si la pieza est� disponible.
@@ -79,29 +56,45 @@ public abstract class EstadoPieza extends PersistentObject {
 	public abstract boolean isVendida();
 	
 	// ********************************************
-	// ** PUBLIC CLASS METHODS
+	// ** FACTORY METHODS
 	// ********************************************
+
+	@Transient
+	private static EstadoPiezaDisponible estadoPiezaDisponible = new EstadoPiezaDisponible();
 	/**
 	 * Retorna un estado <b>DISPONIBLE</b>.
 	 * 
 	 * @param pieza
 	 */
-	public static EstadoPieza getDisponible(Pieza pieza) {
-		return new EstadoPiezaDisponible(pieza);
+	public static EstadoPieza getEstadoDisponible() {
+		return estadoPiezaDisponible;
 	}
 
+	@Transient
+	private static EstadoPiezaReservada estadoPiezaReservada = new EstadoPiezaReservada();
 	/**
 	 * Retorna un estado <b>RESERVADA</b>.
 	 */
-	public static EstadoPieza getReservada(Pieza pieza) {
-		return new EstadoPiezaReservada(pieza);
+	public static EstadoPieza getEstadoReservada() {
+		return estadoPiezaReservada;
 	}
 
+	@Transient
+	private static EstadoPiezaVendida estadoPiezaVendida = new EstadoPiezaVendida();
 	/**
 	 * Retorna un estado <b>VENDIDA</b>.
 	 */
-	public static EstadoPieza getVendida(Pieza pieza) {
-		return new EstadoPiezaVendida(pieza);
+	public static EstadoPieza getEstadoVendida() {
+		return estadoPiezaVendida;
 	}
 
+	//********************************************
+	//** PERSISTENCE IMPLEMENTATION
+	//********************************************
+	
+	@Id
+	protected long id = getId();
+	
+	protected abstract long getId();
+	
 }

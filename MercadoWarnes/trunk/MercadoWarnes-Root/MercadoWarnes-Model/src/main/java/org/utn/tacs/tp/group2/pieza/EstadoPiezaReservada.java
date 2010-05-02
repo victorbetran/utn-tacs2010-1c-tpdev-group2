@@ -9,45 +9,47 @@ import org.utn.tacs.tp.group2.exceptions.pieza.PiezaReservadaException;
 @DiscriminatorValue("RESERVADA")
 public class EstadoPiezaReservada extends EstadoPieza {
 
-	//********************************************
-	//** CONSTRUCTOR
-	//********************************************
-	public EstadoPiezaReservada(Pieza pieza) {
-		super(pieza);
-	}
-	
-	//********************************************
-	//** ESTADO PIEZA METHODS
-	//********************************************
-	@Override public boolean isDisponible() {
+	@Override
+	public boolean isDisponible() {
 		return false;
 	}
 
-	@Override public boolean isReservada() {
+	@Override
+	public boolean isReservada() {
 		return true;
 	}
 
-	@Override public boolean isVendida() {
+	@Override
+	public boolean isVendida() {
 		return false;
 	}
 
-	@Override public EstadoPieza gotoDisponible() {
-		return new EstadoPiezaDisponible(this.pieza);
+	@Override
+	public EstadoPieza gotoDisponible(Pieza pieza) {
+		return getEstadoDisponible();
 	}
 
 	@Override
-	public EstadoPieza gotoReservada() {
-		throw new PiezaReservadaException(this.pieza);
+	public EstadoPieza gotoReservada(Pieza pieza) {
+		throw new PiezaReservadaException(pieza);
 	}
 
 	@Override
-	public EstadoPieza gotoVendida() {
-		return new EstadoPiezaVendida(this.pieza);
+	public EstadoPieza gotoVendida(Pieza pieza) {
+		return getEstadoVendida();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		return  obj instanceof EstadoPiezaReservada;
+		if(obj instanceof EstadoPiezaReservada){
+			return false;
+		}
+		return ((EstadoPiezaReservada) obj).getId() == this.getId();
+	}
+	
+	@Override
+	protected long getId() {
+		return 2;
 	}
 	
 }

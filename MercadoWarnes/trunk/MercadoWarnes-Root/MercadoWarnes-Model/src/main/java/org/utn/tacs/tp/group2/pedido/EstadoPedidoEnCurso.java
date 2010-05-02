@@ -7,18 +7,6 @@ import javax.persistence.Entity;
 @DiscriminatorValue("EN_CURSO")
 public class EstadoPedidoEnCurso extends EstadoPedido{
 	
-	private String tipoEstado = "EN_CURSO";
-
-	//********************************************
-	//** PROTECTED CONSTRUCTOR
-	//********************************************
-	protected EstadoPedidoEnCurso(Pedido pedido) {
-		super(pedido);
-	}
-
-	//********************************************
-	//** ESTADOPEDIDO OVERWRITTEN METHODS
-	//********************************************
 	@Override public boolean isCancelado() {
 		return false;
 	}
@@ -31,20 +19,26 @@ public class EstadoPedidoEnCurso extends EstadoPedido{
 		return true;
 	}
 
-	@Override public EstadoPedido gotoCancelado() {
-		return new EstadoPedidoCancelado(this.pedido);		
+	@Override public EstadoPedido gotoCancelado(Pedido pedido) {
+		return EstadoPedido.getCancelado();		
 	}
 
-	@Override public EstadoPedido gotoEfectivo() {
-		return new EstadoPedidoEfectivo(this.pedido);
+	@Override public EstadoPedido gotoEfectivo(Pedido pedido) {
+		return EstadoPedido.getEfectivo();
 	}
 
-	@Override public EstadoPedido gotoEnCurso() {
+	@Override public EstadoPedido gotoEnCurso(Pedido pedido) {
 		return this;
 	}
 
-	public String getTipoEstado() {
-		return tipoEstado;
+	@Override
+	public String toString() {
+		return "Estado En Curso";
+	}
+	
+	@Override
+	protected long getId() {
+		return 3;
 	}
 
 }

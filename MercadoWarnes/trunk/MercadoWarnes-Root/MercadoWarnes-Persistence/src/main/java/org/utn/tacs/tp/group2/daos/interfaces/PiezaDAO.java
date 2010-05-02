@@ -9,7 +9,7 @@ import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 
-public abstract class PiezaDAO extends AbstractDao{
+public abstract class PiezaDAO extends AbstractDao<Pieza>{
 
 	private static PiezaDAO instance;
 	public static PiezaDAO getInstance(){
@@ -20,21 +20,14 @@ public abstract class PiezaDAO extends AbstractDao{
 		return instance;
 	}
 	
+	@Override
+	protected Class<Pieza> getGenericClass() {
+		return Pieza.class;
+	}
+	
 	// *************************************************************
 	// * DAO INTERFACE
 	// *************************************************************
-	
-	/**
-	 * Devuelve la pieza cuyo ID corresponde al id pasado al mensaje.
-	 */
-	public abstract Pieza findByID(Long id);
-	
-	/**
-	 * Indica si la Pieza esta persistida.
-	 * @param pieza
-	 * @return
-	 */
-	public abstract Boolean isPersisted(Pieza pieza);
 	
 	/**
 	 * Devuelve la pieza correspondiente al c�digo.
@@ -65,18 +58,5 @@ public abstract class PiezaDAO extends AbstractDao{
 	 * Devuelve un listado con las piezas que se encuentran en un estado y pertenecen a un auto
 	 */
 	public abstract List<Pieza> findByEstadoAndAuto(String estado, Auto auto);
-	
-	/**
-	 * Guarda una pieza en la BD
-	 */
-	public abstract void save(Pieza pieza);
-	
-	
-	/**
-	 * Elimina la pieza
-	 */
-	public abstract void remove(Pieza pieza);
-
-		
 	
 }

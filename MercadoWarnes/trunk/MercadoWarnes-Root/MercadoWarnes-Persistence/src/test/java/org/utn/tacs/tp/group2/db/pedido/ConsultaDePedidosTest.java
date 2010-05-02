@@ -4,22 +4,15 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
 public class ConsultaDePedidosTest extends PedidoTest {
 
-	private static final int NUMERO_PEDIDOS_ENCURSO = 2;
-
-	private static final int NUMERO_PEDIDOS_CANCELADOS = 2;
-
-	private static final int NUMERO_PEDIDOS_EFECTIVOS = 0;
-	
 	Pedido pedidoPersistido1;
-
 	Pedido pedidoPersistido2;
 
 	Pedido pedidoPersistidoCancelado1;
-
 	Pedido pedidoPersistidoCancelado2;
 
 	@Override
@@ -32,13 +25,6 @@ public class ConsultaDePedidosTest extends PedidoTest {
 		this.pedidoPersistido2 = new Pedido();
 		this.dao.save(this.pedidoPersistido2);
 
-		this.pedidoPersistidoCancelado1 = new Pedido();
-		this.pedidoPersistidoCancelado1.cancelar();
-		this.dao.save(this.pedidoPersistidoCancelado1);
-
-		this.pedidoPersistidoCancelado2 = new Pedido();
-		this.pedidoPersistidoCancelado2.cancelar();
-		this.dao.save(this.pedidoPersistidoCancelado2);
 	}
 
 	// ********************************************
@@ -48,21 +34,17 @@ public class ConsultaDePedidosTest extends PedidoTest {
 	 * Consulta un pedido existente en la BD por su ID
 	 */
 	@Test
-	public void consultarPedidoPorId() {
-		Pedido pedidoObtenidoConDao = dao.findByID(pedidoPersistido1.getId());
-		Assert.assertEquals("El Pedido persistido no coincide con el accedido.", pedidoPersistido1,
-				pedidoObtenidoConDao);
+	public void consultarPedidoPorIDTest() {
+		Pedido pedidoFromDao = dao.findByID(pedidoPersistido1.getId());
+		Assert.assertEquals("El Pedido persistido no coincide con el accedido.", pedidoPersistido1,	pedidoFromDao);
 	}
 
 	/**
 	 * Consulta pedidos que tiene de estado en curso.
 	 */
 	@Test
-	public void consultarPedidosPorEstadoEnCurso() {
-		List<Pedido> pedidos = dao.findByEstado("EN_CURSO");
-		Assert.assertEquals(NUMERO_PEDIDOS_ENCURSO, pedidos.size());
-		Assert.assertTrue(pedidos.contains(pedidoPersistido1));
-		Assert.assertTrue(pedidos.contains(pedidoPersistido2));
+	public void consultarPedidosEnCurso() {
+		assertList(dao.findByEstado(EstadoPedido.getEnCurso()), this.pedidoPersistido1,this.pedidoPersistido2);
 	}
 	
 	/**
@@ -70,10 +52,9 @@ public class ConsultaDePedidosTest extends PedidoTest {
 	 */
 	@Test
 	public void consultarPedidosPorEstadoCancelado() {
-		List<Pedido> pedidos = dao.findByEstado("CANCELADO");
-		Assert.assertEquals(NUMERO_PEDIDOS_CANCELADOS, pedidos.size());
-		Assert.assertTrue(pedidos.contains(pedidoPersistidoCancelado1));
-		Assert.assertTrue(pedidos.contains(pedidoPersistidoCancelado2));
+		this.pedidoPersistido1.cancelar();
+		this.pedidoPersistido2.cancelar();
+		assertList(dao.findByEstado(EstadoPedido.getCancelado()), this.pedidoPersistido1, this.pedidoPersistido2);
 	}
 
 	/**
@@ -81,7 +62,21 @@ public class ConsultaDePedidosTest extends PedidoTest {
 	 */
 	@Test
 	public void consultarPedidosPorEstadoEfectivo() {
-		List<Pedido> pedidos = dao.findByEstado("EFECTIVO");
-		Assert.assertEquals(NUMERO_PEDIDOS_EFECTIVOS, pedidos.size());
+		List<Pedido> pedidos = dao.findByEstado(EstadoPedido.getEfectivo());
+		Assert.assertEquals(0, pedidos.size());
 	}
+	
+	// *******************************************************************************
+	// *** HELPER
+	// *******************************************************************************
+	
+	private void assertList(List<Pedido> toBeChecked,Pedido ...expected) {
+		int qty = expected.length;
+		
+		Assert.assertEquals("La cantidad de elementos en la lista no es la esperada.",qty, toBeChecked.size());
+		for (Pedido pedidoExpected : expected) {
+			Assert.assertTrue("Uno de los elemenos esperados no se encuentra en el conjunto.",toBeChecked.contains(pedidoExpected));
+		}
+	}
+	
 }

@@ -9,19 +9,7 @@ import org.utn.tacs.tp.group2.exceptions.pedido.PedidoEfectivizadoException;
 @DiscriminatorValue("EFECTIVO")
 public class EstadoPedidoEfectivo extends EstadoPedido{
 
-	private String tipoEstado = "EFECTIVO";
-	
-	//********************************************
-	//** PROTECTED CONSTRUCTOR
-	//********************************************
-	public EstadoPedidoEfectivo(Pedido pedido) {
-		super(pedido);
-	}
 
-	
-	//********************************************
-	//** ESTADOPEDIDO OVERWRITTEN METHODS
-	//********************************************
 	@Override public boolean isCancelado() {
 		return false;
 	}
@@ -35,21 +23,28 @@ public class EstadoPedidoEfectivo extends EstadoPedido{
 	}
 
 	@Override
-	public EstadoPedido gotoCancelado() {
-		throw new PedidoEfectivizadoException(this.pedido);
+	public EstadoPedido gotoCancelado(Pedido pedido) {
+		throw new PedidoEfectivizadoException(pedido);
 	}
 
-	@Override public EstadoPedido gotoEfectivo() {
-		throw new PedidoEfectivizadoException(this.pedido);
+	@Override public EstadoPedido gotoEfectivo(Pedido pedido) {
+		throw new PedidoEfectivizadoException(pedido);
 	}
 
 	@Override
-	public EstadoPedido gotoEnCurso() {
-		throw new PedidoEfectivizadoException(this.pedido);
+	public EstadoPedido gotoEnCurso(Pedido pedido) {
+		throw new PedidoEfectivizadoException(pedido);
 	}
 
-	public String getTipoEstado() {
-		return tipoEstado;
+	@Override
+	public String toString() {
+		return "Estado Efectivo";
 	}
+	
+	@Override
+	protected long getId() {
+		return 2;
+	}
+
 
 }

@@ -9,16 +9,6 @@ import org.utn.tacs.tp.group2.exceptions.pieza.PiezaVendidaException;
 @DiscriminatorValue("VENDIDA")
 public class EstadoPiezaVendida extends EstadoPieza {
 
-	//********************************************
-	//** CONSTRUCTOR
-	//********************************************
-	public EstadoPiezaVendida(Pieza pieza) {
-		super(pieza);
-	}
-	
-	//********************************************
-	//** ESTADO PIEZA METHODS
-	//********************************************
 	@Override public boolean isDisponible() {
 		return false;
 	}
@@ -31,21 +21,29 @@ public class EstadoPiezaVendida extends EstadoPieza {
 		return true;
 	}
 
-	@Override public EstadoPieza gotoDisponible() {
-		throw new PiezaVendidaException(this.pieza);
+	@Override public EstadoPieza gotoDisponible(Pieza pieza) {
+		throw new PiezaVendidaException(pieza);
 	}
 
-	@Override public EstadoPieza gotoReservada() {
-		throw new PiezaVendidaException(this.pieza);
+	@Override public EstadoPieza gotoReservada(Pieza pieza) {
+		throw new PiezaVendidaException(pieza);
 	}
 
-	@Override public EstadoPieza gotoVendida() {
-		throw new PiezaVendidaException(this.pieza);
+	@Override public EstadoPieza gotoVendida(Pieza pieza) {
+		throw new PiezaVendidaException(pieza);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		return  obj instanceof EstadoPiezaVendida;
+		if(obj instanceof EstadoPiezaVendida){
+			return false;
+		}
+		return ((EstadoPiezaVendida) obj).getId() == this.getId();
+	}
+	
+	@Override
+	protected long getId() {
+		return 3;
 	}
 	
 }

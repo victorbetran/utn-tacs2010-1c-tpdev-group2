@@ -9,19 +9,10 @@ import org.utn.tacs.tp.group2.exceptions.pedido.PedidoCanceladoException;
 @DiscriminatorValue("CANCELADO")
 public class EstadoPedidoCancelado extends EstadoPedido{
 
-	
-	private String tipoEstado = "CANCELADO";
-	
-	//********************************************
-	//** PROTECTED CONSTRUCTOR
-	//********************************************
-	public EstadoPedidoCancelado(Pedido pedido) {
-		super(pedido);
-	}
-	
 	//********************************************
 	//** ESTADOPEDIDO OVERWRITTEN METHODS
 	//********************************************
+	
 	@Override public boolean isCancelado() {
 		return true;
 	}
@@ -35,23 +26,28 @@ public class EstadoPedidoCancelado extends EstadoPedido{
 	}
 
 	@Override
-	public EstadoPedido gotoCancelado() {
-		throw new PedidoCanceladoException(this.pedido);
+	public EstadoPedido gotoCancelado(Pedido pedido) {
+		throw new PedidoCanceladoException(pedido);
 	}
 
 	@Override
-	public EstadoPedido gotoEfectivo() {
-		throw new PedidoCanceladoException(this.pedido);
+	public EstadoPedido gotoEfectivo(Pedido pedido) {
+		throw new PedidoCanceladoException(pedido);
 	}
 
 	@Override
-	public EstadoPedido gotoEnCurso() {
-		throw new PedidoCanceladoException(this.pedido);
+	public EstadoPedido gotoEnCurso(Pedido pedido) {
+		throw new PedidoCanceladoException(pedido);
 	}
 
 	@Override
-	public String getTipoEstado() {
-		return tipoEstado;
+	public String toString() {
+		return "Estado Cancelado";
+	}
+	
+	@Override
+	protected long getId() {
+		return 1;
 	}
 
 }

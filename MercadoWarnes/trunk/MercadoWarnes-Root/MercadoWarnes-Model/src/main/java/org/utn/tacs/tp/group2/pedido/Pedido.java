@@ -31,7 +31,7 @@ public class Pedido extends PersistentObject {
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private List<Pieza> piezas;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
+	@OneToOne(cascade = CascadeType.ALL)
 	private EstadoPedido estado;
 
 	// ********************************************
@@ -39,7 +39,7 @@ public class Pedido extends PersistentObject {
 	// ********************************************
 	public Pedido() {
 		this.piezas = new ArrayList<Pieza>();
-		this.estado = EstadoPedido.getEnCurso(this);
+		this.estado = EstadoPedido.getEnCurso();
 		Logueador.getInstancia().loguearTransaccion(this);
 		Logueador.getInstancia().loguearDebug("Se creo el pedido: " + this.toString());
 	}
@@ -53,7 +53,7 @@ public class Pedido extends PersistentObject {
 	public void cancelar() {
 		try {
 			this.disponibilizarPiezas();
-			this.estado = this.estado.gotoCancelado();
+			this.setEstado(this.estado.gotoCancelado(this));
 			Logueador.getInstancia().loguearTransaccion(this);
 			Logueador.getInstancia().loguearDebug("Se cancelo el pedido: " + this.toString());
 		} catch (PiezaException e) {
@@ -67,7 +67,7 @@ public class Pedido extends PersistentObject {
 	public void efectivizar() {
 		try {
 			this.venderPiezas();
-			this.estado = this.estado.gotoEfectivo();
+			this.setEstado(this.estado.gotoEfectivo(this));
 			Logueador.getInstancia().loguearTransaccion(this);
 			Logueador.getInstancia().loguearDebug("Se efectivizo el pedido: " + this.toString());
 		} catch (PiezaException e) {
@@ -175,12 +175,6 @@ public class Pedido extends PersistentObject {
 			pieza.vender();
 		}
 	}
-	/**
-	 * Devuelve el nombre del estado en el que se encuentra el pedido
-	 */
-	public String GetDescripcionEstado() {
-		return this.getEstado().getTipoEstado();
-	}
 
 	// ********************************************
 	// ** GETTERS AND SETTERS
@@ -201,6 +195,11 @@ public class Pedido extends PersistentObject {
 	 */
 	public EstadoPedido getEstado() {
 		return this.estado;
+	}
+	
+	public Pedido setEstado(EstadoPedido estado) {
+		this.estado = estado;
+		return this;
 	}
 
 	// ********************************************

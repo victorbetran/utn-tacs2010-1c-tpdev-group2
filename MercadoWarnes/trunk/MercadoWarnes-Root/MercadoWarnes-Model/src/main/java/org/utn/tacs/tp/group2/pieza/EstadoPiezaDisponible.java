@@ -10,16 +10,6 @@ import org.utn.tacs.tp.group2.exceptions.pieza.PiezaNoReservadaException;
 public class EstadoPiezaDisponible extends EstadoPieza{
 
 	
-	//********************************************
-	//** CONSTRUCTOR
-	//********************************************
-	public EstadoPiezaDisponible(Pieza pieza) {
-		super(pieza);
-	}
-	
-	//********************************************
-	//** ESTADO PIEZA METHODS
-	//********************************************
 	@Override public boolean isDisponible() {
 		return true;
 	}
@@ -33,23 +23,31 @@ public class EstadoPiezaDisponible extends EstadoPieza{
 	}
 
 	@Override
-	public EstadoPieza gotoDisponible() {
+	public EstadoPieza gotoDisponible(Pieza pieza) {
 		return this;
 	}
 
 	@Override
-	public EstadoPieza gotoReservada() {
-		return new EstadoPiezaReservada(this.pieza);
+	public EstadoPieza gotoReservada(Pieza pieza) {
+		return getEstadoReservada();
 	}
 
 	@Override
-	public EstadoPieza gotoVendida() {
-		throw new PiezaNoReservadaException(this.pieza);
+	public EstadoPieza gotoVendida(Pieza pieza) {
+		throw new PiezaNoReservadaException(pieza);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		return  obj instanceof EstadoPiezaDisponible;
+		if(obj instanceof EstadoPiezaDisponible){
+			return false;
+		}
+		return ((EstadoPiezaDisponible) obj).getId() == this.getId();
+	}
+
+	@Override
+	protected long getId() {
+		return 1;
 	}
 
 }

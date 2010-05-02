@@ -53,10 +53,10 @@ public class ConsultaDePiezasTest extends PiezaTest {
 	}
 
 	/**
-	 * Consulta las piezas Disponibles de una determinada Categoria.
+	 * Consulta piezas segun una categoria.
 	 */
 	@Test
-	public void consultarPiezasDisponiblesPorCategoria() {
+	public void consultarPiezasPorCategoria() {
 		this.piezaPersistida1.setCategoria("PREMIUM");
 		this.piezaPersistida2.setCategoria("PREMIUM");
 		
@@ -86,6 +86,14 @@ public class ConsultaDePiezasTest extends PiezaTest {
 	}
 	
 	/**
+	 * Consulta las piezas disponibles.
+	 */
+	@Test
+	public void consultarPiezasDisponibles() {
+		assertList(this.dao.findByEstado(EstadoPieza.getEstadoDisponible()), this.piezaPersistida1, this.piezaPersistida2);
+	}
+	
+	/**
 	 * Consulta las piezas reservadas.
 	 */
 	@Test
@@ -93,12 +101,19 @@ public class ConsultaDePiezasTest extends PiezaTest {
 		this.piezaPersistida1.reservar();
 		this.piezaPersistida2.reservar();
 		
-//		this.dao.save(piezaPersistida1);
-//		this.dao.save(piezaPersistida2);
-		
-		assertList(this.dao.findByEstado(EstadoPieza.getReservada(null)), this.piezaPersistida1, this.piezaPersistida2);
+		assertList(this.dao.findByEstado(EstadoPieza.getEstadoReservada()), this.piezaPersistida1, this.piezaPersistida2);
 	}
 
+	/**
+	 * Consulta las piezas vendidas.
+	 */
+	@Test
+	public void consultarPiezasVendidas() {
+		this.piezaPersistida1.reservar();
+		this.piezaPersistida1.vender();
+		assertList(this.dao.findByEstado(EstadoPieza.getEstadoVendida()), this.piezaPersistida1);
+	}
+	
 	// *******************************************************************************
 	// *** HELPER
 	// *******************************************************************************
