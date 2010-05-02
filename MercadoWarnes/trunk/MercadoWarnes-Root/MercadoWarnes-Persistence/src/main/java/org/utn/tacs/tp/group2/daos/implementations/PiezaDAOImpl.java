@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pieza.Auto;
+import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 
@@ -61,13 +62,13 @@ public class PiezaDAOImpl extends PiezaDAO{
 	}
 
 	@Override
-	public List<Pieza> findByEstado(final String estado) {
+	public List<Pieza> findByEstado(final EstadoPieza estado) {
 		final List<Pieza> resultado = new ArrayList<Pieza>();
 			doExecute(new Command() { 
 			
 			@SuppressWarnings("unchecked")
 			public void execute(Session session) {
-				Query q = session.createQuery("FROM Pieza WHERE estado.tipoEstado = :est"  );
+				Query q = session.createQuery("from Pieza as pieza inner join fetch pieza.estado WHERE pieza.estado = :est");
 				q.setParameter("est", estado);
 				resultado.addAll(q.list());
 			}

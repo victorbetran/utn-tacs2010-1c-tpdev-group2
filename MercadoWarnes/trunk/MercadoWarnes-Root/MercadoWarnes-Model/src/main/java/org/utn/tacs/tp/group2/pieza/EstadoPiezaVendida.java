@@ -6,10 +6,9 @@ import javax.persistence.Entity;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaVendidaException;
 
 @Entity
-@DiscriminatorValue("Vendida")
+@DiscriminatorValue("VENDIDA")
 public class EstadoPiezaVendida extends EstadoPieza {
 
-	private String tipoEstado = "VENDIDA";
 	//********************************************
 	//** CONSTRUCTOR
 	//********************************************
@@ -43,10 +42,10 @@ public class EstadoPiezaVendida extends EstadoPieza {
 	@Override public EstadoPieza gotoVendida() {
 		throw new PiezaVendidaException(this.pieza);
 	}
-	
-	@Override
-	public String getTipoEstado() {
-		return tipoEstado;
-	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return  obj instanceof EstadoPiezaVendida;
+	}
+	
 }

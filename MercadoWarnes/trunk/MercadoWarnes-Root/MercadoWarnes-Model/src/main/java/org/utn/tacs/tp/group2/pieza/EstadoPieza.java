@@ -78,8 +78,6 @@ public abstract class EstadoPieza extends PersistentObject {
 	 */
 	public abstract boolean isVendida();
 	
-	public abstract String getTipoEstado();
-
 	// ********************************************
 	// ** PUBLIC CLASS METHODS
 	// ********************************************
@@ -104,24 +102,6 @@ public abstract class EstadoPieza extends PersistentObject {
 	 */
 	public static EstadoPieza getVendida(Pieza pieza) {
 		return new EstadoPiezaVendida(pieza);
-	}
-
-	// ********************************************
-	// ** OVERWRITTEN METHODS
-	// ********************************************
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-//		if (!(obj instanceof EstadoPieza)) {
-//			return false;
-//		}
-		EstadoPieza otherEstado = (EstadoPieza) obj;
-		return this.getId().equals(otherEstado.getId());
 	}
 
 }

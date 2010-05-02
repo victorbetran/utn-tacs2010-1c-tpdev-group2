@@ -44,7 +44,7 @@ public abstract class PiezaDAO extends AbstractDao{
 	/**
 	 * Devuelve un listado con las piezas que se encuentran en un determinado estado.
 	 */
-	public abstract List<Pieza> findByEstado(String estado);
+	public abstract List<Pieza> findByEstado(EstadoPieza estado);
 	
 	/**
 	 * Devuelve un listado con las piezas que son de una determinada categor�a.

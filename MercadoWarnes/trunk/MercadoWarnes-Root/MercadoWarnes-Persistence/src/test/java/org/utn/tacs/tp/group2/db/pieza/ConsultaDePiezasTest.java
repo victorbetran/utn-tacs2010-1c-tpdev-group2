@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import org.utn.tacs.tp.group2.pieza.Auto;
+import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class ConsultaDePiezasTest extends PiezaTest {
@@ -92,7 +93,10 @@ public class ConsultaDePiezasTest extends PiezaTest {
 		this.piezaPersistida1.reservar();
 		this.piezaPersistida2.reservar();
 		
-		assertList(this.dao.findByEstado("RESERVADA"), this.piezaPersistida1, this.piezaPersistida2);
+//		this.dao.save(piezaPersistida1);
+//		this.dao.save(piezaPersistida2);
+		
+		assertList(this.dao.findByEstado(EstadoPieza.getReservada(null)), this.piezaPersistida1, this.piezaPersistida2);
 	}
 
 	// *******************************************************************************

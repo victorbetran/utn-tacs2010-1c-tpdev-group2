@@ -57,7 +57,7 @@ public class Pieza extends PersistentObject {
 	 * Establece a la pieza como Disponible.
 	 */
 	public Pieza disponibilizar() {
-		this.estado = this.estado.gotoDisponible();
+		this.setEstado(this.estado.gotoDisponible());
 		Logueador.getInstancia().loguearDebug("Se puso disponible la pieza: " + this.toString());
 		return this;
 	}
@@ -66,7 +66,7 @@ public class Pieza extends PersistentObject {
 	 * Establece a la pieza como Reservada.
 	 */
 	public Pieza reservar() {
-		this.estado = this.estado.gotoReservada();
+		this.setEstado(this.estado.gotoReservada());
 		Logueador.getInstancia().loguearDebug("Se reservo la pieza: " + this.toString());
 		return this;
 	}
@@ -75,14 +75,12 @@ public class Pieza extends PersistentObject {
 	 * Establece a la pieza como Vendida.
 	 */
 	public Pieza vender() {
-		this.estado = this.estado.gotoVendida();
+		this.setEstado(this.estado.gotoVendida());
 		Logueador.getInstancia().loguearDebug("Se vendio la pieza: " + this.toString());
 		return this;
 	}
 
 	
-	
-
 	/**
 	 * Determina si la pieza se encuentra reservada.
 	 */
