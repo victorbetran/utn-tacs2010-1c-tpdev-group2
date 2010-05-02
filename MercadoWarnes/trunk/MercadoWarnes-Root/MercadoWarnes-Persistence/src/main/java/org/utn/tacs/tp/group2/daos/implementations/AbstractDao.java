@@ -9,12 +9,6 @@ import org.utn.tacs.tp.group2.hibernate.SessionProvider;
 
 public abstract class AbstractDao<T> {
 
-    public static void doExecute(final Command closure) {
-        Session session = null;
-        session = SessionProvider.getInstance().getSession();
-        closure.execute(session);
-   }
-    
     protected Session getSession(){
     	return SessionProvider.getInstance().getSession();
     }
