@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.utn.tacs.tp.group2.utils.PersistentObject;
+import org.utn.tacs.tp.group2.persistence.utils.PersistentObject;
 
 @Entity
 @Table(name = "AUTO")

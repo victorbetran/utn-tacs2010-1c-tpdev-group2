@@ -13,8 +13,8 @@ import org.utn.tacs.tp.group2.domain.exceptions.CancelacionDePedidoException;
 import org.utn.tacs.tp.group2.domain.exceptions.EfectivizacionDePedidoException;
 import org.utn.tacs.tp.group2.domain.exceptions.PedidoSinPiezasException;
 import org.utn.tacs.tp.group2.domain.exceptions.PiezaException;
-import org.utn.tacs.tp.group2.utils.Logueador;
-import org.utn.tacs.tp.group2.utils.PersistentObject;
+import org.utn.tacs.tp.group2.persistence.utils.Logueador;
+import org.utn.tacs.tp.group2.persistence.utils.PersistentObject;
 
 @Entity
 @Table(name = "PEDIDO")

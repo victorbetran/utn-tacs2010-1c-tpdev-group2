@@ -1,11 +1,11 @@
-package org.utn.tacs.tp.group2.daos.implementations;
+package org.utn.tacs.tp.group2.persistence.daos.implementations;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.utn.tacs.tp.group2.utils.SessionProvider;
+import org.utn.tacs.tp.group2.persistence.utils.SessionProvider;
 
 public abstract class AbstractDao<T> {
 

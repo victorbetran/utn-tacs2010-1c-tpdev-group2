@@ -1,12 +1,12 @@
-package org.utn.tacs.tp.group2.daos.interfaces;
+package org.utn.tacs.tp.group2.persistence.daos.interfaces;
 
 import java.util.List;
 
-import org.utn.tacs.tp.group2.daos.implementations.AbstractDao;
-import org.utn.tacs.tp.group2.daos.implementations.PiezaDAOImpl;
 import org.utn.tacs.tp.group2.domain.Auto;
 import org.utn.tacs.tp.group2.domain.EstadoPieza;
 import org.utn.tacs.tp.group2.domain.Pieza;
+import org.utn.tacs.tp.group2.persistence.daos.implementations.AbstractDao;
+import org.utn.tacs.tp.group2.persistence.daos.implementations.PiezaDAOImpl;
 
 
 public abstract class PiezaDAO extends AbstractDao<Pieza>{

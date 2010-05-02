@@ -9,8 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.utn.tacs.tp.group2.utils.Logueador;
-import org.utn.tacs.tp.group2.utils.PersistentObject;
+import org.utn.tacs.tp.group2.persistence.utils.Logueador;
+import org.utn.tacs.tp.group2.persistence.utils.PersistentObject;
 
 @Entity
 @Table(name = "PIEZA")

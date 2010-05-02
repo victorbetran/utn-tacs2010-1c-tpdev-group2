@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.utils;
+package org.utn.tacs.tp.group2.persistence.utils;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;

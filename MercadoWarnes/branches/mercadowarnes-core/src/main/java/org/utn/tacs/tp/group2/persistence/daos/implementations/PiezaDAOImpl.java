@@ -1,11 +1,11 @@
-package org.utn.tacs.tp.group2.daos.implementations;
+package org.utn.tacs.tp.group2.persistence.daos.implementations;
 
 import java.util.List;
 
-import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.domain.Auto;
 import org.utn.tacs.tp.group2.domain.EstadoPieza;
 import org.utn.tacs.tp.group2.domain.Pieza;
+import org.utn.tacs.tp.group2.persistence.daos.interfaces.PiezaDAO;
 
 
 public class PiezaDAOImpl extends PiezaDAO{
