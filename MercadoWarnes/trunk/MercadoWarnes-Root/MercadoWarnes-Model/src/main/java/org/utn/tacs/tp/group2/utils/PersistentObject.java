@@ -1,17 +1,14 @@
 package org.utn.tacs.tp.group2.utils;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 
 /**
  * Abstraccion de un objeto persistente. Posee toda la l�gica para que un objeto
  * de dominio pueda ser persistido.
  */
 
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 public abstract class PersistentObject {
 
 	//********************************************

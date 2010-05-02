@@ -5,6 +5,7 @@ import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -14,7 +15,9 @@ import org.utn.tacs.tp.group2.utils.PersistentObject;
  * Clase abstracta que representa el estado de una pieza. Existen 3 estado posible: Disponible,
  * Reservada, Vendida.
  */
+
 @Entity
+@MappedSuperclass
 @Table(name = "ESTADO_PIEZA")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="TIPO" ,discriminatorType=DiscriminatorType.STRING)
