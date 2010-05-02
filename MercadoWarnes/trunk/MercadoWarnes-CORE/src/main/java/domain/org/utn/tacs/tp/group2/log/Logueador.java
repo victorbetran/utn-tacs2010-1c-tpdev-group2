@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.utils;
+package org.utn.tacs.tp.group2.log;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

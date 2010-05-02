@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.utn.tacs.tp.group2.utils.Logueador;
+import org.utn.tacs.tp.group2.log.Logueador;
 import org.utn.tacs.tp.group2.utils.PersistentObject;
 
 @Entity
