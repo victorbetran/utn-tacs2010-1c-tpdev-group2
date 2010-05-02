@@ -38,25 +38,20 @@ public class PiezaDAOImpl extends PiezaDAO{
 								.getResults();
 	}
 
-	@Override
-	public List<Pieza> findByEstadoAndAuto(String estado,Auto auto) {
-		return getQueryHandler().setBody("FROM Pieza WHERE estado.tipoEstado = :est and auto = :aut")
-								.addParameter("est", estado)
-								.addParameter("aut", auto)
-								.getResults();
-	}
-
-	@Override
-	public List<Pieza> findByEstadoAndCategoria(String estado,String categoria) {
-		return getQueryHandler().setBody("FROM Pieza WHERE estado.tipoEstado = :est and categoria = :cat")
-								.addParameter("est", estado)
-								.addParameter("cat", categoria)
-								.getResults();
-	}
-	
 //	@Override
-//	public Pieza findByID(Long id) {
-//		return (Pieza) super.getSession().load(Pieza.class, id);
+//	public List<Pieza> findByEstadoAndAuto(String estado,Auto auto) {
+//		return getQueryHandler().setBody("FROM Pieza WHERE estado.tipoEstado = :est and auto = :aut")
+//								.addParameter("est", estado)
+//								.addParameter("aut", auto)
+//								.getResults();
 //	}
 
+//	@Override
+//	public List<Pieza> findByEstadoAndCategoria(String estado,String categoria) {
+//		return getQueryHandler().setBody("FROM Pieza WHERE estado.tipoEstado = :est and categoria = :cat")
+//								.addParameter("est", estado)
+//								.addParameter("cat", categoria)
+//								.getResults();
+//	}
+	
 }
