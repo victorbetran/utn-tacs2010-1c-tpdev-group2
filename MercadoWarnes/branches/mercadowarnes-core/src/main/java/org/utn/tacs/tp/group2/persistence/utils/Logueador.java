@@ -2,7 +2,7 @@ package org.utn.tacs.tp.group2.persistence.utils;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.utn.tacs.tp.group2.domain.Pedido;
+import org.utn.tacs.tp.group2.domain.pieza.Pedido;
 
 public class Logueador {
 	

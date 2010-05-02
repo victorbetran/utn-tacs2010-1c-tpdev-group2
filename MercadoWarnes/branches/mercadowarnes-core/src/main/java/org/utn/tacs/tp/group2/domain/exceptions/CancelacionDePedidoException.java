@@ -1,6 +1,6 @@
 package org.utn.tacs.tp.group2.domain.exceptions;
 
-import org.utn.tacs.tp.group2.domain.Pedido;
+import org.utn.tacs.tp.group2.domain.pieza.Pedido;
 
 public class CancelacionDePedidoException extends PedidoException {
 

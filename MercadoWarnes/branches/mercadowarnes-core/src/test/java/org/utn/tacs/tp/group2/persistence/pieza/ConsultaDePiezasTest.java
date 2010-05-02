@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.domain.Auto;
-import org.utn.tacs.tp.group2.domain.EstadoPieza;
-import org.utn.tacs.tp.group2.domain.Pieza;
+import org.utn.tacs.tp.group2.domain.pieza.Auto;
+import org.utn.tacs.tp.group2.domain.pieza.EstadoPieza;
+import org.utn.tacs.tp.group2.domain.pieza.Pieza;
 
 public class ConsultaDePiezasTest extends PiezaTest {
 

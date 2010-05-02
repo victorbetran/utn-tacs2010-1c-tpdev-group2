@@ -2,8 +2,8 @@ package org.utn.tacs.tp.group2.persistence.daos.implementations;
 
 import java.util.List;
 
-import org.utn.tacs.tp.group2.domain.EstadoPedido;
-import org.utn.tacs.tp.group2.domain.Pedido;
+import org.utn.tacs.tp.group2.domain.pieza.EstadoPedido;
+import org.utn.tacs.tp.group2.domain.pieza.Pedido;
 import org.utn.tacs.tp.group2.persistence.daos.interfaces.PedidoDAO;
 
 public class PedidoDAOImpl extends PedidoDAO {

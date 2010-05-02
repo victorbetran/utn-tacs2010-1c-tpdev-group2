@@ -5,10 +5,10 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.domain.Pedido;
-import org.utn.tacs.tp.group2.domain.Pieza;
 import org.utn.tacs.tp.group2.domain.exceptions.EfectivizacionDePedidoException;
 import org.utn.tacs.tp.group2.domain.exceptions.PedidoSinPiezasException;
+import org.utn.tacs.tp.group2.domain.pieza.Pedido;
+import org.utn.tacs.tp.group2.domain.pieza.Pieza;
 
 public class EfectivizacionDePedidoTest {
 

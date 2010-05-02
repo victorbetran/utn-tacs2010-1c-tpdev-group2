@@ -2,7 +2,7 @@ package org.utn.tacs.tp.group2.persistence.pieza;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.domain.Pieza;
+import org.utn.tacs.tp.group2.domain.pieza.Pieza;
 
 
 public class AbmDePiezasTest extends PiezaTest {

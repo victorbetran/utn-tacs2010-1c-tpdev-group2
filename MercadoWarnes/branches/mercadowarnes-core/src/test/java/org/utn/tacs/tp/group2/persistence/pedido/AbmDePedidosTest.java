@@ -2,7 +2,7 @@ package org.utn.tacs.tp.group2.persistence.pedido;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.domain.Pedido;
+import org.utn.tacs.tp.group2.domain.pieza.Pedido;
 
 public class AbmDePedidosTest extends PedidoTest {
 

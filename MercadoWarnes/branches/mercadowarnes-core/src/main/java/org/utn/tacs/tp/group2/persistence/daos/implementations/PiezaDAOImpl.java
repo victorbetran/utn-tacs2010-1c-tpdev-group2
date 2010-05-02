@@ -2,9 +2,9 @@ package org.utn.tacs.tp.group2.persistence.daos.implementations;
 
 import java.util.List;
 
-import org.utn.tacs.tp.group2.domain.Auto;
-import org.utn.tacs.tp.group2.domain.EstadoPieza;
-import org.utn.tacs.tp.group2.domain.Pieza;
+import org.utn.tacs.tp.group2.domain.pieza.Auto;
+import org.utn.tacs.tp.group2.domain.pieza.EstadoPieza;
+import org.utn.tacs.tp.group2.domain.pieza.Pieza;
 import org.utn.tacs.tp.group2.persistence.daos.interfaces.PiezaDAO;
 
 
