@@ -16,11 +16,11 @@
 		<property name="hbm2ddl.auto">update</property>
 
 		<!-- List of annotated classes -->
-		<mapping class="org.utn.tacs.tp.group2.domain.Pedido"/>
-		<mapping class="org.utn.tacs.tp.group2.domain.EstadoPedido"/>
-		<mapping class="org.utn.tacs.tp.group2.domain.Pieza"/>
-		<mapping class="org.utn.tacs.tp.group2.domain.EstadoPieza"/>
-		<mapping class="org.utn.tacs.tp.group2.domain.Auto"/>
+		<mapping class="org.utn.tacs.tp.group2.domain.pedido.Pedido"/>
+		<mapping class="org.utn.tacs.tp.group2.domain.pedido.EstadoPedido"/>
+		<mapping class="org.utn.tacs.tp.group2.domain.pieza.Pieza"/>
+		<mapping class="org.utn.tacs.tp.group2.domain.pieza.EstadoPieza"/>
+		<mapping class="org.utn.tacs.tp.group2.domain.pieza.Auto"/>
 		
 	</session-factory>
 	
