@@ -9,6 +9,10 @@ import org.utn.tacs.tp.group2.hibernate.SessionProvider;
 
 public abstract class AbstractDao<T> {
 
+    //********************************************
+	//** UTIL METHODS
+	//********************************************
+    
     protected Session getSession(){
     	return SessionProvider.getInstance().getSession();
     }
@@ -17,7 +21,34 @@ public abstract class AbstractDao<T> {
     	return new QueryHandler<T>(getSession());
     }
     
-    static protected class QueryHandler<T>{
+	public void save(T t) {
+		getSession().save(t);
+	}	
+
+	public void remove(T t) {
+		getSession().delete(t);
+	}
+
+	public Boolean isPersisted(T t) {
+		return getSession().contains(t);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public T findByID(final Long id) {
+		return (T) getSession().load(getGenericClass(), id);
+	}
+    
+	//********************************************
+	//** ABSTRACT METHOD
+	//********************************************
+	
+	protected abstract Class<T> getGenericClass();
+	
+	//********************************************
+	//** PRIVATE IMPLEMENTATION
+	//********************************************
+	
+   static protected class QueryHandler<T>{
     	Session session;
     	
     	public QueryHandler(Session s) {
@@ -47,32 +78,5 @@ public abstract class AbstractDao<T> {
 			return (T)q.uniqueResult();
 		}
 	}
-    
-    //********************************************
-	//** UTIL METHODS
-	//********************************************
-    
-	public void save(T t) {
-		getSession().save(t);
-	}	
-
-	public void remove(T t) {
-		getSession().delete(t);
-	}
-
-	public Boolean isPersisted(T t) {
-		return getSession().contains(t);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public T findByID(final Long id) {
-		return (T) getSession().load(getGenericClass(), id);
-	}
-    
-	//********************************************
-	//** ABSTRACT METHOD
-	//********************************************
-	
-	protected abstract Class<T> getGenericClass();
 	
 }
