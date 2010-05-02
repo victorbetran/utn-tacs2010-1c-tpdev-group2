@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.utn.tacs.tp.group2.log.Logueador;
-import org.utn.tacs.tp.group2.utils.PersistentObject;
+import org.utn.tacs.tp.group2.persistence.PersistentObject;
 
 @Entity
 @Table(name = "PIEZA")

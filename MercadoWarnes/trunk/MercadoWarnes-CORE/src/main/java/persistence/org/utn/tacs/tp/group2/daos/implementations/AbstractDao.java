@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.utn.tacs.tp.group2.utils.SessionProvider;
+import org.utn.tacs.tp.group2.persistence.SessionProvider;
 
 public abstract class AbstractDao<T> {
 

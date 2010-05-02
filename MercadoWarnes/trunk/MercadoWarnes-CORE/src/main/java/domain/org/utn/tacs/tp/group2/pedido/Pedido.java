@@ -14,8 +14,8 @@ import org.utn.tacs.tp.group2.exceptions.pedido.EfectivizacionDePedidoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoSinPiezasException;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaException;
 import org.utn.tacs.tp.group2.log.Logueador;
+import org.utn.tacs.tp.group2.persistence.PersistentObject;
 import org.utn.tacs.tp.group2.pieza.Pieza;
-import org.utn.tacs.tp.group2.utils.PersistentObject;
 
 @Entity
 @Table(name = "PEDIDO")

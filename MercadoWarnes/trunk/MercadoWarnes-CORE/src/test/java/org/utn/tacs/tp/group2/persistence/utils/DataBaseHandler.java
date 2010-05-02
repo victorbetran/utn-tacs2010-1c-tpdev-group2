@@ -4,7 +4,7 @@ import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.junit.After;
 import org.junit.Before;
-import org.utn.tacs.tp.group2.utils.SessionProvider;
+import org.utn.tacs.tp.group2.persistence.SessionProvider;
 
 public class DataBaseHandler {
 
