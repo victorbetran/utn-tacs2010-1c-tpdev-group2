@@ -9,10 +9,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.utn.tacs.tp.group2.domain.exceptions.CancelacionDePedidoException;
-import org.utn.tacs.tp.group2.domain.exceptions.EfectivizacionDePedidoException;
-import org.utn.tacs.tp.group2.domain.exceptions.PedidoSinPiezasException;
-import org.utn.tacs.tp.group2.domain.exceptions.PiezaException;
+import org.utn.tacs.tp.group2.domain.exceptions.pedido.CancelacionDePedidoException;
+import org.utn.tacs.tp.group2.domain.exceptions.pedido.EfectivizacionDePedidoException;
+import org.utn.tacs.tp.group2.domain.exceptions.pedido.PedidoSinPiezasException;
+import org.utn.tacs.tp.group2.domain.exceptions.pieza.PiezaException;
 import org.utn.tacs.tp.group2.domain.pieza.Pieza;
 import org.utn.tacs.tp.group2.persistence.utils.Logueador;
 import org.utn.tacs.tp.group2.persistence.utils.PersistentObject;

@@ -1,6 +1,6 @@
 package org.utn.tacs.tp.group2.persistence.daos.exceptions;
 
-import org.utn.tacs.tp.group2.domain.exceptions.PedidoException;
+import org.utn.tacs.tp.group2.domain.exceptions.pedido.PedidoException;
 
 public class PedidoInexistenteException extends PedidoException {
 

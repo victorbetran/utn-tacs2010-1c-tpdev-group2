@@ -3,7 +3,7 @@ package org.utn.tacs.tp.group2.domain.pedido;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import org.utn.tacs.tp.group2.domain.exceptions.PedidoEfectivizadoException;
+import org.utn.tacs.tp.group2.domain.exceptions.pedido.PedidoEfectivizadoException;
 
 @Entity
 @DiscriminatorValue("EFECTIVO")

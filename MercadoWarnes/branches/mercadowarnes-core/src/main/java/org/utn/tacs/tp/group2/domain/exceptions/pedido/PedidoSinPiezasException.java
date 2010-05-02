@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.domain.exceptions;
+package org.utn.tacs.tp.group2.domain.exceptions.pedido;
 
 import org.utn.tacs.tp.group2.domain.pedido.Pedido;
 

@@ -1,6 +1,6 @@
 package org.utn.tacs.tp.group2.persistence.daos.exceptions;
 
-import org.utn.tacs.tp.group2.domain.exceptions.PiezaException;
+import org.utn.tacs.tp.group2.domain.exceptions.pieza.PiezaException;
 
 public class PiezaInexistenteException extends PiezaException {
 

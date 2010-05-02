@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.domain.exceptions.PiezaReservadaException;
+import org.utn.tacs.tp.group2.domain.exceptions.pieza.PiezaReservadaException;
 import org.utn.tacs.tp.group2.domain.pieza.Pieza;
 
 public class CreacionDePedidoTest {

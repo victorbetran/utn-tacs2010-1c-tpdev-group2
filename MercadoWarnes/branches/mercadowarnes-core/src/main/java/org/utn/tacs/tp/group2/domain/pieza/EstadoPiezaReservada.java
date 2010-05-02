@@ -3,7 +3,7 @@ package org.utn.tacs.tp.group2.domain.pieza;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import org.utn.tacs.tp.group2.domain.exceptions.PiezaReservadaException;
+import org.utn.tacs.tp.group2.domain.exceptions.pieza.PiezaReservadaException;
 
 @Entity
 @DiscriminatorValue("RESERVADA")
