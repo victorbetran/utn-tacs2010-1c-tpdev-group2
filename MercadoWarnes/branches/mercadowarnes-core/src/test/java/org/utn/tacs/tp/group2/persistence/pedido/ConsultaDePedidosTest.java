@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.utn.tacs.tp.group2.domain.pieza.EstadoPedido;
-import org.utn.tacs.tp.group2.domain.pieza.Pedido;
+import org.utn.tacs.tp.group2.domain.pedido.EstadoPedido;
+import org.utn.tacs.tp.group2.domain.pedido.Pedido;
 
 public class ConsultaDePedidosTest extends PedidoTest {
 

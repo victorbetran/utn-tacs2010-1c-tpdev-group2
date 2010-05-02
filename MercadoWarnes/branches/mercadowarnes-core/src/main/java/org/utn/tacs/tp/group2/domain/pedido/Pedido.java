@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.domain.pieza;
+package org.utn.tacs.tp.group2.domain.pedido;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,7 @@ import org.utn.tacs.tp.group2.domain.exceptions.CancelacionDePedidoException;
 import org.utn.tacs.tp.group2.domain.exceptions.EfectivizacionDePedidoException;
 import org.utn.tacs.tp.group2.domain.exceptions.PedidoSinPiezasException;
 import org.utn.tacs.tp.group2.domain.exceptions.PiezaException;
+import org.utn.tacs.tp.group2.domain.pieza.Pieza;
 import org.utn.tacs.tp.group2.persistence.utils.Logueador;
 import org.utn.tacs.tp.group2.persistence.utils.PersistentObject;
 

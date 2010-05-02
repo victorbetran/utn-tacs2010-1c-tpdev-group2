@@ -1,6 +1,6 @@
 package org.utn.tacs.tp.group2.domain.exceptions;
 
-import org.utn.tacs.tp.group2.domain.pieza.Pedido;
+import org.utn.tacs.tp.group2.domain.pedido.Pedido;
 
 public class PedidoSinPiezasException extends PedidoException {
 

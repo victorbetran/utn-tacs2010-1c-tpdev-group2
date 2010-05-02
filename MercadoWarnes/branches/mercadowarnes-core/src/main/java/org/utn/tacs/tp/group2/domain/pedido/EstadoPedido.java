@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.domain.pieza;
+package org.utn.tacs.tp.group2.domain.pedido;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;

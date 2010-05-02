@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.utn.tacs.tp.group2.domain.exceptions.CancelacionDePedidoException;
 import org.utn.tacs.tp.group2.domain.exceptions.PedidoCanceladoException;
-import org.utn.tacs.tp.group2.domain.pieza.Pedido;
 import org.utn.tacs.tp.group2.domain.pieza.Pieza;
 
 public class CancelacionDePedidoTest {
