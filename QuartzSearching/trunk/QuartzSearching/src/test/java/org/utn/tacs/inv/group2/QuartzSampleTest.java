@@ -1,6 +1,6 @@
 package org.utn.tacs.inv.group2;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import org.junit.Test;
 import org.quartz.JobDetail;
@@ -18,11 +18,7 @@ public class QuartzSampleTest {
 		try {
             // Grab the Scheduler instance from the Factory 
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
-
-            //NO HACE FALTA LA CONFIGURACION DESDE LA VERSION 1.8.0
-            //reset log4j config for FileAppender
-//            PropertyConfigurator.configure("src/main/resources/log4j.properties");
-            
+          
             // and start it off
             scheduler.start();
 
@@ -30,7 +26,7 @@ public class QuartzSampleTest {
             JobDetail job = new JobDetail("job1", "group1", MyJobClass.class);
             	
             // Define a Trigger that will fire "now"
-            Trigger trigger = new SimpleTrigger("trigger1", "group1", new Date());
+            Trigger trigger = new SimpleTrigger("trigger1", "group1", Calendar.getInstance().getTime());
             	
             // Schedule the job with the trigger
             scheduler.scheduleJob(job, trigger);
