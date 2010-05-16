@@ -1,4 +1,4 @@
-package org.utn.tacs.inv.group2;
+package org.utn.tacs.inv.group2.job;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -6,15 +6,18 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-public class MyJobClass implements Job{
+/**
+ * Este Job loguea en la consola cuando es ejecutado
+ */
+public class LogJob implements Job{
 
-	private static Log log = LogFactory.getLog(MyJobClass.class);
+	private static Log log = LogFactory.getLog(LogJob.class);
 	
-	public MyJobClass() {}
+	public LogJob() {}
 	
 	public void execute(JobExecutionContext context)
 			throws JobExecutionException {
-		log.info("SE INICIO EL TRABAJO!!!");
+		log.info("Corrio MyJob :D");
 	}
 
 }
