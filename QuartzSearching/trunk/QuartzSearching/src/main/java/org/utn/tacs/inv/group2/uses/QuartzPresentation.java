@@ -24,13 +24,17 @@ public class QuartzPresentation {
           
             
             //CREACION DE JOBS
+            
+            //----PRIMER JOB-----//
             JobDetail jobLog = new JobDetail("jobLog", "group2", LogJob.class);
 
             //La expresion dice: q se dispare cada 10 segundos, en el minuto 19, de la hora 20, todos los dias.
             Trigger triggerLog = new CronTrigger("triggerLog", "group2", "0/10 19 20 * * ?");
             
+            //----SEGUNDO JOB-----//
             JobDetail jobCloseSch = new JobDetail("jobCloseSch", "group2", CloseSchedulerJob.class);
             
+            //Se dispara el 16/05/2010 (recuerden que los meses son uno menos, malditos!) al minuto 20:20 hs)
             Trigger triggerCloseSch = new SimpleTrigger("triggerCloseSch", "group2", new GregorianCalendar(2010, 4, 16, 20, 20).getTime());
             
             
