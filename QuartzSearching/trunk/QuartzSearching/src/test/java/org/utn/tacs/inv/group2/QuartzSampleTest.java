@@ -9,6 +9,7 @@ import org.quartz.SchedulerException;
 import org.quartz.SimpleTrigger;
 import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
+import org.utn.tacs.inv.group2.job.LogJob;
 
 
 public class QuartzSampleTest {
@@ -23,7 +24,7 @@ public class QuartzSampleTest {
             scheduler.start();
 
             // Define job instance
-            JobDetail job = new JobDetail("job1", "group1", MyJobClass.class);
+            JobDetail job = new JobDetail("job1", "group1", LogJob.class);
             	
             // Define a Trigger that will fire "now"
             Trigger trigger = new SimpleTrigger("trigger1", "group1", Calendar.getInstance().getTime());
