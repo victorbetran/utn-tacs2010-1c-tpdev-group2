@@ -23,14 +23,8 @@
 	</bean>
 
 	<bean id="defaultSessionFactory"
-		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 <!--		<property name="dataSource" ref="defaultDataSource" />-->
-		<!--		<property name="mappingResources">-->
-		<!--			<list>-->
-		<!--				 Agregar los mappings necesarios -->
-		<!--				<value>com/dosideas/domain/map/Invasor.hbm.xml</value>-->
-		<!--			</list>-->
-		<!--		</property>-->
 		<property name="annotatedClasses">
 			<list>
 				<value>org.utn.tacs.tp.group2.pedido.Pedido</value>
@@ -43,8 +37,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</prop>
-				<prop key="hibernate.connection.url">jdbc:hsqldb:file:db/tp-group2-db;shutdown=true
-					</prop>
+				<prop key="hibernate.connection.url">jdbc:hsqldb:file:db/tp-group2-db;shutdown=true</prop>
 				<prop key="hibernate.connection.username">sa</prop>
 				<prop key="hibernate.connection.password"></prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
