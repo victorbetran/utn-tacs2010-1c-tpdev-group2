@@ -1,34 +1,45 @@
 package org.utn.tacs.tp.group2.log;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
 public class Logueador {
 	
-	private static Logueador instancia;
+	//**************************************
+	//** ATRIBUTTES
+	//**************************************
+	private static Logueador INSTANCE;
+	private Logger logger = LoggerFactory.getLogger(Pedido.class);
 		
-	public static Logueador getInstancia()
+	
+	//**************************************
+	//** CONSTRUCTION
+	//**************************************
+	public static Logueador getInstance()
 	{
-		if (instancia==null)
-			instancia=new Logueador();
-		return instancia;
+		if (INSTANCE == null)
+			INSTANCE = new Logueador();
+		return INSTANCE;
 	}
 	
-	private Logueador()
-	{		
-//		DOMConfigurator.configure("src/main/resources/log4j.cfg.xml");
-	}
+	private Logueador(){}
 	
-	public void loguearTransaccion(Pedido pedido)
+	
+	//**************************************
+	//** INTERFACE
+	//**************************************
+	/**
+	 * Permite loguear las transacciones sobre un pedido. 
+	 */
+	public void logTransaction(Pedido pedido)
 	{
-		Log logger = LogFactory.getLog(Pedido.class);		
-		logger.info(pedido.getId().toString() + " , " + "Operacion: " + pedido.getEstado());	
+		this.logger.info("Pedido: {} => Operacion: {}", pedido.getId(), pedido.getEstado());
 	}
 	
 	public void loguearDebug(String mensaje)
 	{
-		Log logger = LogFactory.getLog("debug");		
+		Logger logger = LoggerFactory.getLogger("DEBUG");		
 		logger.debug(mensaje);	
 	}
 	

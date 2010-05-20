@@ -43,7 +43,7 @@ public class Pieza extends PersistentObject {
 	public Pieza(String codigo) {
 		this.estado = EstadoPieza.getEstadoDisponible();
 		this.codigo = codigo;
-		Logueador.getInstancia().loguearDebug("Se creo la pieza: " + this.toString());
+		Logueador.getInstance().loguearDebug("Se creo la pieza: " + this.toString());
 	}
 
 	public Pieza(){
@@ -58,7 +58,7 @@ public class Pieza extends PersistentObject {
 	 */
 	public Pieza disponibilizar() {
 		this.setEstado(this.estado.gotoDisponible(this));
-		Logueador.getInstancia().loguearDebug("Se puso disponible la pieza: " + this.toString());
+		Logueador.getInstance().loguearDebug("Se puso disponible la pieza: " + this.toString());
 		return this;
 	}
 
@@ -67,7 +67,7 @@ public class Pieza extends PersistentObject {
 	 */
 	public Pieza reservar() {
 		this.setEstado(this.estado.gotoReservada(this));
-		Logueador.getInstancia().loguearDebug("Se reservo la pieza: " + this.toString());
+		Logueador.getInstance().loguearDebug("Se reservo la pieza: " + this.toString());
 		return this;
 	}
 
@@ -76,7 +76,7 @@ public class Pieza extends PersistentObject {
 	 */
 	public Pieza vender() {
 		this.setEstado(this.estado.gotoVendida(this));
-		Logueador.getInstancia().loguearDebug("Se vendio la pieza: " + this.toString());
+		Logueador.getInstance().loguearDebug("Se vendio la pieza: " + this.toString());
 		return this;
 	}
 
