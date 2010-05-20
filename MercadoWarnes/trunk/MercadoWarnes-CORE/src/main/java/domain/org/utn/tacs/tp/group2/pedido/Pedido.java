@@ -40,8 +40,8 @@ public class Pedido extends PersistentObject {
 	public Pedido() {
 		this.piezas = new ArrayList<Pieza>();
 		this.estado = EstadoPedido.getEnCurso();
-		Logueador.getInstancia().loguearTransaccion(this);
-		Logueador.getInstancia().loguearDebug("Se creo el pedido: " + this.toString());
+		Logueador.getInstance().logTransaction(this);
+		Logueador.getInstance().loguearDebug("Se creo el pedido: " + this.toString());
 	}
 
 	// ********************************************
@@ -54,8 +54,8 @@ public class Pedido extends PersistentObject {
 		try {
 			this.disponibilizarPiezas();
 			this.setEstado(this.estado.gotoCancelado(this));
-			Logueador.getInstancia().loguearTransaccion(this);
-			Logueador.getInstancia().loguearDebug("Se cancelo el pedido: " + this.toString());
+			Logueador.getInstance().logTransaction(this);
+			Logueador.getInstance().loguearDebug("Se cancelo el pedido: " + this.toString());
 		} catch (PiezaException e) {
 			throw new CancelacionDePedidoException(this, e);
 		}
@@ -68,8 +68,8 @@ public class Pedido extends PersistentObject {
 		try {
 			this.venderPiezas();
 			this.setEstado(this.estado.gotoEfectivo(this));
-			Logueador.getInstancia().loguearTransaccion(this);
-			Logueador.getInstancia().loguearDebug("Se efectivizo el pedido: " + this.toString());
+			Logueador.getInstance().logTransaction(this);
+			Logueador.getInstance().loguearDebug("Se efectivizo el pedido: " + this.toString());
 		} catch (PiezaException e) {
 			throw new EfectivizacionDePedidoException(this, e);
 		}
@@ -86,7 +86,7 @@ public class Pedido extends PersistentObject {
 	public Pedido addPieza(Pieza pieza) {
 		pieza.reservar();
 		this.piezas.add(pieza);
-		Logueador.getInstancia().loguearDebug(
+		Logueador.getInstance().loguearDebug(
 				"Se agrego la pieza: " + pieza.toString() + " al pedido: " + this.toString());
 		return this;
 	}
@@ -96,7 +96,7 @@ public class Pedido extends PersistentObject {
 	 */
 	public void addPiezas(List<Pieza> piezas) {
 		for (Pieza pieza : piezas) {
-			Logueador.getInstancia().loguearDebug(
+			Logueador.getInstance().loguearDebug(
 					"Se agrego la pieza: " + pieza.toString() + " al pedido: " + this.toString());
 			this.addPieza(pieza);
 		}
