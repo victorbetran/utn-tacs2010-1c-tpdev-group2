@@ -1,6 +1,5 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
@@ -12,7 +11,43 @@
 	<bean name="piezaService" class="org.utn.tacs.tp.group2.service.PiezaServiceImpl">
 		<property name="piezaDAO" ref="piezaDAO" />
 	</bean>
-	
-	<bean name="piezaDAO" class="org.utn.tacs.tp.group2.daos.implementations.PiezaDAOImpl"/>
+
+	<bean name="piezaDAO"
+		class="org.utn.tacs.tp.group2.daos.implementations.PiezaDAOImpl" />
+
+
+	<bean id="defaultSessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="defaultDataSource" />
+		<!--		<property name="mappingResources">-->
+		<!--			<list>-->
+		<!--				 Agregar los mappings necesarios -->
+		<!--				<value>com/dosideas/domain/map/Invasor.hbm.xml</value>-->
+		<!--			</list>-->
+		<!--		</property>-->
+		<property name="annotatedClasses">
+			<list>
+				<value>org.utn.tacs.tp.group2.pedido.Pedido</value>
+				<value>org.utn.tacs.tp.group2.pedido.EstadoPedido</value>
+				<value>org.utn.tacs.tp.group2.pieza.Pieza</value>
+				<value>org.utn.tacs.tp.group2.pieza.EstadoPieza</value>
+				<value>org.utn.tacs.tp.group2.pieza.Auto</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</prop>
+				<prop key="hibernate.connection.url">jdbc:hsqldb:file:db/tp-group2-db;shutdown=true</prop>
+				<prop key="hibernate.connection.username">sa</prop>
+				<prop key="hibernate.connection.password"></prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+				<prop key="hibernate.connection.pool_size">3</prop>
+				<prop key="show_sql">true</prop>
+				<prop key="hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+
+
 
 </beans>
