@@ -10,7 +10,7 @@ import org.utn.tacs.tp.group2.pedido.Pedido;
 public abstract class PedidoDAO extends AbstractDao<Pedido> {
 
 	private static PedidoDAO instance = null;
-
+	
 	public static PedidoDAO getInstance() {
 		if (instance == null) {
 			instance = new PedidoDAOImpl();
