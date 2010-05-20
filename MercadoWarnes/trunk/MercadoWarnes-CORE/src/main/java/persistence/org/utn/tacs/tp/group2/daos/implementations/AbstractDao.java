@@ -22,8 +22,8 @@ public abstract class AbstractDao<T> extends HibernateDaoSupport{
     }
     
 	public void save(T t) {
-		getSession().save(t);
-//		getHibernateTemplate().save(t);
+		//getSession().save(t);
+		getHibernateTemplate().save(t);
 	}	
 
 	public void remove(T t) {
