@@ -27,8 +27,7 @@ public class SessionProvider {
 	            session = sessionFactory.openSession();
 			}
 	        catch (Exception e) {
-	        	// TODO: Apesta esto!, mal!
-	            e.printStackTrace();
+	        	throw new RuntimeException("No se puede crear un session.");
 	        }
 		}
 		return session;
