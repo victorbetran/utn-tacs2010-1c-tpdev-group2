@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.transaction.annotation.Transactional;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
@@ -38,6 +39,7 @@ public class ConsultaDePiezasTest extends PiezaTest {
 		
 	}
 
+	@Transactional
 	@Test
 	public void consultarPiezaPorIDTest() {
 		Pieza piezaObtenidoConDao = dao.findByID(piezaPersistida1.getId());
@@ -47,6 +49,7 @@ public class ConsultaDePiezasTest extends PiezaTest {
 	/**
 	 * Consulta una pieza existente en la BD por su Codigo
 	 */
+	@Transactional
 	@Test
 	public void consultarUnaPiezaPorCodigo() {
 		Assert.assertEquals("La Pieza persistida no coincide con la accedida.", piezaPersistida1.getId(), dao.findByCodigo("PIEZA1").getId());
@@ -62,7 +65,7 @@ public class ConsultaDePiezasTest extends PiezaTest {
 		
 		assertList(this.dao.findByCategoria("PREMIUM"), this.piezaPersistida1,this.piezaPersistida2);
 	}
-
+	
 	/**
 	 * Consulta una pieza segun el auto a la que pertenece.
 	 */

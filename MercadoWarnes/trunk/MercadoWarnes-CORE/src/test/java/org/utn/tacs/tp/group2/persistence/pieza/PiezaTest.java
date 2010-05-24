@@ -13,13 +13,8 @@ public abstract class PiezaTest extends DataBaseHandler<Pieza>{
 	protected PiezaDAO dao = (PiezaDAO) applicationContext.getBean("piezaDAO");
 	
 	@Override
-	public void setUp() {
-		super.setUp();
-	}
-	
-	@Override
 	protected AbstractDao<Pieza> getDao() {
-		return PiezaDAO.getInstance();
+		return dao;
 	}
 	
 }

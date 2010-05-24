@@ -5,41 +5,61 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.utn.tacs.tp.group2.persistence.PersistentObject;
 
-public abstract class AbstractDao<T> extends HibernateDaoSupport{
+public abstract class AbstractDao<T extends PersistentObject> extends HibernateDaoSupport{
 
     //********************************************
 	//** UTIL METHODS
 	//********************************************
     
-//    protected Session getSession(){
-//    	return SessionProvider.getInstance().getSession();
+//    protected Session this.currentSession{
+//    	return SessionProvider.getInstance().this.currentSession;
 //    }
 
+	private Transaction currentTransaction;
+	private Session currentSession;
+	public void beginTransaction() {
+//		this.currentTransaction = getSessionFactory().openSession().beginTransaction();
+		this.currentSession = getSessionFactory().openSession();
+		this.currentTransaction = this.currentSession.beginTransaction();
+	}
+	
+	public void commitTransaction(){
+		this.currentTransaction.commit();
+		this.currentSession.flush();
+		this.currentSession.close();
+	}
+	
+	public void rollbackTransaction(){
+		this.currentTransaction.rollback();
+	}
+	
     protected QueryHandler<T> getQueryHandler(){
-    	return new QueryHandler<T>(getSession());
+    	return new QueryHandler<T>(this.currentSession);
     }
     
 	public void save(T t) {
-		//getSession().save(t);
-		getHibernateTemplate().save(t);
+//		getHibernateTemplate().save(t);
+		this.currentSession.save(t);
 	}	
 
 	public void remove(T t) {
 //		getHibernateTemplate().delete(t);
-		getSession().delete(t);
+		this.currentSession.delete(t);
 	}
 
 	public Boolean isPersisted(T t) {
-		return getSession().contains(t);
-//		return isPersisted(t);
+//		return getHibernateTemplate().get(getGenericClass(), t.getId()) != null;
+		return this.currentSession.get(getGenericClass(), t.getId()) != null;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public T findByID(final Long id) {
-		return (T) getSession().load(getGenericClass(), id);
-//		return (T) getHibernateTemplate().load(getGenericClass(), id);
+		return (T) this.currentSession.load(getGenericClass(), id);
+//		return (T) getHibernateTemplate().get(getGenericClass(), id);
 	}
     
 	//********************************************
