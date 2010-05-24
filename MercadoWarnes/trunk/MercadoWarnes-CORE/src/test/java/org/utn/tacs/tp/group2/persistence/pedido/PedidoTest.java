@@ -19,7 +19,7 @@ public abstract class PedidoTest extends DataBaseHandler<Pedido>{
 	
 	@Override
 	protected AbstractDao<Pedido> getDao() {
-		return PedidoDAO.getInstance();
+		return dao;
 	}
 	
 }

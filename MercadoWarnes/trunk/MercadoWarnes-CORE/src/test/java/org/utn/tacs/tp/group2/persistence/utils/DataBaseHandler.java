@@ -4,8 +4,9 @@ import org.hibernate.Transaction;
 import org.junit.After;
 import org.junit.Before;
 import org.utn.tacs.tp.group2.daos.implementations.AbstractDao;
+import org.utn.tacs.tp.group2.persistence.PersistentObject;
 
-public abstract class DataBaseHandler<T> {
+public abstract class DataBaseHandler<T extends PersistentObject> {
 
 	Transaction transaction;
 //	private Session session;
@@ -14,7 +15,10 @@ public abstract class DataBaseHandler<T> {
 //		((HibernateDaoSupport)getDao()).
 //		session = SessionProvider.getInstance().getSession();
 //		transaction = session.beginTransaction();
-//		transaction = getDao().getSessionFactory().getCurrentSession().beginTransaction();
+//		getDao().getSessionFactory().openSession();
+//		transaction = getDao().getSessionFactory().getCurrentSession().getTransaction();
+//		getDao().getSessionFactory().getCurrentSession().beginTransaction();
+		getDao().beginTransaction();
 	}
 
 	@After
@@ -22,6 +26,8 @@ public abstract class DataBaseHandler<T> {
 //		transaction.rollback();
 //		SessionProvider.getInstance().killSession();
 //		transaction.rollback();
+//		getDao().getSessionFactory().getCurrentSession().getTransaction().rollback();
+		getDao().rollbackTransaction();
 	}
 
 	protected abstract AbstractDao<T> getDao();

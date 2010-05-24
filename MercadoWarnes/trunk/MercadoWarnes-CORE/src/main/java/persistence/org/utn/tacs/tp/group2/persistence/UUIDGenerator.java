@@ -13,7 +13,7 @@ public class UUIDGenerator {
 	}
 
 	public Long getId() {
-		return new Long(UUID.randomUUID().hashCode());
+		return new Long(Math.abs(UUID.randomUUID().hashCode()));
 	}
 	
 }
