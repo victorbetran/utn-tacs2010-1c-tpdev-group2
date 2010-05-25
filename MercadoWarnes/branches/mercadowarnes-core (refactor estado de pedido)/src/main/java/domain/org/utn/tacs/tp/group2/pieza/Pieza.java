@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.utn.tacs.tp.group2.log.Logueador;
@@ -22,7 +22,7 @@ public class Pieza extends PersistentObject {
 	@Column(length = 10)
 	private String codigo;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@Embedded
 	private EstadoPieza estado;
 
 	@Column(length = 128)
