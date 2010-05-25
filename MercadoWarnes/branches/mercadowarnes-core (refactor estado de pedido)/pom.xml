@@ -1,0 +1,121 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.utn.tacs.tp.group2</groupId>
+  <artifactId>mercadowarnes-core</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>MercadoWarnes-CORE</name>
+  <url>http://maven.apache.org</url>
+  
+  <dependencies>
+  
+  	<!-- LOGUEO -->
+  	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-api</artifactId>
+		<version>1.6.0-alpha2</version>
+	</dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-log4j12</artifactId>
+		<version>1.6.0</version>
+	</dependency>
+  	<!-- END LOGUEO -->
+  	
+    <!-- TESTING -->
+    <dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.8.1</version>
+		<scope>test</scope>
+    </dependency>
+    <dependency>
+		<groupId>org.easymock</groupId>
+		<artifactId>easymockclassextension</artifactId>
+		<version>2.5.2</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>hsqldb</groupId>
+		<artifactId>hsqldb</artifactId>
+		<version>1.8.0.7</version>
+		<type>jar</type>
+		<scope>compile</scope>
+	</dependency>
+    <!-- END TESTING -->
+    
+    <!-- HIBERNATE -->
+    <dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate</artifactId>
+		<version>3.2.6.ga</version>
+		<scope>compile</scope>
+    </dependency>
+    <dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-annotations</artifactId>
+		<version>3.3.1.GA</version>
+		<scope>compile</scope>
+	</dependency>
+	<dependency>
+		<groupId>javax.transaction</groupId>
+		<artifactId>jta</artifactId>
+		<version>1.1</version>
+		<scope>compile</scope>
+    </dependency>
+    <dependency>
+		<groupId>javax.persistence</groupId>
+		<artifactId>persistence-api</artifactId>
+		<version>1.0</version>
+    </dependency>
+    <!-- END HIBERNATE -->
+    
+    <!-- SPRING -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring</artifactId>
+		<version>2.5.6</version>
+	</dependency>
+	<dependency>
+		<groupId>commons-dbcp</groupId>
+		<artifactId>commons-dbcp</artifactId>
+		<version>1.2.1</version>
+	</dependency>
+	<!-- END SPRING -->
+    
+  </dependencies>
+  
+  <build>
+  	<sourceDirectory>src/main/java/domain</sourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+     <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+				<source>src/main/java/persistence</source>
+				<source>src/main/java/domain</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
