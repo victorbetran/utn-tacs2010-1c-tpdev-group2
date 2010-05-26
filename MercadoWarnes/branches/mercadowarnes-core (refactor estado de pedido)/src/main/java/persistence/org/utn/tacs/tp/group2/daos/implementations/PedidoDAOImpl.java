@@ -10,7 +10,7 @@ public class PedidoDAOImpl extends PedidoDAO {
 
 	@Override
 	public List<Pedido> findByEstado(EstadoPedido estado) {
-		return getQueryHandler().setBody("from Pedido as pedido inner join fetch pedido.estado WHERE pedido.estado = :est")
+		return getQueryHandler().setBody("from Pedido as pedido WHERE pedido.estado = :est")
 								.addParameter("est", estado)
 								.getResults();
 	}
