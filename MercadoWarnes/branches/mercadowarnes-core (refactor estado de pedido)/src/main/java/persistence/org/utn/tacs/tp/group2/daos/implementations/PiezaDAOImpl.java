@@ -33,7 +33,7 @@ public class PiezaDAOImpl extends PiezaDAO{
 
 	@Override
 	public List<Pieza> findByEstado(EstadoPieza estado) {
-		return getQueryHandler().setBody("from Pieza as pieza inner join fetch pieza.estado WHERE pieza.estado = :est")
+		return getQueryHandler().setBody("from Pieza as pieza WHERE pieza.estado = :est")
 								.addParameter("est", estado)
 								.getResults();
 	}
