@@ -6,6 +6,11 @@ import javax.persistence.Embeddable;
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoCanceladoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoEfectivizadoException;
 
+/**
+ * Clase que representa el estado de un pedido. Existen 3 estado posible: En curso,
+ * Efectivo, Cancelado.
+ */
+
 @Embeddable
 public class EstadoPedido {
 
@@ -16,11 +21,19 @@ public class EstadoPedido {
 	@Column(name="ESTADO")
 	private String descripcion;
 	
-	public EstadoPedido() {}
+	/**
+	 * Hibernate Constructor.
+	 */
+	public EstadoPedido() {
+	}
 	
 	private EstadoPedido(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
+	// ********************************************
+	// ** FACTORY METHODS
+	// ********************************************
 
 	public static EstadoPedido getEnCurso(){
 		return EN_CURSO;
@@ -33,6 +46,10 @@ public class EstadoPedido {
 	public static EstadoPedido getCancelado(){
 		return CANCELADO;
 	}
+	
+	//********************************************
+	//** INTERFAZ DE TRANSICION DE ESTADOS
+	//********************************************
 	
 	public void gotoEnCurso(Pedido pedido){
 		if(isCancelado()) throw new PedidoCanceladoException(pedido);
@@ -53,6 +70,10 @@ public class EstadoPedido {
 		pedido.setEstado(EFECTIVO);
 	}
 
+	//********************************************
+	//** INTERFAZ DE NOTIFICACION DE ESTADO
+	//********************************************
+	
 	public boolean isCancelado(){
 		return this == CANCELADO;
 	}
@@ -64,6 +85,10 @@ public class EstadoPedido {
 	public boolean isEnCurso(){
 		return this == EN_CURSO;
 	}
+	
+	//********************************************
+	//** VARIOS
+	//********************************************
 	
 	public String getDescripcion() {
 		return this.descripcion;
@@ -81,4 +106,5 @@ public class EstadoPedido {
 		EstadoPedido estado = (EstadoPedido)obj;
 		return this.descripcion.equals(estado.descripcion);
 	}
+
 }

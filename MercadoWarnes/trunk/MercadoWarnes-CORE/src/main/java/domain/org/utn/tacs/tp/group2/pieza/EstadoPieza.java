@@ -8,7 +8,7 @@ import org.utn.tacs.tp.group2.exceptions.pieza.PiezaReservadaException;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaVendidaException;
 
 /**
- * Clase abstracta que representa el estado de una pieza. Existen 3 estado posible: Disponible,
+ * Clase que representa el estado de una pieza. Existen 3 estado posible: Disponible,
  * Reservada, Vendida.
  */
 
@@ -22,7 +22,11 @@ public class EstadoPieza {
 	@Column(name="ESTADO")
 	private String descripcion;
 	
-	public EstadoPieza() {}
+	/**
+	 * Hibernate Constructor.
+	 */
+	public EstadoPieza() {
+	}
 	
 	private EstadoPieza(String descripcion) {
 		this.descripcion = descripcion;
@@ -32,13 +36,21 @@ public class EstadoPieza {
 	// ** FACTORY METHODS
 	// ********************************************
 
-	public static EstadoPieza getEstadoDisponible() { return DISPONIBLE; }
+	public static EstadoPieza getEstadoDisponible() { 
+		return DISPONIBLE;
+	}
 
-	public static EstadoPieza getEstadoReservada() { return RESERVADA; }
+	public static EstadoPieza getEstadoReservada() { 
+		return RESERVADA;
+	}
 
-	public static EstadoPieza getEstadoVendida() { return VENDIDA; }
+	public static EstadoPieza getEstadoVendida() { 
+		return VENDIDA;
+	}
 	
-	
+	//********************************************
+	//** INTERFAZ DE TRANSICION DE ESTADOS
+	//********************************************
 	
 	/**
 	 * Setea el estado de la pieza a <b>DISPONIBLE</b>. Una pieza no puede pasar a estar disponible
@@ -70,6 +82,10 @@ public class EstadoPieza {
 		return VENDIDA;
 	}
 
+	//********************************************
+	//** INTERFAZ DE NOTIFICACION DE ESTADO
+	//********************************************
+	
 	/**
 	 * Informa si la pieza est� disponible.
 	 */
@@ -91,6 +107,10 @@ public class EstadoPieza {
 		return this == VENDIDA;
 	}
 
+	//********************************************
+	//** VARIOS
+	//********************************************
+	
 	public String getDescripcion() {
 		return this.descripcion;
 	}
@@ -98,6 +118,13 @@ public class EstadoPieza {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
 
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null || !(obj instanceof EstadoPieza)) return false;
+		if(obj == this) return true;
+		EstadoPieza estado = (EstadoPieza)obj;
+		return this.descripcion.equals(estado.descripcion);
+	}
+	
 }
