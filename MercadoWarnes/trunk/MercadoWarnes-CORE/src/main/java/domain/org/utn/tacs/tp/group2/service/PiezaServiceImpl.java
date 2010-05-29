@@ -1,6 +1,6 @@
 package org.utn.tacs.tp.group2.service;
 
-import org.utn.tacs.tp.group2.daos.interfaces.DAOPiezaIf;
+import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 /**
@@ -8,7 +8,7 @@ import org.utn.tacs.tp.group2.pieza.Pieza;
  */
 public class PiezaServiceImpl implements PiezaService {
 
-	private DAOPiezaIf piezaDAO;
+	private PiezaDAO piezaDAO;
 
 	public Pieza newPieza() {
 		Pieza pieza = new Pieza();
@@ -17,18 +17,23 @@ public class PiezaServiceImpl implements PiezaService {
 	}
 
 	public void deletePieza(Pieza pieza) {
-		piezaDAO.delete(pieza);
+		piezaDAO.remove(pieza);
+	}
+	
+	public Pieza loadPiezaById(Long id) {
+		return piezaDAO.findByID(id);
 	}
 
 	// ********************************************
 	// ** GETTERS & SETTERS
 	// ********************************************
-	public void setPiezaDAO(DAOPiezaIf piezaDAO) {
+	public void setPiezaDAO(PiezaDAO piezaDAO) {
 		this.piezaDAO = piezaDAO;
 	}
 
-	public DAOPiezaIf getPiezaDAO() {
+	public PiezaDAO getPiezaDAO() {
 		return piezaDAO;
 	}
+
 
 }
