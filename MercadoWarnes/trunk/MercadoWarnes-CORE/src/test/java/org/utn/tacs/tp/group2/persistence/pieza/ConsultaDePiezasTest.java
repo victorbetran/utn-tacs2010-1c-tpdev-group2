@@ -3,13 +3,21 @@ package org.utn.tacs.tp.group2.persistence.pieza;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
-public class ConsultaDePiezasTest extends PiezaTest {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"classpath:applicationContext.xml"})
+public class ConsultaDePiezasTest {
 
 	private Pieza piezaPersistida1;
 	private Pieza piezaPersistida2;
@@ -17,9 +25,11 @@ public class ConsultaDePiezasTest extends PiezaTest {
 	private Auto auto1;
 	private Auto auto2;
 
-	@Override
+	@Autowired()
+	private PiezaDAO dao;
+	
+	@Before
 	public void setUp() {
-		super.setUp();
 
 		this.piezaPersistida1 = new Pieza("PIEZA1");
 		this.dao.save(this.piezaPersistida1);
@@ -39,8 +49,8 @@ public class ConsultaDePiezasTest extends PiezaTest {
 		
 	}
 
-	@Transactional
 	@Test
+	@Transactional
 	public void consultarPiezaPorIDTest() {
 		Pieza piezaObtenidoConDao = dao.findByID(piezaPersistida1.getId());
 		Assert.assertEquals("La Pieza persistida no coincide con la accedida.", piezaPersistida1,piezaObtenidoConDao);
@@ -49,8 +59,8 @@ public class ConsultaDePiezasTest extends PiezaTest {
 	/**
 	 * Consulta una pieza existente en la BD por su Codigo
 	 */
-	@Transactional
 	@Test
+	@Transactional
 	public void consultarUnaPiezaPorCodigo() {
 		Assert.assertEquals("La Pieza persistida no coincide con la accedida.", piezaPersistida1.getId(), dao.findByCodigo("PIEZA1").getId());
 	}
@@ -59,6 +69,7 @@ public class ConsultaDePiezasTest extends PiezaTest {
 	 * Consulta piezas segun una categoria.
 	 */
 	@Test
+	@Transactional
 	public void consultarPiezasPorCategoria() {
 		this.piezaPersistida1.setCategoria("PREMIUM");
 		this.piezaPersistida2.setCategoria("PREMIUM");
@@ -70,6 +81,7 @@ public class ConsultaDePiezasTest extends PiezaTest {
 	 * Consulta una pieza segun el auto a la que pertenece.
 	 */
 	@Test
+	@Transactional
 	public void consultarPiezaPorAuto(){
 		this.piezaPersistida1.setAutoOrigen(auto1);
 		this.piezaPersistida2.setAutoOrigen(auto2);
@@ -81,6 +93,7 @@ public class ConsultaDePiezasTest extends PiezaTest {
 	 * Consulta un conjunto de piezas segun el auto a la que pertenecen.
 	 */
 	@Test
+	@Transactional
 	public void consultarPiezasPorAuto(){
 		this.piezaPersistida1.setAutoOrigen(auto1);
 		this.piezaPersistida2.setAutoOrigen(auto1);
@@ -92,6 +105,7 @@ public class ConsultaDePiezasTest extends PiezaTest {
 	 * Consulta las piezas disponibles.
 	 */
 	@Test
+	@Transactional
 	public void consultarPiezasDisponibles() {
 		assertList(this.dao.findByEstado(EstadoPieza.getEstadoDisponible()), this.piezaPersistida1, this.piezaPersistida2);
 	}
@@ -100,6 +114,7 @@ public class ConsultaDePiezasTest extends PiezaTest {
 	 * Consulta las piezas reservadas.
 	 */
 	@Test
+	@Transactional
 	public void consultarPiezasReservadas() {
 		this.piezaPersistida1.reservar();
 		this.piezaPersistida2.reservar();
@@ -111,6 +126,7 @@ public class ConsultaDePiezasTest extends PiezaTest {
 	 * Consulta las piezas vendidas.
 	 */
 	@Test
+	@Transactional
 	public void consultarPiezasVendidas() {
 		this.piezaPersistida1.reservar();
 		this.piezaPersistida1.vender();
