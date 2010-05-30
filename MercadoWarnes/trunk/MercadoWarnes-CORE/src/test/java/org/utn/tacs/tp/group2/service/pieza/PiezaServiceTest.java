@@ -27,7 +27,7 @@ public class PiezaServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		piezaService.getPiezaDAO().beginTransaction();
+//		piezaService.getPiezaDAO().beginTransaction();
 		pieza1 = new Pieza("PIEZA 1");
 		pieza1.setCategoria("PREMIUM");
 		
@@ -102,7 +102,7 @@ public class PiezaServiceTest {
 	@After
 	public void tearDown() throws Exception {
 		// List<Pieza> piezas = piezaDAO.loadAll();
-		piezaService.getPiezaDAO().rollbackTransaction();
+//		piezaService.getPiezaDAO().rollbackTransaction();
 		// piezaDAO.deleteAll();
 	}
 

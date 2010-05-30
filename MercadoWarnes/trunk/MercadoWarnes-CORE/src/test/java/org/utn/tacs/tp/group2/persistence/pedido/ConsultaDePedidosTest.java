@@ -3,21 +3,32 @@ package org.utn.tacs.tp.group2.persistence.pedido;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
-public class ConsultaDePedidosTest extends PedidoTest {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"classpath:applicationContext.xml"})
+public class ConsultaDePedidosTest {
 
+	@Autowired
+	private PedidoDAO dao;
+	
 	Pedido pedidoPersistido1;
 	Pedido pedidoPersistido2;
 
 	Pedido pedidoPersistidoCancelado1;
 	Pedido pedidoPersistidoCancelado2;
 
-	@Override
+	@Before
 	public void setUp() {
-		super.setUp();
 
 		this.pedidoPersistido1 = new Pedido();
 		this.dao.save(this.pedidoPersistido1);
@@ -34,6 +45,7 @@ public class ConsultaDePedidosTest extends PedidoTest {
 	 * Consulta un pedido existente en la BD por su ID
 	 */
 	@Test
+	@Transactional
 	public void consultarPedidoPorIDTest() {
 		Pedido pedidoFromDao = dao.findByID(pedidoPersistido1.getId());
 		Assert.assertEquals("El Pedido persistido no coincide con el accedido.", pedidoPersistido1,	pedidoFromDao);
@@ -43,6 +55,7 @@ public class ConsultaDePedidosTest extends PedidoTest {
 	 * Consulta pedidos que tiene de estado en curso.
 	 */
 	@Test
+	@Transactional
 	public void consultarPedidosEnCurso() {
 		assertList(dao.findByEstado(EstadoPedido.getEnCurso()), this.pedidoPersistido1,this.pedidoPersistido2);
 	}
@@ -51,6 +64,7 @@ public class ConsultaDePedidosTest extends PedidoTest {
 	 * Consulta pedidos que tiene de estado cancelado.
 	 */
 	@Test
+	@Transactional
 	public void consultarPedidosPorEstadoCancelado() {
 		this.pedidoPersistido1.cancelar();
 		this.pedidoPersistido2.cancelar();
@@ -61,6 +75,7 @@ public class ConsultaDePedidosTest extends PedidoTest {
 	 * Consulta pedidos que tiene de estado efectivo.
 	 */
 	@Test
+	@Transactional
 	public void consultarPedidosPorEstadoEfectivo() {
 		List<Pedido> pedidos = dao.findByEstado(EstadoPedido.getEfectivo());
 		Assert.assertEquals(0, pedidos.size());
