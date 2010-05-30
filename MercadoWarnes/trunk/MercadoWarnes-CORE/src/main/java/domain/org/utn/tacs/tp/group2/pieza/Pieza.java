@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.utn.tacs.tp.group2.log.Logueador;
+import org.utn.tacs.tp.group2.log.TheLogger;
 import org.utn.tacs.tp.group2.persistence.PersistentObject;
 
 @Entity
@@ -43,7 +43,7 @@ public class Pieza extends PersistentObject {
 	public Pieza(String codigo) {
 		this.estado = EstadoPieza.getEstadoDisponible();
 		this.codigo = codigo;
-		Logueador.getInstance().loguearDebug("Se creo la pieza: " + this.toString());
+		TheLogger.getConsoleLogger().debug("Se crea la pieza:{}", this);
 	}
 
 	public Pieza(){
@@ -58,7 +58,7 @@ public class Pieza extends PersistentObject {
 	 */
 	public Pieza disponibilizar() {
 		this.setEstado(this.estado.gotoDisponible(this));
-		Logueador.getInstance().loguearDebug("Se puso disponible la pieza: " + this.toString());
+		TheLogger.getConsoleLogger().debug("Se disponibiliza la pieza:{}", this);
 		return this;
 	}
 
@@ -67,7 +67,7 @@ public class Pieza extends PersistentObject {
 	 */
 	public Pieza reservar() {
 		this.setEstado(this.estado.gotoReservada(this));
-		Logueador.getInstance().loguearDebug("Se reservo la pieza: " + this.toString());
+		TheLogger.getConsoleLogger().debug("Se reserva la pieza:{}", this);
 		return this;
 	}
 
@@ -76,7 +76,7 @@ public class Pieza extends PersistentObject {
 	 */
 	public Pieza vender() {
 		this.setEstado(this.estado.gotoVendida(this));
-		Logueador.getInstance().loguearDebug("Se vendio la pieza: " + this.toString());
+		TheLogger.getConsoleLogger().debug("Se vende la pieza:{}", this);
 		return this;
 	}
 

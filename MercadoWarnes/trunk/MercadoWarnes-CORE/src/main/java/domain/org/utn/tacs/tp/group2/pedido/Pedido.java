@@ -13,7 +13,7 @@ import org.utn.tacs.tp.group2.exceptions.pedido.CancelacionDePedidoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.EfectivizacionDePedidoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoSinPiezasException;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaException;
-import org.utn.tacs.tp.group2.log.Logueador;
+import org.utn.tacs.tp.group2.log.TheLogger;
 import org.utn.tacs.tp.group2.persistence.PersistentObject;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
@@ -40,8 +40,7 @@ public class Pedido extends PersistentObject {
 	public Pedido() {
 		this.piezas = new ArrayList<Pieza>();
 		this.estado = EstadoPedido.getEnCurso();
-		Logueador.getInstance().logTransaction(this);
-		Logueador.getInstance().loguearDebug("Se creo el pedido: " + this.toString());
+		TheLogger.getConsoleLogger().debug("Se crea el pedido:{}", this);
 	}
 
 	// ********************************************
@@ -54,9 +53,9 @@ public class Pedido extends PersistentObject {
 		try {
 			this.disponibilizarPiezas();
 			this.estado.gotoCancelado(this);
-			Logueador.getInstance().logTransaction(this);
-			Logueador.getInstance().loguearDebug("Se cancelo el pedido: " + this.toString());
+			TheLogger.cambioDeEstadoLog(this);
 		} catch (PiezaException e) {
+			TheLogger.getConsoleLogger().debug("No se pudo cancelar el pedido:{}", this);
 			throw new CancelacionDePedidoException(this, e);
 		}
 	}
@@ -68,8 +67,7 @@ public class Pedido extends PersistentObject {
 		try {
 			this.venderPiezas();
 			this.estado.gotoEfectivo(this);
-			Logueador.getInstance().logTransaction(this);
-			Logueador.getInstance().loguearDebug("Se efectivizo el pedido: " + this.toString());
+			TheLogger.cambioDeEstadoLog(this);
 		} catch (PiezaException e) {
 			throw new EfectivizacionDePedidoException(this, e);
 		}
@@ -86,8 +84,7 @@ public class Pedido extends PersistentObject {
 	public Pedido addPieza(Pieza pieza) {
 		pieza.reservar();
 		this.piezas.add(pieza);
-		Logueador.getInstance().loguearDebug(
-				"Se agrego la pieza: " + pieza.toString() + " al pedido: " + this.toString());
+		TheLogger.getConsoleLogger().debug("Se agrego la pieza:{} al pedido:{}", pieza, this);
 		return this;
 	}
 
@@ -96,8 +93,7 @@ public class Pedido extends PersistentObject {
 	 */
 	public void addPiezas(List<Pieza> piezas) {
 		for (Pieza pieza : piezas) {
-			Logueador.getInstance().loguearDebug(
-					"Se agrego la pieza: " + pieza.toString() + " al pedido: " + this.toString());
+			TheLogger.getConsoleLogger().debug("Se agrego la pieza:{} al pedido:{}", pieza, this);
 			this.addPieza(pieza);
 		}
 	}
