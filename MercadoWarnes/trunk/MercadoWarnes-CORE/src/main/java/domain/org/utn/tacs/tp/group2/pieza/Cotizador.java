@@ -8,7 +8,7 @@ public class Cotizador {
 	// ** ATRIBUTTES
 	// ********************************************
 	private static Cotizador instancia;
-	private double dolaresAPesos=3.90;
+	private double cotizacionDolaresAPesos=3.90;
 	
 	
 	// ********************************************
@@ -25,23 +25,23 @@ public class Cotizador {
 		
 	public double getEnDolares(BigDecimal pesos)
 	{
-		return pesos.longValue() / this.dolaresAPesos;
+		return pesos.longValue() / this.cotizacionDolaresAPesos;
 	}
 	public double getEnPesos(BigDecimal dolares)
 	{
-		return dolares.longValue() * this.dolaresAPesos;
+		return dolares.longValue() * this.cotizacionDolaresAPesos;
 	}
 
 	
 	// ********************************************
 	// ** GETTERS & SETTERS
 	// ********************************************
-	public double getDolaresAPesos() {
-		return dolaresAPesos;
+	public double getCotizacionDolaresAPesos() {
+		return cotizacionDolaresAPesos;
 	}
 
-	public void setDolaresAPesos(double dolaresAPesos) {
-		this.dolaresAPesos = dolaresAPesos;
+	public void setCotizacionDolaresAPesos(double dolaresAPesos) {
+		this.cotizacionDolaresAPesos = dolaresAPesos;
 	}
 	
 	
