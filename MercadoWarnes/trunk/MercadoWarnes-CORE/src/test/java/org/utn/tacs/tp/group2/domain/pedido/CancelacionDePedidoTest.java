@@ -1,5 +1,7 @@
 package org.utn.tacs.tp.group2.domain.pedido;
 
+import java.math.BigDecimal;
+
 import junit.framework.Assert;
 
 import org.junit.Before;
@@ -7,14 +9,16 @@ import org.junit.Test;
 import org.utn.tacs.tp.group2.exceptions.pedido.CancelacionDePedidoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoCanceladoException;
 import org.utn.tacs.tp.group2.pedido.Pedido;
+import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
+import org.utn.tacs.tp.group2.pieza.Precio;
 
 public class CancelacionDePedidoTest {
 	
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
-	private Pedido pedido;
+	private Pedido pedido;	
 	
 	
 	//********************************************
@@ -22,7 +26,8 @@ public class CancelacionDePedidoTest {
 	//********************************************
 	@Before
 	public void setUp(){
-		this.pedido = new Pedido();
+		this.pedido = new Pedido();		
+		
 	}
 
 	
@@ -42,8 +47,8 @@ public class CancelacionDePedidoTest {
 	 * Cancela un pedido que fue efectifizado, es decir, un pedido <b>EFECTIVO</b>.
 	 */
 	@Test (expected=CancelacionDePedidoException.class)
-	public void cancelarUnPedidoEfectivo(){
-		this.pedido.addPieza(new Pieza("Z-456"));
+	public void cancelarUnPedidoEfectivo(){		
+		this.pedido.addPieza(new Pieza("Z-456",new BigDecimal(30),Moneda.Dolares));
 		this.pedido.efectivizar();
 		this.pedido.cancelar();
 	}

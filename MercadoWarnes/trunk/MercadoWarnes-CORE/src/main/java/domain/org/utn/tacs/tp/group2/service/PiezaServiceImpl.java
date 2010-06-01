@@ -1,10 +1,12 @@
 package org.utn.tacs.tp.group2.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
+import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 /**

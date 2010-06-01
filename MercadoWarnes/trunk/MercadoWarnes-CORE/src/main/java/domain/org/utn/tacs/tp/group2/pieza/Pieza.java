@@ -34,15 +34,16 @@ public class Pieza extends PersistentObject {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Auto autoOrigen;
 
-	@Column
-	private BigDecimal precio;
+	@Embedded
+	private Precio precio;
 
 	// ********************************************
 	// ** PUBLIC CONSTRUCTOR
 	// ********************************************
-	public Pieza(String codigo) {
+	public Pieza(String codigo,BigDecimal precio,Moneda moneda) {
 		this.estado = EstadoPieza.getEstadoDisponible();
 		this.codigo = codigo;
+		this.precio=new Precio(moneda,precio);
 		TheLogger.getConsoleLogger().debug("Se crea la pieza:{}", this);
 	}
 
@@ -186,14 +187,7 @@ public class Pieza extends PersistentObject {
 		return this;
 	}
 
-	public BigDecimal getPrecio() {
-		return this.precio;
-	}
 
-	public Pieza setPrecio(BigDecimal precio) {
-		this.precio = precio;
-		return this;
-	}
 	public EstadoPieza getEstado() {
 		return this.estado;
 	}

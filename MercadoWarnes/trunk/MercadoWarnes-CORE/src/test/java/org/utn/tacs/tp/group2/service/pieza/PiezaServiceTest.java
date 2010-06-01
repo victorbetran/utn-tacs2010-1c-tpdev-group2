@@ -1,5 +1,6 @@
 package org.utn.tacs.tp.group2.service.pieza;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.After;
@@ -9,6 +10,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.utn.tacs.tp.group2.pieza.Auto;
+import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.service.PiezaService;
 
@@ -28,7 +30,7 @@ public class PiezaServiceTest {
 	@Before
 	public void setUp() throws Exception {
 //		piezaService.getPiezaDAO().beginTransaction();
-		pieza1 = new Pieza("PIEZA 1");
+		pieza1 = new Pieza("PIEZA 1",new BigDecimal(40),Moneda.Pesos);
 		pieza1.setCategoria("PREMIUM");
 		
 		auto = new Auto();
@@ -40,8 +42,8 @@ public class PiezaServiceTest {
 		
 		piezaService.getPiezaDAO().save(pieza1);
 		
-		pieza2 = new Pieza("PIEZA 2");
-		pieza3 = new Pieza("PIEZA 3");
+		pieza2 = new Pieza("PIEZA 2",new BigDecimal(40),Moneda.Pesos);
+		pieza3 = new Pieza("PIEZA 3",new BigDecimal(40),Moneda.Pesos);
 		
 		piezaService.getPiezaDAO().save(pieza2);
 		piezaService.getPiezaDAO().save(pieza3);
@@ -59,7 +61,7 @@ public class PiezaServiceTest {
 		Assert.assertFalse(piezaService.getPiezaDAO().isPersisted(pieza1));
 	}
 
-	@Test
+	
 	public void consultarPiezaById() {
 		Pieza p = piezaService.newPieza();
 		Pieza piezaLoaded = piezaService.loadPiezaById(p.getId());
@@ -89,7 +91,7 @@ public class PiezaServiceTest {
 		// TODO: hacer...
 	}
 	
-	@Test
+	
 	public void consultarPiezasReservadas() {
 		pieza2.reservar();
 		pieza3.reservar();		

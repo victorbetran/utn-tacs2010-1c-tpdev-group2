@@ -1,6 +1,7 @@
 package org.utn.tacs.tp.group2.domain.pieza;
 
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaNoReservadaException;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaVendidaException;
+import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class PiezaTest {
@@ -19,12 +21,12 @@ public class PiezaTest {
 	
 	@Before
 	public void setUp() {
-		this.pieza = new Pieza("L-963");		
+		this.pieza = new Pieza("L-963",new BigDecimal(40),Moneda.Pesos);		
 		this.listadoDePiezas = new ArrayList<Pieza>();
 		
 		//Agrego 10 piezas a la lista de piezas
 		for (int i = 0; i < 10; i++) {
-			this.listadoDePiezas.add(new Pieza("V-546"));
+			this.listadoDePiezas.add(new Pieza("V-546",new BigDecimal(50),Moneda.Dolares));
 		}
 	}
 	

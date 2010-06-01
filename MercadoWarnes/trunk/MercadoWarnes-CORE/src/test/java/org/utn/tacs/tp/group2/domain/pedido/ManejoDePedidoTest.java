@@ -1,11 +1,14 @@
 package org.utn.tacs.tp.group2.domain.pedido;
 
 
+import java.math.BigDecimal;
+
 import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.utn.tacs.tp.group2.pedido.Pedido;
+import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class ManejoDePedidoTest {
@@ -19,9 +22,9 @@ public class ManejoDePedidoTest {
 	public void setUp(){
 		this.pedido = new Pedido();
 		
-		this.pieza1 = new Pieza("A-123");
-		this.pieza2 = new Pieza("B-369");
-		this.pieza3 = new Pieza("C-147");
+		this.pieza1 = new Pieza("A-123",new BigDecimal(30),Moneda.Dolares);
+		this.pieza2 = new Pieza("B-369",new BigDecimal(30),Moneda.Pesos);
+		this.pieza3 = new Pieza("C-147",new BigDecimal(30),Moneda.Pesos);
 	}
 
 	/**
