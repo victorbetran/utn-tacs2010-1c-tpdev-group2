@@ -1,5 +1,6 @@
 package org.utn.tacs.tp.group2.persistence.pieza;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.Assert;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
+import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,10 +33,10 @@ public class ConsultaDePiezasTest {
 	@Before
 	public void setUp() {
 
-		this.piezaPersistida1 = new Pieza("PIEZA1");
+		this.piezaPersistida1 = new Pieza("PIEZA1",new BigDecimal(40),Moneda.Pesos);
 		this.dao.save(this.piezaPersistida1);
 
-		this.piezaPersistida2 = new Pieza("PIEZA2");
+		this.piezaPersistida2 = new Pieza("PIEZA2",new BigDecimal(40),Moneda.Pesos);
 		this.dao.save(this.piezaPersistida2);
 
 		auto1 = new Auto();
