@@ -38,9 +38,7 @@ public class Pedido extends PersistentObject {
 	// ** PUBLIC CONSTRUCTOR
 	// ********************************************
 	public Pedido() {
-		this.piezas = new ArrayList<Pieza>();
-		this.estado = EstadoPedido.getEnCurso();
-		TheLogger.getConsoleLogger().debug("Se crea el pedido:{}", this);
+		
 	}
 
 	// ********************************************
@@ -49,6 +47,7 @@ public class Pedido extends PersistentObject {
 	/**
 	 * Cancela un pedido, cancelando sus piezas y cambiando su estado a <i>CANCELADO</i>.
 	 */
+
 	public void cancelar() {
 		try {
 			this.disponibilizarPiezas();
@@ -58,6 +57,12 @@ public class Pedido extends PersistentObject {
 			TheLogger.getConsoleLogger().debug("No se pudo cancelar el pedido:{}", this);
 			throw new CancelacionDePedidoException(this, e);
 		}
+	}
+	
+	public void inicializarPedido()
+	{
+		this.piezas = new ArrayList<Pieza>();
+		this.estado = EstadoPedido.getEnCurso();
 	}
 
 	/**

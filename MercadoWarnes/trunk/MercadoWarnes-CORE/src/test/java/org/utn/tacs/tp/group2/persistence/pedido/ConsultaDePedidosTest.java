@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
+import org.utn.tacs.tp.group2.pedido.PedidoBuilder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})
@@ -30,10 +31,10 @@ public class ConsultaDePedidosTest {
 	@Before
 	public void setUp() {
 
-		this.pedidoPersistido1 = new Pedido();
+		this.pedidoPersistido1 = new PedidoBuilder().Build();
 		this.dao.save(this.pedidoPersistido1);
 
-		this.pedidoPersistido2 = new Pedido();
+		this.pedidoPersistido2 = new PedidoBuilder().Build();
 		this.dao.save(this.pedidoPersistido2);
 
 	}

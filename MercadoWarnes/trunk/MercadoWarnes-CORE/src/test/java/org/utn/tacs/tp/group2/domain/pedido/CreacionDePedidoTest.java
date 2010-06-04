@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaReservadaException;
 import org.utn.tacs.tp.group2.pedido.Pedido;
+import org.utn.tacs.tp.group2.pedido.PedidoBuilder;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
@@ -24,7 +25,7 @@ public class CreacionDePedidoTest {
 		this.piezaDisponible = new Pieza("W-894",new BigDecimal(30),Moneda.Dolares);
 		this.otraPiezaDisponible = new Pieza("K-666",new BigDecimal(30),Moneda.Dolares);
 		this.piezaNoDisponible = new Pieza("N-000",new BigDecimal(30),Moneda.Dolares).reservar();
-		this.pedido = new Pedido();
+		this.pedido = new PedidoBuilder().Build();
 	}
 	
 	
