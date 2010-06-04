@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.utn.tacs.tp.group2.exceptions.pedido.EfectivizacionDePedidoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoSinPiezasException;
 import org.utn.tacs.tp.group2.pedido.Pedido;
+import org.utn.tacs.tp.group2.pedido.PedidoBuilder;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
@@ -21,7 +22,7 @@ public class EfectivizacionDePedidoTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		this.pedido = new Pedido();
+		this.pedido = new PedidoBuilder().Build();
 		this.unaPieza = new Pieza("P-987",new BigDecimal(30),Moneda.Pesos);
 		this.otraPieza = new Pieza("6-985",new BigDecimal(30),Moneda.Pesos);
 	}
