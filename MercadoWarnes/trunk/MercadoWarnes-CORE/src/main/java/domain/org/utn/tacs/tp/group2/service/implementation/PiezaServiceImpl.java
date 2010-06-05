@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.service;
+package org.utn.tacs.tp.group2.service.implementation;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 /**
- * Implementación del Servicio de Piezas.
+ * Implementaciï¿½n del Servicio de Piezas.
  */
 public class PiezaServiceImpl implements PiezaService {
 

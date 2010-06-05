@@ -1,9 +1,9 @@
-package org.utn.tacs.tp.group2.service;
+package org.utn.tacs.tp.group2.service.implementation;
 
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 
 /**
- * Implementación del Servicio de Pedidos.
+ * Implementaciï¿½n del Servicio de Pedidos.
  */
 public class PedidoServiceImpl implements PedidoService {
 
