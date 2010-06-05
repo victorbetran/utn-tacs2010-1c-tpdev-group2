@@ -12,8 +12,8 @@
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
 	<jaxws:endpoint 
-	  id="helloWorld" 
-	  implementor="org.utn.tacs.tp.group2.MercadoWarnes.HelloWorldImpl" 
-	  address="/HelloWorld" />
+	  id="speaker" 
+	  implementor="org.utn.tacs.tp.group2.service.implementation.SpeakerImpl" 
+	  address="/speaker" />
 	  
 </beans>
