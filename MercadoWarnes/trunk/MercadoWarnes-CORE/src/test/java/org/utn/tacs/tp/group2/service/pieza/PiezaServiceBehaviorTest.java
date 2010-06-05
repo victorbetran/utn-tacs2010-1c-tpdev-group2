@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
@@ -20,7 +19,7 @@ import org.utn.tacs.tp.group2.service.implementation.PiezaServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})
-public class PiezaServiceTest {
+public class PiezaServiceBehaviorTest {
 
 	@Autowired
 	private PiezaService piezaService;
@@ -54,14 +53,12 @@ public class PiezaServiceTest {
 		piezaService.getPiezaDAO().save(pieza3);
 	}
 
-	@Transactional
 	@Test
 	public void crearPieza() {
 		Pieza p = piezaService.newPieza();
 		Assert.assertNotNull(p);
 	}
 
-	@Transactional
 	@Test
 	public void borrarPieza() {
 		piezaService.delete(pieza1);
@@ -77,7 +74,6 @@ public class PiezaServiceTest {
 		Assert.assertEquals(p, piezaLoaded);
 	}
 
-	@Transactional
 	@Test
 	public void consultarPiezasByCategoria() {
 		List<Pieza> piezas = piezaService.loadPiezasByCategoria("PREMIUM");
@@ -87,7 +83,6 @@ public class PiezaServiceTest {
 		}
 	}
 
-	@Transactional
 	@Test
 	public void consulterPiezasByAuto() {
 		List<Pieza> piezas = piezaService.loadPiezasByAuto(auto);
@@ -97,7 +92,6 @@ public class PiezaServiceTest {
 		}
 	}
 	
-	@Transactional
 	@Test
 	public void consultarPorcentajePiezasVendidasDeUnAuto() {
 		// TODO: hacer...
