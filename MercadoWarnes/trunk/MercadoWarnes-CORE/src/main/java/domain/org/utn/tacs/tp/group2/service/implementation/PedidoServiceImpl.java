@@ -1,6 +1,7 @@
 package org.utn.tacs.tp.group2.service.implementation;
 
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
+import org.utn.tacs.tp.group2.service.definition.PedidoService;
 
 /**
  * Implementaci�n del Servicio de Pedidos.
