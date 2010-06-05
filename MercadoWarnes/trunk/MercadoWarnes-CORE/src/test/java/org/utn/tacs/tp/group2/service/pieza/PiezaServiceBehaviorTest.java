@@ -53,18 +53,6 @@ public class PiezaServiceBehaviorTest {
 		piezaService.getPiezaDAO().save(pieza3);
 	}
 
-	@Test
-	public void crearPieza() {
-		Pieza p = piezaService.newPieza();
-		Assert.assertNotNull(p);
-	}
-
-	@Test
-	public void borrarPieza() {
-		piezaService.delete(pieza1);
-		Assert.assertFalse(piezaService.getPiezaDAO().isPersisted(pieza1));
-	}
-
 	// TODO: Ver como lograr hacer andar este test.
 	// @Transactional
 	// @Test
@@ -98,20 +86,17 @@ public class PiezaServiceBehaviorTest {
 	}
 	
 	
-	public void consultarPiezasReservadas() {
-		pieza2.reservar();
-		pieza3.reservar();		
-		List<Pieza> piezas = piezaService.loadPiezasReservadas();		
-		Assert.assertFalse(piezas.isEmpty());
-		Assert.assertTrue(piezas.contains(pieza2));
-		Assert.assertTrue(piezas.contains(pieza3));		
-	}
+//	public void consultarPiezasReservadas() {
+//		pieza2.reservar();
+//		pieza3.reservar();		
+//		List<Pieza> piezas = piezaService.loadPiezasReservadas();		
+//		Assert.assertFalse(piezas.isEmpty());
+//		Assert.assertTrue(piezas.contains(pieza2));
+//		Assert.assertTrue(piezas.contains(pieza3));		
+//	}
 
 	@After
 	public void tearDown() throws Exception {
-		// List<Pieza> piezas = piezaDAO.loadAll();
-//		piezaService.getPiezaDAO().rollbackTransaction();
-		// piezaDAO.deleteAll();
 	}
 
 }
