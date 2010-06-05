@@ -1,7 +1,6 @@
 package org.utn.tacs.tp.group2.domain.pieza;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 import junit.framework.Assert;
 

@@ -57,11 +57,12 @@ public class PiezaServiceTest {
 
 	@Test
 	public void borrarPieza() {
-		piezaService.deletePieza(pieza1);
+		piezaService.delete(pieza1);
 		Assert.assertFalse(piezaService.getPiezaDAO().isPersisted(pieza1));
 	}
 
-	
+	// TODO: Ver como lograr hacer andar este test.
+	// @Test
 	public void consultarPiezaById() {
 		Pieza p = piezaService.newPieza();
 		Pieza piezaLoaded = piezaService.loadPiezaById(p.getId());

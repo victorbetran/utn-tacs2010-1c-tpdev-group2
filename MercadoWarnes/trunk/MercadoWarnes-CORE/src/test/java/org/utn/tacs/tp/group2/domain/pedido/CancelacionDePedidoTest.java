@@ -12,7 +12,6 @@ import org.utn.tacs.tp.group2.pedido.Pedido;
 import org.utn.tacs.tp.group2.pedido.PedidoBuilder;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
-import org.utn.tacs.tp.group2.pieza.Precio;
 
 public class CancelacionDePedidoTest {
 	
