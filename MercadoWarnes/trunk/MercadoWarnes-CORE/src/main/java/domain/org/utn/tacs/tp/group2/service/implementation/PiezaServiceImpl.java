@@ -1,18 +1,18 @@
 package org.utn.tacs.tp.group2.service.implementation;
 
-import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
-import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.service.definition.PiezaService;
 
 /**
  * Implementaci�n del Servicio de Piezas.
  */
+@Transactional
 public class PiezaServiceImpl implements PiezaService {
 
 	private PiezaDAO piezaDAO;
@@ -23,7 +23,7 @@ public class PiezaServiceImpl implements PiezaService {
 		return pieza;
 	}
 
-	public void deletePieza(Pieza pieza) {
+	public void delete(Pieza pieza) {
 		piezaDAO.remove(pieza);
 	}
 

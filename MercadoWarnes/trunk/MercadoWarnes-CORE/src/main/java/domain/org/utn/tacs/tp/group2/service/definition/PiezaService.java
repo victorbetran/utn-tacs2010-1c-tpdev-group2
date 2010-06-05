@@ -15,7 +15,7 @@ public interface PiezaService {
 	
 	public Pieza newPieza();
 
-	public void deletePieza(Pieza pieza);
+	public void delete(Pieza pieza);
 
 	public Pieza loadPiezaById(Long id);
 
