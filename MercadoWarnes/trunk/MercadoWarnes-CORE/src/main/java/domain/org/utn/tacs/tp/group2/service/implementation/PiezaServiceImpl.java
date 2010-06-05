@@ -8,6 +8,7 @@ import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
+import org.utn.tacs.tp.group2.service.definition.PiezaService;
 
 /**
  * Implementaci�n del Servicio de Piezas.

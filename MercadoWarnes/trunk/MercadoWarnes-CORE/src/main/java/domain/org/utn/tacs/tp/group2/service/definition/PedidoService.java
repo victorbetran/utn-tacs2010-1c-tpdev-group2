@@ -1,4 +1,4 @@
-package org.utn.tacs.tp.group2.service.implementation;
+package org.utn.tacs.tp.group2.service.definition;
 
 /**
  * Interfaz del Servicio de Pedidos.
