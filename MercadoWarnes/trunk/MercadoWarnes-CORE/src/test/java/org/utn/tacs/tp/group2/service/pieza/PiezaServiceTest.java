@@ -16,6 +16,7 @@ import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.service.definition.PiezaService;
+import org.utn.tacs.tp.group2.service.implementation.PiezaServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})
@@ -32,7 +33,8 @@ public class PiezaServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-//		piezaService.getPiezaDAO().beginTransaction();
+		((PiezaServiceImpl)this.piezaService).setPiezaDAO(new PiezaDAOMock());
+		
 		pieza1 = new Pieza("PIEZA 1",new BigDecimal(40),Moneda.Pesos);
 		pieza1.setCategoria("PREMIUM");
 		
