@@ -6,8 +6,11 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 import org.utn.tacs.tp.group2.pedido.PedidoBuilder;
@@ -15,26 +18,20 @@ import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.service.definition.PedidoService;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"classpath:applicationContext.xml"})
 public class PedidoServiceTest {
 
-	ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-			"applicationContext.xml");
-
-	private PedidoService pedidoService = (PedidoService) applicationContext
-			.getBean("pedidService");
+	@Autowired
+	private PedidoService pedidoService;
 
 	Pedido pedido1;
-
 	Pedido pedido2;
-
 	Pedido pedido3;
-
 	Pedido pedido4;
-
 	Pedido pedido5;
 
 	Pieza pieza1;
-
 	Pieza pieza2;
 
 	@Before
@@ -56,18 +53,21 @@ public class PedidoServiceTest {
 
 	}
 
+	@Transactional
 	@Test
 	public void crearPedido() {
 		Pedido p = pedidoService.newPedido();
 		Assert.assertNotNull(p);
 	}
 
+	@Transactional
 	@Test
 	public void cancelarPedido() {
 		pedidoService.cancelarPedido(pedido1);
 		Assert.assertTrue(pedido1.isCancelado());
 	}
 	
+	@Transactional
 	@Test
 	public void efectivizarPedido() {
 		pedido1.addPieza(pieza1);
@@ -76,6 +76,7 @@ public class PedidoServiceTest {
 	}
 
 	// TODO: Ver como lograr hacer andar este test... mismo problema que en el de pieza
+//	@Transactional
 	// @Test
 	public void consultarPedidoById() {
 		Pedido p = pedidoService.newPedido();
@@ -83,6 +84,7 @@ public class PedidoServiceTest {
 		Assert.assertEquals(p, pedidoLoaded);
 	}
 
+	@Transactional
 	@Test
 	public void consultarPedidosByEstadoEnCurso() {
 		List<Pedido> pedidos = pedidoService.loadPedidosByEstado(EstadoPedido.getEnCurso());
@@ -94,6 +96,7 @@ public class PedidoServiceTest {
 		Assert.assertTrue(pedidos.contains(pedido5));
 	}
 
+	@Transactional
 	@Test
 	public void consultarPedidosByEstadoCancelado() {
 		pedido1.cancelar();
@@ -104,6 +107,7 @@ public class PedidoServiceTest {
 		Assert.assertTrue(pedidos.contains(pedido2));
 	}
 
+	@Transactional
 	@Test
 	public void consultarPedidosByEstadoEfectivo() {
 		List<Pedido> pedidos = pedidoService.loadPedidosByEstado(EstadoPedido.getEfectivo());
