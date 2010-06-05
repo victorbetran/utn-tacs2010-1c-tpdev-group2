@@ -7,19 +7,22 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.service.definition.PiezaService;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"classpath:applicationContext.xml"})
 public class PiezaServiceTest {
 
-	ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-			"applicationContext.xml");
-
-	private PiezaService piezaService = (PiezaService) applicationContext.getBean("piezaService");
+	@Autowired
+	private PiezaService piezaService;
 
 	private Pieza pieza1;
 	private Pieza pieza2;
@@ -49,12 +52,14 @@ public class PiezaServiceTest {
 		piezaService.getPiezaDAO().save(pieza3);
 	}
 
+	@Transactional
 	@Test
 	public void crearPieza() {
 		Pieza p = piezaService.newPieza();
 		Assert.assertNotNull(p);
 	}
 
+	@Transactional
 	@Test
 	public void borrarPieza() {
 		piezaService.delete(pieza1);
@@ -62,6 +67,7 @@ public class PiezaServiceTest {
 	}
 
 	// TODO: Ver como lograr hacer andar este test.
+	// @Transactional
 	// @Test
 	public void consultarPiezaById() {
 		Pieza p = piezaService.newPieza();
@@ -69,6 +75,7 @@ public class PiezaServiceTest {
 		Assert.assertEquals(p, piezaLoaded);
 	}
 
+	@Transactional
 	@Test
 	public void consultarPiezasByCategoria() {
 		List<Pieza> piezas = piezaService.loadPiezasByCategoria("PREMIUM");
@@ -78,6 +85,7 @@ public class PiezaServiceTest {
 		}
 	}
 
+	@Transactional
 	@Test
 	public void consulterPiezasByAuto() {
 		List<Pieza> piezas = piezaService.loadPiezasByAuto(auto);
@@ -87,6 +95,7 @@ public class PiezaServiceTest {
 		}
 	}
 	
+	@Transactional
 	@Test
 	public void consultarPorcentajePiezasVendidasDeUnAuto() {
 		// TODO: hacer...
