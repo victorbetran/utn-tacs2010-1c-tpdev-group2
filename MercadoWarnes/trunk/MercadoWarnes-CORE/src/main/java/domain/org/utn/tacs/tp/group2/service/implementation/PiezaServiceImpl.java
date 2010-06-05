@@ -27,7 +27,7 @@ public class PiezaServiceImpl implements PiezaService {
 		piezaDAO.remove(pieza);
 	}
 
-	public Pieza loadPiezaById(Long id) {
+	public Pieza getPiezaById(Long id) {
 		return piezaDAO.findByID(id);
 	}
 

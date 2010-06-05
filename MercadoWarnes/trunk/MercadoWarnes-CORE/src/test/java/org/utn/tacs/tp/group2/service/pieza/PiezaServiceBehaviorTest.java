@@ -25,9 +25,9 @@ public class PiezaServiceBehaviorTest {
 	@Autowired
 	private PiezaService piezaService;
 
-	private Pieza unaPiezaDeAutoA;
-	private Pieza otraPiezaDeAutoA;
-	private Pieza unaPiezaDeAutoB;
+	private Pieza unaPiezaPremiumDeAutoA;
+	private Pieza unaPiezaMediumDeAutoA;
+	private Pieza unaPiezaMediumDeAutoB;
 
 	private Auto autoA;
 	private Auto autoB;
@@ -40,47 +40,53 @@ public class PiezaServiceBehaviorTest {
 		autoA = Auto.createAuto("EXP-074", "AK-47", 2009, new Date());
 		autoB = Auto.createAuto("EXP-077", "AKA-47", 2002, new Date());
 		
-		unaPiezaDeAutoA = new Pieza("PIEZA 1",new BigDecimal(40),Moneda.Pesos);
-		unaPiezaDeAutoA.setCategoria("PREMIUM");
-		unaPiezaDeAutoA.setAutoOrigen(autoA);
+		unaPiezaPremiumDeAutoA = new Pieza("PIEZA 1",new BigDecimal(40),Moneda.Pesos);
+		unaPiezaPremiumDeAutoA.setCategoria("PREMIUM");
+		unaPiezaPremiumDeAutoA.setAutoOrigen(autoA);
 		
-		otraPiezaDeAutoA = new Pieza("PIEZA 2",new BigDecimal(40),Moneda.Pesos);
-		otraPiezaDeAutoA.setCategoria("MEDIUM");
-		otraPiezaDeAutoA.setAutoOrigen(autoA);
+		unaPiezaMediumDeAutoA = new Pieza("PIEZA 2",new BigDecimal(40),Moneda.Pesos);
+		unaPiezaMediumDeAutoA.setCategoria("MEDIUM");
+		unaPiezaMediumDeAutoA.setAutoOrigen(autoA);
 		
-		unaPiezaDeAutoB = new Pieza("PIEZA 3",new BigDecimal(40),Moneda.Pesos);
-		unaPiezaDeAutoB.setCategoria("MEDIUM");
-		unaPiezaDeAutoB.setAutoOrigen(autoB);
+		unaPiezaMediumDeAutoB = new Pieza("PIEZA 3",new BigDecimal(40),Moneda.Pesos);
+		unaPiezaMediumDeAutoB.setCategoria("MEDIUM");
+		unaPiezaMediumDeAutoB.setAutoOrigen(autoB);
 		
-		piezaDAO.save(unaPiezaDeAutoA);
-		piezaDAO.save(otraPiezaDeAutoA);
-		piezaDAO.save(unaPiezaDeAutoB);
-	}
-
-	// TODO: Ver como lograr hacer andar este test.
-	// @Transactional
-	// @Test
-	public void consultarPiezaById() {
-		Pieza p = piezaService.newPieza();
-		Pieza piezaLoaded = piezaService.loadPiezaById(p.getId());
-		Assert.assertEquals(p, piezaLoaded);
+		piezaDAO.save(unaPiezaPremiumDeAutoA);
+		piezaDAO.save(unaPiezaMediumDeAutoA);
+		piezaDAO.save(unaPiezaMediumDeAutoB);
 	}
 
 	@Test
-	public void consultarPiezasByCategoria() {
+	public void consultarPiezaById() {
+		Pieza serviceGivenPieza = piezaService.getPiezaById(this.unaPiezaPremiumDeAutoA.getId());
+		Assert.assertEquals(this.unaPiezaPremiumDeAutoA, serviceGivenPieza);
+	}
+
+	@Test
+	public void consultarPiezasByCategoriaPremium() {
 		List<Pieza> piezas = piezaService.loadPiezasByCategoria("PREMIUM");
 		Assert.assertFalse(piezas.isEmpty());
 		for (Pieza p : piezas) {
-			Assert.assertEquals(p.getCategoria(), unaPiezaDeAutoA.getCategoria());
+			Assert.assertEquals(p.getCategoria(), unaPiezaPremiumDeAutoA.getCategoria());
 		}
 	}
 
+	@Test
+	public void consultarPiezasByCategoriaMedium() {
+		List<Pieza> piezas = piezaService.loadPiezasByCategoria("MEDIUM");
+		Assert.assertFalse(piezas.isEmpty());
+		for (Pieza p : piezas) {
+			Assert.assertEquals(p.getCategoria(), unaPiezaPremiumDeAutoA.getCategoria());
+		}
+	}
+	
 	@Test
 	public void consulterPiezasByAuto() {
 		List<Pieza> piezas = piezaService.loadPiezasByAuto(autoA);
 		Assert.assertFalse(piezas.isEmpty());
 		for (Pieza p : piezas) {
-			Assert.assertEquals(p.getAutoOrigen(), unaPiezaDeAutoA.getAutoOrigen());
+			Assert.assertEquals(p.getAutoOrigen(), unaPiezaPremiumDeAutoA.getAutoOrigen());
 		}
 	}
 	
@@ -90,15 +96,6 @@ public class PiezaServiceBehaviorTest {
 	}
 	
 	
-//	public void consultarPiezasReservadas() {
-//		pieza2.reservar();
-//		pieza3.reservar();		
-//		List<Pieza> piezas = piezaService.loadPiezasReservadas();		
-//		Assert.assertFalse(piezas.isEmpty());
-//		Assert.assertTrue(piezas.contains(pieza2));
-//		Assert.assertTrue(piezas.contains(pieza3));		
-//	}
-
 	@After
 	public void tearDown() throws Exception {
 	}

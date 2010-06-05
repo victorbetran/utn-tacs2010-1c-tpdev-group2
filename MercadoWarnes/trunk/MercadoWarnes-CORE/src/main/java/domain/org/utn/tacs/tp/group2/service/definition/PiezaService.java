@@ -17,7 +17,7 @@ public interface PiezaService {
 
 	public void delete(Pieza pieza);
 
-	public Pieza loadPiezaById(Long id);
+	public Pieza getPiezaById(Long id);
 
 	public List<Pieza> loadPiezasByCategoria(String string);
 
