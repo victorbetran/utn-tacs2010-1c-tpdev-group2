@@ -20,7 +20,7 @@ import org.utn.tacs.tp.group2.pieza.Pieza;
 import com.thoughtworks.xstream.XStream;
 
 @Component
-public class SpeakerImpl extends Resource{
+public class PiezasResource extends Resource{
 
 	public String talkAsMaradona() {
 		return "sigan mamando, es bueno para los huesos";
@@ -67,9 +67,9 @@ public class SpeakerImpl extends Resource{
 	
 	public Representation represent(Variant variant) throws ResourceException {
 		XStream xStream = new XStream();
-		Set<PiezaDTO> materiasKeySet = new HashSet<PiezaDTO>();
-		materiasKeySet.add(damePieza());
-		return new StringRepresentation(xStream.toXML(materiasKeySet), MediaType.TEXT_XML);
+		Set<PiezaDTO> piezas = new HashSet<PiezaDTO>();
+		piezas.add(damePieza());
+		return new StringRepresentation(xStream.toXML(piezas), MediaType.TEXT_XML);
 	}
 
 }

@@ -11,6 +11,10 @@
 
 	<context:annotation-config />
 
+	<!--  Scan Spring Components. Note the Resource will be automatically picked -->
+	<context:component-scan base-package="org.utn.tacs.tp.group2.service.implementation">
+	</context:component-scan>
+	
 	<bean name="root" class="org.restlet.ext.spring.SpringRouter">
 		<property name="attachments" ref="resourceMap" />
 	</bean>
@@ -18,22 +22,26 @@
 	<bean id="resourceMap" class="java.util.HashMap">
 		<constructor-arg>
 			<map>
-				<entry key="/maradona">
-					<ref bean="speakerFinder"/>
+				<entry key="/piezas">
+					<ref bean="piezasFinder"/>
+				</entry>
+				<entry key="/piezas/{idPieza}">
+					<ref bean="piezaFinder"/>
 				</entry>
 			</map>
 		</constructor-arg>
 	</bean>
 	
-	<bean id="speakerFinder"
+	<bean id="piezasFinder"
 		class="org.restlet.ext.spring.SpringFinder">
-		<lookup-method name="createResource" bean="speakerImpl" />
+		<lookup-method name="createResource" bean="piezasResource" />
 	</bean>	
 	
-	<bean name="speakerImpl" 
-		  class="org.utn.tacs.tp.group2.service.implementation.SpeakerImpl">
-	</bean>
-
+	<bean id="piezaFinder"
+		class="org.restlet.ext.spring.SpringFinder">
+		<lookup-method name="createResource" bean="piezaResource" />
+	</bean>	
+	
 
 	<!--*************************-->
 	<!--        SERVICIOS        -->
