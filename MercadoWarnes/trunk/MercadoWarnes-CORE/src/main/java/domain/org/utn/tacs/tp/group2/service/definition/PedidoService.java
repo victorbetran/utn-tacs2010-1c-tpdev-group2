@@ -19,6 +19,6 @@ public interface PedidoService {
 
 	public Pedido cancelarPedido(String pedidoId);
 
-	public List<Pedido> loadPedidosByEstado(String estadoDePedido);
+	public List<Pedido> getPedidosByEstado(String estadoDePedido);
 
 }

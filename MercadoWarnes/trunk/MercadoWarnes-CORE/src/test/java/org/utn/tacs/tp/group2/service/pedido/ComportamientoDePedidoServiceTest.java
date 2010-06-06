@@ -1,6 +1,7 @@
 package org.utn.tacs.tp.group2.service.pedido;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import junit.framework.Assert;
 
@@ -10,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
@@ -104,7 +106,8 @@ public class ComportamientoDePedidoServiceTest {
 	
 	@Test
 	public void cancelarUnPedidoQueEstabaCancelado(){
-		// TODO: Hacer, deberia devolver null ?
+		this.pedidoService.cancelarPedido(this.pedidoConUnaPieza.getId().toString());
+		Assert.assertNull(this.pedidoService.cancelarPedido(this.pedidoConUnaPieza.getId().toString()));
 	}
 	
 	@Test
@@ -118,7 +121,24 @@ public class ComportamientoDePedidoServiceTest {
 
 	@Test
 	public void efectivizarUnPedidoQueEstabaCancelado() {
-		// TODO: Hacer, deberia devolver null ?
+		this.pedidoService.cancelarPedido(this.pedidoConUnaPieza.getId().toString());
+		Assert.assertNull(this.pedidoService.efectivizarPedido(this.pedidoConUnaPieza.getId().toString()));
+	}
+	
+	@Test
+	public void consultarPedidosPorEstado() {
+		List<Pedido> pedidos = this.pedidoService.getPedidosByEstado(EstadoPedido.getEnCurso().toString());
+		
+		Assert.assertEquals(2,pedidos.size());
+		Assert.assertTrue(pedidos.contains(this.pedidoConUnaPieza));
+		Assert.assertTrue(pedidos.contains(this.pedidoSinPiezas));
+	}
+
+	@Test
+	public void consultarPedidosPorEstadoSinResultado() {
+		List<Pedido> pedidos = this.pedidoService.getPedidosByEstado(EstadoPedido.getCancelado().toString());
+		
+		Assert.assertEquals(0,pedidos.size());
 	}
 	
 	//********************************************
@@ -134,58 +154,3 @@ public class ComportamientoDePedidoServiceTest {
 	}
 	
 }
-//	@Transactional
-//	@Test
-//	public void cancelarPedido() {
-//		pedidoService.cancelarPedido(pedido1);
-//		Assert.assertTrue(pedido1.isCancelado());
-//	}
-	
-//	@Transactional
-//	@Test
-//	public void efectivizarPedido() {
-//		pedido1.addPieza(pieza1);
-//		pedidoService.efectivizarPedido(pedido1);
-//		Assert.assertTrue(pedido1.isEfectivo());
-//	}
-
-	// TODO: Ver como lograr hacer andar este test... mismo problema que en el de pieza
-//	@Transactional
-	// @Test
-//	public void consultarPedidoById() {
-//		Pedido p = pedidoService.newPedido();
-//		Pedido pedidoLoaded = pedidoService.getPedidoById(p.getId());
-//		Assert.assertEquals(p, pedidoLoaded);
-//	}
-//
-//	@Transactional
-//	@Test
-//	public void consultarPedidosByEstadoEnCurso() {
-//		List<Pedido> pedidos = pedidoService.loadPedidosByEstado(EstadoPedido.getEnCurso());
-//		Assert.assertEquals(5, pedidos.size());
-//		Assert.assertTrue(pedidos.contains(pedido1));
-//		Assert.assertTrue(pedidos.contains(pedido2));
-//		Assert.assertTrue(pedidos.contains(pedido3));
-//		Assert.assertTrue(pedidos.contains(pedido4));
-//		Assert.assertTrue(pedidos.contains(pedido5));
-//	}
-//
-//	@Transactional
-//	@Test
-//	public void consultarPedidosByEstadoCancelado() {
-//		pedido1.cancelar();
-//		pedido2.cancelar();
-//		List<Pedido> pedidos = pedidoService.loadPedidosByEstado(EstadoPedido.getCancelado());
-//		Assert.assertEquals(2, pedidos.size());
-//		Assert.assertTrue(pedidos.contains(pedido1));
-//		Assert.assertTrue(pedidos.contains(pedido2));
-//	}
-//
-//	@Transactional
-//	@Test
-//	public void consultarPedidosByEstadoEfectivo() {
-//		List<Pedido> pedidos = pedidoService.loadPedidosByEstado(EstadoPedido.getEfectivo());
-//		Assert.assertEquals(0, pedidos.size());
-//	}
-
-
