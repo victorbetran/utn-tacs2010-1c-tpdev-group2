@@ -100,4 +100,15 @@ public class PiezaServiceBehaviorTest {
 		// TODO: hacer.
 	}
 
+	@Test
+	public void consultarPiezasPorEstadoReservado() {
+		// TODO: hacer.
+	}
+	
+	@Test
+	public void consultarPiezasPorEstadoReservadoSinResultado() {
+		// TODO: hacer.
+	}
+	
+
 }
