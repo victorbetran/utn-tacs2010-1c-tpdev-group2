@@ -1,18 +1,22 @@
 package org.utn.tacs.tp.group2.service.implementation;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
+import javax.jws.WebService;
+
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
+import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.service.definition.PiezaService;
 
 /**
  * Implementaci�n del Servicio de Piezas.
  */
-@Transactional
+
+@WebService(endpointInterface="org.utn.tacs.tp.group2.service.definition.PiezaService")
 public class PiezaServiceImpl implements PiezaService {
 
 	private PiezaDAO piezaDAO;
@@ -28,7 +32,8 @@ public class PiezaServiceImpl implements PiezaService {
 	}
 
 	public Pieza getPiezaById(Long id) {
-		return piezaDAO.findByID(id);
+		return new Pieza("codigo", new BigDecimal(20), Moneda.Pesos);
+//		return piezaDAO.findByID(id);
 	}
 
 	public List<Pieza> loadPiezasByCategoria(String categoria) {
@@ -46,6 +51,7 @@ public class PiezaServiceImpl implements PiezaService {
 	// ********************************************
 	// ** GETTERS & SETTERS
 	// ********************************************
+
 	public void setPiezaDAO(PiezaDAO piezaDAO) {
 		this.piezaDAO = piezaDAO;
 	}
