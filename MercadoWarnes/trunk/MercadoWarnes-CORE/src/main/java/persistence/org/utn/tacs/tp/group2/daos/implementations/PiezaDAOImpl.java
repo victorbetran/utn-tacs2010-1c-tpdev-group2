@@ -2,6 +2,7 @@ package org.utn.tacs.tp.group2.daos.implementations;
 
 import java.util.List;
 
+import org.utn.tacs.tp.group2.daos.exceptions.PiezaInexistenteException;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
@@ -9,7 +10,7 @@ import org.utn.tacs.tp.group2.pieza.Pieza;
 
 
 public class PiezaDAOImpl extends PiezaDAO{
-
+	
 	@Override
 	public List<Pieza> findByAuto(final Auto auto) {
 		return getQueryHandler().setBody("from Pieza as pieza inner join fetch pieza.autoOrigen WHERE pieza.autoOrigen = :aut")
@@ -36,6 +37,11 @@ public class PiezaDAOImpl extends PiezaDAO{
 		return getQueryHandler().setBody("from Pieza as pieza WHERE pieza.estado = :est")
 								.addParameter("est", estado)
 								.getResults();
+	}
+
+	@Override
+	protected RuntimeException getNotFoundObjectException(Long id) {
+		return new PiezaInexistenteException("No existe una pieza con el ID: '" + id + "'");
 	}
 
 //	@Override

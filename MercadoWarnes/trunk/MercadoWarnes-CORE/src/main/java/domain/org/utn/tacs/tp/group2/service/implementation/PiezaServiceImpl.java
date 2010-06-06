@@ -2,6 +2,7 @@ package org.utn.tacs.tp.group2.service.implementation;
 
 import java.util.List;
 
+import org.utn.tacs.tp.group2.daos.exceptions.PiezaInexistenteException;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
@@ -27,7 +28,11 @@ public class PiezaServiceImpl implements PiezaService{
 //	}
 
 	public Pieza getPiezaById(Long id) {
-		return piezaDAO.findByID(id);
+		try{
+			return piezaDAO.findByID(id);
+		}catch (PiezaInexistenteException e) {
+			return null;
+		}
 	}
 
 	public List<Pieza> getAllPiezas() {

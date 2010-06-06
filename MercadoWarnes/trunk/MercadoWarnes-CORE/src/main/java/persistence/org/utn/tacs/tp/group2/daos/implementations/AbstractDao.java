@@ -32,6 +32,9 @@ public abstract class AbstractDao<T extends PersistentObject> extends HibernateD
 	
 	@SuppressWarnings("unchecked")
 	public T findByID(final Long id) {
+		if( this.getHibernateTemplate().get(getGenericClass(), id) == null ){
+			throw getNotFoundObjectException(id);
+		}
 		return (T) this.getHibernateTemplate().load(getGenericClass(), id);
 	}
 
@@ -46,6 +49,8 @@ public abstract class AbstractDao<T extends PersistentObject> extends HibernateD
 	//********************************************
 	
 	protected abstract Class<T> getGenericClass();
+	
+	protected abstract RuntimeException getNotFoundObjectException(Long id);
 	
 	//********************************************
 	//** PRIVATE IMPLEMENTATION

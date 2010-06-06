@@ -66,7 +66,14 @@ public class PiezaResource extends Resource {
 	public Representation represent(Variant variant) throws ResourceException {
 
 		if(consultaById()){
-			return new StringRepresentation(new XStream().toXML(new PiezaDTO(this.piezaService.getPiezaById(this.getId()))), MediaType.TEXT_XML);
+			Pieza pieza = this.piezaService.getPiezaById(this.getId());
+			
+			if(pieza == null){
+				return null;
+			}
+			
+			return new StringRepresentation(new XStream().toXML(new PiezaDTO()), MediaType.TEXT_XML);
+			
 		}else{
 			List<PiezaDTO> toReturn = new ArrayList<PiezaDTO>();
 			
