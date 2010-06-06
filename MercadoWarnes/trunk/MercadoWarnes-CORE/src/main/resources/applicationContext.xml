@@ -40,27 +40,21 @@
 				<entry key="/pieza-byState/{estado}">
 					<ref bean="piezaEndpoint" />
 				</entry>
-<!--				<entry key="/piezas">-->
-<!--					<ref bean="piezasFinder" />-->
-<!--				</entry>-->
-<!--				<entry key="/pedido-byid/{idPedido}">-->
-<!--					<ref bean="piezasFinder" />-->
-<!--				</entry>-->
-<!--				<entry key="/pedido-all/{estado}">-->
-<!--					<ref bean="piezasFinder" />-->
-<!--				</entry>-->
-<!--				<entry key="/pedido-byid/{idPedido}/addPieza/{idPieza}">-->
-<!--					<ref bean="piezasFinder" />-->
-<!--				</entry>-->
-<!--				<entry key="/pedido-byid/{idPedido}/delPieza/{idPieza}">-->
-<!--					<ref bean="piezasFinder" />-->
-<!--				</entry>-->
-<!--				<entry key="/pedido-byid/{idPedido}/efectivizar">-->
-<!--					<ref bean="piezasFinder" />-->
-<!--				</entry>-->
-<!--				<entry key="/pedido-byid/{idPedido}/cancelar">-->
-<!--					<ref bean="piezasFinder" />-->
-<!--				</entry>-->
+				<entry key="/pedido-byId/{idPedido}">
+					<ref bean="pedidoEndpoint" />
+				</entry>
+				<entry key="/pedido-all/{estado}">
+					<ref bean="pedidoEndpoint" />
+				</entry>
+				<entry key="/pedido-byState/{estado}">
+					<ref bean="pedidoEndpoint" />
+				</entry>
+				<entry key="/pedido-byId/{idPedido}/addPieza/{idPieza}">
+					<ref bean="pedidoEndpoint" />
+				</entry>
+				<entry key="/pedido-byid/{idPedido}/{accion}">
+					<ref bean="pedidoEndpoint" />
+				</entry>
 			</map>
 		</constructor-arg>
 	</bean>
@@ -69,19 +63,13 @@
 		<lookup-method name="createResource" bean="piezaResource" />
 	</bean>
 
+	<bean id="pedidoEndpoint" class="org.restlet.ext.spring.SpringFinder">
+		<lookup-method name="createResource" bean="pedidoResource" />
+	</bean>
+
 	<bean id="fakeValuesLoaderEndpoint" class="org.restlet.ext.spring.SpringFinder">
 		<lookup-method name="createResource" bean="fakeValuesLoaderResource" />
 	</bean>
-
-<!--	<bean id="piezasFinder" class="org.restlet.ext.spring.SpringFinder">-->
-<!--		<lookup-method name="createResource" bean="piezasResource" />-->
-<!--	</bean>-->
-<!--	-->
-<!---->
-<!--	<bean id="piezaFinder" class="org.restlet.ext.spring.SpringFinder">-->
-<!--		<lookup-method name="createResource" bean="piezaResource" />-->
-<!--	</bean>-->
-
 
 	<!--*************************-->
 	<!--        SERVICIOS        -->
