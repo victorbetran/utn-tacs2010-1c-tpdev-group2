@@ -34,7 +34,13 @@ public abstract class AbstractDao<T extends PersistentObject> extends HibernateD
 	public T findByID(final Long id) {
 		return (T) this.getHibernateTemplate().load(getGenericClass(), id);
 	}
-    
+
+	@SuppressWarnings("unchecked")
+	public List<T> findAll() {
+		// TODO: TEST!
+		return (List<T>) this.getHibernateTemplate().loadAll(getGenericClass());
+	}
+	
 	//********************************************
 	//** ABSTRACT METHOD
 	//********************************************

@@ -1,6 +1,5 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
@@ -11,49 +10,86 @@
 
 	<context:annotation-config />
 
-	<!--  Scan Spring Components. Note the Resource will be automatically picked -->
-	<context:component-scan base-package="org.utn.tacs.tp.group2.service.implementation">
+	<!--
+		Scan Spring Components. Note the Resource will be automatically picked
+	-->
+	<context:component-scan base-package="org.utn.tacs.tp.group2.service.resources">
 	</context:component-scan>
-	
+
 	<bean name="root" class="org.restlet.ext.spring.SpringRouter">
 		<property name="attachments" ref="resourceMap" />
 	</bean>
-	
+
 	<bean id="resourceMap" class="java.util.HashMap">
 		<constructor-arg>
 			<map>
-				<entry key="/piezas">
-					<ref bean="piezasFinder"/>
+				<entry key="/pieza/all">
+					<ref bean="piezaEndpoint" />
 				</entry>
-				<entry key="/piezas/{idPieza}">
-					<ref bean="piezaFinder"/>
+				<entry key="/pieza/{idPieza}">
+					<ref bean="piezaEndpoint" />
 				</entry>
+<!--				<entry key="/pieza-all/reservadas">-->
+<!--					<ref bean="piezasFinder" />-->
+<!--				</entry>-->
+<!--				<entry key="/pieza-bycat/{categoria}">-->
+<!--					<ref bean="piezaFinder" />-->
+<!--				</entry>-->
+<!--				<entry key="/pieza-bycar/{idAuto}">-->
+<!--					<ref bean="piezaFinder" />-->
+<!--				</entry>-->
+<!--				<entry key="/piezas">-->
+<!--					<ref bean="piezasFinder" />-->
+<!--				</entry>-->
+<!--				<entry key="/pedido-byid/{idPedido}">-->
+<!--					<ref bean="piezasFinder" />-->
+<!--				</entry>-->
+<!--				<entry key="/pedido-all/{estado}">-->
+<!--					<ref bean="piezasFinder" />-->
+<!--				</entry>-->
+<!--				<entry key="/pedido-byid/{idPedido}/addPieza/{idPieza}">-->
+<!--					<ref bean="piezasFinder" />-->
+<!--				</entry>-->
+<!--				<entry key="/pedido-byid/{idPedido}/delPieza/{idPieza}">-->
+<!--					<ref bean="piezasFinder" />-->
+<!--				</entry>-->
+<!--				<entry key="/pedido-byid/{idPedido}/efectivizar">-->
+<!--					<ref bean="piezasFinder" />-->
+<!--				</entry>-->
+<!--				<entry key="/pedido-byid/{idPedido}/cancelar">-->
+<!--					<ref bean="piezasFinder" />-->
+<!--				</entry>-->
 			</map>
 		</constructor-arg>
 	</bean>
-	
-	<bean id="piezasFinder"
-		class="org.restlet.ext.spring.SpringFinder">
-		<lookup-method name="createResource" bean="piezasResource" />
-	</bean>	
-	
-	<bean id="piezaFinder"
-		class="org.restlet.ext.spring.SpringFinder">
+
+	<bean id="piezaEndpoint" class="org.restlet.ext.spring.SpringFinder">
 		<lookup-method name="createResource" bean="piezaResource" />
-	</bean>	
-	
+	</bean>
+
+<!--	<bean id="piezasFinder" class="org.restlet.ext.spring.SpringFinder">-->
+<!--		<lookup-method name="createResource" bean="piezasResource" />-->
+<!--	</bean>-->
+<!--	-->
+<!---->
+<!--	<bean id="piezaFinder" class="org.restlet.ext.spring.SpringFinder">-->
+<!--		<lookup-method name="createResource" bean="piezaResource" />-->
+<!--	</bean>-->
+
 
 	<!--*************************-->
 	<!--        SERVICIOS        -->
 	<!--*************************-->
-	<bean name="piezaService" class="org.utn.tacs.tp.group2.service.implementation.PiezaServiceImpl">
+	<bean name="piezaService"
+		class="org.utn.tacs.tp.group2.service.implementation.PiezaServiceImpl">
 		<property name="piezaDAO" ref="piezaDAO" />
 	</bean>
 
-	<bean name="pedidoService" class="org.utn.tacs.tp.group2.service.implementation.PedidoServiceImpl">
+	<bean name="pedidoService"
+		class="org.utn.tacs.tp.group2.service.implementation.PedidoServiceImpl">
 		<property name="pedidoDAO" ref="pedidoDAO" />
 	</bean>
-	
+
 
 	<!--*************************-->
 	<!--          DAOS           -->
