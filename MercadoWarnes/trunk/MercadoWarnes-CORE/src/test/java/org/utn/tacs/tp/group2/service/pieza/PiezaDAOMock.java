@@ -8,7 +8,7 @@ import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
-public class PiezaDAOMockToTestPiezaServiceBehavior extends PiezaDAO{
+public class PiezaDAOMock extends PiezaDAO{
 
 	private List<Pieza> piezas = new ArrayList<Pieza>();
 	
@@ -55,14 +55,27 @@ public class PiezaDAOMockToTestPiezaServiceBehavior extends PiezaDAO{
 	}
 	
 	@Override
-	public Pieza findByCodigo(String codigo) {
-		return null;
+	public List<Pieza> findAll() {
+		return this.piezas;
 	}
 
 	@Override
 	public List<Pieza> findByEstado(EstadoPieza estado) {
-		return null;
+		List<Pieza> toReturn = new ArrayList<Pieza>();
+		
+		for (Pieza pieza : this.piezas) {
+			if(pieza.getEstado().equals(estado)){
+				toReturn.add(pieza);
+			}
+		}
+		
+		return toReturn;
 	}
 	
+	@Override
+	public Pieza findByCodigo(String codigo) {
+		return null;
+	}
+
 
 }
