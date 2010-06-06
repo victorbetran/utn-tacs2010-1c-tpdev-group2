@@ -25,16 +25,19 @@
 				<entry key="/loadFakeValues">
 					<ref bean="fakeValuesLoaderEndpoint" />
 				</entry>
-				<entry key="/pieza/all">
+				<entry key="/pieza-byId/{idPieza}">
 					<ref bean="piezaEndpoint" />
 				</entry>
-				<entry key="/pieza/{idPieza}">
+				<entry key="/pieza-all">
 					<ref bean="piezaEndpoint" />
 				</entry>
-				<entry key="/piezas-bycat/{categoria}">
+				<entry key="/pieza-byCat/{categoria}">
 					<ref bean="piezaEndpoint" />
 				</entry>
-				<entry key="/piezas-bycar/{idAuto}">
+				<entry key="/pieza-byCar/{idAuto}">
+					<ref bean="piezaEndpoint" />
+				</entry>
+				<entry key="/pieza-byState/{estado}">
 					<ref bean="piezaEndpoint" />
 				</entry>
 <!--				<entry key="/piezas">-->
