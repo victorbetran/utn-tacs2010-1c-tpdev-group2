@@ -19,6 +19,13 @@ public class PiezaDAOImpl extends PiezaDAO{
 	}
 
 	@Override
+	public List<Pieza> findByAutoId(Long autoId) {
+		return getQueryHandler().setBody("from Pieza as pieza inner join fetch pieza.autoOrigen WHERE pieza.autoOrigen.id = :autId")
+								.addParameter("autId", autoId)
+								.getResults();
+	}
+	
+	@Override
 	public List<Pieza> findByCategoria(final String categoria) {
 		return getQueryHandler().setBody("FROM Pieza WHERE categoria = :cat")
 								.addParameter("cat", categoria)
@@ -43,6 +50,7 @@ public class PiezaDAOImpl extends PiezaDAO{
 	protected RuntimeException getNotFoundObjectException(Long id) {
 		return new PiezaInexistenteException("No existe una pieza con el ID: '" + id + "'");
 	}
+
 
 //	@Override
 //	public List<Pieza> findByEstadoAndAuto(String estado,Auto auto) {

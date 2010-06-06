@@ -30,6 +30,20 @@ public class PiezaDAOMock extends PiezaDAO{
 		
 		return toReturn;
 	}
+	
+
+	@Override
+	public List<Pieza> findByAutoId(Long autoId) {
+		List<Pieza> toReturn = new ArrayList<Pieza>();
+		
+		for (Pieza pieza : this.piezas) {
+			if(pieza.getAutoOrigen().getId().equals(autoId)){
+				toReturn.add(pieza);
+			}
+		}
+		
+		return toReturn;
+	}
 
 	@Override
 	public List<Pieza> findByCategoria(String categoria) {
@@ -82,5 +96,6 @@ public class PiezaDAOMock extends PiezaDAO{
 	protected RuntimeException getNotFoundObjectException(Long id) {
 		return null;
 	}
+
 
 }

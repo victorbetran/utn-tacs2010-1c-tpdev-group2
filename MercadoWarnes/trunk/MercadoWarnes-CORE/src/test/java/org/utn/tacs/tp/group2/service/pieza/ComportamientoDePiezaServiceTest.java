@@ -84,7 +84,7 @@ public class ComportamientoDePiezaServiceTest {
 	
 	@Test
 	public void consultarPiezasByAuto() {
-		List<Pieza> piezasGivenByService = piezaService.getPiezasByAuto(this.autoA);
+		List<Pieza> piezasGivenByService = piezaService.getPiezasByAuto(this.autoA.getId().toString());
 		Assert.assertEquals(2, piezasGivenByService.size());
 		Assert.assertTrue(piezasGivenByService.contains(this.unaPiezaPremiumDeAutoA));
 		Assert.assertTrue(piezasGivenByService.contains(this.unaPiezaMediumDeAutoA));
@@ -92,7 +92,7 @@ public class ComportamientoDePiezaServiceTest {
 	
 	@Test
 	public void consulterPiezasByAutoSinResultado() {
-		List<Pieza> piezasGivenByService = piezaService.getPiezasByAuto(Auto.createAuto("", "", 2010, new Date()));
+		List<Pieza> piezasGivenByService = piezaService.getPiezasByAuto(Auto.createAuto("", "", 2010, new Date()).getId().toString());
 		Assert.assertTrue(piezasGivenByService.isEmpty());
 	}
 	

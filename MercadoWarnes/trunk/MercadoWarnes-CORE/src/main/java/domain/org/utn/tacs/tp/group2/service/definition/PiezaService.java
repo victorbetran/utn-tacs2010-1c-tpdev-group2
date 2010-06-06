@@ -2,7 +2,6 @@ package org.utn.tacs.tp.group2.service.definition;
 
 import java.util.List;
 
-import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
 /**
@@ -20,7 +19,7 @@ public interface PiezaService {
 
 	public List<Pieza> getPiezasByCategoria(String categoria);
 
-	public List<Pieza> getPiezasByAuto(Auto auto);
+	public List<Pieza> getPiezasByAuto(String autoId);
 
 	public List<Pieza> getPiezasReservadas();
 
