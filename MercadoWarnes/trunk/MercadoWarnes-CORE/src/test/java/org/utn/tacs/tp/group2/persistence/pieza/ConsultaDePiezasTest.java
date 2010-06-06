@@ -1,6 +1,7 @@
 package org.utn.tacs.tp.group2.persistence.pieza;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.utn.tacs.tp.group2.daos.exceptions.PiezaInexistenteException;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
@@ -39,18 +41,13 @@ public class ConsultaDePiezasTest {
 		this.piezaPersistida2 = new Pieza("PIEZA2",new BigDecimal(40),Moneda.Pesos);
 		this.dao.save(this.piezaPersistida2);
 
-		auto1 = new Auto();
-		auto1.setModelo("AK-47");
-		auto1.setAnio(2009);
-		auto1.setPatente("EXP-074");
-
-		auto2 = new Auto();
-		auto2.setModelo("FAST");
-		auto2.setAnio(2001);
-		auto2.setPatente("BMW-001");
-		
+		auto1 = Auto.createAuto("EXP-074", "AK-47", 2009, new Date());
+		auto2 = Auto.createAuto("FAST", "BMW-001", 2001, new Date());
 	}
 
+	/**
+	 * Consulta una pieza existente en la BD por su ID
+	 */
 	@Test
 	@Transactional
 	public void consultarPiezaPorIDTest() {
@@ -58,6 +55,15 @@ public class ConsultaDePiezasTest {
 		Assert.assertEquals("La Pieza persistida no coincide con la accedida.", piezaPersistida1,piezaObtenidoConDao);
 	}
 
+	/**
+	 * Consultar por un ID inexistente
+	 */
+	@Transactional
+	@Test(expected = PiezaInexistenteException.class)
+	public void consultarPiezaInexistenteTest() {
+		dao.findByID(new Pieza("PIEZA INEXISTENTE",new BigDecimal(40),Moneda.Pesos).getId());
+	}
+	
 	/**
 	 * Consulta una pieza existente en la BD por su Codigo
 	 */

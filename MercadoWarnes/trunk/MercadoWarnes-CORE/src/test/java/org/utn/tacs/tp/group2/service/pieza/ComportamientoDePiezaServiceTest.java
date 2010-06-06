@@ -56,7 +56,7 @@ public class ComportamientoDePiezaServiceTest {
 		Assert.assertEquals(this.unaPiezaPremiumDeAutoA, piezaGivenByService);
 	}
 
-	@Test
+	@Test()
 	public void consultarPiezaInexistente() {
 		Assert.assertNull(piezaService.getPiezaById(new Pieza("PIEZA INEXISTENTE",new BigDecimal(40),Moneda.Pesos).getId()));		
 	}

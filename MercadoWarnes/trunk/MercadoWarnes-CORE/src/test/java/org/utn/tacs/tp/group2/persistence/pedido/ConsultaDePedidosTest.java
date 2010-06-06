@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.utn.tacs.tp.group2.daos.exceptions.PedidoInexistenteException;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
@@ -42,6 +43,7 @@ public class ConsultaDePedidosTest {
 	// ********************************************
 	// ** TEST METHODS
 	// ********************************************
+
 	/**
 	 * Consulta un pedido existente en la BD por su ID
 	 */
@@ -52,6 +54,15 @@ public class ConsultaDePedidosTest {
 		Assert.assertEquals("El Pedido persistido no coincide con el accedido.", pedidoPersistido1,	pedidoFromDao);
 	}
 
+	/**
+	 * Consultar por un ID inexistente
+	 */
+	@Transactional
+	@Test(expected = PedidoInexistenteException.class)
+	public void consultarPiezaInexistenteTest() {
+		dao.findByID(new Pedido().getId());
+	}
+	
 	/**
 	 * Consulta pedidos que tiene de estado en curso.
 	 */

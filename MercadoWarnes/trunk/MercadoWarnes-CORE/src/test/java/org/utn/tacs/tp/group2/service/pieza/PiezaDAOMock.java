@@ -3,6 +3,7 @@ package org.utn.tacs.tp.group2.service.pieza;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.utn.tacs.tp.group2.daos.exceptions.PiezaInexistenteException;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
@@ -51,7 +52,7 @@ public class PiezaDAOMock extends PiezaDAO{
 			}
 		}
 		
-		return null;
+		throw new PiezaInexistenteException("");
 	}
 	
 	@Override
@@ -77,5 +78,9 @@ public class PiezaDAOMock extends PiezaDAO{
 		return null;
 	}
 
+	@Override
+	protected RuntimeException getNotFoundObjectException(Long id) {
+		return null;
+	}
 
 }
