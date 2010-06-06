@@ -35,6 +35,19 @@ public class EstadoPedido {
 	// ** FACTORY METHODS
 	// ********************************************
 
+	public static EstadoPedido estadoByDescripcion(String descripcionDeEstado) {
+		if(EN_CURSO.descripcion.equals(descripcionDeEstado)){
+			return EN_CURSO;
+		}
+		if(EFECTIVO.descripcion.equals(descripcionDeEstado)){
+			return EFECTIVO;
+		}
+		if(CANCELADO.descripcion.equals(descripcionDeEstado)){
+			return CANCELADO;
+		}
+		return null;
+	}
+
 	public static EstadoPedido getEnCurso(){
 		return EN_CURSO;
 	}
