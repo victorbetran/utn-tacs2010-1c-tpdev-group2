@@ -108,6 +108,18 @@ public class ConsultaDePiezasTest {
 		
 		assertList(this.dao.findByAuto(auto1), this.piezaPersistida1, this.piezaPersistida2);
 	}
+
+	/**
+	 * Consulta un conjunto de piezas segun el id del auto al que pertenecen.
+	 */
+	@Test
+	@Transactional
+	public void consultarPiezasPorIdDeAuto(){
+		this.piezaPersistida1.setAutoOrigen(auto1);
+		this.piezaPersistida2.setAutoOrigen(auto1);
+		
+		assertList(this.dao.findByAutoId(auto1.getId()), this.piezaPersistida1, this.piezaPersistida2);
+	}
 	
 	/**
 	 * Consulta las piezas disponibles.

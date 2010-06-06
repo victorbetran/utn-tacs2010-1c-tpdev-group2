@@ -49,6 +49,8 @@ public abstract class PiezaDAO extends AbstractDao<Pieza>{
 	 */
 	public abstract List<Pieza> findByAuto(Auto auto);
 
+	public abstract List<Pieza> findByAutoId(Long valueOf);
+
 //	/**
 //	 * Devuelve un listado con las piezas que se encuentran en un estado y forman parte de una categoria.
 //	 */

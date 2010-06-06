@@ -2,6 +2,7 @@ package org.utn.tacs.tp.group2.service.implementation;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.utn.tacs.tp.group2.daos.exceptions.PiezaInexistenteException;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pieza.Auto;
@@ -15,6 +16,7 @@ import org.utn.tacs.tp.group2.service.definition.PiezaService;
 
 public class PiezaServiceImpl implements PiezaService{
 
+	@Autowired
 	private PiezaDAO piezaDAO;
 
 //	public Pieza newPieza() {
@@ -39,8 +41,8 @@ public class PiezaServiceImpl implements PiezaService{
 		return this.piezaDAO.findAll();
 	}
 	
-	public List<Pieza> getPiezasByAuto(Auto auto) {
-		return piezaDAO.findByAuto(auto);
+	public List<Pieza> getPiezasByAuto(String autoId) {
+		return piezaDAO.findByAutoId(Long.valueOf(autoId));
 	}
 	
 	public List<Pieza> getPiezasByCategoria(String categoria) {
