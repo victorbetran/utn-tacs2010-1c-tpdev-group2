@@ -4,8 +4,17 @@ import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class PiezaDTO {
 
+	private String codigo;
+	
+	public PiezaDTO() {
+	}
+
 	public PiezaDTO(Pieza pieza) {
-		// TODO Auto-generated constructor stub
+		this.codigo = pieza.getCodigo();
+	}
+	
+	public String getCodigo() {
+		return codigo;
 	}
 
 }
