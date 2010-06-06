@@ -2,11 +2,11 @@ package org.utn.tacs.tp.group2.service.implementation;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
-import org.utn.tacs.tp.group2.pedido.EstadoPedido;
+import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pedido.Pedido;
-import org.utn.tacs.tp.group2.pedido.PedidoBuilder;
 import org.utn.tacs.tp.group2.service.definition.PedidoService;
 
 /**
@@ -15,46 +15,54 @@ import org.utn.tacs.tp.group2.service.definition.PedidoService;
 @Transactional
 public class PedidoServiceImpl implements PedidoService {
 
+	@Autowired
 	private PedidoDAO pedidoDAO;
 
+	@Autowired
+	private PiezaDAO piezaDAO;
+	
+	public Pedido crearPedido() {
+		return null;
+	}
+
+	public void agregarPieza(Long pedidoId, Long piezaId) {
+		
+	}
+
+	public void cancelarPedido(Pedido pedido) {
+		
+	}
+
+	public void efectivizarPedido(Pedido pedido) {
+		
+	}
+
+	public Pedido getPedidoById(Long id) {
+		return null;
+	}
+
+	public List<Pedido> loadPedidosByEstado(String estadoDePedido) {
+		return null;
+	}
+	
+	//********************************************
+	//** GETTER & SETTER
+	//********************************************
+	
 	public void setPedidoDAO(PedidoDAO pedidoDAO) {
 		this.pedidoDAO = pedidoDAO;
 	}
-
+	
 	public PedidoDAO getPedidoDAO() {
 		return pedidoDAO;
 	}
 
-	public void save(Pedido pedido) {
-		pedidoDAO.save(pedido);
+	public void setPiezaDAO(PiezaDAO piezaDAO) {
+		this.piezaDAO = piezaDAO;
 	}
-
-	public void delete(Pedido pedido) {
-		pedidoDAO.remove(pedido);
+	
+	public PiezaDAO getPiezaDAO() {
+		return piezaDAO;
 	}
-
-	public Pedido newPedido() {
-		Pedido pedido = new PedidoBuilder().Build();
-		this.save(pedido);
-		return pedido;
-	}
-
-	public void cancelarPedido(Pedido pedido) {
-		pedido.cancelar();
-	}
-
-	public void efectivizarPedido(Pedido pedido) {
-		pedido.efectivizar();
-	}
-
-	@Transactional(readOnly = true)
-	public Pedido loadPedidoById(Long id) {
-		return pedidoDAO.findByID(id);
-	}
-
-	@Transactional(readOnly = true)
-	public List<Pedido> loadPedidosByEstado(EstadoPedido estado) {
-		return pedidoDAO.findByEstado(estado);
-	}
-
+	
 }
