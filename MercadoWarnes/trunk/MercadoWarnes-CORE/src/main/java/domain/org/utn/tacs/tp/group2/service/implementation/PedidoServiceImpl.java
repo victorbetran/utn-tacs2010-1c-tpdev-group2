@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pedido.Pedido;
+import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.service.definition.PedidoService;
 
 /**
@@ -22,23 +23,39 @@ public class PedidoServiceImpl implements PedidoService {
 	private PiezaDAO piezaDAO;
 	
 	public Pedido crearPedido() {
-		return null;
+		Pedido pedidoNuevo = Pedido.createPedido();
+		this.pedidoDAO.save(pedidoNuevo);
+		return pedidoNuevo;
 	}
 
-	public void agregarPieza(Long pedidoId, Long piezaId) {
+	public Pedido agregarPiezaAlPedido(String pedidoId, String piezaId) {
+		Pedido pedido = this.pedidoDAO.findByID(Long.valueOf(pedidoId));
+		Pieza pieza = this.piezaDAO.findByID(Long.valueOf(piezaId));
 		
-	}
-
-	public void cancelarPedido(Pedido pedido) {
+		pedido.addPieza(pieza);
 		
+		return pedido;
+	}
+	
+	public Pedido cancelarPedido(String pedidoId) {
+		Pedido pedido = this.pedidoDAO.findByID(Long.valueOf(pedidoId));
+		pedido.cancelar();
+		return pedido;
 	}
 
-	public void efectivizarPedido(Pedido pedido) {
-		
+	public Pedido efectivizarPedido(String pedidoId) {
+		Pedido pedido = this.pedidoDAO.findByID(Long.valueOf(pedidoId));
+		pedido.efectivizar();
+		return pedido;		
 	}
 
-	public Pedido getPedidoById(Long id) {
-		return null;
+	public Pedido getPedidoById(String id) {
+		try{
+			return this.pedidoDAO.findByID(Long.valueOf(id));
+		}
+		catch (RuntimeException e) {
+			return null;
+		}
 	}
 
 	public List<Pedido> loadPedidosByEstado(String estadoDePedido) {

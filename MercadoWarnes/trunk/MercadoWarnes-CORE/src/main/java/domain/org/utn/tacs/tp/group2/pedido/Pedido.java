@@ -37,6 +37,16 @@ public class Pedido extends PersistentObject {
 	// ********************************************
 	// ** PUBLIC CONSTRUCTOR
 	// ********************************************
+	
+	public static Pedido createPedido(){
+		Pedido toReturn = new Pedido();
+		
+		toReturn.piezas = new ArrayList<Pieza>();
+		toReturn.estado = EstadoPedido.getEnCurso();
+		
+		return toReturn;
+	}
+	
 	public Pedido() {
 		
 	}
@@ -59,12 +69,6 @@ public class Pedido extends PersistentObject {
 		}
 	}
 	
-	public void inicializarPedido()
-	{
-		this.piezas = new ArrayList<Pieza>();
-		this.estado = EstadoPedido.getEnCurso();
-	}
-
 	/**
 	 * Efectiviza un pedido, vendiendo sus piezas y cambiando su estado a <i>EFECTIVO</i>.
 	 */

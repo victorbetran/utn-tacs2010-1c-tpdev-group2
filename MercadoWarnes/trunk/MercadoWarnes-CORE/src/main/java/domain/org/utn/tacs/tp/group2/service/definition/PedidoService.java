@@ -9,15 +9,16 @@ import org.utn.tacs.tp.group2.pedido.Pedido;
  */
 public interface PedidoService {
 
-	public Pedido getPedidoById(Long id);
+	public Pedido getPedidoById(String id);
 	
 	public Pedido crearPedido();
 	
-	public void agregarPieza(Long pedidoId, Long piezaId);
+	public Pedido agregarPiezaAlPedido(String pedidoId, String piezaId);
 
-	public void efectivizarPedido(Pedido pedido);
+	public Pedido efectivizarPedido(String pedidoId);
 
-	public void cancelarPedido(Pedido pedido);
+	public Pedido cancelarPedido(String pedidoId);
 
 	public List<Pedido> loadPedidosByEstado(String estadoDePedido);
+
 }
