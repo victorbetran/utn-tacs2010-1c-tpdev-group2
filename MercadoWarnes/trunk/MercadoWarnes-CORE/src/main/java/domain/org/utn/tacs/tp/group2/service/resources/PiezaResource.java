@@ -39,17 +39,16 @@ public class PiezaResource extends Resource {
 			if(pieza == null){
 				return null;
 			}
-			return new StringRepresentation(new XStream().toXML(new PiezaDTO()), MediaType.TEXT_XML);
-		} else if(consultaByAll()){
-			return this.buildAnswerFrom(this.piezaService.getAllPiezas());
+			return new StringRepresentation(new XStream().toXML(new PiezaDTO(pieza)), MediaType.TEXT_XML);
 		} else if(consultaByCategoria()){
 			return this.buildAnswerFrom(this.piezaService.getPiezasByCategoria(getCategoria()));
 		} else if(consultaByAuto()){
 			return this.buildAnswerFrom(this.piezaService.getPiezasByAuto(getAutoId()));
+		} else if(consultaByEstado()){
+			return this.buildAnswerFrom(this.piezaService.getPiezasReservadas());
+		} else{
+			return this.buildAnswerFrom(this.piezaService.getAllPiezas());
 		}
-
-		return null;
-		
 	}
 
 	private Representation buildAnswerFrom(List<Pieza> piezas){
@@ -68,12 +67,7 @@ public class PiezaResource extends Resource {
 
 	private boolean consultaById() {
 		String id = (String) getRequest().getAttributes().get("idPieza");
-		return id != null && !id.equals("all");
-	}
-	
-	private boolean consultaByAll() {
-		String id = (String) getRequest().getAttributes().get("idPieza");
-		return id != null && id.equals("all");
+		return id != null;
 	}
 	
 	private boolean consultaByCategoria() {
@@ -84,7 +78,12 @@ public class PiezaResource extends Resource {
 	private boolean consultaByAuto() {
 		String id = (String) getRequest().getAttributes().get("idAuto");
 		return id != null;
-	}	
+	}
+	
+	private boolean consultaByEstado() {
+		String id = (String) getRequest().getAttributes().get("estado");
+		return id != null;
+	}
 	
 	private Long getPiezaId(){
 		return Long.valueOf((String) getRequest().getAttributes().get("idPieza"));
@@ -96,6 +95,10 @@ public class PiezaResource extends Resource {
 	
 	private String getAutoId(){
 		return (String) getRequest().getAttributes().get("idAuto");
+	}
+
+	private String getEstado(){
+		return (String) getRequest().getAttributes().get("estado");
 	}
 	
 	//********************************************

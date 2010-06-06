@@ -40,4 +40,19 @@ public class PiezaDTO {
 	public String getAutoOrigen() {
 		return autoOrigen;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof PiezaDTO))
+			return false;
+		
+		PiezaDTO dto = (PiezaDTO) obj;
+		
+		return this.codigo.equals(dto.codigo)
+			   && this.estado.equals(dto.estado)
+			   && this.categoria.equals(dto.categoria)
+			   && this.autoOrigen.equals(dto.autoOrigen);
+		
+	}
+	
 }
