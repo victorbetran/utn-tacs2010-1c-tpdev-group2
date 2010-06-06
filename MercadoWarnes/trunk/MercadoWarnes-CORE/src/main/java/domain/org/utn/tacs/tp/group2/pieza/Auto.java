@@ -12,9 +12,25 @@ import org.utn.tacs.tp.group2.persistence.PersistentObject;
 @Table(name = "AUTO")
 public class Auto extends PersistentObject {
 
+	// *************************************************************
+	// * CONSTRUCTOR
+	// *************************************************************
+	
+	public static Auto createAuto(String patente, String modelo, Integer anio, Date fechaDesguace){
+		Auto toReturn = new Auto();
+		
+		toReturn.setPatente(patente)
+				.setModelo(modelo)
+				.setAnio(anio)
+				.setFechaDeDesguace(fechaDesguace);
+		
+		return toReturn;
+	}
+	
 	// ********************************************
 	// ** ATRIBUTTES
 	// ********************************************
+	
 	@Column(nullable = false, length = 6)
 	private String patente;
 
@@ -48,6 +64,7 @@ public class Auto extends PersistentObject {
 	// ********************************************
 	// ** GETTERS & SETTERS
 	// ********************************************
+	
 	public String getPatente() {
 		return this.patente;
 	}
