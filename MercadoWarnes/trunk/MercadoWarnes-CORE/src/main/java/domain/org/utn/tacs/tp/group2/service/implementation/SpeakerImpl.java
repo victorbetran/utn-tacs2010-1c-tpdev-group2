@@ -1,17 +1,27 @@
 package org.utn.tacs.tp.group2.service.implementation;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.jws.WebService;
-
+import org.restlet.Context;
+import org.restlet.data.MediaType;
+import org.restlet.data.Request;
+import org.restlet.data.Response;
+import org.restlet.resource.Representation;
+import org.restlet.resource.Resource;
+import org.restlet.resource.ResourceException;
+import org.restlet.resource.StringRepresentation;
+import org.restlet.resource.Variant;
+import org.springframework.stereotype.Component;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
-import org.utn.tacs.tp.group2.service.definition.Speaker;
 
-@WebService(endpointInterface="org.utn.tacs.tp.group2.service.definition.Speaker")
-public class SpeakerImpl implements Speaker{
+import com.thoughtworks.xstream.XStream;
 
-	// http://127.0.0.1:8080/mercadowarnes/speaker/talkAsMaradona
+@Component
+public class SpeakerImpl extends Resource{
+
 	public String talkAsMaradona() {
 		return "sigan mamando, es bueno para los huesos";
 	}
@@ -26,6 +36,40 @@ public class SpeakerImpl implements Speaker{
 
 	public PiezaDTO damePieza() {
 		return new PiezaDTO(new Pieza("CODIGO",new BigDecimal(99), Moneda.Dolares));
+	}
+	
+	//*************************************//
+	
+	public void init(Context context, Request request, Response response) {
+		super.init(context, request, response);
+		getVariants().add(new Variant(MediaType.TEXT_XML));
+	}
+	
+	@Override
+	public boolean allowDelete() {
+		return false;
+	}
+
+	@Override
+	public boolean allowGet() {
+		return true;
+	}
+
+	@Override
+	public boolean allowPost() {
+		return false;
+	}
+
+	@Override
+	public boolean allowPut() {
+		return false;
+	}
+	
+	public Representation represent(Variant variant) throws ResourceException {
+		XStream xStream = new XStream();
+		Set<PiezaDTO> materiasKeySet = new HashSet<PiezaDTO>();
+		materiasKeySet.add(damePieza());
+		return new StringRepresentation(xStream.toXML(materiasKeySet), MediaType.TEXT_XML);
 	}
 
 }
