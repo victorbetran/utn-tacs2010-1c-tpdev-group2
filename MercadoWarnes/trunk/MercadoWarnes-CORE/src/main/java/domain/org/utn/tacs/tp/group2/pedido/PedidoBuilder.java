@@ -9,8 +9,8 @@ public class PedidoBuilder {
 	
 	public PedidoBuilder()
 	{
-		this.pedido=new Pedido();
-		this.pedido.inicializarPedido();		
+		this.pedido = Pedido.createPedido();
+//		this.pedido.inicializarPedido();		
 	}
 	
 	
