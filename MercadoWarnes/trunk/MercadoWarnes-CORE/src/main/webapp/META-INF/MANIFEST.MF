@@ -6,27 +6,17 @@ Class-Path: activation-1.1.jar antlr-2.7.6.jar aopalliance-1.0.jar asm
  estlet.ext.simple-1.1-M4.jar com.noelios.restlet.ext.spring-1.1-M4.ja
  r commons-beanutils-1.7.0.jar commons-codec-1.2.jar commons-collectio
  ns-2.1.jar commons-dbcp-1.2.1.jar commons-httpclient-3.1.jar commons-
- lang-2.3.jar commons-logging-1.1.jar commons-pool-1.2.jar cxf-api-2.2
- .7.jar cxf-common-schemas-2.2.7.jar cxf-common-utilities-2.2.7.jar cx
- f-rt-bindings-soap-2.2.7.jar cxf-rt-bindings-xml-2.2.7.jar cxf-rt-cor
- e-2.2.7.jar cxf-rt-databinding-jaxb-2.2.7.jar cxf-rt-frontend-jaxws-2
- .2.7.jar cxf-rt-frontend-simple-2.2.7.jar cxf-rt-transports-http-2.2.
- 7.jar cxf-rt-ws-addr-2.2.7.jar cxf-tools-common-2.2.7.jar dom4j-1.6.1
+ lang-2.3.jar commons-logging-1.1.jar commons-pool-1.2.jar dom4j-1.6.1
  .jar dozer-3.3.1.jar ehcache-1.2.3.jar ejb3-persistence-1.0.1.GA.jar 
- geronimo-activation_1.1_spec-1.0.2.jar geronimo-annotation_1.0_spec-1
- .1.1.jar geronimo-javamail_1.4_spec-1.6.jar geronimo-jaxws_2.1_spec-1
- .0.jar geronimo-stax-api_1.0_spec-1.0.1.jar geronimo-ws-metadata_2.0_
- spec-1.1.2.jar hibernate-3.2.6.ga.jar hibernate-annotations-3.3.1.GA.
- jar hibernate-commons-annotations-3.0.0.ga.jar hsqldb-1.8.0.7.jar jax
- b-api-2.1.jar jaxb-impl-2.1.3.jar jta-1.1.jar log4j-1.2.14.jar logkit
- -1.0.1.jar neethi-2.0.4.jar org.json-2.0.jar org.restlet-1.1-M4.jar o
- rg.restlet.ext.jaxb-1.1-M4.jar org.restlet.ext.json-1.1-M4.jar org.re
- stlet.ext.spring-1.1-M4.jar org.simpleframework-3.1.3.jar persistence
- -api-1.0.jar saaj-api-1.3.jar saaj-impl-1.3.2.jar slf4j-api-1.6.0-alp
+ hibernate-3.2.6.ga.jar hibernate-annotations-3.3.1.GA.jar hibernate-c
+ ommons-annotations-3.0.0.ga.jar hsqldb-1.8.0.7.jar jaxb-api-2.1.jar j
+ axb-impl-2.1.3.jar jta-1.1.jar log4j-1.2.14.jar logkit-1.0.1.jar org.
+ json-2.0.jar org.restlet-1.1-M4.jar org.restlet.ext.jaxb-1.1-M4.jar o
+ rg.restlet.ext.json-1.1-M4.jar org.restlet.ext.spring-1.1-M4.jar org.
+ simpleframework-3.1.3.jar persistence-api-1.0.jar slf4j-api-1.6.0-alp
  ha2.jar slf4j-log4j12-1.6.0.jar spring-2.5.6.jar spring-beans-2.5.jar
   spring-context-2.5.6.jar spring-context-support-2.5.jar spring-core-
- 2.5.jar spring-web-2.5.jar spring-webmvc-2.5.jar stax-api-1.0-2.jar w
- sdl4j-1.6.2.jar wstx-asl-3.2.9.jar xercesImpl-2.0.2.jar xml-apis-1.0.
- b2.jar xml-resolver-1.2.jar XmlSchema-1.4.5.jar xpp3_min-1.1.3.4.O.ja
- r xstream-1.2.2.jar
+ 2.5.jar spring-web-2.5.jar spring-webmvc-2.5.jar stax-api-1.0-2.jar x
+ ercesImpl-2.0.2.jar xml-apis-1.0.b2.jar xpp3_min-1.1.3.4.O.jar xstrea
+ m-1.2.2.jar
 
