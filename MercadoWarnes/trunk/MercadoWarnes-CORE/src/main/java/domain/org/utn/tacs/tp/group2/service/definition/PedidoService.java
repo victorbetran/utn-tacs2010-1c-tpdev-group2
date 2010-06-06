@@ -2,7 +2,6 @@ package org.utn.tacs.tp.group2.service.definition;
 
 import java.util.List;
 
-import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
 /**
@@ -10,18 +9,15 @@ import org.utn.tacs.tp.group2.pedido.Pedido;
  */
 public interface PedidoService {
 
-	Pedido newPedido();
-
-	Pedido loadPedidoById(Long id);
+	public Pedido getPedidoById(Long id);
 	
-	void delete(Pedido pedido);
+	public Pedido crearPedido();
+	
+	public void agregarPieza(Long pedidoId, Long piezaId);
 
-	void save(Pedido pedido);
+	public void efectivizarPedido(Pedido pedido);
 
-	List<Pedido> loadPedidosByEstado(EstadoPedido estado);
+	public void cancelarPedido(Pedido pedido);
 
-	void efectivizarPedido(Pedido pedido);
-
-	void cancelarPedido(Pedido pedido);
-
+	public List<Pedido> loadPedidosByEstado(String estadoDePedido);
 }
