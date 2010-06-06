@@ -127,4 +127,9 @@ public class EstadoPieza {
 		return this.descripcion.equals(estado.descripcion);
 	}
 	
+	@Override
+	public String toString() {
+		return this.descripcion;
+	}
+	
 }
