@@ -1,7 +1,11 @@
 package org.utn.tacs.tp.group2.service.implementation;
 
+import java.math.BigDecimal;
+
 import javax.jws.WebService;
 
+import org.utn.tacs.tp.group2.pieza.Moneda;
+import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.service.definition.Speaker;
 
 @WebService(endpointInterface="org.utn.tacs.tp.group2.service.definition.Speaker")
@@ -18,6 +22,10 @@ public class SpeakerImpl implements Speaker{
 		if(pais.equals("brazil"))
 			return 5;
 		return 0;
+	}
+
+	public PiezaDTO damePieza() {
+		return new PiezaDTO(new Pieza("CODIGO",new BigDecimal(99), Moneda.Dolares));
 	}
 
 }

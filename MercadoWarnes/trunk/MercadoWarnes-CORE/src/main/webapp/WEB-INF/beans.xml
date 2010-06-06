@@ -14,12 +14,12 @@
 		implementor="org.utn.tacs.tp.group2.service.implementation.SpeakerImpl"
 		address="/speaker" />
 
-	<jaxws:endpoint id="piezaEndpoint"
-		implementor="org.utn.tacs.tp.group2.service.implementation.PiezaServiceImpl"
-		address="/pieza" />
+<!--	<jaxws:endpoint id="piezaEndpoint"-->
+<!--		implementor="org.utn.tacs.tp.group2.service.implementation.PiezaServiceImpl"-->
+<!--		address="/pieza" />-->
 
-	<jaxws:endpoint id="pedidoEndpoint"
-		implementor="org.utn.tacs.tp.group2.service.implementation.PedidoServiceImpl"
-		address="/pedido" />
+<!--	<jaxws:endpoint id="pedidoEndpoint"-->
+<!--		implementor="org.utn.tacs.tp.group2.service.implementation.PedidoServiceImpl"-->
+<!--		address="/pedido" />-->
 
 </beans>
