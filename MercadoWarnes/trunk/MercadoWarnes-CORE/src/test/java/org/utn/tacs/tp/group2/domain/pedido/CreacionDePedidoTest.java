@@ -1,6 +1,5 @@
 package org.utn.tacs.tp.group2.domain.pedido;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.Assert;
@@ -38,7 +37,7 @@ public class CreacionDePedidoTest {
 	}
 	
 	/**
-	 * Controla la adición de una pieza a un pedido.
+	 * Controla la adiciï¿½n de una pieza a un pedido.
 	 */
 	@Test
 	public void agregarPieza(){
@@ -51,7 +50,7 @@ public class CreacionDePedidoTest {
 	}
 
 	/**
-	 * Controla la adición de piezas a un pedido.
+	 * Controla la adiciï¿½n de piezas a un pedido.
 	 */
 	@Test
 	public void agregarPiezas(){

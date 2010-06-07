@@ -33,7 +33,7 @@ public class PiezaTest {
 
 	/**
 	 * Una pieza que no fue reservada no puede ser vendida. Una pieza
-	 * DISPONIBLE, implica que no está RESERVADA.
+	 * DISPONIBLE, implica que no estï¿½ RESERVADA.
 	 */
 	@Test(expected = PiezaNoReservadaException.class)
 	public void venderUnaPiezaDisponible() {
@@ -41,7 +41,7 @@ public class PiezaTest {
 	}
 
 	/**
-	 * Una pieza sólo puede venderse si fue reservada.
+	 * Una pieza sï¿½lo puede venderse si fue reservada.
 	 */
 	@Test
 	public void venderUnaPiezaReservada() {
@@ -73,7 +73,7 @@ public class PiezaTest {
 	}
 
 	/**
-	 * Una pieza sólo puede reservarse si está DISPONIBLE.
+	 * Una pieza sï¿½lo puede reservarse si estï¿½ DISPONIBLE.
 	 */
 	@Test
 	public void reservarUnaPiezaDisponible() {
@@ -116,7 +116,7 @@ public class PiezaTest {
 	 * Obtener el valor de la pieza en pesos con precio en dolares
 	 */
 	public void obtenerValorDePiezaEnDolaresAPesos() {
-		Pieza pieza=new Pieza("",10,Moneda.Dolares);
+		pieza = new Pieza("",10,Moneda.Dolares);
 		Precio.setCotizacionDolaresAPesos(4);
 		double precio = this.pieza.getPrecioEn(Moneda.Pesos);
 		Assert.assertEquals(precio, 40);
@@ -133,8 +133,8 @@ public class PiezaTest {
 	 * Obtener el valor de la pieza en dolares con precio en dolares
 	 */
 	public void obtenerValorDePiezaEnDolaresADolares() {
-		Pieza pieza=new Pieza("",10,Moneda.Dolares);		
-		double precio = this.pieza.getPrecioEn(Moneda.Dolares);
+		Pieza pieza = new Pieza("",10,Moneda.Dolares);		
+		double precio = pieza.getPrecioEn(Moneda.Dolares);
 		Assert.assertEquals(precio, 10);
 	}
 
