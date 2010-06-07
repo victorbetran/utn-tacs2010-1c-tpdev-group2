@@ -1,7 +1,5 @@
 package org.utn.tacs.tp.group2.pieza;
 
-import java.math.BigDecimal;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;

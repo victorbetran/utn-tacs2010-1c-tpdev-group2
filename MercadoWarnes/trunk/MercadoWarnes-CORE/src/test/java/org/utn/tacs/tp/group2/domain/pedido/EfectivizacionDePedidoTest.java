@@ -1,8 +1,6 @@
 package org.utn.tacs.tp.group2.domain.pedido;
 
 
-import java.math.BigDecimal;
-
 import junit.framework.Assert;
 
 import org.junit.Before;
@@ -39,7 +37,7 @@ public class EfectivizacionDePedidoTest {
 
 	/**
 	 * Verifica que las piezas de un pedido queden VENDIDAS ante la
-	 * efectivización del pedido.
+	 * efectivizaciï¿½n del pedido.
 	 */
 	@Test
 	public void efectivizarPedidoVerificandoPiezasVendidas() {

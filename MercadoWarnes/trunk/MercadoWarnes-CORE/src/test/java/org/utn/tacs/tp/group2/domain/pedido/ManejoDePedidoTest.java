@@ -1,8 +1,6 @@
 package org.utn.tacs.tp.group2.domain.pedido;
 
 
-import java.math.BigDecimal;
-
 import junit.framework.Assert;
 
 import org.junit.Before;

@@ -1,7 +1,5 @@
 package org.utn.tacs.tp.group2.pieza;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -51,8 +49,6 @@ public class Precio {
 		return valor;
 	}
 
-	
-
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
@@ -65,7 +61,6 @@ public class Precio {
 		this.moneda = moneda;
 	}
 
-
 	public double getValorEn(Moneda moneda) {
 		if (this.moneda.equals(moneda))
 			return this.getValor();
@@ -73,7 +68,6 @@ public class Precio {
 			return this.convertirValorAMoneda(moneda);		
 		
 	}
-
 
 	private double convertirValorAMoneda(Moneda moneda2) {		
 		if (this.moneda.equals(Moneda.Pesos))
