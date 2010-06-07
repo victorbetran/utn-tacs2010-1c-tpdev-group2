@@ -22,6 +22,10 @@ public interface PiezaService {
 	public List<Pieza> getPiezasByAuto(String autoId);
 
 	public List<Pieza> getPiezasReservadas();
+	
+	public List<Pieza> getPiezasVendidasByAuto(String autoId);
+	
+	public int getPorcentajePiezasVendidasByAuto(String autoId);
 
 	public List<Pieza> getAllPiezas();	
 	

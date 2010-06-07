@@ -12,7 +12,7 @@ import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.service.definition.PedidoService;
 
 /**
- * Implementaci�n del Servicio de Pedidos.
+ * Implementacion del Servicio de Pedidos.
  */
 @Transactional
 public class PedidoServiceImpl implements PedidoService {
