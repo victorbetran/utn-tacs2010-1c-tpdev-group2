@@ -45,15 +45,24 @@ public class ConsultaDePedidosTest {
 	// ********************************************
 
 	/**
-	 * Consulta un pedido existente en la BD por su ID
+	 * Consulta un pedido existente en la BD.
 	 */
 	@Test
 	@Transactional
-	public void consultarPedidoPorIDTest() {
+	public void consultarPedidoPersistidoTest() {
 		Pedido pedidoFromDao = dao.findByID(pedidoPersistido1.getId());
 		Assert.assertEquals("El Pedido persistido no coincide con el accedido.", pedidoPersistido1,	pedidoFromDao);
 	}
 
+	/**
+	 * Consulta un pedido existente en la BD por su ID
+	 */
+	@Test
+	@Transactional
+	public void consultarPedidoPersistidoPorIdTest() {
+		Assert.assertTrue("El Pedido persistido no es encontrado por su ID.", dao.existsId(pedidoPersistido1.getId()));
+	}
+	
 	/**
 	 * Consultar por un ID inexistente
 	 */

@@ -37,13 +37,13 @@ public class EstadoPedido {
 
 	public static EstadoPedido estadoByDescripcion(String descripcionDeEstado) {
 		if(EN_CURSO.descripcion.equals(descripcionDeEstado)){
-			return EN_CURSO;
+			return getEnCurso();
 		}
 		if(EFECTIVO.descripcion.equals(descripcionDeEstado)){
-			return EFECTIVO;
+			return getEfectivo();
 		}
 		if(CANCELADO.descripcion.equals(descripcionDeEstado)){
-			return CANCELADO;
+			return getCancelado();
 		}
 		return null;
 	}
