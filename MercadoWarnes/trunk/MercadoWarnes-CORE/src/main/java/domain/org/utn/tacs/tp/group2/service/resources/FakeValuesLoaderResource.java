@@ -43,19 +43,19 @@ public class FakeValuesLoaderResource extends Resource{
 			Auto autoA = Auto.createAuto("EXP-074", "AK-47", 2009, new Date());
 			Auto autoB = Auto.createAuto("EXP-174", "AK-47", 2009, new Date());
 			
-			unaPiezaPremiumDeAutoA = new Pieza("PIEZA 1",new BigDecimal(50),Moneda.Dolares);
+			unaPiezaPremiumDeAutoA = new Pieza("PIEZA 1",50,Moneda.Dolares);
 			unaPiezaPremiumDeAutoA.setCategoria("PREMIUM");
 			unaPiezaPremiumDeAutoA.setAutoOrigen(autoA);
 			
-			unaPiezaMediumDeAutoA = new Pieza("PIEZA 2",new BigDecimal(22),Moneda.Pesos);
+			unaPiezaMediumDeAutoA = new Pieza("PIEZA 2",22,Moneda.Pesos);
 			unaPiezaMediumDeAutoA.setCategoria("MEDIUM");
 			unaPiezaMediumDeAutoA.setAutoOrigen(autoA);
 			
-			otraPiezaMediumDeAutoA = new Pieza("PIEZA 3",new BigDecimal(45),Moneda.Pesos);
+			otraPiezaMediumDeAutoA = new Pieza("PIEZA 3",45,Moneda.Pesos);
 			otraPiezaMediumDeAutoA.setCategoria("MEDIUM");
 			otraPiezaMediumDeAutoA.setAutoOrigen(autoA);
 			
-			unaPiezaMediumDeAutoB = new Pieza("PIEZA 12",new BigDecimal(25),Moneda.Pesos);
+			unaPiezaMediumDeAutoB = new Pieza("PIEZA 12",25,Moneda.Pesos);
 			unaPiezaMediumDeAutoB.setCategoria("MEDIUM");
 			unaPiezaMediumDeAutoB.setAutoOrigen(autoB);
 			

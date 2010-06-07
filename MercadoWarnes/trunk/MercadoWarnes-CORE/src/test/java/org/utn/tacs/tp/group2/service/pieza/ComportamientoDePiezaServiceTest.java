@@ -33,15 +33,15 @@ public class ComportamientoDePiezaServiceTest {
 		autoA = Auto.createAuto("EXP-074", "AK-47", 2009, new Date());
 		autoB = Auto.createAuto("EXP-077", "AKA-47", 2002, new Date());
 		
-		unaPiezaPremiumDeAutoA = new Pieza("PIEZA 1",new BigDecimal(50),Moneda.Dolares);
+		unaPiezaPremiumDeAutoA = new Pieza("PIEZA 1",50,Moneda.Dolares);
 		unaPiezaPremiumDeAutoA.setCategoria("PREMIUM");
 		unaPiezaPremiumDeAutoA.setAutoOrigen(autoA);
 		
-		unaPiezaMediumDeAutoA = new Pieza("PIEZA 2",new BigDecimal(22),Moneda.Pesos);
+		unaPiezaMediumDeAutoA = new Pieza("PIEZA 2",22,Moneda.Pesos);
 		unaPiezaMediumDeAutoA.setCategoria("MEDIUM");
 		unaPiezaMediumDeAutoA.setAutoOrigen(autoA);
 		
-		unaPiezaMediumDeAutoB = new Pieza("PIEZA 3",new BigDecimal(45),Moneda.Pesos);
+		unaPiezaMediumDeAutoB = new Pieza("PIEZA 3",45,Moneda.Pesos);
 		unaPiezaMediumDeAutoB.setCategoria("MEDIUM");
 		unaPiezaMediumDeAutoB.setAutoOrigen(autoB);
 		
@@ -58,7 +58,7 @@ public class ComportamientoDePiezaServiceTest {
 
 	@Test()
 	public void consultarPiezaInexistente() {
-		Assert.assertNull(piezaService.getPiezaById(new Pieza("PIEZA INEXISTENTE",new BigDecimal(40),Moneda.Pesos).getId()));		
+		Assert.assertNull(piezaService.getPiezaById(new Pieza("PIEZA INEXISTENTE",40,Moneda.Pesos).getId()));		
 	}
 	
 	@Test

@@ -40,7 +40,7 @@ public class Pieza extends PersistentObject {
 	// ********************************************
 	// ** PUBLIC CONSTRUCTOR
 	// ********************************************
-	public Pieza(String codigo,BigDecimal precio,Moneda moneda) {
+	public Pieza(String codigo,double precio,Moneda moneda) {
 		this.estado = EstadoPieza.getEstadoDisponible();
 		this.codigo = codigo;
 		this.precio=new Precio(moneda,precio);
@@ -195,5 +195,10 @@ public class Pieza extends PersistentObject {
 	public void setEstado(EstadoPieza estado) {
 		this.estado = estado;
 	}
+	
+	public double getPrecioEn(Moneda moneda) {
+		return this.precio.getValorEn(moneda);
+	}
+
 	
 }

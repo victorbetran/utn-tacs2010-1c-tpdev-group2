@@ -15,14 +15,26 @@ public class Precio {
 	private Moneda moneda;
 	
 	@Column
-	private BigDecimal valor;
+	private double valor;
+	
+	private static double cotizacionDolaresAPesos=3.90;
 	
 	
 	// ********************************************
 	// ** PUBLIC CONSTRUCTOR
 	// ********************************************
 	
-	public Precio(Moneda moneda, BigDecimal valor) {		
+	public static double getCotizacionDolaresAPesos() {
+		return cotizacionDolaresAPesos;
+	}
+
+
+	public static void setCotizacionDolaresAPesos(double cotizacionDolaresAPesos) {
+		Precio.cotizacionDolaresAPesos = cotizacionDolaresAPesos;
+	}
+
+
+	public Precio(Moneda moneda, double valor) {		
 		this.moneda = moneda;
 		this.valor = valor;
 	}
@@ -35,13 +47,13 @@ public class Precio {
 	// ** GETTERS & SETTERS
 	// ********************************************
 
-	public BigDecimal getValor() {
+	public double getValor() {
 		return valor;
 	}
 
 	
 
-	public void setValor(BigDecimal valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 
@@ -51,5 +63,22 @@ public class Precio {
 
 	public void setMoneda(Moneda moneda) {
 		this.moneda = moneda;
+	}
+
+
+	public double getValorEn(Moneda moneda) {
+		if (this.moneda.equals(moneda))
+			return this.getValor();
+		else
+			return this.convertirValorAMoneda(moneda);		
+		
+	}
+
+
+	private double convertirValorAMoneda(Moneda moneda2) {		
+		if (this.moneda.equals(Moneda.Pesos))
+			return this.valor / cotizacionDolaresAPesos;
+		else
+			return this.valor * cotizacionDolaresAPesos;
 	}
 }

@@ -1,6 +1,5 @@
 package org.utn.tacs.tp.group2.service.pedido;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -43,7 +42,7 @@ public class ComportamientoDePedidoServiceTest {
 		pedidoSinPiezas = Pedido.createPedido();
 		pedidoConUnaPieza = Pedido.createPedido();
 
-		piezaAgregadaAPedido = new Pieza("CODE!", new BigDecimal(12), Moneda.Pesos);
+		piezaAgregadaAPedido = new Pieza("CODE!", 12, Moneda.Pesos);
 		pedidoConUnaPieza.addPieza(piezaAgregadaAPedido);
 		
 		piezaDAO.save(piezaAgregadaAPedido);
@@ -71,7 +70,7 @@ public class ComportamientoDePedidoServiceTest {
 	
 	@Test
 	public void agregarPiezaAPedidoSinPiezas() {
-		Pieza unaPieza = new Pieza("AZF-2221", new BigDecimal(64), Moneda.Pesos);
+		Pieza unaPieza = new Pieza("AZF-2221", 64, Moneda.Pesos);
 		this.piezaDAO.save(unaPieza);
 		
 		Assert.assertEquals(this.pedidoSinPiezas,this.pedidoService.agregarPiezaAlPedido(this.pedidoSinPiezas.getId().toString(), unaPieza.getId().toString()));
@@ -84,7 +83,7 @@ public class ComportamientoDePedidoServiceTest {
 
 	@Test
 	public void agregarPiezaAPedidoConUnaPieza() {
-		Pieza unaPieza = new Pieza("AZF-2221", new BigDecimal(64), Moneda.Pesos);
+		Pieza unaPieza = new Pieza("AZF-2221", 64, Moneda.Pesos);
 		this.piezaDAO.save(unaPieza);
 		Assert.assertEquals(this.pedidoConUnaPieza,this.pedidoService.agregarPiezaAlPedido(this.pedidoConUnaPieza.getId().toString(), unaPieza.getId().toString()));
 		
