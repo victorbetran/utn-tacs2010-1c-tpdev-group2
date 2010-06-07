@@ -91,11 +91,26 @@ public class PiezaDAOMock extends PiezaDAO{
 	public Pieza findByCodigo(String codigo) {
 		return null;
 	}
+	
+	@Override
+	public List<Pieza> findByEstadoAndAutoId(EstadoPieza estado, Long autoId) {
+		List<Pieza> toReturn = new ArrayList<Pieza>();
+		
+		for (Pieza pieza : this.piezas) {
+			if(pieza.getAutoOrigen().getId().equals(autoId) && pieza.getEstado().equals(estado)){
+				toReturn.add(pieza);
+			}
+		}
+		
+		return toReturn;
+	}
+
 
 	@Override
 	protected RuntimeException getNotFoundObjectException(Long id) {
 		return null;
 	}
+
 
 
 }

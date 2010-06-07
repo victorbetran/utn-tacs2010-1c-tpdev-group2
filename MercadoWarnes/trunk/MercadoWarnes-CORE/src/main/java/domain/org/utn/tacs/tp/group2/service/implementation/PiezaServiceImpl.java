@@ -10,7 +10,7 @@ import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.service.definition.PiezaService;
 
 /**
- * Implementaci�n del Servicio de Piezas.
+ * Implementacion del Servicio de Piezas.
  */
 
 public class PiezaServiceImpl implements PiezaService{
@@ -40,6 +40,17 @@ public class PiezaServiceImpl implements PiezaService{
 	
 	public List<Pieza> getPiezasReservadas() {
 		return piezaDAO.findByEstado(EstadoPieza.getEstadoReservada());
+	}
+	
+	public List<Pieza> getPiezasVendidasByAuto(String autoId) {
+		return piezaDAO.findByEstadoAndAutoId(EstadoPieza.getEstadoVendida(), Long.valueOf(autoId));
+	}
+	
+	public int getPorcentajePiezasVendidasByAuto(String autoId) {
+		int numeroPiezasVendidas = this.getPiezasByAuto(autoId).size();
+		int numeroPiezasVendidasByAuto = this.getPiezasVendidasByAuto(autoId).size();
+				
+		return (numeroPiezasVendidasByAuto*100)/numeroPiezasVendidas;
 	}
 
 	// ********************************************

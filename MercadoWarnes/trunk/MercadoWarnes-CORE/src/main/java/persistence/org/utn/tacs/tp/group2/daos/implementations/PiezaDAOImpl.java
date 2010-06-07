@@ -45,12 +45,20 @@ public class PiezaDAOImpl extends PiezaDAO{
 								.addParameter("est", estado)
 								.getResults();
 	}
+	
+	@Override
+	public List<Pieza> findByEstadoAndAutoId(EstadoPieza estado, Long autoId) {
+		// TODO: TEST en la parte de DAOS!
+		return getQueryHandler().setBody("from Pieza as pieza inner join fetch pieza.autoOrigen WHERE pieza.autoOrigen.id = :autId AND pieza.estado = :est")
+				.addParameter("est", estado)
+				.addParameter("autId", autoId)
+				.getResults();
+	}
 
 	@Override
 	protected RuntimeException getNotFoundObjectException(Long id) {
 		return new PiezaInexistenteException("No existe una pieza con el ID: '" + id + "'");
 	}
-
 
 //	@Override
 //	public List<Pieza> findByEstadoAndAuto(String estado,Auto auto) {

@@ -98,7 +98,10 @@ public class ComportamientoDePiezaServiceTest {
 	
 	@Test
 	public void consultarPorcentajePiezasVendidasDeUnAuto() {
-		// TODO: hacer.
+		this.unaPiezaPremiumDeAutoA.reservar();
+		this.unaPiezaPremiumDeAutoA.vender();
+		int porcentaje = piezaService.getPorcentajePiezasVendidasByAuto(this.autoA.getId().toString());
+		Assert.assertEquals(porcentaje, 50);
 	}
 
 	@Test

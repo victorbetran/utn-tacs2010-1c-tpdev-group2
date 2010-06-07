@@ -59,7 +59,7 @@ public class ConsultaDePedidosTest {
 	 */
 	@Transactional
 	@Test(expected = PedidoInexistenteException.class)
-	public void consultarPiezaInexistenteTest() {
+	public void consultarPedidoInexistenteTest() {
 		dao.findByID(new Pedido().getId());
 	}
 	
