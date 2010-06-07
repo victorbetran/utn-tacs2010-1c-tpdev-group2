@@ -27,7 +27,11 @@ public abstract class AbstractDao<T extends PersistentObject> extends HibernateD
 	}
 
 	public Boolean isPersisted(T t) {
-		return this.getHibernateTemplate().get(getGenericClass(), t.getId()) != null;
+		return this.existsId(t.getId());
+	}
+	
+	public Boolean existsId(Long id){
+		return this.getHibernateTemplate().get(getGenericClass(), id) != null;
 	}
 	
 	@SuppressWarnings("unchecked")

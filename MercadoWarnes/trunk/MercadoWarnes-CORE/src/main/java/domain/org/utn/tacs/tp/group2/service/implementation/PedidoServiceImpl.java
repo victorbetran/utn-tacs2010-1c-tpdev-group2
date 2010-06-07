@@ -23,12 +23,14 @@ public class PedidoServiceImpl implements PedidoService {
 	@Autowired
 	private PiezaDAO piezaDAO;
 	
+	@Transactional
 	public Pedido crearPedido() {
 		Pedido pedidoNuevo = Pedido.createPedido();
 		this.pedidoDAO.save(pedidoNuevo);
 		return pedidoNuevo;
 	}
 
+	@Transactional
 	public Pedido agregarPiezaAlPedido(String pedidoId, String piezaId) {
 		Pedido pedido = this.pedidoDAO.findByID(Long.valueOf(pedidoId));
 		Pieza pieza = this.piezaDAO.findByID(Long.valueOf(piezaId));
@@ -38,6 +40,7 @@ public class PedidoServiceImpl implements PedidoService {
 		return pedido;
 	}
 	
+	@Transactional
 	public Pedido cancelarPedido(String pedidoId) {
 		try{
 			Pedido pedido = this.pedidoDAO.findByID(Long.valueOf(pedidoId));
@@ -48,6 +51,7 @@ public class PedidoServiceImpl implements PedidoService {
 		}
 	}
 
+	@Transactional
 	public Pedido efectivizarPedido(String pedidoId) {
 		try{
 			Pedido pedido = this.pedidoDAO.findByID(Long.valueOf(pedidoId));
@@ -58,6 +62,7 @@ public class PedidoServiceImpl implements PedidoService {
 		}
 	}
 
+	@Transactional
 	public Pedido getPedidoById(String id) {
 		try{
 			return this.pedidoDAO.findByID(Long.valueOf(id));
@@ -66,7 +71,7 @@ public class PedidoServiceImpl implements PedidoService {
 			return null;
 		}
 	}
-
+	
 	public List<Pedido> getPedidosByEstado(String estadoDePedido) {
 		return this.pedidoDAO.findByEstado(EstadoPedido.estadoByDescripcion(estadoDePedido));
 	}

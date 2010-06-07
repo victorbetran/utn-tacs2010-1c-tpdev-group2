@@ -40,10 +40,10 @@
 				<entry key="/pieza-byState/{estado}">
 					<ref bean="piezaEndpoint" />
 				</entry>
-				<entry key="/pedido-byId/{idPedido}">
-					<ref bean="pedidoEndpoint" />
+				<entry key="/pedido-create">
+					<ref bean="creadorPedidoEndpoint" />
 				</entry>
-				<entry key="/pedido-all/{estado}">
+				<entry key="/pedido-byId/{idPedido}">
 					<ref bean="pedidoEndpoint" />
 				</entry>
 				<entry key="/pedido-byState/{estado}">
@@ -65,6 +65,10 @@
 
 	<bean id="pedidoEndpoint" class="org.restlet.ext.spring.SpringFinder">
 		<lookup-method name="createResource" bean="pedidoResource" />
+	</bean>
+
+	<bean id="creadorPedidoEndpoint" class="org.restlet.ext.spring.SpringFinder">
+		<lookup-method name="createResource" bean="creadorPedidoResource" />
 	</bean>
 
 	<bean id="fakeValuesLoaderEndpoint" class="org.restlet.ext.spring.SpringFinder">
