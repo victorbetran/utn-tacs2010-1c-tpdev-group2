@@ -23,8 +23,8 @@ public class EfectivizacionDePedidoTest {
 	@Before
 	public void setUp() throws Exception {
 		this.pedido = new PedidoBuilder().Build();
-		this.unaPieza = new Pieza("P-987",new BigDecimal(30),Moneda.Pesos);
-		this.otraPieza = new Pieza("6-985",new BigDecimal(30),Moneda.Pesos);
+		this.unaPieza = new Pieza("P-987",30,Moneda.Pesos);
+		this.otraPieza = new Pieza("6-985",30,Moneda.Pesos);
 	}
 
 	/**

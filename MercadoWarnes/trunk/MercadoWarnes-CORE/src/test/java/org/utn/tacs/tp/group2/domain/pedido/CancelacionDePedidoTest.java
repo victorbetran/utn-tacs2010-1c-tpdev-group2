@@ -1,7 +1,5 @@
 package org.utn.tacs.tp.group2.domain.pedido;
 
-import java.math.BigDecimal;
-
 import junit.framework.Assert;
 
 import org.junit.Before;
@@ -47,7 +45,7 @@ public class CancelacionDePedidoTest {
 	 */
 	@Test (expected=CancelacionDePedidoException.class)
 	public void cancelarUnPedidoEfectivo(){		
-		this.pedido.addPieza(new Pieza("Z-456",new BigDecimal(30),Moneda.Dolares));
+		this.pedido.addPieza(new Pieza("Z-456",30,Moneda.Dolares));
 		this.pedido.efectivizar();
 		this.pedido.cancelar();
 	}

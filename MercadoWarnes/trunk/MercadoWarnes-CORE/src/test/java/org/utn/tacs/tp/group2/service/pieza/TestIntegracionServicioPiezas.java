@@ -50,10 +50,10 @@ public class TestIntegracionServicioPiezas {
 		autoConPiezas = Auto.createAuto("EXP-074", "AK-47", 2009, new Date());
 		autoSinPiezas = Auto.createAuto("FAST", "BMW-001", 2001, new Date());
 		
-		this.unaPiezaModelo = new Pieza("PIEZA1",new BigDecimal(40),Moneda.Pesos).setAutoOrigen(autoConPiezas);
+		this.unaPiezaModelo = new Pieza("PIEZA1",40,Moneda.Pesos).setAutoOrigen(autoConPiezas);
 		this.unaPiezaModelo.setCategoria("MEDIUM");
 		
-		this.otraPiezaModelo = new Pieza("PIEZA2",new BigDecimal(40),Moneda.Pesos).setAutoOrigen(autoConPiezas);
+		this.otraPiezaModelo = new Pieza("PIEZA2",40,Moneda.Pesos).setAutoOrigen(autoConPiezas);
 		this.otraPiezaModelo.setCategoria("MEDIUM");
 		
 		this.piezaDao.save(this.unaPiezaModelo);
@@ -74,7 +74,7 @@ public class TestIntegracionServicioPiezas {
 	@Transactional
 	@Test
 	public void codigoRespuestaConsultandoUnaPiezaInexistentePorId(){
-		Response response = router.get("/pieza-byId/" + new Pieza("",new BigDecimal(20),Moneda.Dolares).getId());
+		Response response = router.get("/pieza-byId/" + new Pieza("",20,Moneda.Dolares).getId());
 		Assert.assertEquals(Status.CLIENT_ERROR_NOT_FOUND, response.getStatus());
 	}
 	
