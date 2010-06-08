@@ -44,6 +44,8 @@ public class Pedido extends PersistentObject {
 		toReturn.piezas = new ArrayList<Pieza>();
 		toReturn.estado = EstadoPedido.getEnCurso();
 		
+		TheLogger.getConsoleLogger().debug("Se crea el pedido:{}", toReturn);
+		
 		return toReturn;
 	}
 	

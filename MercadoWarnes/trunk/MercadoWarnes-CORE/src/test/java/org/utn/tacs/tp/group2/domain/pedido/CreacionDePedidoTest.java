@@ -6,8 +6,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaReservadaException;
+import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
-import org.utn.tacs.tp.group2.pedido.PedidoBuilder;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
@@ -20,11 +20,17 @@ public class CreacionDePedidoTest {
 	
 	@Before
 	public void setUp(){
-		
 		this.piezaDisponible = new Pieza("W-894",30,Moneda.Dolares);
 		this.otraPiezaDisponible = new Pieza("K-666",30,Moneda.Dolares);
 		this.piezaNoDisponible = new Pieza("N-000",30,Moneda.Dolares).reservar();
-		this.pedido = new PedidoBuilder().Build();
+		this.pedido = Pedido.createPedido();
+	}
+
+	@Test
+	public void creacionEInicializacion() {
+		Assert.assertNotNull(this.pedido.getPiezas());
+		Assert.assertTrue(this.pedido.getPiezas().isEmpty());
+		Assert.assertEquals(EstadoPedido.getEnCurso(), this.pedido.getEstado());
 	}
 	
 	

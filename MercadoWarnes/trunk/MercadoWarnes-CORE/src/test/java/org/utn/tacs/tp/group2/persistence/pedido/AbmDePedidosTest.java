@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.pedido.Pedido;
-import org.utn.tacs.tp.group2.pedido.PedidoBuilder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})
@@ -24,7 +23,7 @@ public class AbmDePedidosTest {
 
 	@Before
 	public void setUp() {
-		this.pedidoPersistido = new PedidoBuilder().Build();
+		this.pedidoPersistido = Pedido.createPedido();
 		this.dao.save(this.pedidoPersistido);
 
 		this.pedidoPersistidoFromDao = this.dao.findByID(pedidoPersistido.getId());

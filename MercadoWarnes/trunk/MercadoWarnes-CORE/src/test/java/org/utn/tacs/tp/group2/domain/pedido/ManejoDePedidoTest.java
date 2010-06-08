@@ -6,7 +6,6 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.utn.tacs.tp.group2.pedido.Pedido;
-import org.utn.tacs.tp.group2.pedido.PedidoBuilder;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
@@ -19,7 +18,7 @@ public class ManejoDePedidoTest {
 	
 	@Before
 	public void setUp(){
-		this.pedido = new PedidoBuilder().Build();
+		this.pedido = Pedido.createPedido();
 		
 		this.pieza1 = new Pieza("A-123",30,Moneda.Dolares);
 		this.pieza2 = new Pieza("B-369",30,Moneda.Pesos);
