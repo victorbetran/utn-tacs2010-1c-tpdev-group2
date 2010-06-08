@@ -72,6 +72,7 @@ public class PedidoServiceImpl implements PedidoService {
 		}
 	}
 	
+	@Transactional	
 	public List<Pedido> getPedidosByEstado(String estadoDePedido) {
 		return this.pedidoDAO.findByEstado(EstadoPedido.estadoByDescripcion(estadoDePedido));
 	}
