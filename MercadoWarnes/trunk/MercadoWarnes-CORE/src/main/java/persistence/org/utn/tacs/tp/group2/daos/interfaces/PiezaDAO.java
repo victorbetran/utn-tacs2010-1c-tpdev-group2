@@ -53,6 +53,13 @@ public abstract class PiezaDAO extends AbstractDao<Pieza>{
 
 	public abstract List<Pieza> findByEstadoAndAutoId(EstadoPieza estado, Long autoId);
 
+	public Pieza getByID(Long id) {
+		if( this.getHibernateTemplate().get(Pieza.class, id) == null ){
+			throw getNotFoundObjectException(id);
+		}
+		return (Pieza) this.getHibernateTemplate().get(Pieza.class, id);
+	}
+
 //	/**
 //	 * Devuelve un listado con las piezas que se encuentran en un estado y forman parte de una categoria.
 //	 */
