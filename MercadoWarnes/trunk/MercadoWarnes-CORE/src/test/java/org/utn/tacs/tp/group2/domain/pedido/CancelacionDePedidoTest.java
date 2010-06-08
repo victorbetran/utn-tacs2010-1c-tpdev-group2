@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.utn.tacs.tp.group2.exceptions.pedido.CancelacionDePedidoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoCanceladoException;
 import org.utn.tacs.tp.group2.pedido.Pedido;
-import org.utn.tacs.tp.group2.pedido.PedidoBuilder;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
@@ -24,7 +23,7 @@ public class CancelacionDePedidoTest {
 	//********************************************
 	@Before
 	public void setUp(){
-		this.pedido = new PedidoBuilder().Build();		
+		this.pedido = Pedido.createPedido();	
 	}
 
 	

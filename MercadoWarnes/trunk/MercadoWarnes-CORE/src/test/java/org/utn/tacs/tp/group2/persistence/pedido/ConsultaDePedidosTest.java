@@ -14,7 +14,6 @@ import org.utn.tacs.tp.group2.daos.exceptions.PedidoInexistenteException;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
-import org.utn.tacs.tp.group2.pedido.PedidoBuilder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})
@@ -32,10 +31,10 @@ public class ConsultaDePedidosTest {
 	@Before
 	public void setUp() {
 
-		this.pedidoPersistido1 = new PedidoBuilder().Build();
+		this.pedidoPersistido1 = Pedido.createPedido();
 		this.dao.save(this.pedidoPersistido1);
 
-		this.pedidoPersistido2 = new PedidoBuilder().Build();
+		this.pedidoPersistido2 = Pedido.createPedido();
 		this.dao.save(this.pedidoPersistido2);
 
 	}
