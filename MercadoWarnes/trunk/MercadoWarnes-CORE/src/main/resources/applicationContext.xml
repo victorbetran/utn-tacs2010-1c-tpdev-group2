@@ -52,7 +52,7 @@
 				<entry key="/pedido-byId/{idPedido}/addPieza/{idPieza}">
 					<ref bean="pedidoEndpoint" />
 				</entry>
-				<entry key="/pedido-byid/{idPedido}/{accion}">
+				<entry key="/pedido-byId/{idPedido}/{accion}">
 					<ref bean="pedidoEndpoint" />
 				</entry>
 			</map>

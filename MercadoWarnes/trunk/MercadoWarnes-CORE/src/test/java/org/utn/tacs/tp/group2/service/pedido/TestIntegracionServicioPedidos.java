@@ -1,6 +1,7 @@
 package org.utn.tacs.tp.group2.service.pedido;
 
 import java.io.IOException;
+import java.util.List;
 
 import junit.framework.Assert;
 
@@ -16,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
+import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
@@ -36,32 +38,38 @@ public class TestIntegracionServicioPedidos {
 	@Autowired
 	private PedidoDAO pedidoDao;
 
-	private Pedido unPedidoModelo;
-	private PedidoDTO unPedidoDTO;
+	private Pedido unPedidoModeloSinPieza;
+	private PedidoDTO unPedidoSinPiezaDTO;
+
+	private Pedido unPedidoModeloConPieza;
 	
 	private Pedido unPedidoEfectivizado;
 	private PedidoDTO unPedidoEfectivizadoDTO;
 	
 	@Before
 	public void setUp() {
-		this.unPedidoModelo = Pedido.createPedido();
+		this.unPedidoModeloSinPieza = Pedido.createPedido();
+		
+		this.unPedidoModeloConPieza = Pedido.createPedido();
+		this.unPedidoModeloConPieza.addPieza(new Pieza("",12,Moneda.Pesos));
 		
 		this.unPedidoEfectivizado = Pedido.createPedido();
 		this.unPedidoEfectivizado.addPieza(new Pieza("",22,Moneda.Dolares));
 		this.unPedidoEfectivizado.efectivizar();
 		
-		
-		this.pedidoDao.save(this.unPedidoModelo);
+		this.pedidoDao.save(this.unPedidoModeloSinPieza);
+		this.pedidoDao.save(this.unPedidoModeloConPieza);
 		this.pedidoDao.save(unPedidoEfectivizado);
 		
-		this.unPedidoDTO = new PedidoDTO(this.unPedidoModelo);
+		this.unPedidoSinPiezaDTO = new PedidoDTO(this.unPedidoModeloSinPieza);
 		this.unPedidoEfectivizadoDTO = new PedidoDTO(this.unPedidoEfectivizado);
+		
 	}
 	
 	@Transactional
 	@Test
 	public void codigoRespuestaConsultandoUnPedidoPorId(){
-		Response response = router.get("/pedido-byId/" + this.unPedidoModelo.getId());
+		Response response = router.get("/pedido-byId/" + this.unPedidoModeloSinPieza.getId());
 		Assert.assertEquals(Status.SUCCESS_OK, response.getStatus());
 	}
 	
@@ -75,10 +83,10 @@ public class TestIntegracionServicioPedidos {
 	@Transactional
 	@Test
 	public void respuestaConsultandoPorId() throws IOException {
-		Response response = router.get("/pedido-byId/" + this.unPedidoModelo.getId().toString());
+		Response response = router.get("/pedido-byId/" + this.unPedidoModeloSinPieza.getId().toString());
 		PedidoDTO pedidoGivenByService = (PedidoDTO) new XStream().fromXML(response.getEntity().getStream());
 		
-		Assert.assertEquals(this.unPedidoDTO, pedidoGivenByService);
+		Assert.assertEquals(this.unPedidoSinPiezaDTO, pedidoGivenByService);
 	}
 	
 	@Transactional
@@ -90,17 +98,17 @@ public class TestIntegracionServicioPedidos {
 		Assert.assertTrue(this.pedidoDao.existsId(Long.valueOf(pedidoGivenByService.getId())));
 	}
 	
-//	@SuppressWarnings("unchecked")
-//	@Transactional
-//	@Test
-//	public void consultarPedidosPorEstado() throws IOException {
-//		Response response = router.get("/pedido-byState/" + EstadoPedido.getEfectivo().toString());		
-//		
-//		List<PedidoDTO> pedidosGivenByService = (List<PedidoDTO>) new XStream().fromXML(response.getEntity().getStream());
-//		
-//		Assert.assertEquals(1, pedidosGivenByService.size());
-//		Assert.assertTrue(pedidosGivenByService.contains(this.unPedidoEfectivizadoDTO));
-//	}
+	@SuppressWarnings("unchecked")
+	@Transactional
+	@Test
+	public void consultarPedidosPorEstado() throws IOException {
+		Response response = router.get("/pedido-byState/" + EstadoPedido.getEfectivo().toString());		
+		
+		List<PedidoDTO> pedidosGivenByService = (List<PedidoDTO>) new XStream().fromXML(response.getEntity().getStream());
+		
+		Assert.assertEquals(1, pedidosGivenByService.size());
+		Assert.assertTrue(pedidosGivenByService.contains(this.unPedidoEfectivizadoDTO));
+	}
 	
 	@Transactional
 	@Test
@@ -108,8 +116,8 @@ public class TestIntegracionServicioPedidos {
 		Pieza unaPiezaParaAgregar = new Pieza("",12, Moneda.Dolares);
 		piezaDao.save(unaPiezaParaAgregar);
 		
-		Response response = router.get("/pedido-byId/" + this.unPedidoModelo.getId().toString() + "/addPieza/" + unaPiezaParaAgregar.getId().toString());
-		response = router.get("/pedido-byId/" + this.unPedidoModelo.getId().toString());
+		Response response = router.get("/pedido-byId/" + this.unPedidoModeloSinPieza.getId().toString() + "/addPieza/" + unaPiezaParaAgregar.getId().toString());
+		response = router.get("/pedido-byId/" + this.unPedidoModeloSinPieza.getId().toString());
 		
 		PedidoDTO pedidoGivenByService = (PedidoDTO) new XStream().fromXML(response.getEntity().getStream());
 		
@@ -117,14 +125,23 @@ public class TestIntegracionServicioPedidos {
 		Assert.assertTrue(pedidoGivenByService.getPiezas().contains(unaPiezaParaAgregar.getId().toString()));
 	}
 
-//	@Transactional
-//	@Test
-//	public void efectivizarPedido() throws IOException {
-//		router.get("/pedido-byId/" + this.unPedidoModelo.getId().toString() + "/efectivizar");
-//		
-//		Pedido pedido = pedidoDao.findByID(this.unPedidoModelo.getId());
-//		Assert.assertTrue(pedido.isEfectivo());
-//	}
+	@Transactional
+	@Test
+	public void efectivizarPedido() throws IOException {
+		router.get("/pedido-byId/" + this.unPedidoModeloConPieza.getId().toString() + "/efectivizar");
+		
+		Pedido pedido = pedidoDao.findByID(this.unPedidoModeloConPieza.getId());
+		Assert.assertTrue(pedido.isEfectivo());
+	}
+	
+	@Transactional
+	@Test
+	public void cancelarPedido() throws IOException {
+		router.get("/pedido-byId/" + this.unPedidoModeloConPieza.getId().toString() + "/cancelar");
+		
+		Pedido pedido = pedidoDao.findByID(this.unPedidoModeloConPieza.getId());
+		Assert.assertTrue(pedido.isCancelado());
+	}
 	
 	//********************************************
 	//** GETTER & SETTERS
