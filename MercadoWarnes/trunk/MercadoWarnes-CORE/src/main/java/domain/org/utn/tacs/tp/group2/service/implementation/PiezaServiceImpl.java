@@ -20,7 +20,7 @@ public class PiezaServiceImpl implements PiezaService{
 	@Autowired
 	private PiezaDAO piezaDAO;
 
-	public Pieza getPiezaById(Long id) {
+	public Pieza loadPiezaById(Long id) {
 		try{
 			return piezaDAO.findByID(id);
 		}catch (PiezaInexistenteException e) {
@@ -65,5 +65,14 @@ public class PiezaServiceImpl implements PiezaService{
 
 	public PiezaDAO getPiezaDAO() {
 		return piezaDAO;
+	}
+
+	public Pieza getPiezaById(Long id) {
+		try{
+			//TODO: mejorar esto.
+			return piezaDAO.getByID(id);
+		}catch (PiezaInexistenteException e) {
+			return null;
+		}
 	}
 }

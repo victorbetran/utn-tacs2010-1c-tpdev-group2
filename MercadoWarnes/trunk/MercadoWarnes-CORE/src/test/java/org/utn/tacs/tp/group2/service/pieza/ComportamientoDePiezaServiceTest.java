@@ -51,13 +51,13 @@ public class ComportamientoDePiezaServiceTest {
 
 	@Test
 	public void consultarPiezaById() {
-		Pieza piezaGivenByService = piezaService.getPiezaById(this.unaPiezaPremiumDeAutoA.getId());
+		Pieza piezaGivenByService = piezaService.loadPiezaById(this.unaPiezaPremiumDeAutoA.getId());
 		Assert.assertEquals(this.unaPiezaPremiumDeAutoA, piezaGivenByService);
 	}
 
 	@Test()
 	public void consultarPiezaInexistente() {
-		Assert.assertNull(piezaService.getPiezaById(new Pieza("PIEZA INEXISTENTE",40,Moneda.Pesos).getId()));		
+		Assert.assertNull(piezaService.loadPiezaById(new Pieza("PIEZA INEXISTENTE",40,Moneda.Pesos).getId()));		
 	}
 	
 	@Test
