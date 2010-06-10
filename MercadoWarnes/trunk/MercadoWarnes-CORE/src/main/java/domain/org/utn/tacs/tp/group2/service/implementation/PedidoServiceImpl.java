@@ -17,14 +17,14 @@ import org.utn.tacs.tp.group2.service.definition.PedidoService;
 @Transactional
 public class PedidoServiceImpl implements PedidoService {
 
-	@Autowired
+	@Autowired(required=true)
 	private PedidoDAO pedidoDAO;
 
-	@Autowired
+	@Autowired(required=true)
 	private PiezaDAO piezaDAO;
 	
 	public Pedido crearPedido() {
-		Pedido pedidoNuevo = Pedido.createPedido();
+		Pedido pedidoNuevo = Pedido.create();
 		this.pedidoDAO.save(pedidoNuevo);
 		return pedidoNuevo;
 	}
@@ -58,13 +58,17 @@ public class PedidoServiceImpl implements PedidoService {
 		}
 	}
 
-	public Pedido getPedidoById(String id) {
+	public Pedido loadPedidoById(String id) {
 		try{
 			return this.pedidoDAO.findByID(Long.valueOf(id));
 		}
 		catch (RuntimeException e) {
 			return null;
 		}
+	}
+	
+	public Pedido getPedidoById(String pedidoId) {
+		return this.pedidoDAO.getByID(Long.valueOf(pedidoId));
 	}
 	
 	public List<Pedido> getPedidosByEstado(String estadoDePedido) {
@@ -90,5 +94,5 @@ public class PedidoServiceImpl implements PedidoService {
 	public PiezaDAO getPiezaDAO() {
 		return piezaDAO;
 	}
-	
+
 }

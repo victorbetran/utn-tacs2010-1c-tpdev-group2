@@ -39,8 +39,8 @@ public class ComportamientoDePedidoServiceTest {
 		((PedidoServiceImpl)this.pedidoService).setPedidoDAO(pedidoDAO);
 		((PedidoServiceImpl)this.pedidoService).setPiezaDAO(piezaDAO);
 
-		pedidoSinPiezas = Pedido.createPedido();
-		pedidoConUnaPieza = Pedido.createPedido();
+		pedidoSinPiezas = Pedido.create();
+		pedidoConUnaPieza = Pedido.create();
 
 		piezaAgregadaAPedido = new Pieza("CODE!", 12, Moneda.Pesos);
 		pedidoConUnaPieza.addPieza(piezaAgregadaAPedido);
@@ -54,12 +54,12 @@ public class ComportamientoDePedidoServiceTest {
 
 	@Test
 	public void consultarPedidoPorId() {
-		Assert.assertEquals(this.pedidoSinPiezas, this.pedidoService.getPedidoById(this.pedidoSinPiezas.getId().toString()));
+		Assert.assertEquals(this.pedidoSinPiezas, this.pedidoService.loadPedidoById(this.pedidoSinPiezas.getId().toString()));
 	}
 
 	@Test
 	public void consultarPedidoInexistente() {
-		Assert.assertNull(this.pedidoService.getPedidoById(Pedido.createPedido().getId().toString()));
+		Assert.assertNull(this.pedidoService.loadPedidoById(Pedido.create().getId().toString()));
 	}
 	
 	@Test

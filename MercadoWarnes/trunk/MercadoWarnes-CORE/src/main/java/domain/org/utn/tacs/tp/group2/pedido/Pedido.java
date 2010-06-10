@@ -28,7 +28,7 @@ public class Pedido extends PersistentObject {
 	 * Cuando se guarda o actualiza un pedido le pega a las piezas, pero si se borra, no borra a las
 	 * piezas asosiadas a el mismo
 	 */
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Pieza> piezas;
 
 	@Embedded
@@ -38,7 +38,7 @@ public class Pedido extends PersistentObject {
 	// ** PUBLIC CONSTRUCTOR
 	// ********************************************
 	
-	public static Pedido createPedido(){
+	public static Pedido create(){
 		Pedido toReturn = new Pedido();
 		
 		toReturn.piezas = new ArrayList<Pieza>();

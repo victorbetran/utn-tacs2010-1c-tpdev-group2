@@ -23,7 +23,7 @@ import com.thoughtworks.xstream.XStream;
 @Component
 public class PiezaResource extends Resource {
 
-	@Autowired
+	@Autowired(required=true)
 	private PiezaService piezaService;
 	
 	public void init(Context context, Request request, Response response) {

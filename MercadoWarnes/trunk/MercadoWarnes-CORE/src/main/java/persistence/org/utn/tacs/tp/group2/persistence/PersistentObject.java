@@ -14,7 +14,6 @@ public abstract class PersistentObject {
 	//********************************************
 	//** ATRIBUTTES
 	//********************************************
-//	@GeneratedValue(strategy=GenerationType.TABLE)
 	@Id
 	protected Long id = UUIDGenerator.getInstance().getId();
 	
@@ -30,18 +29,6 @@ public abstract class PersistentObject {
 	}
 	
 	@Override public abstract boolean equals(Object obj);
-	
-//		if (obj == null) {
-//			return false;
-//		}
-//		else if (!this.getClass().isInstance(obj)) {
-//			return false;
-//		}
-//		else if (obj == this) {
-//			return true;
-//		}else {
-//			return this.getId().equals(((PersistentObject) obj).getId());
-//		}
 	
 	@Override public int hashCode(){
 		return this.getId().hashCode();

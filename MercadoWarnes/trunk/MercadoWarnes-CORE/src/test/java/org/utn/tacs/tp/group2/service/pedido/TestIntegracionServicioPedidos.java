@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.utn.tacs.tp.group2.daos.exceptions.PedidoInexistenteException;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
@@ -49,12 +50,12 @@ public class TestIntegracionServicioPedidos {
 	
 	@Before
 	public void setUp() {
-		this.unPedidoModeloSinPieza = Pedido.createPedido();
+		this.unPedidoModeloSinPieza = Pedido.create();
 		
-		this.unPedidoModeloConPieza = Pedido.createPedido();
+		this.unPedidoModeloConPieza = Pedido.create();
 		this.unPedidoModeloConPieza.addPieza(new Pieza("",12,Moneda.Pesos));
 		
-		this.unPedidoEfectivizado = Pedido.createPedido();
+		this.unPedidoEfectivizado = Pedido.create();
 		this.unPedidoEfectivizado.addPieza(new Pieza("",22,Moneda.Dolares));
 		this.unPedidoEfectivizado.efectivizar();
 		
@@ -74,10 +75,11 @@ public class TestIntegracionServicioPedidos {
 		Assert.assertEquals(Status.SUCCESS_OK, response.getStatus());
 	}
 	
-	@Test
+	@Test(expected=PedidoInexistenteException.class)
 	public void codigoRespuestaConsultandoUnPedidoInexistentePorId() {
-		Response response = router.get("/pedido-byId/" + Pedido.createPedido());
-		Assert.assertEquals(Status.CLIENT_ERROR_NOT_FOUND, response.getStatus());
+		Response response = router.get("/pedido-byId/" + Pedido.create());
+		//Como el pedido no es persistido, el servicio devuelve una excepcion.
+		//Assert.assertEquals(Status.CLIENT_ERROR_NOT_FOUND, response.getStatus());
 	}
 	
 	@Test
@@ -99,7 +101,7 @@ public class TestIntegracionServicioPedidos {
 //	@SuppressWarnings("unchecked")
 //	@Test
 //	public void consultarPedidosPorEstado() throws IOException {
-//		Response response = router.get("/pedido-byState/" + EstadoPedido.getEfectivo().toString());		
+//		Response response = router.get("/pedido-byState/" + EstadoPedido.getEfectivo());		
 //		
 //		List<PedidoDTO> pedidosGivenByService = (List<PedidoDTO>) new XStream().fromXML(response.getEntity().getStream());
 //		

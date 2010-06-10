@@ -20,5 +20,4 @@ public class PedidoDAOImpl extends PedidoDAO {
 	protected RuntimeException getNotFoundObjectException(Long id) {
 		return new PedidoInexistenteException("No existe una pedido con el ID: '" + id + "'");
 	}
-
 }

@@ -8,12 +8,15 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-	<context:annotation-config />
 
-	
-<!--		Scan Spring Components. Note the Resource will be automatically picked-->
-	<context:component-scan base-package="org.utn.tacs.tp.group2.service.resources">
-	</context:component-scan>
+	<!--*******************-->
+	<!--   CONSULTAS REST  -->
+	<!--*******************-->
+	<context:annotation-config/>
+	<context:component-scan base-package="org.utn.tacs.tp.group2.service.resources"/>
+	<context:component-scan base-package="org.utn.tacs.tp.group2.daos"/>
+	<context:component-scan base-package="org.utn.tacs.tp.group2.pedido"/>
+	<context:component-scan base-package="org.utn.tacs.tp.group2.pieza"/>
 
 	<bean name="root" class="org.restlet.ext.spring.SpringRouter">
 		<property name="attachments" ref="resourceMap" />
@@ -25,10 +28,13 @@
 				<entry key="/loadFakeValues">
 					<ref bean="fakeValuesLoaderEndpoint" />
 				</entry>
-				<entry key="/pieza-byId/{idPieza}">
+				<!--*******************-->
+				<!--Consultas de Piezas-->
+				<!--*******************-->
+				<entry key="/pieza-all">
 					<ref bean="piezaEndpoint" />
 				</entry>
-				<entry key="/pieza-all">
+				<entry key="/pieza-byId/{idPieza}">
 					<ref bean="piezaEndpoint" />
 				</entry>
 				<entry key="/pieza-byCat/{categoria}">
@@ -40,6 +46,9 @@
 				<entry key="/pieza-byState/{estado}">
 					<ref bean="piezaEndpoint" />
 				</entry>
+				<!--*************************************-->
+				<!--Consultas de Pedidos + Creación + Uso-->
+				<!--*************************************-->
 				<entry key="/pedido-create">
 					<ref bean="creadorPedidoEndpoint" />
 				</entry>
@@ -74,6 +83,7 @@
 	<bean id="fakeValuesLoaderEndpoint" class="org.restlet.ext.spring.SpringFinder">
 		<lookup-method name="createResource" bean="fakeValuesLoaderResource" />
 	</bean>
+
 
 	<!--*************************-->
 	<!--        SERVICIOS        -->

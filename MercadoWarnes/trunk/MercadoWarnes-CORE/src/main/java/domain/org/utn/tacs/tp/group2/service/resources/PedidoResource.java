@@ -23,7 +23,7 @@ import com.thoughtworks.xstream.XStream;
 @Component
 public class PedidoResource extends Resource{
 
-	@Autowired
+	@Autowired(required=true)
 	private PedidoService pedidoService;
 	
 	public void init(Context context, Request request, Response response) {

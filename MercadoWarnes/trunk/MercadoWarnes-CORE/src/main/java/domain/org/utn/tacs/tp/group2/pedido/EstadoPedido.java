@@ -14,7 +14,7 @@ import org.utn.tacs.tp.group2.exceptions.pedido.PedidoEfectivizadoException;
 @Embeddable
 public class EstadoPedido {
 
-	private static EstadoPedido EN_CURSO = new EstadoPedido("En Curso");
+	private static EstadoPedido EN_CURSO = new EstadoPedido("EnCurso");
 	private static EstadoPedido EFECTIVO = new EstadoPedido("Efectivo");
 	private static EstadoPedido CANCELADO  = new EstadoPedido("Cancelado");
 	

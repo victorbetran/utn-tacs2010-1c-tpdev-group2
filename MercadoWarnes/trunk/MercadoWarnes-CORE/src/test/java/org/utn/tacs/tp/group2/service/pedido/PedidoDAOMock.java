@@ -56,4 +56,9 @@ public class PedidoDAOMock extends PedidoDAO{
 		return null;
 	}
 
+	@Override
+	public Pedido getByID(Long id) {
+		return this.findByID(id);
+	}
+
 }

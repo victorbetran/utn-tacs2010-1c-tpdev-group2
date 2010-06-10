@@ -17,7 +17,7 @@ import org.utn.tacs.tp.group2.service.definition.PiezaService;
 @Transactional
 public class PiezaServiceImpl implements PiezaService{
 
-	@Autowired
+	@Autowired(required=true)
 	private PiezaDAO piezaDAO;
 
 	public Pieza loadPiezaById(Long id) {

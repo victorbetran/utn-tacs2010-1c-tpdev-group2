@@ -31,10 +31,10 @@ public class ConsultaDePedidosTest {
 	@Before
 	public void setUp() {
 
-		this.pedidoPersistido1 = Pedido.createPedido();
+		this.pedidoPersistido1 = Pedido.create();
 		this.dao.save(this.pedidoPersistido1);
 
-		this.pedidoPersistido2 = Pedido.createPedido();
+		this.pedidoPersistido2 = Pedido.create();
 		this.dao.save(this.pedidoPersistido2);
 
 	}

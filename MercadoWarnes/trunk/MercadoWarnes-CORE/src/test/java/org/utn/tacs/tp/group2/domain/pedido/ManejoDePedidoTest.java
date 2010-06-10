@@ -18,7 +18,7 @@ public class ManejoDePedidoTest {
 	
 	@Before
 	public void setUp(){
-		this.pedido = Pedido.createPedido();
+		this.pedido = Pedido.create();
 		
 		this.pieza1 = new Pieza("A-123",30,Moneda.Dolares);
 		this.pieza2 = new Pieza("B-369",30,Moneda.Pesos);
