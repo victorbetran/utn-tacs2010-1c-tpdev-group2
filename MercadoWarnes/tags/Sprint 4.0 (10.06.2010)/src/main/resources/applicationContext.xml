@@ -1,0 +1,163 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+
+	<!--*******************-->
+	<!--   CONSULTAS REST  -->
+	<!--*******************-->
+	<context:annotation-config/>
+	<context:component-scan base-package="org.utn.tacs.tp.group2.service.resources"/>
+	<context:component-scan base-package="org.utn.tacs.tp.group2.daos"/>
+	<context:component-scan base-package="org.utn.tacs.tp.group2.pedido"/>
+	<context:component-scan base-package="org.utn.tacs.tp.group2.pieza"/>
+
+	<bean name="root" class="org.restlet.ext.spring.SpringRouter">
+		<property name="attachments" ref="resourceMap" />
+	</bean>
+
+	<bean id="resourceMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="/loadFakeValues">
+					<ref bean="fakeValuesLoaderEndpoint" />
+				</entry>
+				<!--*******************-->
+				<!--Consultas de Piezas-->
+				<!--*******************-->
+				<entry key="/pieza-all">
+					<ref bean="piezaEndpoint" />
+				</entry>
+				<entry key="/pieza-byId/{idPieza}">
+					<ref bean="piezaEndpoint" />
+				</entry>
+				<entry key="/pieza-byCat/{categoria}">
+					<ref bean="piezaEndpoint" />
+				</entry>
+				<entry key="/pieza-byCar/{idAuto}">
+					<ref bean="piezaEndpoint" />
+				</entry>
+				<entry key="/pieza-byState/{estado}">
+					<ref bean="piezaEndpoint" />
+				</entry>
+				<!--*************************************-->
+				<!--Consultas de Pedidos + Creación + Uso-->
+				<!--*************************************-->
+				<entry key="/pedido-create">
+					<ref bean="creadorPedidoEndpoint" />
+				</entry>
+				<entry key="/pedido-byId/{idPedido}">
+					<ref bean="pedidoEndpoint" />
+				</entry>
+				<entry key="/pedido-byState/{estado}">
+					<ref bean="pedidoEndpoint" />
+				</entry>
+				<entry key="/pedido-byId/{idPedido}/addPieza/{idPieza}">
+					<ref bean="pedidoEndpoint" />
+				</entry>
+				<entry key="/pedido-byId/{idPedido}/{accion}">
+					<ref bean="pedidoEndpoint" />
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<bean id="piezaEndpoint" class="org.restlet.ext.spring.SpringFinder">
+		<lookup-method name="createResource" bean="piezaResource" />
+	</bean>
+
+	<bean id="pedidoEndpoint" class="org.restlet.ext.spring.SpringFinder">
+		<lookup-method name="createResource" bean="pedidoResource" />
+	</bean>
+
+	<bean id="creadorPedidoEndpoint" class="org.restlet.ext.spring.SpringFinder">
+		<lookup-method name="createResource" bean="creadorPedidoResource" />
+	</bean>
+
+	<bean id="fakeValuesLoaderEndpoint" class="org.restlet.ext.spring.SpringFinder">
+		<lookup-method name="createResource" bean="fakeValuesLoaderResource" />
+	</bean>
+
+
+	<!--*************************-->
+	<!--        SERVICIOS        -->
+	<!--*************************-->
+	<bean name="piezaService"
+		class="org.utn.tacs.tp.group2.service.implementation.PiezaServiceImpl">
+		<property name="piezaDAO" ref="piezaDAO" />
+	</bean>
+
+	<bean name="pedidoService"
+		class="org.utn.tacs.tp.group2.service.implementation.PedidoServiceImpl">
+		<property name="pedidoDAO" ref="pedidoDAO" />
+	</bean>
+
+
+	<!--*************************-->
+	<!--          DAOS           -->
+	<!--*************************-->
+	<bean name="piezaDAO"
+		class="org.utn.tacs.tp.group2.daos.implementations.PiezaDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean name="pedidoDAO"
+		class="org.utn.tacs.tp.group2.daos.implementations.PedidoDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<!--*************************-->
+	<!--  TRANSACTION MANAGER     -->
+	<!--*************************-->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<!--*************************-->
+	<!--        SESSION          -->
+	<!--*************************-->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceStd" />
+		<property name="schemaUpdate" value="true" />
+		<property name="annotatedClasses">
+			<list>
+				<value>org.utn.tacs.tp.group2.pedido.Pedido</value>
+				<value>org.utn.tacs.tp.group2.pedido.EstadoPedido</value>
+				<value>org.utn.tacs.tp.group2.pieza.Pieza</value>
+				<value>org.utn.tacs.tp.group2.pieza.EstadoPieza</value>
+				<value>org.utn.tacs.tp.group2.pieza.Auto</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+				<prop key="show_sql">true</prop>
+				<prop key="hbm2ddl.auto">create</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!--*************************-->
+	<!--    DATA SOURCE (db)     -->
+	<!--*************************-->
+	<bean id="dataSourceStd" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+		<property name="url" value="jdbc:hsqldb:mem:tp-group2-db" />
+		<property name="username" value="sa" />
+		<property name="password" value="" />
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="10" />
+	</bean>
+
+</beans>
