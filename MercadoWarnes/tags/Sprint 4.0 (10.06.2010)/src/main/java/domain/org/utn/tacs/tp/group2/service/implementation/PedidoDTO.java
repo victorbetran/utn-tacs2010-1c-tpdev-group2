@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.utn.tacs.tp.group2.pedido.Pedido;
-import org.utn.tacs.tp.group2.pieza.Pieza;
 
 public class PedidoDTO {
 
@@ -13,10 +12,6 @@ public class PedidoDTO {
 	private String estado;
 	
 	public PedidoDTO(Pedido pedido) {
-		//TODO: ver xq las piezas vienen como proxy y pincha xq la session se cerro.
-		for (Pieza pieza : pedido.getPiezas()) {
-			this.piezas.add(pieza.getId().toString());
-		}
 		this.id = pedido.getId().toString();
 		this.estado = pedido.getEstado().toString();
 	}

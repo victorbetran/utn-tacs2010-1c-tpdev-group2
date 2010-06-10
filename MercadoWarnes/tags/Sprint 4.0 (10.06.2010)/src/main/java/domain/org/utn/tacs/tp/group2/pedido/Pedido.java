@@ -176,8 +176,6 @@ public class Pedido extends PersistentObject {
 	private void venderPiezas() {
 		if (this.piezas.isEmpty())
 			throw new PedidoSinPiezasException(this);
-		// TODO: si alguna de las piezas es vendida y luego se dispara
-		// excepcion, las piezas quedan en estado inconsistente.
 		for (Pieza pieza : this.piezas) {
 			pieza.vender();
 		}

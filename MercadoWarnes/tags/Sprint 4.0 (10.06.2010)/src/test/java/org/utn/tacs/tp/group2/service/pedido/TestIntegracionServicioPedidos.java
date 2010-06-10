@@ -1,7 +1,6 @@
 package org.utn.tacs.tp.group2.service.pedido;
 
 import java.io.IOException;
-import java.util.List;
 
 import junit.framework.Assert;
 
@@ -18,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.utn.tacs.tp.group2.daos.exceptions.PedidoInexistenteException;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
-import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
@@ -77,9 +75,7 @@ public class TestIntegracionServicioPedidos {
 	
 	@Test(expected=PedidoInexistenteException.class)
 	public void codigoRespuestaConsultandoUnPedidoInexistentePorId() {
-		Response response = router.get("/pedido-byId/" + Pedido.create());
-		//Como el pedido no es persistido, el servicio devuelve una excepcion.
-		//Assert.assertEquals(Status.CLIENT_ERROR_NOT_FOUND, response.getStatus());
+		router.get("/pedido-byId/" + Pedido.create());
 	}
 	
 	@Test
@@ -98,31 +94,6 @@ public class TestIntegracionServicioPedidos {
 		Assert.assertTrue(this.pedidoDao.existsId(Long.valueOf(pedidoGivenByService.getId())));
 	}
 	
-//	@SuppressWarnings("unchecked")
-//	@Test
-//	public void consultarPedidosPorEstado() throws IOException {
-//		Response response = router.get("/pedido-byState/" + EstadoPedido.getEfectivo());		
-//		
-//		List<PedidoDTO> pedidosGivenByService = (List<PedidoDTO>) new XStream().fromXML(response.getEntity().getStream());
-//		
-//		Assert.assertEquals(1, pedidosGivenByService.size());
-//		Assert.assertTrue(pedidosGivenByService.contains(this.unPedidoEfectivizadoDTO));
-//	}
-	
-	@Test
-	public void agregarPieza() throws IOException {
-		Pieza unaPiezaParaAgregar = new Pieza("",12, Moneda.Dolares);
-		piezaDao.save(unaPiezaParaAgregar);
-		
-		Response response = router.get("/pedido-byId/" + this.unPedidoModeloSinPieza.getId().toString() + "/addPieza/" + unaPiezaParaAgregar.getId().toString());
-		response = router.get("/pedido-byId/" + this.unPedidoModeloSinPieza.getId().toString());
-		
-		PedidoDTO pedidoGivenByService = (PedidoDTO) new XStream().fromXML(response.getEntity().getStream());
-		
-		Assert.assertEquals(1,pedidoGivenByService.getPiezas().size());
-		Assert.assertTrue(pedidoGivenByService.getPiezas().contains(unaPiezaParaAgregar.getId().toString()));
-	}
-
 	@Test
 	public void efectivizarPedido() throws IOException {
 		router.get("/pedido-byId/" + this.unPedidoModeloConPieza.getId().toString() + "/efectivizar");

@@ -52,7 +52,6 @@ public abstract class AbstractDao<T extends PersistentObject> extends HibernateD
 
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
-		// TODO: TEST!
 		return (List<T>) this.getHibernateTemplate().loadAll(getGenericClass());
 	}
 	
