@@ -1,7 +1,5 @@
 package org.utn.tacs.tp.group2.service.pedido;
 
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,15 +26,6 @@ public class CreacionDePedidoDTOTest {
 		
 		this.pedidoDto = new PedidoDTO(this.pedidoModel);
 		
-	}
-	
-	@Test
-	public void validarPiezas() {
-		List<String> piezasId = this.pedidoDto.getPiezas();
-		
-		Assert.assertEquals(2, piezasId.size());
-		Assert.assertTrue(piezasId.contains(this.unaPiezaModel.getId().toString()));
-		Assert.assertTrue(piezasId.contains(this.otraPiezaModel.getId().toString()));
 	}
 	
 	@Test

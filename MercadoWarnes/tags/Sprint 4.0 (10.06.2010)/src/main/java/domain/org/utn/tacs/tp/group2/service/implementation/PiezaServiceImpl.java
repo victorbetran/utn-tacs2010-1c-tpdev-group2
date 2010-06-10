@@ -69,7 +69,6 @@ public class PiezaServiceImpl implements PiezaService{
 
 	public Pieza getPiezaById(Long id) {
 		try{
-			//TODO: mejorar esto.
 			return piezaDAO.getByID(id);
 		}catch (PiezaInexistenteException e) {
 			return null;
