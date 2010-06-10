@@ -31,5 +31,5 @@ public abstract class PedidoDAO extends AbstractDao<Pedido> {
 	 * @return una lista de pedidos
 	 */
 	public abstract List<Pedido> findByEstado(EstadoPedido tipoEstado);
-
+	
 }

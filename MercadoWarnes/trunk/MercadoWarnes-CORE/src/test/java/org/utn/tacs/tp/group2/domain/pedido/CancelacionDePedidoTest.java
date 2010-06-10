@@ -23,7 +23,7 @@ public class CancelacionDePedidoTest {
 	//********************************************
 	@Before
 	public void setUp(){
-		this.pedido = Pedido.createPedido();	
+		this.pedido = Pedido.create();	
 	}
 
 	

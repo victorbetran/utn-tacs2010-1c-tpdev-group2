@@ -22,7 +22,7 @@ public class CreacionDePedidoDTOTest {
 		this.unaPiezaModel = new Pieza("CodigoPieza",10,Moneda.Dolares);
 		this.otraPiezaModel = new Pieza("CodigoPieza",10,Moneda.Dolares);
 		
-		this.pedidoModel = Pedido.createPedido();
+		this.pedidoModel = Pedido.create();
 		this.pedidoModel.addPieza(unaPiezaModel);
 		this.pedidoModel.addPieza(otraPiezaModel);
 		

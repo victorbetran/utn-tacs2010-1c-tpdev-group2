@@ -23,7 +23,7 @@ public class AbmDePedidosTest {
 
 	@Before
 	public void setUp() {
-		this.pedidoPersistido = Pedido.createPedido();
+		this.pedidoPersistido = Pedido.create();
 		this.dao.save(this.pedidoPersistido);
 
 		this.pedidoPersistidoFromDao = this.dao.findByID(pedidoPersistido.getId());

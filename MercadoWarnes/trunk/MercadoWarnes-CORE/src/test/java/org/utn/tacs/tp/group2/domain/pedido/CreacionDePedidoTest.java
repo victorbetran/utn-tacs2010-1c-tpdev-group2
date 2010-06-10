@@ -23,7 +23,7 @@ public class CreacionDePedidoTest {
 		this.piezaDisponible = new Pieza("W-894",30,Moneda.Dolares);
 		this.otraPiezaDisponible = new Pieza("K-666",30,Moneda.Dolares);
 		this.piezaNoDisponible = new Pieza("N-000",30,Moneda.Dolares).reservar();
-		this.pedido = Pedido.createPedido();
+		this.pedido = Pedido.create();
 	}
 
 	@Test
