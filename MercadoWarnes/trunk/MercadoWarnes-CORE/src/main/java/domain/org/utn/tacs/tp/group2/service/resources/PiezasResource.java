@@ -1,5 +1,7 @@
 package org.utn.tacs.tp.group2.service.resources;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,6 +17,7 @@ import org.restlet.resource.StringRepresentation;
 import org.restlet.resource.Variant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.service.definition.PiezaService;
 import org.utn.tacs.tp.group2.service.implementation.PiezaDTO;
@@ -22,7 +25,7 @@ import org.utn.tacs.tp.group2.service.implementation.PiezaDTO;
 import com.thoughtworks.xstream.XStream;
 
 @Component
-public class PiezaResource extends Resource {
+public class PiezasResource extends Resource {
 
 	@Autowired
 	private PiezaService piezaService;
@@ -52,25 +55,47 @@ public class PiezaResource extends Resource {
 		return false;
 	}
 	
-	/**
-	 * GET
-	 */
+	private String categoria;
+	private String estado;
+	private String auto;
 	@Override
 	public Representation represent(Variant variant) throws ResourceException {
-		String id = (String) getRequest().getAttributes().get("id-pieza");
+		this.loadParameters();
 		
-		if (!isValidID(id)) {
+		if(!allParametersOk()){
 			getResponse().setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
 			return null;
 		}
+		
+		if(this.categoria != null){
+			return this.buildAnswerFrom(this.piezaService.getPiezasByCategoria(this.categoria));
+		} else if (this.estado != null) {
+			return this.buildAnswerFrom(this.piezaService.getPiezasByEstado(this.estado));
+		} else if (this.auto != null) {
+			return this.buildAnswerFrom(this.piezaService.getPiezasByAuto(this.auto));
+		} 
+		
+		return this.buildAnswerFrom(this.piezaService.getAllPiezas());			
+	}
+	
+	
+	private void loadParameters() {
+		this.categoria = getQuery().getFirstValue("categoria");
+		this.estado = getQuery().getFirstValue("estado");
+		this.auto = getQuery().getFirstValue("id-auto");
+	}
 
-		Pieza pieza = this.piezaService.getPiezaById(id);
-		if (pieza == null) {
-			getResponse().setStatus(Status.CLIENT_ERROR_NOT_FOUND);
-			return null;
+	private boolean allParametersOk() {
+		
+		if(estado != null){
+			return estado.equals(EstadoPieza.getEstadoDisponible().toString()) || estado.equals(EstadoPieza.getEstadoReservada().toString()) || estado.equals(EstadoPieza.getEstadoVendida().toString());
 		}
 		
-		return new StringRepresentation(new XStream().toXML(new PiezaDTO(pieza)), MediaType.TEXT_XML);	
+		if(auto != null){
+			return this.isValidID(auto);
+		}
+		
+		return true;
 	}
 
 	private static Pattern numericCheckPattern = Pattern.compile("^\\d+$");
@@ -82,52 +107,24 @@ public class PiezaResource extends Resource {
 		return matcher.find();
 	}
 	
-//	/**
-//	 * POST
-//	 */
-//	@Override
-//	public void acceptRepresentation(Representation entity)	throws ResourceException {
-//		Form form = new Form(entity);
-//		
-//		String codigo = form.getFirstValue("codigo");
-//		String estado = form.getFirstValue("estado");
-//		String descripcion = form.getFirstValue("descripcion");
-//		String categoria = form.getFirstValue("categoria");
-//		String autoOrigen = form.getFirstValue("autoOrigen");
-//		String precio = form.getFirstValue("precio");
-//		String moneda = form.getFirstValue("moneda");
-//		
-//		if( areValid(codigo,estado,descripcion,categoria,autoOrigen,precio,moneda) ){
-//			
-//		}
-//		
-//		getResponse().setStatus(Status.SUCCESS_CREATED);
-//		super.acceptRepresentation(entity);
-//	}
-//
-//	private boolean areValid(String codigo, String estado, String descripcion, String categoria, String autoOrigen, String precio, String moneda) {
-//		if(codigo == null || estado == null || categoria == null || autoOrigen == null || precio == null || moneda == null){
-//			return false;
-//		}
-//		
-//		if(EstadoPieza.estadoByDescripcion(estado) == null){
-//			return false;
-//		}
-//		
-//		if(categoria.isEmpty()){
-//			return false;
-//		}
-//		
-//		if(this.isValidID(autoOrigen)){
-//			
-//		}
-//		
-//		return true;
-//	}
+	//********************************************
+	//** PRIVATE IMPLEMENTATION
+	//********************************************
+	
+	private Representation buildAnswerFrom(List<Pieza> piezas){
+		List<PiezaDTO> toReturn = new ArrayList<PiezaDTO>();
 
+		for (Pieza pieza : piezas) {
+			toReturn.add(new PiezaDTO(pieza));
+		}
+		
+		return new StringRepresentation(new XStream().toXML(toReturn), MediaType.TEXT_XML);		
+	}
+	
 	//********************************************
 	//** GETTER & SETTER
 	//********************************************
+	
 	public PiezaService getPiezaService() {
 		return piezaService;
 	}
@@ -135,5 +132,5 @@ public class PiezaResource extends Resource {
 	public void setPiezaService(PiezaService piezaService) {
 		this.piezaService = piezaService;
 	}
-	
+
 }

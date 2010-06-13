@@ -9,26 +9,20 @@ import org.utn.tacs.tp.group2.pieza.Pieza;
  */
 public interface PiezaService {
 
-//	public PiezaDAO getPiezaDAO();
-//	
-//	public Pieza newPieza();
-//
-//	public void delete(Pieza pieza);
-
 	public Pieza loadPiezaById(Long id);
 	
-	public Pieza getPiezaById(Long id);
+	public Pieza getPiezaById(String id);
 
 	public List<Pieza> getPiezasByCategoria(String categoria);
 
 	public List<Pieza> getPiezasByAuto(String autoId);
 
-	public List<Pieza> getPiezasReservadas();
-	
 	public List<Pieza> getPiezasVendidasByAuto(String autoId);
 	
 	public int getPorcentajePiezasVendidasByAuto(String autoId);
 
-	public List<Pieza> getAllPiezas();	
+	public List<Pieza> getAllPiezas();
+
+	public List<Pieza> getPiezasByEstado(String estado);	
 	
 }
