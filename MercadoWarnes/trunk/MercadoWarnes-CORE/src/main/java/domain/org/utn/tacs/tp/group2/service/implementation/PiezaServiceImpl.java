@@ -40,8 +40,8 @@ public class PiezaServiceImpl implements PiezaService{
 		return piezaDAO.findByCategoria(categoria);
 	}
 	
-	public List<Pieza> getPiezasReservadas() {
-		return piezaDAO.findByEstado(EstadoPieza.getEstadoReservada());
+	public List<Pieza> getPiezasByEstado(String estado) {
+		return piezaDAO.findByEstado(EstadoPieza.estadoByDescripcion(estado));
 	}
 	
 	public List<Pieza> getPiezasVendidasByAuto(String autoId) {
@@ -67,12 +67,13 @@ public class PiezaServiceImpl implements PiezaService{
 		return piezaDAO;
 	}
 
-	public Pieza getPiezaById(Long id) {
+	public Pieza getPiezaById(String id) {
 		try{
 			//TODO: mejorar esto.
-			return piezaDAO.getByID(id);
+			return piezaDAO.getByID(Long.valueOf(id));
 		}catch (PiezaInexistenteException e) {
 			return null;
 		}
 	}
+
 }

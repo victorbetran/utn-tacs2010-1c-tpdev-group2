@@ -27,6 +27,7 @@ import com.thoughtworks.xstream.XStream;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})
+@Transactional
 public class TestIntegracionServicioPiezas {
 
 	@Autowired
@@ -63,32 +64,57 @@ public class TestIntegracionServicioPiezas {
 
 	}
 	
-	@Transactional
 	@Test
 	public void codigoRespuestaConsultandoUnaPiezaPorId(){
-		Response response = router.get("/pieza-byId/" + this.unaPiezaModelo.getId());
+		Response response = router.get("/pieza/" + this.unaPiezaModelo.getId());
 		Assert.assertEquals(Status.SUCCESS_OK, response.getStatus());
 	}
 	
-	@Transactional
 	@Test
 	public void codigoRespuestaConsultandoUnaPiezaInexistentePorId(){
-		Response response = router.get("/pieza-byId/" + new Pieza("",20,Moneda.Dolares).getId());
+		Response response = router.get("/pieza/" + new Pieza("",20,Moneda.Dolares).getId());
 		Assert.assertEquals(Status.CLIENT_ERROR_NOT_FOUND, response.getStatus());
 	}
 	
-	@Transactional
+	@Test
+	public void codigoRespuestaConsultandoUnaPiezaConIdInvalido(){
+		Response response = router.get("/pieza/" + "343rs2ds2");
+		Assert.assertEquals(Status.CLIENT_ERROR_BAD_REQUEST, response.getStatus());
+	}
+	
 	@Test
 	public void codigoRespuestaConsultandoTodasLasPiezas(){
-		Response response = router.get("/pieza-all");
+		Response response = router.get("/pieza");
 		Assert.assertEquals(Status.SUCCESS_OK, response.getStatus());
 	}
 
+	@Test
+	public void codigoRespuestaConsultandoPorEstadoInvalido(){
+		Response response = router.get("/pieza?estado=noexiste");
+		Assert.assertEquals(Status.CLIENT_ERROR_BAD_REQUEST, response.getStatus());
+	}
+
+	@Test
+	public void codigoRespuestaConsultandoPorAuto(){
+		Response response = router.get("/pieza?id-auto=" + this.autoConPiezas.getId());
+		Assert.assertEquals(Status.SUCCESS_OK, response.getStatus());
+	}
+	
+	@Test
+	public void codigoRespuestaConsultandoPorAutoInvalido(){
+		Response response = router.get("/pieza?id-auto=noexiste");
+		Assert.assertEquals(Status.CLIENT_ERROR_BAD_REQUEST, response.getStatus());
+	}
+	
+	
+	//********************************************
+	//** VALIDACION DE OBJETOS RESPUESTA
+	//********************************************
+	
 	@SuppressWarnings("unchecked")
-	@Transactional
 	@Test
 	public void respuestaConsultandoTodasLasPiezas() throws IOException{
-		Response response = router.get("/pieza-all");
+		Response response = router.get("/pieza");
 		List<PiezaDTO> piezasGivenByService = (List<PiezaDTO>) new XStream().fromXML(response.getEntity().getStream());
 		
 		Assert.assertEquals(2, piezasGivenByService.size());
@@ -96,20 +122,18 @@ public class TestIntegracionServicioPiezas {
 		Assert.assertTrue(piezasGivenByService.contains(this.otraPiezaDTO));
 	}
 	
-	@Transactional
 	@Test
 	public void respuestaConsultandoPiezaPorId() throws IOException{
-		Response response = router.get("/pieza-byId/" + this.unaPiezaDTO.getId());
+		Response response = router.get("/pieza/" + this.unaPiezaDTO.getId());
 		PiezaDTO piezaGivenByService = (PiezaDTO) new XStream().fromXML(response.getEntity().getStream());
 		
 		Assert.assertEquals(this.unaPiezaDTO,piezaGivenByService);
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Transactional
 	@Test
 	public void respuestaConsultandoPiezasPorCategoria() throws IOException{
-		Response response = router.get("/pieza-byCat/" + "MEDIUM");
+		Response response = router.get("/pieza/?categoria=MEDIUM");
 		List<PiezaDTO> piezasGivenByService = (List<PiezaDTO>) new XStream().fromXML(response.getEntity().getStream());
 		
 		Assert.assertEquals(2, piezasGivenByService.size());
@@ -118,20 +142,18 @@ public class TestIntegracionServicioPiezas {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Transactional
 	@Test
 	public void respuestaConsultandoPiezasPorCategoriaSinResultados() throws IOException{
-		Response response = router.get("/pieza-byCat/" + "PREMIUM");
+		Response response = router.get("/pieza/?categoria=PREMIUM");
 		List<PiezaDTO> piezasGivenByService = (List<PiezaDTO>) new XStream().fromXML(response.getEntity().getStream());
 		
 		Assert.assertTrue(piezasGivenByService.isEmpty());
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Transactional
 	@Test
 	public void respuestaConsultandoPiezasPorAuto() throws IOException{
-		Response response = router.get("/pieza-byCar/" + this.autoConPiezas.getId());
+		Response response = router.get("/pieza/?id-auto=" + this.autoConPiezas.getId());
 		List<PiezaDTO> piezasGivenByService = (List<PiezaDTO>) new XStream().fromXML(response.getEntity().getStream());
 		
 		Assert.assertEquals(2, piezasGivenByService.size());
@@ -140,23 +162,21 @@ public class TestIntegracionServicioPiezas {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Transactional
 	@Test
 	public void respuestaConsultandoPiezasPorAutoSinResultados() throws IOException{
-		Response response = router.get("/pieza-byCar/" + this.autoSinPiezas.getId());
+		Response response = router.get("/pieza/?id-auto=" + this.autoSinPiezas.getId());
 		List<PiezaDTO> piezasGivenByService = (List<PiezaDTO>) new XStream().fromXML(response.getEntity().getStream());
 		
 		Assert.assertTrue(piezasGivenByService.isEmpty());
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Transactional
 	@Test
 	public void respuestaConsultandoPiezasReservadas() throws IOException{
 		this.unaPiezaModelo.reservar();
 		this.unaPiezaDTO = new PiezaDTO(this.unaPiezaModelo);
 		
-		Response response = router.get("/pieza-byState/" + EstadoPieza.getEstadoReservada().getDescripcion());
+		Response response = router.get("/pieza/?estado=" + EstadoPieza.getEstadoReservada().getDescripcion());
 		List<PiezaDTO> piezasGivenByService = (List<PiezaDTO>) new XStream().fromXML(response.getEntity().getStream());
 		
 		Assert.assertEquals(1, piezasGivenByService.size());
@@ -164,10 +184,9 @@ public class TestIntegracionServicioPiezas {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Transactional
 	@Test
 	public void respuestaConsultandoPiezasReservadasSinResultados() throws IOException{
-		Response response = router.get("/pieza-byState/" + EstadoPieza.getEstadoReservada().getDescripcion());
+		Response response = router.get("/pieza?estado=" + EstadoPieza.getEstadoReservada().getDescripcion());
 		List<PiezaDTO> piezasGivenByService = (List<PiezaDTO>) new XStream().fromXML(response.getEntity().getStream());
 		
 		Assert.assertTrue(piezasGivenByService.isEmpty());

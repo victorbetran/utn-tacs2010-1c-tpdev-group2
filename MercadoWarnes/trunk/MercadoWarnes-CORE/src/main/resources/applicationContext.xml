@@ -14,9 +14,6 @@
 	<!--*******************-->
 	<context:annotation-config/>
 	<context:component-scan base-package="org.utn.tacs.tp.group2.service.resources"/>
-	<context:component-scan base-package="org.utn.tacs.tp.group2.daos"/>
-	<context:component-scan base-package="org.utn.tacs.tp.group2.pedido"/>
-	<context:component-scan base-package="org.utn.tacs.tp.group2.pieza"/>
 
 	<bean name="root" class="org.restlet.ext.spring.SpringRouter">
 		<property name="attachments" ref="resourceMap" />
@@ -31,20 +28,11 @@
 				<!--*******************-->
 				<!--Consultas de Piezas-->
 				<!--*******************-->
-				<entry key="/pieza-all">
+				<entry key="/pieza/{id-pieza}">
 					<ref bean="piezaEndpoint" />
 				</entry>
-				<entry key="/pieza-byId/{idPieza}">
-					<ref bean="piezaEndpoint" />
-				</entry>
-				<entry key="/pieza-byCat/{categoria}">
-					<ref bean="piezaEndpoint" />
-				</entry>
-				<entry key="/pieza-byCar/{idAuto}">
-					<ref bean="piezaEndpoint" />
-				</entry>
-				<entry key="/pieza-byState/{estado}">
-					<ref bean="piezaEndpoint" />
+				<entry key="/pieza">
+					<ref bean="piezasEndpoint" />
 				</entry>
 				<!--*************************************-->
 				<!--Consultas de Pedidos + Creación + Uso-->
@@ -70,6 +58,10 @@
 
 	<bean id="piezaEndpoint" class="org.restlet.ext.spring.SpringFinder">
 		<lookup-method name="createResource" bean="piezaResource" />
+	</bean>
+
+	<bean id="piezasEndpoint" class="org.restlet.ext.spring.SpringFinder">
+		<lookup-method name="createResource" bean="piezasResource" />
 	</bean>
 
 	<bean id="pedidoEndpoint" class="org.restlet.ext.spring.SpringFinder">

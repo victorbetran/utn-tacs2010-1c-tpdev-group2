@@ -32,6 +32,19 @@ public class EstadoPieza {
 		this.descripcion = descripcion;
 	}
 	
+	public static EstadoPieza estadoByDescripcion(String descripcionDeEstado) {
+		if(DISPONIBLE.descripcion.equals(descripcionDeEstado)){
+			return getEstadoDisponible();
+		}
+		if(RESERVADA.descripcion.equals(descripcionDeEstado)){
+			return getEstadoReservada();
+		}
+		if(VENDIDA.descripcion.equals(descripcionDeEstado)){
+			return getEstadoVendida();
+		}
+		return null;
+	}
+	
 	// ********************************************
 	// ** FACTORY METHODS
 	// ********************************************

@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.utn.tacs.tp.group2.pieza.Auto;
+import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.service.implementation.PiezaServiceImpl;
@@ -107,7 +108,7 @@ public class ComportamientoDePiezaServiceTest {
 	public void consultarPiezasPorEstadoReservado() {
 		this.unaPiezaMediumDeAutoA.reservar();
 		
-		List<Pieza> piezasGivenByService = piezaService.getPiezasReservadas();
+		List<Pieza> piezasGivenByService = piezaService.getPiezasByEstado(EstadoPieza.getEstadoReservada().toString());
 		Assert.assertEquals(1,piezasGivenByService.size());
 		
 		Assert.assertTrue(piezasGivenByService.contains(this.unaPiezaMediumDeAutoA));
