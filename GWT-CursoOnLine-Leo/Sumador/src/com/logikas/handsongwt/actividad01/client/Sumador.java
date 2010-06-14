@@ -1,5 +1,8 @@
 package com.logikas.handsongwt.actividad01.client;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -20,26 +23,54 @@ public class Sumador implements EntryPoint {
 		final TextBox primerSumando = new TextBox();
 		final TextBox segundoSumando = new TextBox();
 		final Label resultado = new Label();
-		
+		resultado.setVisible(false);
 		Button boton = new Button("Sumar");
+		
+		//Binding Object-Tag
+		RootPanel.get("sumando1").add(primerSumando);
+		RootPanel.get("sumando2").add(segundoSumando);
+		RootPanel.get("suma").add(resultado);
+		RootPanel.get("sumar").add(boton);
+
+		//Comportamiento
 		boton.addClickHandler(new ClickHandler() {
 			@Override
-			public void onClick(ClickEvent event) {
-				Integer num1 = Integer.valueOf(primerSumando.getText());
-				Integer num2 = Integer.valueOf(segundoSumando.getText());
-				resultado.setText(Integer.valueOf(num1.intValue() + num2.intValue()).toString());
+			public void onClick(ClickEvent event){
+				try{
+					Suma suma = new Suma();
+					int num1 = Integer.parseInt(primerSumando.getText());
+					int num2 = Integer.parseInt(segundoSumando.getText());
+					resultado.setText(suma.addSumando(num1).addSumando(num2).execute().toString());
+				}
+				catch(NumberFormatException e){
+					resultado.setText("Error en los valores de entrada");
+				}
+				resultado.setVisible(true);
 			}
 		});
 		
-		
-		
-		//Bindeo de los componentes al HTML
-		RootPanel.get("numero1").add(primerSumando);
-		RootPanel.get("numero2").add(segundoSumando);
-		RootPanel.get("resultado").add(resultado);
-		RootPanel.get("sumar").add(boton);
-		
-		
 	}
-
 }
+
+class Suma {
+	
+	private List<Integer> sumandos;
+	
+	public Suma() {
+		this.sumandos = new ArrayList<Integer>();
+	}
+	
+	public Suma addSumando(int sumando){
+		this.sumandos.add(Integer.valueOf(sumando));
+		return this;
+	}
+	
+	public Integer execute(){
+		Integer result = Integer.valueOf(0);
+		for(Integer sumando : this.sumandos){
+			result = result.intValue() + sumando.intValue();
+		}
+		return result;
+	}
+}
+
