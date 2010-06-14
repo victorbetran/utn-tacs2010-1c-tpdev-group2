@@ -108,19 +108,19 @@
 	<!--*************************-->
 	<!--          JMS            -->
 	<!--*************************-->
-	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-		<property name="brokerURL" value="tcp://localhost:61616" />
-	</bean>
-
-	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="defaultDestination" ref="destinationQueue" />
-		<property name="receiveTimeout" value="30000" />		
-	</bean>
-
-	<bean id="destinationQueue" class="org.apache.activemq.command.ActiveMQQueue">
-		<constructor-arg index="0" value="pedidosQueue" />
-	</bean>
+<!--	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">-->
+<!--		<property name="brokerURL" value="tcp://localhost:61616" />-->
+<!--	</bean>-->
+<!---->
+<!--	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">-->
+<!--		<property name="connectionFactory" ref="connectionFactory" />-->
+<!--		<property name="defaultDestination" ref="destinationQueue" />-->
+<!--		<property name="receiveTimeout" value="30000" />		-->
+<!--	</bean>-->
+<!---->
+<!--	<bean id="destinationQueue" class="org.apache.activemq.command.ActiveMQQueue">-->
+<!--		<constructor-arg index="0" value="pedidosQueue" />-->
+<!--	</bean>-->
 
 
 	<!--*************************-->
