@@ -6,8 +6,11 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.utn.tacs.tp.group2.persistence.PersistentObject;
 
+@Transactional(propagation=Propagation.REQUIRED)
 public abstract class AbstractDao<T extends PersistentObject> extends HibernateDaoSupport{
 
     //********************************************
@@ -35,6 +38,7 @@ public abstract class AbstractDao<T extends PersistentObject> extends HibernateD
 	}
 	
 	@SuppressWarnings("unchecked")
+	@Transactional(propagation=Propagation.REQUIRED)
 	public T findByID(final Long id) {
 		if( this.getHibernateTemplate().get(getGenericClass(), id) == null ){
 			throw getNotFoundObjectException(id);

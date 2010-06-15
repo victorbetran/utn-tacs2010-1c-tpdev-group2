@@ -1,9 +1,5 @@
 package org.utn.tacs.tp.group2.service.resources;
 
-import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.restlet.Context;
 import org.restlet.data.MediaType;
 import org.restlet.data.Request;
@@ -16,23 +12,21 @@ import org.restlet.resource.StringRepresentation;
 import org.restlet.resource.Variant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.utn.tacs.tp.group2.pedido.Pedido;
+import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.service.definition.PedidoService;
-import org.utn.tacs.tp.group2.service.implementation.PedidoDTO;
 
 import com.thoughtworks.xstream.XStream;
 
 @Component
-public class PedidoResource extends Resource{
+public class PedidosResource extends Resource {
 
-	@Autowired(required=true)
+	@Autowired
 	private PedidoService pedidoService;
 	
 	public void init(Context context, Request request, Response response) {
 		super.init(context, request, response);
 		getVariants().add(new Variant(MediaType.TEXT_XML));
 	}
-
 
 	@Override
 	public boolean allowDelete() {
@@ -46,58 +40,39 @@ public class PedidoResource extends Resource{
 
 	@Override
 	public boolean allowPost() {
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean allowPut() {
-		return true;
+		return false;
 	}
 	
-	/**
-	 * GET
-	 */
+	private String estado;
 	@Override
 	public Representation represent(Variant variant) throws ResourceException {
-		String id = (String) getRequest().getAttributes().get("id-pedido");
+		this.estado = getQuery().getFirstValue("estado");
 		
-		if (!isValidID(id)) {
+		if(estado == null || EstadoPedido.estadoByDescripcion(this.estado) == null){
 			getResponse().setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
 			return null;
 		}
-
-		PedidoDTO pedido = this.pedidoService.getPedidoById(id);
-		if (pedido == null) {
-			getResponse().setStatus(Status.CLIENT_ERROR_NOT_FOUND);
-			return null;
-		}
 		
-		return new StringRepresentation(new XStream().toXML(pedido), MediaType.TEXT_XML);
-	}
-
-	private static Pattern numericCheckPattern = Pattern.compile("^\\d+$");
-	private boolean isValidID(String id) {
-		if( id == null)
-			return false;
+		return this.buildAnswerFrom(this.pedidoService.getPedidosByEstado(this.estado));
 		
-		Matcher matcher = numericCheckPattern.matcher(id); 
-		return matcher.find();
 	}
-
-	/**
-	 * POST
-	 */
-	@Override
-	public void acceptRepresentation(Representation entity)	throws ResourceException {
-
-		try {
-			Pedido pedido = (Pedido) new XStream().fromXML(entity.getStream());
-			this.pedidoService.pedidoCreado(pedido);
-		} catch (IOException e) {
-			getResponse().setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
-		}
-
+	
+	//********************************************
+	//** PRIVATE IMPLEMENTATION
+	//********************************************
+	
+	private Representation buildAnswerFrom(Object o){
+		return new StringRepresentation(new XStream().toXML(o), MediaType.TEXT_XML);		
 	}
+	
+	//********************************************
+	//** GETTER & SETTER
+	//********************************************
 	
 	public PedidoService getPedidoService() {
 		return pedidoService;
@@ -106,5 +81,5 @@ public class PedidoResource extends Resource{
 	public void setPedidoService(PedidoService pedidoService) {
 		this.pedidoService = pedidoService;
 	}
-	
+
 }

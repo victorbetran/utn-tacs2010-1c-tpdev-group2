@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.utn.tacs.tp.group2.daos.exceptions.PedidoInexistenteException;
-import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
+import org.utn.tacs.tp.group2.daos.implementations.PedidoDAOImpl;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
-public class PedidoDAOMock extends PedidoDAO{
+public class PedidoDAOMock extends PedidoDAOImpl{
 
 	private List<Pedido> pedidos = new ArrayList<Pedido>();
 	
@@ -51,14 +51,11 @@ public class PedidoDAOMock extends PedidoDAO{
 		return toReturn;
 	}
 
-	@Override
-	protected RuntimeException getNotFoundObjectException(Long id) {
+	public Boolean existsId(Long id) {
 		return null;
 	}
 
-	@Override
-	public Pedido getByID(Long id) {
-		return this.findByID(id);
+	public void remove(Pedido t) {
 	}
 
 }

@@ -7,14 +7,16 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.utn.tacs.tp.group2.exceptions.pedido.PedidoCanceladoException;
+import org.utn.tacs.tp.group2.exceptions.pedido.PedidoSinPiezasException;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.service.definition.PedidoService;
+import org.utn.tacs.tp.group2.service.implementation.PedidoDTO;
 import org.utn.tacs.tp.group2.service.implementation.PedidoServiceImpl;
 import org.utn.tacs.tp.group2.service.pieza.PiezaDAOMock;
 
@@ -22,8 +24,7 @@ import org.utn.tacs.tp.group2.service.pieza.PiezaDAOMock;
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})
 public class ComportamientoDePedidoServiceTest {
 
-	@Autowired
-	private PedidoService pedidoService;
+	private PedidoService pedidoService = new PedidoServiceImpl();
 	
 	private PedidoDAOMock pedidoDAO;
 	private PiezaDAOMock piezaDAO;
@@ -31,13 +32,16 @@ public class ComportamientoDePedidoServiceTest {
 	Pedido pedidoSinPiezas;
 	Pedido pedidoConUnaPieza;
 	Pieza piezaAgregadaAPedido;
+	
+	PedidoDTO pedidoSinPiezasDTO;
+	PedidoDTO pedidoConUnaPiezaDTO;
 
 	@Before
 	public void setUp() {
 		pedidoDAO = new PedidoDAOMock();
 		piezaDAO = new PiezaDAOMock();
-		((PedidoServiceImpl)this.pedidoService).setPedidoDAO(pedidoDAO);
-		((PedidoServiceImpl)this.pedidoService).setPiezaDAO(piezaDAO);
+		this.pedidoService.setPedidoDAO(pedidoDAO);
+		this.pedidoService.setPiezaDAO(piezaDAO);
 
 		pedidoSinPiezas = Pedido.create();
 		pedidoConUnaPieza = Pedido.create();
@@ -50,30 +54,32 @@ public class ComportamientoDePedidoServiceTest {
 		pedidoDAO.save(pedidoSinPiezas);
 		pedidoDAO.save(pedidoConUnaPieza);
 
+		this.pedidoSinPiezasDTO = new PedidoDTO(this.pedidoSinPiezas);
+		this.pedidoConUnaPiezaDTO = new PedidoDTO(this.pedidoConUnaPieza);
 	}
 
 	@Test
 	public void consultarPedidoPorId() {
-		Assert.assertEquals(this.pedidoSinPiezas, this.pedidoService.loadPedidoById(this.pedidoSinPiezas.getId().toString()));
+		Assert.assertEquals(this.pedidoSinPiezasDTO, this.pedidoService.getPedidoById(this.pedidoSinPiezas.getId().toString()));
 	}
 
 	@Test
 	public void consultarPedidoInexistente() {
-		Assert.assertNull(this.pedidoService.loadPedidoById(Pedido.create().getId().toString()));
+		Assert.assertNull(this.pedidoService.getPedidoById(Pedido.create().getId().toString()));
 	}
 	
-	@Test
-	public void crearPedido() {
-		Pedido nuevoPedido = this.pedidoService.crearPedido();
-		Assert.assertTrue(this.pedidoDAO.isPersisted(nuevoPedido));
-	}
+//	@Test
+//	public void crearPedido() {
+//		Pedido nuevoPedido = this.pedidoService.crearPedido();
+//		Assert.assertTrue(this.pedidoDAO.isPersisted(nuevoPedido));
+//	}
 	
 	@Test
 	public void agregarPiezaAPedidoSinPiezas() {
 		Pieza unaPieza = new Pieza("AZF-2221", 64, Moneda.Pesos);
 		this.piezaDAO.save(unaPieza);
 		
-		Assert.assertEquals(this.pedidoSinPiezas,this.pedidoService.agregarPiezaAlPedido(this.pedidoSinPiezas.getId().toString(), unaPieza.getId().toString()));
+		this.pedidoService.agregarPiezaAlPedido(this.pedidoSinPiezas.getId().toString(), unaPieza.getId().toString());
 		
 		Pedido pedidoGivenFromDao = this.pedidoDAO.findByID(this.pedidoSinPiezas.getId());
 		
@@ -85,7 +91,7 @@ public class ComportamientoDePedidoServiceTest {
 	public void agregarPiezaAPedidoConUnaPieza() {
 		Pieza unaPieza = new Pieza("AZF-2221", 64, Moneda.Pesos);
 		this.piezaDAO.save(unaPieza);
-		Assert.assertEquals(this.pedidoConUnaPieza,this.pedidoService.agregarPiezaAlPedido(this.pedidoConUnaPieza.getId().toString(), unaPieza.getId().toString()));
+		this.pedidoService.agregarPiezaAlPedido(this.pedidoConUnaPieza.getId().toString(), unaPieza.getId().toString());
 		
 		Pedido pedidoGivenFromDao = this.pedidoDAO.findByID(this.pedidoConUnaPieza.getId());
 		
@@ -98,15 +104,15 @@ public class ComportamientoDePedidoServiceTest {
 	public void cancelarUnPedido(){
 		Assert.assertTrue(!this.pedidoConUnaPieza.isCancelado());
 		
-		Assert.assertEquals(this.pedidoConUnaPieza,this.pedidoService.cancelarPedido(this.pedidoConUnaPieza.getId().toString()));
+		this.pedidoService.cancelarPedido(this.pedidoConUnaPieza.getId().toString());
 		
 		Assert.assertTrue(this.pedidoConUnaPieza.isCancelado());
 	}
 	
-	@Test
+	@Test(expected=PedidoCanceladoException.class)
 	public void cancelarUnPedidoQueEstabaCancelado(){
 		this.pedidoService.cancelarPedido(this.pedidoConUnaPieza.getId().toString());
-		Assert.assertNull(this.pedidoService.cancelarPedido(this.pedidoConUnaPieza.getId().toString()));
+		this.pedidoService.cancelarPedido(this.pedidoConUnaPieza.getId().toString());
 	}
 	
 	@Test
@@ -118,24 +124,24 @@ public class ComportamientoDePedidoServiceTest {
 		Assert.assertTrue(this.pedidoConUnaPieza.isEfectivo());
 	}
 
-	@Test
+	@Test(expected=PedidoSinPiezasException.class)
 	public void efectivizarUnPedidoQueEstabaCancelado() {
 		this.pedidoService.cancelarPedido(this.pedidoConUnaPieza.getId().toString());
-		Assert.assertNull(this.pedidoService.efectivizarPedido(this.pedidoConUnaPieza.getId().toString()));
+		this.pedidoService.efectivizarPedido(this.pedidoConUnaPieza.getId().toString());
 	}
 	
 	@Test
 	public void consultarPedidosPorEstado() {
-		List<Pedido> pedidos = this.pedidoService.getPedidosByEstado(EstadoPedido.getEnCurso().toString());
+		List<PedidoDTO> pedidos = this.pedidoService.getPedidosByEstado(EstadoPedido.getEnCurso().toString());
 		
 		Assert.assertEquals(2,pedidos.size());
-		Assert.assertTrue(pedidos.contains(this.pedidoConUnaPieza));
-		Assert.assertTrue(pedidos.contains(this.pedidoSinPiezas));
+		Assert.assertTrue(pedidos.contains(this.pedidoConUnaPiezaDTO));
+		Assert.assertTrue(pedidos.contains(this.pedidoSinPiezasDTO));
 	}
 
 	@Test
 	public void consultarPedidosPorEstadoSinResultado() {
-		List<Pedido> pedidos = this.pedidoService.getPedidosByEstado(EstadoPedido.getCancelado().toString());
+		List<PedidoDTO> pedidos = this.pedidoService.getPedidosByEstado(EstadoPedido.getCancelado().toString());
 		
 		Assert.assertEquals(0,pedidos.size());
 	}
