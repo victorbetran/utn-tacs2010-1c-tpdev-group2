@@ -15,7 +15,6 @@ import org.restlet.resource.StringRepresentation;
 import org.restlet.resource.Variant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.service.definition.PiezaService;
 import org.utn.tacs.tp.group2.service.implementation.PiezaDTO;
 
@@ -64,13 +63,13 @@ public class PiezaResource extends Resource {
 			return null;
 		}
 
-		Pieza pieza = this.piezaService.getPiezaById(id);
+		PiezaDTO pieza = this.piezaService.getPiezaById(id);
 		if (pieza == null) {
 			getResponse().setStatus(Status.CLIENT_ERROR_NOT_FOUND);
 			return null;
 		}
 		
-		return new StringRepresentation(new XStream().toXML(new PiezaDTO(pieza)), MediaType.TEXT_XML);	
+		return new StringRepresentation(new XStream().toXML(pieza), MediaType.TEXT_XML);	
 	}
 
 	private static Pattern numericCheckPattern = Pattern.compile("^\\d+$");

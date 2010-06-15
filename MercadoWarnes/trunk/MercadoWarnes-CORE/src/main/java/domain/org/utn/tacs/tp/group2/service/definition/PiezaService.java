@@ -2,27 +2,41 @@ package org.utn.tacs.tp.group2.service.definition;
 
 import java.util.List;
 
-import org.utn.tacs.tp.group2.pieza.Pieza;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
+import org.utn.tacs.tp.group2.service.implementation.PiezaDTO;
 
 /**
  * Interfaz del Servicio de Piezas.
  */
 public interface PiezaService {
 
-	public Pieza loadPiezaById(Long id);
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public PiezaDTO getPiezaById(String id);
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public List<PiezaDTO> getPiezasByCategoria(String categoria);
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public List<PiezaDTO> getPiezasByAuto(String autoId);
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public List<PiezaDTO> getPiezasVendidasByAuto(String autoId);
 	
-	public Pieza getPiezaById(String id);
-
-	public List<Pieza> getPiezasByCategoria(String categoria);
-
-	public List<Pieza> getPiezasByAuto(String autoId);
-
-	public List<Pieza> getPiezasVendidasByAuto(String autoId);
-	
+	@Transactional(propagation=Propagation.SUPPORTS)
 	public int getPorcentajePiezasVendidasByAuto(String autoId);
 
-	public List<Pieza> getAllPiezas();
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public List<PiezaDTO> getAllPiezas();
 
-	public List<Pieza> getPiezasByEstado(String estado);	
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public List<PiezaDTO> getPiezasByEstado(String estado);	
+	
+//	@Transactional(propagation=Propagation.SUPPORTS)
+	public void setPiezaDAO(PiezaDAO dao);
+
+//	@Transactional(propagation=Propagation.SUPPORTS)
+	public PiezaDAO getPiezaDAO();
 	
 }

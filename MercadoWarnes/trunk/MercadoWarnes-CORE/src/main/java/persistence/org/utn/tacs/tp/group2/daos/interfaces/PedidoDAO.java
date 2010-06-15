@@ -2,34 +2,32 @@ package org.utn.tacs.tp.group2.daos.interfaces;
 
 import java.util.List;
 
-import org.utn.tacs.tp.group2.daos.implementations.AbstractDao;
-import org.utn.tacs.tp.group2.daos.implementations.PedidoDAOImpl;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
-public abstract class PedidoDAO extends AbstractDao<Pedido> {
+public interface PedidoDAO {
 
-	private static PedidoDAO instance = null;
-	
-	public static PedidoDAO getInstance() {
-		if (instance == null) {
-			instance = new PedidoDAOImpl();
-		}
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void save(Pedido t);
 
-		return instance;
-	}
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void remove(Pedido t);
 
-	@Override
-	protected Class<Pedido> getGenericClass() {
-		return Pedido.class;
-	}
-	
+	@Transactional(propagation = Propagation.SUPPORTS)
+	public Boolean isPersisted(Pedido t);
 
-	/**
-	 * Carga todos los pedido con ese estado.
-	 * 
-	 * @return una lista de pedidos
-	 */
-	public abstract List<Pedido> findByEstado(EstadoPedido tipoEstado);
+	@Transactional(propagation = Propagation.SUPPORTS)
+	public Boolean existsId(Long id);
+
+	@Transactional(propagation = Propagation.SUPPORTS)
+	public Pedido findByID(final Long id);
+
+	@Transactional(propagation = Propagation.SUPPORTS)
+	public List<Pedido> findAll();
+
+	@Transactional(propagation = Propagation.SUPPORTS)
+	public List<Pedido> findByEstado(EstadoPedido estado);
 	
 }

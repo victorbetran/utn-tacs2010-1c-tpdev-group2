@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.utn.tacs.tp.group2.daos.exceptions.PiezaInexistenteException;
-import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
+import org.utn.tacs.tp.group2.daos.implementations.PiezaDAOImpl;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 
-public class PiezaDAOMock extends PiezaDAO{
+public class PiezaDAOMock extends PiezaDAOImpl{
 
 	private List<Pieza> piezas = new ArrayList<Pieza>();
 	
@@ -105,10 +105,19 @@ public class PiezaDAOMock extends PiezaDAO{
 		return toReturn;
 	}
 
-
-	@Override
-	protected RuntimeException getNotFoundObjectException(Long id) {
+	public Pieza getByID(Long id) {
 		return null;
+	}
+
+	public Boolean existsId(Long id) {
+		return null;
+	}
+
+	public Boolean isPersisted(Pieza pieza) {
+		return null;
+	}
+
+	public void remove(Pieza pieza) {
 	}
 
 

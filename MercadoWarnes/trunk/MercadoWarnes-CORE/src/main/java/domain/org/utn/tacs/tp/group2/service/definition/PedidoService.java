@@ -2,25 +2,45 @@ package org.utn.tacs.tp.group2.service.definition;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
+import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.pedido.Pedido;
+import org.utn.tacs.tp.group2.service.implementation.PedidoDTO;
 
 /**
  * Interfaz del Servicio de Pedidos.
  */
 public interface PedidoService {
-
-	public Pedido loadPedidoById(String id);
 	
-	public Pedido crearPedido();
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public PedidoDTO getPedidoById(String id);
 	
-	public Pedido agregarPiezaAlPedido(String pedidoId, String piezaId);
+	@Transactional(propagation=Propagation.REQUIRED)
+	public void agregarPiezaAlPedido(String pedidoId, String piezaId);
 
-	public Pedido efectivizarPedido(String id);
+	@Transactional(propagation=Propagation.REQUIRED)
+	public void efectivizarPedido(String id);
 
-	public Pedido cancelarPedido(String id);
+	@Transactional(propagation=Propagation.REQUIRED)
+	public void cancelarPedido(String id);
 
-	public List<Pedido> getPedidosByEstado(String estado);
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public List<PedidoDTO> getPedidosByEstado(String estado);
 
-	public Pedido getPedidoById(String id);
+	@Transactional(propagation=Propagation.REQUIRED)
+	public void pedidoCreado(Pedido pedido);
 
+//	@Transactional(propagation=Propagation.SUPPORTS)
+	public void setPedidoDAO(PedidoDAO dao);
+	
+//	@Transactional(propagation=Propagation.SUPPORTS)
+	public PedidoDAO getPedidoDAO();
+	
+//	@Transactional(propagation=Propagation.SUPPORTS)
+	public void setPiezaDAO(PiezaDAO dao);
+	
+//	@Transactional(propagation=Propagation.SUPPORTS)
+	public PiezaDAO getPiezaDAO();
 }

@@ -6,34 +6,44 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
+import org.utn.tacs.tp.group2.service.definition.PiezaService;
+import org.utn.tacs.tp.group2.service.implementation.PiezaDTO;
 import org.utn.tacs.tp.group2.service.implementation.PiezaServiceImpl;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"classpath:applicationContext.xml"})
 public class ComportamientoDePiezaServiceTest {
 
-	@Autowired
-	private PiezaServiceImpl piezaService = new PiezaServiceImpl();
+	private PiezaService piezaService = new PiezaServiceImpl();
 
 	private Pieza unaPiezaPremiumDeAutoA;
 	private Pieza unaPiezaMediumDeAutoA;
 	private Pieza unaPiezaMediumDeAutoB;
+	
+	private PiezaDTO unaPiezaPremiumDeAutoADTO;
+	private PiezaDTO unaPiezaMediumDeAutoADTO;
+	private PiezaDTO unaPiezaMediumDeAutoBDTO;
 
 	private Auto autoA;
 	private Auto autoB;
 
 	@Before
 	public void setUp() throws Exception {
+		
 		PiezaDAOMock piezaDAO = new PiezaDAOMock();
-		((PiezaServiceImpl)this.piezaService).setPiezaDAO(piezaDAO);
+		this.piezaService.setPiezaDAO(piezaDAO);
 		
 		autoA = Auto.createAuto("EXP-074", "AK-47", 2009, new Date());
 		autoB = Auto.createAuto("EXP-077", "AKA-47", 2002, new Date());
 		
-		unaPiezaPremiumDeAutoA = new Pieza("PIEZA 1",50,Moneda.Dolares);
+		unaPiezaPremiumDeAutoA = new Pieza("PIEZA 1 - gato",50,Moneda.Dolares);
 		unaPiezaPremiumDeAutoA.setCategoria("PREMIUM");
 		unaPiezaPremiumDeAutoA.setAutoOrigen(autoA);
 		
@@ -48,51 +58,55 @@ public class ComportamientoDePiezaServiceTest {
 		piezaDAO.save(unaPiezaPremiumDeAutoA);
 		piezaDAO.save(unaPiezaMediumDeAutoA);
 		piezaDAO.save(unaPiezaMediumDeAutoB);
+		
+		this.unaPiezaPremiumDeAutoADTO = new PiezaDTO(unaPiezaPremiumDeAutoA);
+		this.unaPiezaMediumDeAutoADTO = new PiezaDTO(unaPiezaMediumDeAutoA);
+		this.unaPiezaMediumDeAutoBDTO = new PiezaDTO(unaPiezaMediumDeAutoB);
 	}
-
+	
 	@Test
 	public void consultarPiezaById() {
-		Pieza piezaGivenByService = piezaService.loadPiezaById(this.unaPiezaPremiumDeAutoA.getId());
-		Assert.assertEquals(this.unaPiezaPremiumDeAutoA, piezaGivenByService);
+		PiezaDTO piezaGivenByService = piezaService.getPiezaById(this.unaPiezaPremiumDeAutoA.getId().toString());
+		Assert.assertEquals(this.unaPiezaPremiumDeAutoADTO, piezaGivenByService);
 	}
 
 	@Test()
 	public void consultarPiezaInexistente() {
-		Assert.assertNull(piezaService.loadPiezaById(new Pieza("PIEZA INEXISTENTE",40,Moneda.Pesos).getId()));		
+		Assert.assertNull(piezaService.getPiezaById(new Pieza("PIEZA INEXISTENTE",40,Moneda.Pesos).getId().toString()));		
 	}
 	
 	@Test
 	public void consultarPiezasByCategoriaPremium() {
-		List<Pieza> piezasGivenByService = piezaService.getPiezasByCategoria("PREMIUM");
+		List<PiezaDTO> piezasGivenByService = piezaService.getPiezasByCategoria("PREMIUM");
 		Assert.assertEquals(1, piezasGivenByService.size());
-		Assert.assertTrue(piezasGivenByService.contains(this.unaPiezaPremiumDeAutoA));
+		Assert.assertTrue(piezasGivenByService.contains(this.unaPiezaPremiumDeAutoADTO));
 	}
 
 	@Test
 	public void consultarPiezasByCategoriaMedium() {
-		List<Pieza> piezasGivenByService = piezaService.getPiezasByCategoria("MEDIUM");
+		List<PiezaDTO> piezasGivenByService = piezaService.getPiezasByCategoria("MEDIUM");
 		Assert.assertEquals(2, piezasGivenByService.size());
-		Assert.assertTrue(piezasGivenByService.contains(this.unaPiezaMediumDeAutoA));
-		Assert.assertTrue(piezasGivenByService.contains(this.unaPiezaMediumDeAutoB));
+		Assert.assertTrue(piezasGivenByService.contains(this.unaPiezaMediumDeAutoADTO));
+		Assert.assertTrue(piezasGivenByService.contains(this.unaPiezaMediumDeAutoBDTO));
 	}
 	
 	@Test
 	public void consultarPiezasByCategoriaSinResultado() {
-		List<Pieza> piezasGivenByService = piezaService.getPiezasByCategoria("NO-EXISTING-CATEGORY");
+		List<PiezaDTO> piezasGivenByService = piezaService.getPiezasByCategoria("NO-EXISTING-CATEGORY");
 		Assert.assertTrue(piezasGivenByService.isEmpty());
 	}
 	
 	@Test
 	public void consultarPiezasByAuto() {
-		List<Pieza> piezasGivenByService = piezaService.getPiezasByAuto(this.autoA.getId().toString());
+		List<PiezaDTO> piezasGivenByService = piezaService.getPiezasByAuto(this.autoA.getId().toString());
 		Assert.assertEquals(2, piezasGivenByService.size());
-		Assert.assertTrue(piezasGivenByService.contains(this.unaPiezaPremiumDeAutoA));
-		Assert.assertTrue(piezasGivenByService.contains(this.unaPiezaMediumDeAutoA));
+		Assert.assertTrue(piezasGivenByService.contains(this.unaPiezaPremiumDeAutoADTO));
+		Assert.assertTrue(piezasGivenByService.contains(this.unaPiezaMediumDeAutoADTO));
 	}
 	
 	@Test
 	public void consulterPiezasByAutoSinResultado() {
-		List<Pieza> piezasGivenByService = piezaService.getPiezasByAuto(Auto.createAuto("", "", 2010, new Date()).getId().toString());
+		List<PiezaDTO> piezasGivenByService = piezaService.getPiezasByAuto(Auto.createAuto("", "", 2010, new Date()).getId().toString());
 		Assert.assertTrue(piezasGivenByService.isEmpty());
 	}
 	
@@ -107,11 +121,12 @@ public class ComportamientoDePiezaServiceTest {
 	@Test
 	public void consultarPiezasPorEstadoReservado() {
 		this.unaPiezaMediumDeAutoA.reservar();
+		PiezaDTO unaPiezaMediumDeAutoADTO_Reservada = new PiezaDTO(this.unaPiezaMediumDeAutoA);
 		
-		List<Pieza> piezasGivenByService = piezaService.getPiezasByEstado(EstadoPieza.getEstadoReservada().toString());
+		List<PiezaDTO> piezasGivenByService = piezaService.getPiezasByEstado(EstadoPieza.getEstadoReservada().toString());
 		Assert.assertEquals(1,piezasGivenByService.size());
 		
-		Assert.assertTrue(piezasGivenByService.contains(this.unaPiezaMediumDeAutoA));
+		Assert.assertTrue(piezasGivenByService.contains(unaPiezaMediumDeAutoADTO_Reservada));
 	}
 	
 }

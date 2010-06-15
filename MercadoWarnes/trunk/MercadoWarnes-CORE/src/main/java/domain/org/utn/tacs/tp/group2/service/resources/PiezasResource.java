@@ -1,7 +1,5 @@
 package org.utn.tacs.tp.group2.service.resources;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,9 +16,7 @@ import org.restlet.resource.Variant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
-import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.service.definition.PiezaService;
-import org.utn.tacs.tp.group2.service.implementation.PiezaDTO;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -88,7 +84,7 @@ public class PiezasResource extends Resource {
 	private boolean allParametersOk() {
 		
 		if(estado != null){
-			return estado.equals(EstadoPieza.getEstadoDisponible().toString()) || estado.equals(EstadoPieza.getEstadoReservada().toString()) || estado.equals(EstadoPieza.getEstadoVendida().toString());
+			return EstadoPieza.estadoByDescripcion(estado) != null;
 		}
 		
 		if(auto != null){
@@ -111,14 +107,8 @@ public class PiezasResource extends Resource {
 	//** PRIVATE IMPLEMENTATION
 	//********************************************
 	
-	private Representation buildAnswerFrom(List<Pieza> piezas){
-		List<PiezaDTO> toReturn = new ArrayList<PiezaDTO>();
-
-		for (Pieza pieza : piezas) {
-			toReturn.add(new PiezaDTO(pieza));
-		}
-		
-		return new StringRepresentation(new XStream().toXML(toReturn), MediaType.TEXT_XML);		
+	private Representation buildAnswerFrom(Object o){
+		return new StringRepresentation(new XStream().toXML(o), MediaType.TEXT_XML);		
 	}
 	
 	//********************************************

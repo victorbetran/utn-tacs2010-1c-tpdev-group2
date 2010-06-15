@@ -21,6 +21,11 @@ public class PiezaDTO {
 		this.categoria = pieza.getCategoria();
 	}
 	
+	@Override
+	public String toString() {
+		return "PIEZA DTO: cat:" + this.categoria + " est: " + this.estado + " cod: " + this.codigo + " id: " + this.id;
+	}
+	
 	public String getCodigo() {
 		return codigo;
 	}
