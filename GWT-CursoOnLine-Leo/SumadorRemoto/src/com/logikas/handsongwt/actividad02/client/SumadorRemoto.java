@@ -50,15 +50,15 @@ public class SumadorRemoto implements EntryPoint {
 					sumaService.sumar(suma,
 						new AsyncCallback<Integer>() {
 							public void onFailure(Throwable caught) {
-								resultado.setText("Error en la Red");
+								resultado.setText("Error de numero negativo");
 							}
 							public void onSuccess(Integer result) {
 								resultado.setText(result.toString());
 							}
 						});
 				}
-				catch(NumberFormatException e){
-					resultado.setText("Error de numero negativo");
+				catch(IllegalArgumentException e){
+					resultado.setText("Error en al red");
 				}
 				showResult(true);
 				enableDataEntry(true);
