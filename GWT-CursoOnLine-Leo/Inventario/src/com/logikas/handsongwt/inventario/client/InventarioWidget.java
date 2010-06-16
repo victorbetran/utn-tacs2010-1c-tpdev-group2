@@ -2,13 +2,17 @@ package com.logikas.handsongwt.inventario.client;
 
 import java.util.ArrayList;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 public class InventarioWidget extends Composite{
 	
@@ -39,7 +43,7 @@ public class InventarioWidget extends Composite{
 	
 	
 	//**********************************
-	//* CONSTRUCTOR
+	//* METODOS DE CONSTRUCCION
 	//**********************************
 	public InventarioWidget() {
 		
@@ -53,7 +57,6 @@ public class InventarioWidget extends Composite{
 		
 		// Crear panel de carga
 		this.crearPanelAgregar();
-				
 		
 	}
 
@@ -69,6 +72,12 @@ public class InventarioWidget extends Composite{
 		this.botonAgregar = new Button("Agregar");
 		this.panelAgregar.add(this.botonAgregar);
 		this.panelPrincipal.add(this.panelAgregar);
+		
+		this.botonAgregar.addClickHandler(new ClickHandler(){ 
+			public void onClick(ClickEvent event) { 
+				agregarItem(); 
+			} 
+		});
 	}
 
 	/**
@@ -84,4 +93,61 @@ public class InventarioWidget extends Composite{
 		this.panelPrincipal.add(this.tablaInventario);
 	}
 
+	
+	//**********************************
+	//* METODOS DE USO
+	//**********************************
+	/**
+	 * 
+	 */
+	private void agregarItem() {
+		
+		// Obtener articulo cargado
+		final String articulo = this.textoArticulo.getValue();
+		
+		// Limpiar Campo Articulo
+		textoArticulo.setValue("");
+		
+		// Obtener cantidad de filas en tabla
+		int fila = this.tablaInventario.getRowCount();
+		
+		// Cargar celda de artículo
+		Label labelArticulo = new Label();
+		labelArticulo.setText(articulo);
+		
+		this.tablaInventario.setWidget(fila, COL_ARTICULO, labelArticulo);
+		
+		// Obtener valor disponible
+		boolean disponible = this.checkDisponible.getValue();
+		Widget widgetDisponible = crearWidgetDisponible(disponible);
+		this.tablaInventario.setWidget(fila, COL_DISPONIBLE, widgetDisponible);
+		Button botonEliminar = new Button("X");
+		botonEliminar.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				eliminarItem(articulo);
+			}
+		});
+		
+		this.tablaInventario.setWidget(fila, COL_ELIMINAR, botonEliminar);
+		
+		// Agregar artículos al registro interno
+		this.articulos.add(articulo);
+	}
+
+	private Widget crearWidgetDisponible(boolean disponible) {
+		String texto = disponible? "Si": "No";
+		Label label = new Label();
+		label.setText(texto);
+		return label;
+	}
+	
+	private void eliminarItem(String articulo) {
+		int fila = this.articulos.indexOf(articulo);
+		this.articulos.remove(fila);
+		
+		// La fila 0 (cero) es de headers, por eso se suma 1 (uno)
+		this.tablaInventario.removeRow(fila + 1);
+		}
 }
