@@ -1,7 +1,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
            http://www.springframework.org/schema/aop
@@ -16,8 +15,8 @@
 	<!--*******************-->
 	<!--   CONSULTAS REST  -->
 	<!--*******************-->
-	<context:annotation-config/>
-	<context:component-scan base-package="org.utn.tacs.tp.group2.service.resources"/>
+	<context:annotation-config />
+	<context:component-scan base-package="org.utn.tacs.tp.group2.service.resources" />
 
 	<bean name="root" class="org.restlet.ext.spring.SpringRouter">
 		<property name="attachments" ref="resourceMap" />
@@ -79,13 +78,24 @@
 		<lookup-method name="createResource" bean="pedidosResource" />
 	</bean>
 
-<!--	<bean id="creadorPedidoEndpoint" class="org.restlet.ext.spring.SpringFinder">-->
-<!--		<lookup-method name="createResource" bean="creadorPedidoResource" />-->
-<!--	</bean>-->
+	<!--
+		<bean id="creadorPedidoEndpoint"
+		class="org.restlet.ext.spring.SpringFinder">
+	-->
+	<!--
+		<lookup-method name="createResource" bean="creadorPedidoResource" />
+	-->
+	<!--	</bean>-->
 <!---->
-<!--	<bean id="fakeValuesLoaderEndpoint" class="org.restlet.ext.spring.SpringFinder">-->
-<!--		<lookup-method name="createResource" bean="fakeValuesLoaderResource" />-->
-<!--	</bean>-->
+	<!--
+		<bean id="fakeValuesLoaderEndpoint"
+		class="org.restlet.ext.spring.SpringFinder">
+	-->
+	<!--
+		<lookup-method name="createResource" bean="fakeValuesLoaderResource"
+		/>
+	-->
+	<!--	</bean>-->
 
 
 	<!--*************************-->
@@ -119,20 +129,55 @@
 	<!--*************************-->
 	<!--          JMS            -->
 	<!--*************************-->
+	<!-- Connection con el Broker del Simulador de TACS -->
 <!--	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">-->
 <!--		<property name="brokerURL" value="tcp://localhost:61616" />-->
 <!--	</bean>-->
-<!---->
+
+	<!-- JmsTemplate no es necesario ya que hacemos la implementacion de listener -->
 <!--	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">-->
 <!--		<property name="connectionFactory" ref="connectionFactory" />-->
 <!--		<property name="defaultDestination" ref="destinationQueue" />-->
-<!--		<property name="receiveTimeout" value="30000" />		-->
+<!--		<property name="receiveTimeout" value="30000" />-->
 <!--	</bean>-->
-<!---->
+
+	<!-- Message Listener Container -->
+	<!--
+		Este bicho se encarga de mirar en la cola hasta q aparezca un mensaje
+		nuevo, cuando aparece se lo pasa al MDP. Usando el ListenerContainer
+		no es necesario el JmsTemplate. SPRING PAG. 410.
+	-->
+<!--	<bean class="org.springframework.jms.listener.SimpleMessageListenerContainer">-->
+<!--		<property name="connectionFactory" ref="connectionFactory" />-->
+<!--		<property name="destination" ref="destinationQueue" />-->
+<!--		<property name="messageListener" ref="purePojoMdp" />-->
+<!--	</bean>-->
+
+	<!-- Message Listener Adapter -->
+	<!--
+		Es un MessageListener que delega en un bean y en un metodo elegido la
+		implementacion de lo que se hace con el objeto recibido de la cola. SPRING PAG. 412.
+	-->
+<!--	<bean id="purePojoMdp"-->
+<!--		class="org.springframework.jms.listener.adapter.MessageListenerAdapter">-->
+<!--		<property name="delegate" ref="mercadoWarnesMdp" />-->
+<!--		<property name="defaultListenerMethod" value="processPedido" />-->
+<!--		<property name="messageConverter" value="pedidoConverter" />-->
+<!--	</bean>-->
+	
+	<!-- POJO, con la logica de lo que debe se debe hacer con el objeto recibido, persistirlo, bla bla -->
+<!--	<bean id="mercadoWarnesMdp"-->
+<!--		class="NUESTRA CLASE">-->
+<!--	</bean>-->
+
+	<!-- Destination -->
 <!--	<bean id="destinationQueue" class="org.apache.activemq.command.ActiveMQQueue">-->
 <!--		<constructor-arg index="0" value="pedidosQueue" />-->
 <!--	</bean>-->
 
+	<!-- Converter -->
+<!--	<bean id="pedidoConverter" class="org.utn.tacs.tp.group2.jms.PedidoMessageConverter">-->
+<!--	</bean>-->
 
 	<!--*************************-->
 	<!--  TRANSACTION MANAGER     -->
@@ -141,8 +186,8 @@
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
-	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<!--*************************-->
 	<!--        SESSION          -->
