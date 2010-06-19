@@ -292,7 +292,7 @@
 		<org.restlet.jaxb.version>1.1-M4</org.restlet.jaxb.version>
 		
 		<!-- Path donde se van a colocar las clases generadas a partir del wsdl -->
-		<dir.destiny>./src/test/java/resources</dir.destiny>
+		<dir.destiny>./src/main/java/domain/</dir.destiny>
 		
 		<!-- URl de donde se van a obtener los wsdl -->
 		<wsdl.url>http://127.0.0.1:8080/WarnesSimulator/PedidosService?wsdl</wsdl.url>
@@ -339,31 +339,31 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-codegen-plugin</artifactId>
-				<version>2.2.1</version>
-				<executions>
-					<execution>
-						<id>generate-sources</id>
-						<phase>generate-sources</phase>
-						<configuration>
-							<sourceRoot>${dir.destiny}</sourceRoot>
-							<wsdlOptions>
-								<wsdlOption>
-									<wsdl>${wsdl.url}</wsdl>
-									<extraargs>
-										<extraarg>-verbose</extraarg>
-									</extraargs>
-								</wsdlOption>
-							</wsdlOptions>
-						</configuration>
-						<goals>
-							<goal>wsdl2java</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.apache.cxf</groupId>-->
+<!--				<artifactId>cxf-codegen-plugin</artifactId>-->
+<!--				<version>2.2.1</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>generate-sources</id>-->
+<!--						<phase>generate-sources</phase>-->
+<!--						<configuration>-->
+<!--							<sourceRoot>${dir.destiny}</sourceRoot>-->
+<!--							<wsdlOptions>-->
+<!--								<wsdlOption>-->
+<!--									<wsdl>${wsdl.url}</wsdl>-->
+<!--									<extraargs>-->
+<!--										<extraarg>-verbose</extraarg>-->
+<!--									</extraargs>-->
+<!--								</wsdlOption>-->
+<!--							</wsdlOptions>-->
+<!--						</configuration>-->
+<!--						<goals>-->
+<!--							<goal>wsdl2java</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 </project>
