@@ -6,7 +6,7 @@ import org.junit.Test;
 public class NotificarEfectivizacionDePedidosTest {
 
 	@Test
-	public void efectivizarPedido(){
+	public void notificaciónExitosaDePedido(){
 
 	}
 	

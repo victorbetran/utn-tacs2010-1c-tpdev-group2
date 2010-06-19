@@ -37,19 +37,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link NotificarPedidoEfectivo }
+     * Create an instance of {@link NotificarPedidoEfectivoResponse }
      * 
      */
-    public NotificarPedidoEfectivo createNotificarPedidoEfectivo() {
-        return new NotificarPedidoEfectivo();
-    }
-
-    /**
-     * Create an instance of {@link Pedido }
-     * 
-     */
-    public Pedido createPedido() {
-        return new Pedido();
+    public NotificarPedidoEfectivoResponse createNotificarPedidoEfectivoResponse() {
+        return new NotificarPedidoEfectivoResponse();
     }
 
     /**
@@ -61,11 +53,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link NotificarPedidoEfectivoResponse }
+     * Create an instance of {@link Pedido }
      * 
      */
-    public NotificarPedidoEfectivoResponse createNotificarPedidoEfectivoResponse() {
-        return new NotificarPedidoEfectivoResponse();
+    public Pedido createPedido() {
+        return new Pedido();
+    }
+
+    /**
+     * Create an instance of {@link NotificarPedidoEfectivo }
+     * 
+     */
+    public NotificarPedidoEfectivo createNotificarPedidoEfectivo() {
+        return new NotificarPedidoEfectivo();
     }
 
     /**
