@@ -10,7 +10,9 @@ import org.springframework.jms.support.converter.MessageConverter;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 import org.utn.tacs.tp.group2.pieza.EstadoPieza;
+import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
+import org.utn.tacs.tp.group2.pieza.Precio;
 
 import ar.edu.utn.frba.tacs.warnes.Item;
 
@@ -36,22 +38,22 @@ public class PedidoMessageConverter implements MessageConverter {
 		ar.edu.utn.frba.tacs.warnes.Pedido pedidoApi = (ar.edu.utn.frba.tacs.warnes.Pedido) objectMessage
 				.getObject();
 
-		// TODO: Procer el pedidoApi y devolver un Pedido de nuestro dominio. Esperando respuesta de
-		// Gabo para continuar la implementación.
-
 		// Creamos un pedido de nuestro dominio
 		Pedido pedido = Pedido.create();
 
-		// Tranformamos los items en piezas y las agregamos al pedido
+		// Tranformamos los items en piezas y las agregamos al pedido. Muchos atributos de la pieza
+		// son tomados por Default.
 		for (Item item : pedidoApi.getItems()) {
-			Pieza pieza = new Pieza();
-			// TODO: Faltan atributos de la pieza, hay algunos por default? esperando a Gabo
-			pieza.setCodigo(item.getCodigo());
-			pieza.setEstado(EstadoPieza.getEstadoVendida());
-
-			pedido.addPieza(pieza);
+			for (int i = 0; i < item.getCantidad(); i++) {
+				Pieza pieza = Pieza.createDefault();
+				pieza.setCodigo(item.getCodigo());
+				pieza.setPrecio(new Precio(Moneda.Pesos, item.getPrecioUnitario()));
+				pedido.addPieza(pieza);
+				pieza.setEstado(EstadoPieza.getEstadoVendida());
+			}
 		}
 
+		// Lo seteo manualmente para no tener problemas con lo de SOAP, creo.
 		pedido.setEstado(EstadoPedido.getEfectivo());
 
 		return pedido;

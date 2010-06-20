@@ -176,8 +176,8 @@
 <!--	</bean>-->
 
 	<!-- Converter -->
-<!--	<bean id="pedidoConverter" class="org.utn.tacs.tp.group2.jms.PedidoMessageConverter">-->
-<!--	</bean>-->
+	<bean id="pedidoConverter" class="org.utn.tacs.tp.group2.jms.PedidoMessageConverter">
+	</bean>
 
 	<!--*************************-->
 	<!--  TRANSACTION MANAGER     -->

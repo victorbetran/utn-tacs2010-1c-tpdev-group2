@@ -1,5 +1,7 @@
 package org.utn.tacs.tp.group2.pieza;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -43,6 +45,21 @@ public class Pieza extends PersistentObject {
 		this.codigo = codigo;
 		this.precio=new Precio(moneda,precio);
 		TheLogger.getConsoleLogger().debug("Se crea la pieza:{}", this);
+	}
+	
+	/**
+	 * Este metodo crea una pieza con un autoOrigen y una categoria "DEFAULT". Lo necesita el
+	 * converter de pedidosApi. El codigo, estado y precio se deben setear manualmente.
+	 * 
+	 * @return una pieza
+	 */
+	public static Pieza createDefault() {
+		Pieza pieza = new Pieza();
+		pieza.setEstado(EstadoPieza.getEstadoDisponible());
+		pieza.setAutoOrigen(Auto.createAuto("DEFAULT", "DEFAULT", 2010, new Date()));
+		pieza.setCategoria("DEFAULT");
+		TheLogger.getConsoleLogger().debug("Se crea la pieza:{}", pieza);
+		return pieza;
 	}
 
 	public Pieza(){
@@ -196,6 +213,14 @@ public class Pieza extends PersistentObject {
 	
 	public double getPrecioEn(Moneda moneda) {
 		return this.precio.getValorEn(moneda);
+	}
+
+	/**
+	 * Necesario en el converter de JMS.
+	 * @param precio
+	 */
+	public void setPrecio(Precio precio) {
+		this.precio = precio;
 	}
 
 	
