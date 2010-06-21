@@ -8,6 +8,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.utn.tacs.tp.group2.exceptions.pedido.CancelacionDePedidoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.EfectivizacionDePedidoException;
@@ -80,7 +81,8 @@ public class Pedido extends PersistentObject {
 			this.venderPiezas();
 			this.estado.gotoEfectivo(this);
 			TheLogger.cambioDeEstadoLog(this);
-			NotificadorDePedidosAdapter.getInstance().notifyPedidoEfectivization(this);
+//			NotificadorDePedidosAdapter.getInstance().notifyPedidoEfectivization(this);
+			notifyEfectivizacion();
 		} catch (PiezaException e) {
 			throw new EfectivizacionDePedidoException(this, e);
 		}
@@ -159,6 +161,23 @@ public class Pedido extends PersistentObject {
 		return this.piezas.size();
 	}
 
+	//********************************************
+	//** OBSERVING SERVICES
+	//********************************************
+	
+	@Transient
+	private List<EfectivizacionPedidosObserver> efectvizacionObserver = new ArrayList<EfectivizacionPedidosObserver>();
+	
+	public void acceptEfectivizacionObserver(EfectivizacionPedidosObserver obs){
+		this.efectvizacionObserver.add(obs);
+	}
+	
+	private void notifyEfectivizacion(){
+		for (EfectivizacionPedidosObserver obs : this.efectvizacionObserver) {
+			obs.pedidoEfectivizado(this);
+		}
+	}
+	
 	// ********************************************
 	// ** PRIVATE METHOD
 	// ********************************************
