@@ -1,6 +1,7 @@
 package org.utn.tacs.tp.group2.service.soap;
 
 
+import org.utn.tacs.tp.group2.pedido.EfectivizacionPedidosObserver;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
 import ar.edu.utn.frba.tacs.mercadowarnessh.facturacion.PedidosService;
@@ -10,7 +11,7 @@ import ar.edu.utn.frba.tacs.mercadowarnessh.facturacion.PedidosServiceImplServic
  * Clase utilizada para realizar notificaciones al servicio SOAP sobre
  * el cambio de estado en los Pedidos.
  */
-public class NotificadorDePedidosAdapter {
+public class NotificadorDePedidosAdapter implements EfectivizacionPedidosObserver{
 
 	//***********************************
 	//* ATRIBUTTES
@@ -42,6 +43,13 @@ public class NotificadorDePedidosAdapter {
 		this.pedidoServiceSOAP.notificarPedidoEfectivo(this.myPedidoToYourSOAPPedido(pedido));
 	}
 	
+	//********************************************
+	//** EFECTIVIZACION PEDIDO OBSERVER
+	//********************************************
+	
+	public void pedidoEfectivizado(Pedido pedido) {
+		this.notifyPedidoEfectivization(pedido);
+	}
 	
 	//***********************************
 	//*PRIVATE METHODS
