@@ -16,9 +16,10 @@ import org.restlet.resource.StringRepresentation;
 import org.restlet.resource.Variant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.utn.tacs.tp.group2.pedido.Pedido;
+import org.utn.tacs.tp.group2.exceptions.services.ComposicionPedidoInvalida;
 import org.utn.tacs.tp.group2.service.definition.PedidoService;
 import org.utn.tacs.tp.group2.service.implementation.PedidoDTO;
+import org.utn.tacs.tp.group2.service.implementation.PiezaDTO;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -51,7 +52,7 @@ public class PedidoResource extends Resource{
 
 	@Override
 	public boolean allowPut() {
-		return true;
+		return false;
 	}
 	
 	/**
@@ -75,6 +76,29 @@ public class PedidoResource extends Resource{
 		return new StringRepresentation(new XStream().toXML(pedido), MediaType.TEXT_XML);
 	}
 
+	@Override
+	public void acceptRepresentation(Representation entity)	throws ResourceException {
+		String id = (String) getRequest().getAttributes().get("id-pedido");
+		
+		if (!isValidID(id)) {
+			getResponse().setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
+		} else {
+			try {
+				PiezaDTO pedido;
+				pedido = (PiezaDTO) new XStream().fromXML(entity.getStream());
+	
+				this.pedidoService.agregarPiezaAlPedido(id, pedido);
+				getResponse().setStatus(Status.SUCCESS_NO_CONTENT);
+			} catch (ComposicionPedidoInvalida e) {
+				getResponse().setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
+			} catch (IOException e) {
+				getResponse().setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
+			} catch (RuntimeException e) {
+				getResponse().setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
+			}
+		}
+	}
+	
 	private static Pattern numericCheckPattern = Pattern.compile("^\\d+$");
 	private boolean isValidID(String id) {
 		if( id == null)
@@ -84,21 +108,6 @@ public class PedidoResource extends Resource{
 		return matcher.find();
 	}
 
-	/**
-	 * POST
-	 */
-	@Override
-	public void acceptRepresentation(Representation entity)	throws ResourceException {
-
-		try {
-			Pedido pedido = (Pedido) new XStream().fromXML(entity.getStream());
-			this.pedidoService.pedidoCreado(pedido);
-		} catch (IOException e) {
-			getResponse().setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
-		}
-
-	}
-	
 	public PedidoService getPedidoService() {
 		return pedidoService;
 	}

@@ -6,8 +6,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
-import org.utn.tacs.tp.group2.pedido.Pedido;
 import org.utn.tacs.tp.group2.service.implementation.PedidoDTO;
+import org.utn.tacs.tp.group2.service.implementation.PiezaDTO;
 
 /**
  * Interfaz del Servicio de Pedidos.
@@ -18,7 +18,7 @@ public interface PedidoService {
 	public PedidoDTO getPedidoById(String id);
 	
 	@Transactional(propagation=Propagation.REQUIRED)
-	public void agregarPiezaAlPedido(String pedidoId, String piezaId);
+	public void agregarPiezaAlPedido(String pedidoId, PiezaDTO piezaDTO);
 
 	@Transactional(propagation=Propagation.REQUIRED)
 	public void efectivizarPedido(String id);
@@ -30,7 +30,7 @@ public interface PedidoService {
 	public List<PedidoDTO> getPedidosByEstado(String estado);
 
 	@Transactional(propagation=Propagation.REQUIRED)
-	public void pedidoCreado(Pedido pedido);
+	public Long crearPedido(PedidoDTO pedidoDTO);
 
 //	@Transactional(propagation=Propagation.SUPPORTS)
 	public void setPedidoDAO(PedidoDAO dao);

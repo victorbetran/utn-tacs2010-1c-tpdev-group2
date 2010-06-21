@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.utn.tacs.tp.group2.daos.exceptions.PedidoInexistenteException;
+import org.utn.tacs.tp.group2.daos.exceptions.PiezaInexistenteException;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
+import org.utn.tacs.tp.group2.exceptions.services.ComposicionPedidoInvalida;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 import org.utn.tacs.tp.group2.pieza.Pieza;
@@ -23,19 +25,28 @@ public class PedidoServiceImpl implements PedidoService {
 	@Autowired()
 	private PiezaDAO piezaDAO;
 	
-//	public Pedido crearPedido() {
-//		Pedido pedidoNuevo = Pedido.create();
-//		this.pedidoDAO.save(pedidoNuevo);
-//		return pedidoNuevo;
-//	}
-	
-	public void pedidoCreado(Pedido pedido) {
-		
+	public Long crearPedido(PedidoDTO pedidoDTO) {
+		try{
+			List<Pieza> piezas = new ArrayList<Pieza>();
+			
+			for (String string : pedidoDTO.getPiezas()) {
+				piezas.add(this.piezaDAO.findByID(Long.valueOf(string)));
+			}
+			
+			Pedido nuevoPedido = Pedido.create();
+			nuevoPedido.addPiezas(piezas);
+			
+			this.pedidoDAO.save(nuevoPedido);
+			
+			return nuevoPedido.getId();
+		}catch (PiezaInexistenteException e) {
+			throw new ComposicionPedidoInvalida(e);
+		}
 	}
 
-	public void agregarPiezaAlPedido(String pedidoId, String piezaId) {
+	public void agregarPiezaAlPedido(String pedidoId, PiezaDTO piezaDTO) {
 		Pedido pedido = this.pedidoDAO.findByID(Long.valueOf(pedidoId));
-		Pieza pieza = this.piezaDAO.findByID(Long.valueOf(piezaId));
+		Pieza pieza = this.piezaDAO.findByID(Long.valueOf(piezaDTO.getId()));
 		
 		pedido.addPieza(pieza);
 	}
@@ -98,4 +109,18 @@ public class PedidoServiceImpl implements PedidoService {
 		return piezaDAO;
 	}
 
+	private List<Pieza> getPiezasFrom(PedidoDTO pedidoDTO) {
+		List<Pieza> toReturn = new ArrayList<Pieza>();
+		
+		try{
+			for (String string : pedidoDTO.getPiezas()) {
+				toReturn.add(this.piezaDAO.findByID(Long.valueOf(string)));
+			}
+		}catch (PiezaInexistenteException e) {
+			throw new ComposicionPedidoInvalida(e);
+		}
+		
+		return toReturn;
+	}
+	
 }

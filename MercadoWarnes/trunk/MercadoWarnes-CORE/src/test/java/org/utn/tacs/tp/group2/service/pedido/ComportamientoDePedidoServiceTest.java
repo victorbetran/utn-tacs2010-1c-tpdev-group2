@@ -1,5 +1,7 @@
 package org.utn.tacs.tp.group2.service.pedido;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -11,13 +13,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoCanceladoException;
 import org.utn.tacs.tp.group2.exceptions.pedido.PedidoSinPiezasException;
+import org.utn.tacs.tp.group2.exceptions.services.ComposicionPedidoInvalida;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
+import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
 import org.utn.tacs.tp.group2.service.definition.PedidoService;
 import org.utn.tacs.tp.group2.service.implementation.PedidoDTO;
 import org.utn.tacs.tp.group2.service.implementation.PedidoServiceImpl;
+import org.utn.tacs.tp.group2.service.implementation.PiezaDTO;
 import org.utn.tacs.tp.group2.service.pieza.PiezaDAOMock;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -68,18 +73,56 @@ public class ComportamientoDePedidoServiceTest {
 		Assert.assertNull(this.pedidoService.getPedidoById(Pedido.create().getId().toString()));
 	}
 	
-//	@Test
-//	public void crearPedido() {
-//		Pedido nuevoPedido = this.pedidoService.crearPedido();
-//		Assert.assertTrue(this.pedidoDAO.isPersisted(nuevoPedido));
-//	}
+	@Test
+	public void crearPedidoSinPiezas() {
+		Pedido nuevoPedido = Pedido.create();
+		PedidoDTO nuevoPedidoDTO = new PedidoDTO(nuevoPedido);
+
+		Long id = this.pedidoService.crearPedido(nuevoPedidoDTO);
+		
+		Assert.assertNotNull(this.pedidoDAO.findByID(id));
+	}
+
+	@Test
+	public void crearPedidoConPiezas() {
+		Pieza piezaNueva = new Pieza("CODE!", 33, Moneda.Pesos);
+		this.piezaDAO.save(piezaNueva);
+		
+		List<String> piezaId = new ArrayList<String>();
+		piezaId.add(piezaNueva.getId().toString());
+		
+		Pedido nuevoPedido = Pedido.create();
+		PedidoDTO nuevoPedidoDTO = new PedidoDTO(nuevoPedido);
+		
+		nuevoPedidoDTO.setPiezas(piezaId);
+		
+		Long id = this.pedidoService.crearPedido(nuevoPedidoDTO);
+		
+		Assert.assertNotNull(this.pedidoDAO.findByID(id));
+	}
+
+	@Test(expected=ComposicionPedidoInvalida.class)
+	public void crearPedidoConPiezasInexistentes() {
+		Pieza piezaNueva = new Pieza("CODE!", 33, Moneda.Pesos);
+		
+		List<String> piezaId = new ArrayList<String>();
+		piezaId.add(piezaNueva.getId().toString());
+		
+		Pedido nuevoPedido = Pedido.create();
+		PedidoDTO nuevoPedidoDTO = new PedidoDTO(nuevoPedido);
+		
+		nuevoPedidoDTO.setPiezas(piezaId);
+		
+		this.pedidoService.crearPedido(nuevoPedidoDTO);
+	}
 	
 	@Test
 	public void agregarPiezaAPedidoSinPiezas() {
 		Pieza unaPieza = new Pieza("AZF-2221", 64, Moneda.Pesos);
+		unaPieza.setAutoOrigen(Auto.createAuto("", "", 2010, new Date()));
 		this.piezaDAO.save(unaPieza);
 		
-		this.pedidoService.agregarPiezaAlPedido(this.pedidoSinPiezas.getId().toString(), unaPieza.getId().toString());
+		this.pedidoService.agregarPiezaAlPedido(this.pedidoSinPiezas.getId().toString(), new PiezaDTO(unaPieza));
 		
 		Pedido pedidoGivenFromDao = this.pedidoDAO.findByID(this.pedidoSinPiezas.getId());
 		
@@ -90,8 +133,9 @@ public class ComportamientoDePedidoServiceTest {
 	@Test
 	public void agregarPiezaAPedidoConUnaPieza() {
 		Pieza unaPieza = new Pieza("AZF-2221", 64, Moneda.Pesos);
+		unaPieza.setAutoOrigen(Auto.createAuto("", "", 2010, new Date()));
 		this.piezaDAO.save(unaPieza);
-		this.pedidoService.agregarPiezaAlPedido(this.pedidoConUnaPieza.getId().toString(), unaPieza.getId().toString());
+		this.pedidoService.agregarPiezaAlPedido(this.pedidoConUnaPieza.getId().toString(), new PiezaDTO(unaPieza));
 		
 		Pedido pedidoGivenFromDao = this.pedidoDAO.findByID(this.pedidoConUnaPieza.getId());
 		

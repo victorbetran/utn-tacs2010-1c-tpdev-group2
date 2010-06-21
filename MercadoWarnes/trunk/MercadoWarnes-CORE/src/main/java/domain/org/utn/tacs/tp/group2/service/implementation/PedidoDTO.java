@@ -13,7 +13,6 @@ public class PedidoDTO {
 	private String estado;
 	
 	public PedidoDTO(Pedido pedido) {
-		//TODO: ver xq las piezas vienen como proxy y pincha xq la session se cerro.
 		for (Pieza pieza : pedido.getPiezas()) {
 			this.piezas.add(pieza.getId().toString());
 		}
@@ -38,6 +37,10 @@ public class PedidoDTO {
 		return this.piezas;
 	}
 
+	public void setPiezas(List<String> piezas) {
+		this.piezas = piezas;
+	}
+	
 	public String getId() {
 		return id;
 	}

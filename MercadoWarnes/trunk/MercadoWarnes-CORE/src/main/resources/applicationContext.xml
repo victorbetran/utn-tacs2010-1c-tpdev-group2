@@ -1,6 +1,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
            http://www.springframework.org/schema/aop
@@ -15,8 +16,8 @@
 	<!--*******************-->
 	<!--   CONSULTAS REST  -->
 	<!--*******************-->
-	<context:annotation-config />
-	<context:component-scan base-package="org.utn.tacs.tp.group2.service.resources" />
+	<context:annotation-config/>
+	<context:component-scan base-package="org.utn.tacs.tp.group2.service.resources"/>
 
 	<bean name="root" class="org.restlet.ext.spring.SpringRouter">
 		<property name="attachments" ref="resourceMap" />
@@ -25,9 +26,6 @@
 	<bean id="resourceMap" class="java.util.HashMap">
 		<constructor-arg>
 			<map>
-<!--				<entry key="/loadFakeValues">-->
-<!--					<ref bean="fakeValuesLoaderEndpoint" />-->
-<!--				</entry>-->
 				<!--*******************-->
 				<!--Consultas de Piezas-->
 				<!--*******************-->
@@ -46,18 +44,9 @@
 				<entry key="/pedido">
 					<ref bean="pedidosEndpoint" />
 				</entry>
-<!--				<entry key="/pedido-byId/{idPedido}">-->
-<!--					<ref bean="pedidoEndpoint" />-->
-<!--				</entry>-->
-<!--				<entry key="/pedido-byState/{estado}">-->
-<!--					<ref bean="pedidoEndpoint" />-->
-<!--				</entry>-->
-<!--				<entry key="/pedido-byId/{idPedido}/addPieza/{idPieza}">-->
-<!--					<ref bean="pedidoEndpoint" />-->
-<!--				</entry>-->
-<!--				<entry key="/pedido-byId/{idPedido}/{accion}">-->
-<!--					<ref bean="pedidoEndpoint" />-->
-<!--				</entry>-->
+				<entry key="/pedido/{id-pedido}/accion/{accion}">
+					<ref bean="pedidoManejadorEndpoint" />
+				</entry>
 			</map>
 		</constructor-arg>
 	</bean>
@@ -78,25 +67,10 @@
 		<lookup-method name="createResource" bean="pedidosResource" />
 	</bean>
 
-	<!--
-		<bean id="creadorPedidoEndpoint"
-		class="org.restlet.ext.spring.SpringFinder">
-	-->
-	<!--
-		<lookup-method name="createResource" bean="creadorPedidoResource" />
-	-->
-	<!--	</bean>-->
-<!---->
-	<!--
-		<bean id="fakeValuesLoaderEndpoint"
-		class="org.restlet.ext.spring.SpringFinder">
-	-->
-	<!--
-		<lookup-method name="createResource" bean="fakeValuesLoaderResource"
-		/>
-	-->
-	<!--	</bean>-->
-
+	<bean id="pedidoManejadorEndpoint" class="org.restlet.ext.spring.SpringFinder">
+		<lookup-method name="createResource" bean="pedidoManejadorResource" />
+	</bean>
+	
 
 	<!--*************************-->
 	<!--        SERVICIOS        -->
@@ -179,6 +153,7 @@
 	<bean id="pedidoConverter" class="org.utn.tacs.tp.group2.jms.PedidoMessageConverter">
 	</bean>
 
+
 	<!--*************************-->
 	<!--  TRANSACTION MANAGER     -->
 	<!--*************************-->
@@ -186,8 +161,8 @@
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 
 	<!--*************************-->
 	<!--        SESSION          -->

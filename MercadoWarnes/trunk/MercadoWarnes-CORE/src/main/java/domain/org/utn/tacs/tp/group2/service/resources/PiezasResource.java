@@ -78,7 +78,7 @@ public class PiezasResource extends Resource {
 	private void loadParameters() {
 		this.categoria = getQuery().getFirstValue("categoria");
 		this.estado = getQuery().getFirstValue("estado");
-		this.auto = getQuery().getFirstValue("id-auto");
+		this.auto = getQuery().getFirstValue("auto");
 	}
 
 	private boolean allParametersOk() {
