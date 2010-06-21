@@ -1,5 +1,7 @@
 package org.utn.tacs.tp.group2.service.resources;
 
+import java.io.IOException;
+
 import org.restlet.Context;
 import org.restlet.data.MediaType;
 import org.restlet.data.Request;
@@ -12,8 +14,10 @@ import org.restlet.resource.StringRepresentation;
 import org.restlet.resource.Variant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.utn.tacs.tp.group2.exceptions.services.ComposicionPedidoInvalida;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.service.definition.PedidoService;
+import org.utn.tacs.tp.group2.service.implementation.PedidoDTO;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -45,7 +49,7 @@ public class PedidosResource extends Resource {
 
 	@Override
 	public boolean allowPut() {
-		return false;
+		return true;
 	}
 	
 	private String estado;
@@ -60,6 +64,26 @@ public class PedidosResource extends Resource {
 		
 		return this.buildAnswerFrom(this.pedidoService.getPedidosByEstado(this.estado));
 		
+	}
+	
+	/**
+	 * PUT
+	 */
+	@Override
+	public void storeRepresentation(Representation entity) throws ResourceException {
+		try {
+			PedidoDTO pedido;
+			pedido = (PedidoDTO) new XStream().fromXML(entity.getStream());
+
+			this.pedidoService.crearPedido(pedido);
+			getResponse().setStatus(Status.SUCCESS_CREATED);
+		} catch (ComposicionPedidoInvalida e) {
+			getResponse().setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
+		} catch (IOException e) {
+			getResponse().setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
+		} catch (RuntimeException e) {
+			getResponse().setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
+		}
 	}
 	
 	//********************************************
