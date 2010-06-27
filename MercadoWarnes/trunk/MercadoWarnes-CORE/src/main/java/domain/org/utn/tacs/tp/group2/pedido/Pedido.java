@@ -17,11 +17,10 @@ import org.utn.tacs.tp.group2.exceptions.pieza.PiezaException;
 import org.utn.tacs.tp.group2.log.TheLogger;
 import org.utn.tacs.tp.group2.persistence.PersistentObject;
 import org.utn.tacs.tp.group2.pieza.Pieza;
-import org.utn.tacs.tp.group2.service.soap.NotificadorDePedidosAdapter;
 
 @Entity
 @Table(name = "PEDIDO")
-public class Pedido extends PersistentObject {
+public class Pedido extends PersistentObject{
 
 	// ********************************************
 	// ** ATRIBUTTES
@@ -51,9 +50,7 @@ public class Pedido extends PersistentObject {
 		return toReturn;
 	}
 	
-	public Pedido() {
-		
-	}
+	public Pedido() {}
 
 	// ********************************************
 	// ** PUBLIC METHODS
@@ -81,8 +78,7 @@ public class Pedido extends PersistentObject {
 			this.venderPiezas();
 			this.estado.gotoEfectivo(this);
 			TheLogger.cambioDeEstadoLog(this);
-//			NotificadorDePedidosAdapter.getInstance().notifyPedidoEfectivization(this);
-			notifyEfectivizacion();
+			this.notifyEfectivizacion();
 		} catch (PiezaException e) {
 			throw new EfectivizacionDePedidoException(this, e);
 		}
