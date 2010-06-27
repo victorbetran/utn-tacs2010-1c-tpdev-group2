@@ -39,7 +39,7 @@ public class NotificadorDePedidosAdapter implements EfectivizacionPedidosObserve
 	/**
 	 * Notifica de la efectivización de un pedido al WS de SOAP.
 	 */
-	public void notifyPedidoEfectivization(Pedido pedido){
+	private void notifyPedidoEfectivization(Pedido pedido){
 		this.pedidoServiceSOAP.notificarPedidoEfectivo(this.myPedidoToYourSOAPPedido(pedido));
 	}
 	
