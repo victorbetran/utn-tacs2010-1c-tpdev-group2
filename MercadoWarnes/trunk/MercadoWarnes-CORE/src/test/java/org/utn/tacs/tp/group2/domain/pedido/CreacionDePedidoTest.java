@@ -20,9 +20,9 @@ public class CreacionDePedidoTest {
 	
 	@Before
 	public void setUp(){
-		this.piezaDisponible = new Pieza("W-894",30,Moneda.Dolares);
-		this.otraPiezaDisponible = new Pieza("K-666",30,Moneda.Dolares);
-		this.piezaNoDisponible = new Pieza("N-000",30,Moneda.Dolares).reservar();
+		this.piezaDisponible = new Pieza("W-894",30,Moneda.DOLAR);
+		this.otraPiezaDisponible = new Pieza("K-666",30,Moneda.DOLAR);
+		this.piezaNoDisponible = new Pieza("N-000",30,Moneda.DOLAR).reservar();
 		this.pedido = Pedido.create();
 	}
 

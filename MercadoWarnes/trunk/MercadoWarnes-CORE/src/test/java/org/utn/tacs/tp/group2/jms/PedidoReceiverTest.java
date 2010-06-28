@@ -27,7 +27,7 @@ public class PedidoReceiverTest {
 	@Before
 	public void setUp() {
 		this.pedido=Pedido.create();
-		this.pieza=new Pieza("3", 3, Moneda.Pesos);
+		this.pieza=new Pieza("3", 3, Moneda.PESO);
 		this.pedido.addPieza(pieza);	
 			
 	}

@@ -17,8 +17,8 @@ public class NotificarEfectivizacionDePedidosTest {
 	
 	@Before
 	public void setUp(){
-		Pieza aPieza = new Pieza("CodigoPieza",10,Moneda.Dolares);
-		Pieza otherPieza = new Pieza("CodigoPieza",10,Moneda.Dolares);
+		Pieza aPieza = new Pieza("CodigoPieza",10,Moneda.DOLAR);
+		Pieza otherPieza = new Pieza("CodigoPieza",10,Moneda.DOLAR);
 		this.pedido = Pedido.create();
 		this.pedido.addPieza(aPieza);
 		this.pedido.addPieza(otherPieza);

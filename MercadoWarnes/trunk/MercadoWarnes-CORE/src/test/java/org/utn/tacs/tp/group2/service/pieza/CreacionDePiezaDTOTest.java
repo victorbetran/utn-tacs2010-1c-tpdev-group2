@@ -19,7 +19,7 @@ public class CreacionDePiezaDTOTest {
 	@Before
 	public void setUp(){
 		this.autoDePiezaModel = Auto.createAuto("patente", "modelo", 2010, new Date());
-		this.piezaModel = new Pieza("CodigoPieza",10,Moneda.Dolares);
+		this.piezaModel = new Pieza("CodigoPieza",10,Moneda.DOLAR);
 		this.piezaModel.setAutoOrigen(this.autoDePiezaModel);
 		this.piezaModel.setCategoria("UNA CATEGORIA");
 		

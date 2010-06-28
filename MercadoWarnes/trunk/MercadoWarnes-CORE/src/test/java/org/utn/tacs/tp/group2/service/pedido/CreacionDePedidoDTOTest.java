@@ -19,8 +19,8 @@ public class CreacionDePedidoDTOTest {
 	
 	@Before
 	public void setUp() {
-		this.unaPiezaModel = new Pieza("CodigoPieza",10,Moneda.Dolares);
-		this.otraPiezaModel = new Pieza("CodigoPieza",10,Moneda.Dolares);
+		this.unaPiezaModel = new Pieza("CodigoPieza",10,Moneda.DOLAR);
+		this.otraPiezaModel = new Pieza("CodigoPieza",10,Moneda.DOLAR);
 		
 		this.pedidoModel = Pedido.create();
 		this.pedidoModel.addPieza(unaPiezaModel);

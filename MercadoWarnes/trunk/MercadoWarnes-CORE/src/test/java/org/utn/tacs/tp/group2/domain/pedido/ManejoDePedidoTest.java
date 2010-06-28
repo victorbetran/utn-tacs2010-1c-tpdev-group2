@@ -20,9 +20,9 @@ public class ManejoDePedidoTest {
 	public void setUp(){
 		this.pedido = Pedido.create();
 		
-		this.pieza1 = new Pieza("A-123",30,Moneda.Dolares);
-		this.pieza2 = new Pieza("B-369",30,Moneda.Pesos);
-		this.pieza3 = new Pieza("C-147",30,Moneda.Pesos);
+		this.pieza1 = new Pieza("A-123",30,Moneda.DOLAR);
+		this.pieza2 = new Pieza("B-369",30,Moneda.PESO);
+		this.pieza3 = new Pieza("C-147",30,Moneda.PESO);
 	}
 
 	/**

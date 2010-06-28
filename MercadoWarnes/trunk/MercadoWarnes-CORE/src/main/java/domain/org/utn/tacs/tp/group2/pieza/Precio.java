@@ -15,23 +15,10 @@ public class Precio {
 	@Column
 	private double valor;
 	
-	private static double cotizacionDolaresAPesos=3.90;
-	
 	
 	// ********************************************
 	// ** PUBLIC CONSTRUCTOR
 	// ********************************************
-	
-	public static double getCotizacionDolaresAPesos() {
-		return cotizacionDolaresAPesos;
-	}
-
-
-	public static void setCotizacionDolaresAPesos(double cotizacionDolaresAPesos) {
-		Precio.cotizacionDolaresAPesos = cotizacionDolaresAPesos;
-	}
-
-
 	public Precio(Moneda moneda, double valor) {		
 		this.moneda = moneda;
 		this.valor = valor;
@@ -69,10 +56,15 @@ public class Precio {
 		
 	}
 
-	private double convertirValorAMoneda(Moneda moneda2) {		
-		if (this.moneda.equals(Moneda.Pesos))
-			return this.valor / cotizacionDolaresAPesos;
-		else
-			return this.valor * cotizacionDolaresAPesos;
+	private double convertirValorAMoneda(Moneda monedaDestino) {		
+		return this.valor * this.getCotizacionTo(monedaDestino);
+	}
+	
+	/**
+	 * Obtiene el multiplicador (cotizacion) para la moneda destino dependiendo de la moneda
+	 * del precio actual.
+	 */
+	private double getCotizacionTo(Moneda monedaDestino){
+		return Cotizador.getInstance().getCotizacionBetween(this.moneda, monedaDestino);
 	}
 }

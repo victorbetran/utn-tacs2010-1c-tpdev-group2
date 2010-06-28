@@ -10,9 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaNoReservadaException;
 import org.utn.tacs.tp.group2.exceptions.pieza.PiezaVendidaException;
+import org.utn.tacs.tp.group2.pieza.Cotizador;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
-import org.utn.tacs.tp.group2.pieza.Precio;
 
 public class PiezaTest {
 
@@ -21,13 +21,15 @@ public class PiezaTest {
 	
 	@Before
 	public void setUp() {
-		this.pieza = new Pieza("L-963",40,Moneda.Pesos);		
+		this.pieza = new Pieza("L-963",40,Moneda.PESO);		
 		this.listadoDePiezas = new ArrayList<Pieza>();
 		
 		//Agrego 10 piezas a la lista de piezas
 		for (int i = 0; i < 10; i++) {
-			this.listadoDePiezas.add(new Pieza("V-546",50,Moneda.Dolares));
+			this.listadoDePiezas.add(new Pieza("V-546",50,Moneda.DOLAR));
 		}
+		
+		Cotizador.getInstance().loadCotizacionBetween(Moneda.DOLAR, Moneda.PESO, 4);
 	}
 	
 
@@ -109,32 +111,30 @@ public class PiezaTest {
 	 * Obtener el valor de la pieza en pesos con precio en pesos
 	 */
 	public void obtenerValorDePiezaEnPesosAPesos() {
-		double precio = this.pieza.getPrecioEn(Moneda.Pesos);
+		double precio = this.pieza.getPrecioEn(Moneda.PESO);
 		Assert.assertEquals(precio, 40);
 	}
 	/**
 	 * Obtener el valor de la pieza en pesos con precio en dolares
 	 */
 	public void obtenerValorDePiezaEnDolaresAPesos() {
-		pieza = new Pieza("",10,Moneda.Dolares);
-		Precio.setCotizacionDolaresAPesos(4);
-		double precio = this.pieza.getPrecioEn(Moneda.Pesos);
+		pieza = new Pieza("",10,Moneda.DOLAR);
+		double precio = this.pieza.getPrecioEn(Moneda.PESO);
 		Assert.assertEquals(precio, 40);
 	}
 	/**
 	 * Obtener el valor de la pieza en dolares con precio en pesos
 	 */
 	public void obtenerValorDePiezaEnPesosADolares() {
-		Precio.setCotizacionDolaresAPesos(4);
-		double precio = this.pieza.getPrecioEn(Moneda.Dolares);
+		double precio = this.pieza.getPrecioEn(Moneda.DOLAR);
 		Assert.assertEquals(precio, 10);
 	}
 	/**
 	 * Obtener el valor de la pieza en dolares con precio en dolares
 	 */
 	public void obtenerValorDePiezaEnDolaresADolares() {
-		Pieza pieza = new Pieza("",10,Moneda.Dolares);		
-		double precio = pieza.getPrecioEn(Moneda.Dolares);
+		Pieza pieza = new Pieza("",10,Moneda.DOLAR);		
+		double precio = pieza.getPrecioEn(Moneda.DOLAR);
 		Assert.assertEquals(precio, 10);
 	}
 

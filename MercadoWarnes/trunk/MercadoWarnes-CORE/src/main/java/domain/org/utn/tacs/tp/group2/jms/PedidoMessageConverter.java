@@ -47,7 +47,7 @@ public class PedidoMessageConverter implements MessageConverter {
 			for (int i = 0; i < item.getCantidad(); i++) {
 				Pieza pieza = Pieza.createDefault();
 				pieza.setCodigo(item.getCodigo());
-				pieza.setPrecio(new Precio(Moneda.Pesos, item.getPrecioUnitario()));
+				pieza.setPrecio(new Precio(Moneda.PESO, item.getPrecioUnitario()));
 				pedido.addPieza(pieza);
 				pieza.setEstado(EstadoPieza.getEstadoVendida());
 			}

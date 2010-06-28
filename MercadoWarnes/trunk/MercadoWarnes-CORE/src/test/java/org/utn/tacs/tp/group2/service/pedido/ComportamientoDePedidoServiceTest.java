@@ -51,7 +51,7 @@ public class ComportamientoDePedidoServiceTest {
 		pedidoSinPiezas = Pedido.create();
 		pedidoConUnaPieza = Pedido.create();
 
-		piezaAgregadaAPedido = new Pieza("CODE!", 12, Moneda.Pesos);
+		piezaAgregadaAPedido = new Pieza("CODE!", 12, Moneda.PESO);
 		pedidoConUnaPieza.addPieza(piezaAgregadaAPedido);
 		
 		piezaDAO.save(piezaAgregadaAPedido);
@@ -85,7 +85,7 @@ public class ComportamientoDePedidoServiceTest {
 
 	@Test
 	public void crearPedidoConPiezas() {
-		Pieza piezaNueva = new Pieza("CODE!", 33, Moneda.Pesos);
+		Pieza piezaNueva = new Pieza("CODE!", 33, Moneda.PESO);
 		this.piezaDAO.save(piezaNueva);
 		
 		List<String> piezaId = new ArrayList<String>();
@@ -103,7 +103,7 @@ public class ComportamientoDePedidoServiceTest {
 
 	@Test(expected=ComposicionPedidoInvalida.class)
 	public void crearPedidoConPiezasInexistentes() {
-		Pieza piezaNueva = new Pieza("CODE!", 33, Moneda.Pesos);
+		Pieza piezaNueva = new Pieza("CODE!", 33, Moneda.PESO);
 		
 		List<String> piezaId = new ArrayList<String>();
 		piezaId.add(piezaNueva.getId().toString());
@@ -118,7 +118,7 @@ public class ComportamientoDePedidoServiceTest {
 	
 	@Test
 	public void agregarPiezaAPedidoSinPiezas() {
-		Pieza unaPieza = new Pieza("AZF-2221", 64, Moneda.Pesos);
+		Pieza unaPieza = new Pieza("AZF-2221", 64, Moneda.PESO);
 		unaPieza.setAutoOrigen(Auto.createAuto("", "", 2010, new Date()));
 		this.piezaDAO.save(unaPieza);
 		
@@ -132,7 +132,7 @@ public class ComportamientoDePedidoServiceTest {
 
 	@Test
 	public void agregarPiezaAPedidoConUnaPieza() {
-		Pieza unaPieza = new Pieza("AZF-2221", 64, Moneda.Pesos);
+		Pieza unaPieza = new Pieza("AZF-2221", 64, Moneda.PESO);
 		unaPieza.setAutoOrigen(Auto.createAuto("", "", 2010, new Date()));
 		this.piezaDAO.save(unaPieza);
 		this.pedidoService.agregarPiezaAlPedido(this.pedidoConUnaPieza.getId().toString(), new PiezaDTO(unaPieza));

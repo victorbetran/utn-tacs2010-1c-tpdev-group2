@@ -34,10 +34,10 @@ public class ConsultaDePiezasTest {
 	@Before
 	public void setUp() {
 
-		this.piezaPersistida1 = new Pieza("PIEZA1",40,Moneda.Pesos);
+		this.piezaPersistida1 = new Pieza("PIEZA1",40,Moneda.PESO);
 		this.dao.save(this.piezaPersistida1);
 
-		this.piezaPersistida2 = new Pieza("PIEZA2",40,Moneda.Pesos);
+		this.piezaPersistida2 = new Pieza("PIEZA2",40,Moneda.PESO);
 		this.dao.save(this.piezaPersistida2);
 
 		auto1 = Auto.createAuto("EXP-074", "AK-47", 2009, new Date());
@@ -60,7 +60,7 @@ public class ConsultaDePiezasTest {
 	@Transactional
 	@Test(expected = PiezaInexistenteException.class)
 	public void consultarPiezaInexistenteTest() {
-		dao.findByID(new Pieza("PIEZA INEXISTENTE",40,Moneda.Pesos).getId());
+		dao.findByID(new Pieza("PIEZA INEXISTENTE",40,Moneda.PESO).getId());
 	}
 	
 	/**
