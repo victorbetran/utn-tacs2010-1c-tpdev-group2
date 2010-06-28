@@ -44,7 +44,7 @@ public class CancelacionDePedidoTest {
 	 */
 	@Test (expected=CancelacionDePedidoException.class)
 	public void cancelarUnPedidoEfectivo(){		
-		this.pedido.addPieza(new Pieza("Z-456",30,Moneda.Dolares));
+		this.pedido.addPieza(new Pieza("Z-456",30,Moneda.DOLAR));
 		this.pedido.efectivizar();
 		this.pedido.cancelar();
 	}

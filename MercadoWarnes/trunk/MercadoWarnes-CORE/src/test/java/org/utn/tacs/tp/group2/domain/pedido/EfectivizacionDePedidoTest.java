@@ -20,8 +20,8 @@ public class EfectivizacionDePedidoTest {
 	@Before
 	public void setUp() throws Exception {
 		this.pedido = Pedido.create();
-		this.unaPieza = new Pieza("P-987",30,Moneda.Pesos);
-		this.otraPieza = new Pieza("6-985",30,Moneda.Pesos);
+		this.unaPieza = new Pieza("P-987",30,Moneda.PESO);
+		this.otraPieza = new Pieza("6-985",30,Moneda.PESO);
 	}
 
 	/**

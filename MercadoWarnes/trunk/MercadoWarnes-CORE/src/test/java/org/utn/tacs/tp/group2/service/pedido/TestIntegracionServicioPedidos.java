@@ -58,10 +58,10 @@ public class TestIntegracionServicioPedidos {
 		this.unPedidoModeloSinPieza = Pedido.create();
 		
 		this.unPedidoModeloConPieza = Pedido.create();
-		this.unPedidoModeloConPieza.addPieza(new Pieza("",12,Moneda.Pesos));
+		this.unPedidoModeloConPieza.addPieza(new Pieza("",12,Moneda.PESO));
 		
 		this.unPedidoEfectivizado = Pedido.create();
-		this.unPedidoEfectivizado.addPieza(new Pieza("",22,Moneda.Dolares));
+		this.unPedidoEfectivizado.addPieza(new Pieza("",22,Moneda.DOLAR));
 		this.unPedidoEfectivizado.efectivizar();
 		
 		this.pedidoDao = pr.getPedidoService().getPedidoDAO();
@@ -77,7 +77,7 @@ public class TestIntegracionServicioPedidos {
 	
 	@Test
 	public void codigoRespuestaCreandoPedidoValido() {
-		Pieza nuevaPieza = new Pieza("CODE",12,Moneda.Dolares);
+		Pieza nuevaPieza = new Pieza("CODE",12,Moneda.DOLAR);
 		this.piezaDao.save(nuevaPieza);
 		List<String> piezaId = new ArrayList<String>();
 		piezaId.add(nuevaPieza.getId().toString());
@@ -92,7 +92,7 @@ public class TestIntegracionServicioPedidos {
 
 	@Test
 	public void codigoRespuestaCreandoPedidoConPiezasNoValidas() {
-		Pieza nuevaPieza = new Pieza("CODE",12,Moneda.Dolares);
+		Pieza nuevaPieza = new Pieza("CODE",12,Moneda.DOLAR);
 		List<String> piezaId = new ArrayList<String>();
 		piezaId.add(nuevaPieza.getId().toString());
 		
@@ -130,7 +130,7 @@ public class TestIntegracionServicioPedidos {
 	
 	@Test
 	public void codigoRespuestaAgregandoPieza() throws IOException {
-		Pieza unaPiezaParaAgregar = new Pieza("",12, Moneda.Dolares);
+		Pieza unaPiezaParaAgregar = new Pieza("",12, Moneda.DOLAR);
 		unaPiezaParaAgregar.setAutoOrigen(Auto.createAuto("", "", 2010, new Date()));
 		piezaDao.save(unaPiezaParaAgregar);
 		
@@ -183,7 +183,7 @@ public class TestIntegracionServicioPedidos {
 	
 	@Test
 	public void agregarPieza() throws IOException {
-		Pieza unaPiezaParaAgregar = new Pieza("",12, Moneda.Dolares);
+		Pieza unaPiezaParaAgregar = new Pieza("",12, Moneda.DOLAR);
 		unaPiezaParaAgregar.setAutoOrigen(Auto.createAuto("", "", 2010, new Date()));
 		piezaDao.save(unaPiezaParaAgregar);
 		
