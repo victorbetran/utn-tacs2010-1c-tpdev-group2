@@ -2,6 +2,7 @@ package com.logikas.handsongwt.actividad04.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -10,6 +11,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.HTMLTable.Cell;
 
 public class GaleriaDeclarativaWidget extends Composite{
 
@@ -63,8 +65,15 @@ public class GaleriaDeclarativaWidget extends Composite{
 	 * Crea la tabla donde residirán las imágenes con sus nombres.
 	 */
 	private void createTableImages() {
-		this.images = new FlexTable();
-		this.images.addTableListener(new ImageTableListener(this));
+		final FlexTable table  = new FlexTable();
+		table.addClickHandler(new ClickHandler(){
+			@Override
+			public void onClick(ClickEvent event) {
+				Cell cell = table.getCellForEvent(event);
+				select(cell.getRowIndex() - 1);
+			}
+		});
+		this.images = table;
 		this.images.setText(0, 0, "Nombre");
 		this.images.setText(0, 1, "Imagen");
 		this.images.getRowFormatter().addStyleName(0, "tablaImagenesHeader");
