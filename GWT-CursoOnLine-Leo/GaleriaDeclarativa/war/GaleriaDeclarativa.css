@@ -1,0 +1,16 @@
+.tablaImagenesHeader {
+	background-color: #568BBA;
+	color: white;
+	font-style: italic;
+	text-align: center;
+}
+
+.tablaImagenesNombre {
+	text-align: center;
+	width: 120px;
+}
+
+.tablaImagenesImagen {
+	text-align: center;
+	width: 120px;
+}

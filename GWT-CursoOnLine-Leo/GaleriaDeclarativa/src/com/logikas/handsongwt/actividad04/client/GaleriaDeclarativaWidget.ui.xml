@@ -1,0 +1,13 @@
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'
+			 xmlns:lgk='urn:import:com.logikas.handsongwt.actividad04.client'>
+	
+	<g:VerticalPanel>
+		<g:FlexTable ui:field="images"/>
+		<lgk:FormInput ui:field="name"/>
+		<lgk:FormInput ui:field="url"/>
+		<g:Button ui:field="btnAccept">Aceptar</g:Button>
+		<g:Label ui:field="message"/>
+	</g:VerticalPanel>
+	
+</ui:UiBinder>
