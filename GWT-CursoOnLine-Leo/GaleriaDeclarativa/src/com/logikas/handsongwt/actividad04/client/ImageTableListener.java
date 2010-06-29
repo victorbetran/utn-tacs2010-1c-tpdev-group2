@@ -5,15 +5,15 @@ import com.google.gwt.user.client.ui.TableListener;
 
 public class ImageTableListener implements TableListener {
 
-	private GaleriaDeclarativaWidget model;
+	private GaleriaDeclarativaWidget view;
 	
 	public ImageTableListener(GaleriaDeclarativaWidget galeriaDeclarativaWidget) {
-		this.model = galeriaDeclarativaWidget;
+		this.view = galeriaDeclarativaWidget;
 	}
 
 	@Override
 	public void onCellClicked(SourcesTableEvents sender, int row, int cell) {
-		this.model.select(row - 1);
+		this.view.select(row - 1);
 	}
 
 }
