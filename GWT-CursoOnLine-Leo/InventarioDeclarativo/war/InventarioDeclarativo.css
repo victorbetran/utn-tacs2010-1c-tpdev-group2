@@ -1,0 +1,11 @@
+.tablaInventarioHeader {
+	background-color: #568BBA;
+	color: white;
+	font-style: italic;
+}
+
+.tablaInventario {
+	border: 1px solid silver;
+	padding: 2px;
+	margin-bottom: 6px;
+}
