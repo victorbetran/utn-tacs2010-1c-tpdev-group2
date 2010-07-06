@@ -14,7 +14,9 @@ public class PedidoReceiver  {
 	public void procesarPedido(Pedido pedido)
 	{	
 		pedido.efectivizar();
+		
 		this.pedidoDAO.save(pedido);
 	}
 
 }
+
