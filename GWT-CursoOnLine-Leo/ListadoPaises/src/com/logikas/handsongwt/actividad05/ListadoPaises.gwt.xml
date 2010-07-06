@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Este archivo pertenece al curso "Hands On GWT" de Logikas Eduka
+                        www.logikas.com - 2010
+ -->
+<module rename-to='listadopaises'>
+
+  <!-- Inherit the core Web Toolkit stuff.-->
+  <inherits name='com.google.gwt.user.User'/>
+
+  <!-- Inherit the default GWT style sheet.-->
+  <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+
+  <!-- Other module inherits.-->
+  <inherits name="com.google.gwt.i18n.I18N"/>
+  <extend-property name="locale" values="en"/>
+
+  <!-- Specify the app entry point class.-->
+  <entry-point class='com.logikas.handsongwt.actividad05.client.ListadoPaises'/>
+
+  <!-- Specify the paths for translatable code.-->
+  <source path='client'/>
+  <source path='domain'/>
+
+</module>
