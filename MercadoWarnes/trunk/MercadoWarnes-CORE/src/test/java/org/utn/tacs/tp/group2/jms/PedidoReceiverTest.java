@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 import org.utn.tacs.tp.group2.pieza.Moneda;
@@ -33,6 +34,7 @@ public class PedidoReceiverTest {
 	}
 	
 	@Test
+	@Transactional
 	public void ProcesarUnPedido()
 	{		
 		this.pedidoReceiver.procesarPedido(this.pedido);
