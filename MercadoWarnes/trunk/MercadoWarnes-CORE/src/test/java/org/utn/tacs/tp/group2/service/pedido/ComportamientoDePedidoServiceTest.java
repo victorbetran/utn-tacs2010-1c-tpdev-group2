@@ -24,9 +24,10 @@ import org.utn.tacs.tp.group2.service.implementation.PedidoDTO;
 import org.utn.tacs.tp.group2.service.implementation.PedidoServiceImpl;
 import org.utn.tacs.tp.group2.service.implementation.PiezaDTO;
 import org.utn.tacs.tp.group2.service.pieza.PiezaDAOMock;
+import org.utn.tacs.tp.group2.service.soap.NotificadorDePedidosAdapterMock;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:applicationContext.xml"})
+@ContextConfiguration(locations={"classpath:testingApplicationContext.xml"})
 public class ComportamientoDePedidoServiceTest {
 
 	private PedidoService pedidoService = new PedidoServiceImpl();
@@ -45,6 +46,7 @@ public class ComportamientoDePedidoServiceTest {
 	public void setUp() {
 		pedidoDAO = new PedidoDAOMock();
 		piezaDAO = new PiezaDAOMock();
+		((PedidoServiceImpl)this.pedidoService).setNotificador(new NotificadorDePedidosAdapterMock());
 		this.pedidoService.setPedidoDAO(pedidoDAO);
 		this.pedidoService.setPiezaDAO(piezaDAO);
 

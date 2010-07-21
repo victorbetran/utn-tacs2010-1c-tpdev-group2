@@ -28,7 +28,7 @@ import org.utn.tacs.tp.group2.service.resources.PiezaResource;
 import com.thoughtworks.xstream.XStream;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:applicationContext.xml"})
+@ContextConfiguration(locations={"classpath:testingApplicationContext.xml"})
 @Transactional(propagation=Propagation.REQUIRES_NEW)
 public class TestIntegracionServicioPiezas {
 

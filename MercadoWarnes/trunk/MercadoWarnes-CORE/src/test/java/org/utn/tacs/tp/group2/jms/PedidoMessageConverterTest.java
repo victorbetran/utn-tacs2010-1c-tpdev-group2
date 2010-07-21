@@ -25,7 +25,7 @@ import ar.edu.utn.frba.tacs.warnes.Cliente;
 import ar.edu.utn.frba.tacs.warnes.Item;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext.xml" })
+@ContextConfiguration(locations = { "classpath:testingApplicationContext.xml" })
 public class PedidoMessageConverterTest {
 
 	@Autowired

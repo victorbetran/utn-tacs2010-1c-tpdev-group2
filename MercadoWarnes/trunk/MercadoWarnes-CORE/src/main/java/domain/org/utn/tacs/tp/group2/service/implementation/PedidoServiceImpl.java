@@ -9,6 +9,7 @@ import org.utn.tacs.tp.group2.daos.exceptions.PiezaInexistenteException;
 import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
 import org.utn.tacs.tp.group2.exceptions.services.ComposicionPedidoInvalida;
+import org.utn.tacs.tp.group2.pedido.EfectivizacionPedidosObserver;
 import org.utn.tacs.tp.group2.pedido.EstadoPedido;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 import org.utn.tacs.tp.group2.pieza.Pieza;
@@ -58,6 +59,7 @@ public class PedidoServiceImpl implements PedidoService {
 
 	public void efectivizarPedido(String pedidoId) {
 		Pedido pedido = this.pedidoDAO.findByID(Long.valueOf(pedidoId));
+		pedido.acceptEfectivizacionObserver(getNotificador());
 		pedido.efectivizar();
 	}
 
@@ -92,6 +94,16 @@ public class PedidoServiceImpl implements PedidoService {
 	//********************************************
 	//** GETTER & SETTER
 	//********************************************
+
+	@Autowired
+	private EfectivizacionPedidosObserver notificadorDePedidosAdapter;
+	private EfectivizacionPedidosObserver getNotificador() {
+		return this.notificadorDePedidosAdapter;
+	}
+	
+	public void setNotificador(EfectivizacionPedidosObserver notificador) {
+		this.notificadorDePedidosAdapter = notificador;
+	}
 	
 	public void setPedidoDAO(PedidoDAO pedidoDAO) {
 		this.pedidoDAO = pedidoDAO;
