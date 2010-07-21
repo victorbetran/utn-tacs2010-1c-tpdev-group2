@@ -12,7 +12,7 @@ import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.pedido.Pedido;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:applicationContext.xml"})
+@ContextConfiguration(locations={"classpath:testingApplicationContext.xml"})
 public class AbmDePedidosTest {
 
 	@Autowired

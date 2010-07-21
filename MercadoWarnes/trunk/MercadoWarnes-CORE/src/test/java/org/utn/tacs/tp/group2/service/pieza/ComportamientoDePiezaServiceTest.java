@@ -18,7 +18,7 @@ import org.utn.tacs.tp.group2.service.implementation.PiezaDTO;
 import org.utn.tacs.tp.group2.service.implementation.PiezaServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:applicationContext.xml"})
+@ContextConfiguration(locations={"classpath:testingApplicationContext.xml"})
 public class ComportamientoDePiezaServiceTest {
 
 	private PiezaService piezaService = new PiezaServiceImpl();

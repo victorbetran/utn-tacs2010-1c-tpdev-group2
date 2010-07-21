@@ -32,7 +32,7 @@ import org.utn.tacs.tp.group2.service.resources.PedidoResource;
 import com.thoughtworks.xstream.XStream;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:applicationContext.xml"})
+@ContextConfiguration(locations={"classpath:testingApplicationContext.xml"})
 @Transactional
 public class TestIntegracionServicioPedidos {
 

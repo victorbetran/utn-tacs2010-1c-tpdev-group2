@@ -16,21 +16,21 @@ public class NotificadorDePedidosAdapter implements EfectivizacionPedidosObserve
 	//***********************************
 	//* ATRIBUTTES
 	//***********************************
-	private static final NotificadorDePedidosAdapter INSTANCE = new NotificadorDePedidosAdapter();
+//	private static final NotificadorDePedidosAdapter INSTANCE = new NotificadorDePedidosAdapter();
 	private PedidosService pedidoServiceSOAP;
 	
 	
 	//***********************************
 	//* CONSTRUCTORS
 	//***********************************
-	private NotificadorDePedidosAdapter() {
+	public NotificadorDePedidosAdapter() {
 		PedidosServiceImplService service = new PedidosServiceImplService();  
 		this.pedidoServiceSOAP = service.getPort(PedidosService.class);  
 	}
 	
-	public static NotificadorDePedidosAdapter getInstance(){
-		return INSTANCE;
-	}
+//	public static NotificadorDePedidosAdapter getInstance(){
+//		return INSTANCE;
+//	}
 	
 	
 	//***********************************

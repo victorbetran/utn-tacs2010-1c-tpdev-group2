@@ -102,8 +102,8 @@
 	<!--*************************-->
 	<!--          SOAP           -->
 	<!--*************************-->
-	<bean name="notificadorDePedidosAdapter"
-		class="org.utn.tacs.tp.group2.service.soap.NotificadorDePedidosAdapter">
+	<bean name="notificadorDePedidosAdapterMock"
+		class="org.utn.tacs.tp.group2.service.soap.NotificadorDePedidosAdapterMock">
 	</bean>
 
 	<!--*************************-->
