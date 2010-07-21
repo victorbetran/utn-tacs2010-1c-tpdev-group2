@@ -1,0 +1,377 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.utn.tacs.tp.group2</groupId>
+	<artifactId>mercadowarnes</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>MercadoWarnes-CORE</name>
+	<url>http://maven.apache.org</url>
+
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>Maven Repository Switchboard</name>
+			<layout>default</layout>
+			<url>http://repo1.maven.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>maven-restlet</id>
+			<name>Public online Restlet repository</name>
+			<url>http://maven.restlet.org</url>
+		</repository>
+		<repository>
+			<id>maven-spring</id>
+			<name>Spring Portfolio Repository</name>
+			<url>http://repo1.maven.org/maven-spring</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+
+		<!-- LOGUEO -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.0-alpha2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.0</version>
+		</dependency>
+		<!-- END LOGUEO -->
+
+		<!-- TESTING -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymockclassextension</artifactId>
+			<version>2.5.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>1.8.0.7</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<!-- END TESTING -->
+
+		<!-- HIBERNATE -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate</artifactId>
+			<version>3.2.6.ga</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-annotations</artifactId>
+			<version>3.3.1.GA</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- END HIBERNATE -->
+
+		<!-- SPRING -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>2.5.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>2.5.6</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>2.5.6</version>
+		</dependency>
+		<!-- END SPRING -->
+
+		<!--Simulador-Model-->
+		<dependency>
+			<groupId>ar.edu.utn.frba.tacs</groupId>
+			<artifactId>WarnesSimulator-Model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>jar</type>
+		</dependency>
+		<!--END Simulador-Model-->
+
+		<!-- OTRAS DEP -->
+		<dependency>
+			<groupId>xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>log4j</groupId>-->
+<!--			<artifactId>log4j</artifactId>-->
+<!--			<version>1.2.14</version>-->
+<!--		</dependency>-->
+		<!-- JMS -->
+		<dependency>
+			<groupId>javax.jms</groupId>
+			<artifactId>jms</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<!-- Necesario para los test del converter, NO BORRAR -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-core</artifactId>
+			<version>5.3.0</version>
+		</dependency>
+		<!-- END JMS -->
+
+		<!-- compile -->
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm</artifactId>
+			<version>1.5.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.1_3</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>3.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.restlet</groupId>
+			<artifactId>org.restlet.ext.json</artifactId>
+			<version>${com.noelios.restlet.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.noelios.restlet</groupId>
+			<artifactId>com.noelios.restlet</artifactId>
+			<version>${com.noelios.restlet.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.restlet</groupId>
+			<artifactId>org.restlet.ext.jaxb</artifactId>
+			<version>${com.noelios.restlet.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.noelios.restlet</groupId>
+			<artifactId>com.noelios.restlet.ext.httpclient</artifactId>
+			<version>${com.noelios.restlet.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.noelios.restlet</groupId>
+			<artifactId>com.noelios.restlet.ext.simple</artifactId>
+			<version>${com.noelios.restlet.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.noelios.restlet</groupId>
+			<artifactId>com.noelios.restlet.ext.spring</artifactId>
+			<version>${com.noelios.restlet.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.restlet</groupId>
+			<artifactId>org.restlet.ext.spring</artifactId>
+			<version>${com.noelios.restlet.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<!-- OTRAS DEP -->
+
+		<!--CXF - SOAP-->
+		<dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.thoughtworks.xstream</groupId>-->
+<!--            <artifactId>xstream</artifactId>-->
+<!--            <version>1.3.1</version>-->
+<!--            <type>jar</type>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>  -->
+        <dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.15</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>jms</artifactId>
+					<groupId>javax.jms</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jmxtools</artifactId>
+					<groupId>com.sun.jdmk</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jmxri</artifactId>
+					<groupId>com.sun.jmx</groupId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.activation</groupId>
+					<artifactId>activation</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.mail</groupId>
+					<artifactId>mail</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>itext</groupId>
+			<artifactId>itext</artifactId>
+			<version>1.3.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<!--END CXF - SOAP-->
+	</dependencies>
+
+	<properties>
+		<org.restlet.version>1.1-M4</org.restlet.version>
+		<com.noelios.restlet.version>1.1-M4</com.noelios.restlet.version>
+		<org.restlet.jaxb.version>1.1-M4</org.restlet.jaxb.version>
+		
+		<!-- Path donde se van a colocar las clases generadas a partir del wsdl -->
+		<dir.destiny>./src/main/java/domain/</dir.destiny>
+		
+		<!-- URl de donde se van a obtener los wsdl -->
+		<wsdl.url>http://127.0.0.1:8080/WarnesSimulator/PedidosService?wsdl</wsdl.url>
+	</properties>
+
+	<build>
+		<sourceDirectory>src/main/java/domain</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<projectNameTemplate>[artifactId]-[version]</projectNameTemplate>
+					<wtpmanifest>true</wtpmanifest>
+					<wtpapplicationxml>true</wtpapplicationxml>
+					<wtpversion>2.0</wtpversion>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/main/java/persistence</source>
+								<source>src/main/java/domain</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.apache.cxf</groupId>-->
+<!--				<artifactId>cxf-codegen-plugin</artifactId>-->
+<!--				<version>2.2.1</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>generate-sources</id>-->
+<!--						<phase>generate-sources</phase>-->
+<!--						<configuration>-->
+<!--							<sourceRoot>${dir.destiny}</sourceRoot>-->
+<!--							<wsdlOptions>-->
+<!--								<wsdlOption>-->
+<!--									<wsdl>${wsdl.url}</wsdl>-->
+<!--									<extraargs>-->
+<!--										<extraarg>-verbose</extraarg>-->
+<!--									</extraargs>-->
+<!--								</wsdlOption>-->
+<!--							</wsdlOptions>-->
+<!--						</configuration>-->
+<!--						<goals>-->
+<!--							<goal>wsdl2java</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
+		</plugins>
+	</build>
+</project>
