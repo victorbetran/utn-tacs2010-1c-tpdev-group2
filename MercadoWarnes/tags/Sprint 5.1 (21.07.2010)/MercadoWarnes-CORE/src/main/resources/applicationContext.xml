@@ -1,0 +1,184 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+ 		   http://www.springframework.org/schema/tx
+ 		   http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+
+
+	<!--*******************-->
+	<!--   CONSULTAS REST  -->
+	<!--*******************-->
+	<context:annotation-config/>
+	<context:component-scan base-package="org.utn.tacs.tp.group2.service.resources"/>
+
+	<bean name="root" class="org.restlet.ext.spring.SpringRouter">
+		<property name="attachments" ref="resourceMap" />
+	</bean>
+
+	<bean id="resourceMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<!--*******************-->
+				<!--Consultas de Piezas-->
+				<!--*******************-->
+				<entry key="/pieza/{id-pieza}">
+					<ref bean="piezaEndpoint" />
+				</entry>
+				<entry key="/pieza">
+					<ref bean="piezasEndpoint" />
+				</entry>
+				<!--*************************************-->
+				<!--Consultas de Pedidos + Creación + Uso-->
+				<!--*************************************-->
+				<entry key="/pedido/{id-pedido}">
+					<ref bean="pedidoEndpoint" />
+				</entry>
+				<entry key="/pedido">
+					<ref bean="pedidosEndpoint" />
+				</entry>
+				<entry key="/pedido/{id-pedido}/accion/{accion}">
+					<ref bean="pedidoManejadorEndpoint" />
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<bean id="piezaEndpoint" class="org.restlet.ext.spring.SpringFinder">
+		<lookup-method name="createResource" bean="piezaResource" />
+	</bean>
+
+	<bean id="piezasEndpoint" class="org.restlet.ext.spring.SpringFinder">
+		<lookup-method name="createResource" bean="piezasResource" />
+	</bean>
+
+	<bean id="pedidoEndpoint" class="org.restlet.ext.spring.SpringFinder">
+		<lookup-method name="createResource" bean="pedidoResource" />
+	</bean>
+
+	<bean id="pedidosEndpoint" class="org.restlet.ext.spring.SpringFinder">
+		<lookup-method name="createResource" bean="pedidosResource" />
+	</bean>
+
+	<bean id="pedidoManejadorEndpoint" class="org.restlet.ext.spring.SpringFinder">
+		<lookup-method name="createResource" bean="pedidoManejadorResource" />
+	</bean>
+	
+
+	<!--*************************-->
+	<!--        SERVICIOS        -->
+	<!--*************************-->
+	<bean name="piezaService"
+		class="org.utn.tacs.tp.group2.service.implementation.PiezaServiceImpl">
+		<property name="piezaDAO" ref="piezaDAO" />
+	</bean>
+
+	<bean name="pedidoService"
+		class="org.utn.tacs.tp.group2.service.implementation.PedidoServiceImpl">
+		<property name="pedidoDAO" ref="pedidoDAO" />
+	</bean>
+
+
+	<!--*************************-->
+	<!--          DAOS           -->
+	<!--*************************-->
+	<bean name="piezaDAO"
+		class="org.utn.tacs.tp.group2.daos.implementations.PiezaDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean name="pedidoDAO"
+		class="org.utn.tacs.tp.group2.daos.implementations.PedidoDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<!--*************************-->
+	<!--          JMS            -->
+	<!--*************************-->
+	
+	
+	<!-- Connection con el Broker del Simulador de TACS -->
+<!--	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">-->
+<!--		<property name="brokerURL" value="tcp://localhost:61616" />-->
+<!--	</bean>-->
+
+
+
+	<!-- Message Listener Adapter -->
+	<!--
+		Es un MessageListener que delega en un bean y en un metodo elegido la
+		implementacion de lo que se hace con el objeto recibido de la cola. SPRING PAG. 412.
+	-->
+	<bean id="purePojoMdp"
+		class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<property name="delegate" ref="pedidoReceiver" />
+		<property name="defaultListenerMethod" value="procesarPedido" />
+		<property name="messageConverter" ref="pedidoConverter" />
+	</bean>
+	
+	<!-- Recibe el pedido de JMS -->
+	<bean id="pedidoReceiver" class="org.utn.tacs.tp.group2.jms.PedidoReceiver">	
+	</bean>
+
+	<!-- Converter -->
+	<bean id="pedidoConverter" class="org.utn.tacs.tp.group2.jms.PedidoMessageConverter">
+	</bean>
+
+
+	<!--*************************-->
+	<!--  TRANSACTION MANAGER     -->
+	<!--*************************-->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+	<!--*************************-->
+	<!--        SESSION          -->
+	<!--*************************-->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceStd" />
+		<property name="schemaUpdate" value="true" />
+		<property name="annotatedClasses">
+			<list>
+				<value>org.utn.tacs.tp.group2.pedido.Pedido</value>
+				<value>org.utn.tacs.tp.group2.pedido.EstadoPedido</value>
+				<value>org.utn.tacs.tp.group2.pieza.Pieza</value>
+				<value>org.utn.tacs.tp.group2.pieza.EstadoPieza</value>
+				<value>org.utn.tacs.tp.group2.pieza.Auto</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+				<prop key="show_sql">true</prop>
+				<prop key="hbm2ddl.auto">create</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!--*************************-->
+	<!--    DATA SOURCE (db)     -->
+	<!--*************************-->
+	<bean id="dataSourceStd" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+		<property name="url" value="jdbc:hsqldb:mem:tp-group2-db" />
+		<property name="username" value="sa" />
+		<property name="password" value="" />
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="10" />
+	</bean>
+
+</beans>
