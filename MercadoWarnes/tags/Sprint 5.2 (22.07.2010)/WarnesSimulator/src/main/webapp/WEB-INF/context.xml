@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+  xmlns="http://www.springframework.org/schema/beans" 
+  xmlns:amq="http://activemq.apache.org/schema/core"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:jaxws="http://cxf.apache.org/jaxws"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+  http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+  	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+  
+  
+	<amq:broker useJmx="false" persistent="false">
+		<amq:transportConnectors>
+			<amq:transportConnector uri="tcp://localhost:61636" />
+		</amq:transportConnectors>
+	</amq:broker>
+
+	<bean id="pedidosServiceImpl" class="ar.edu.utn.frba.tacs.mercadowarnessh.facturacion.PedidosServiceImpl" />
+
+	<jaxws:endpoint id="pedidosService"
+		implementor="#pedidosServiceImpl"
+		address="/PedidosService" />
+	
+	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="vm://localhost:0"/>
+	</bean>
+	
+	<bean id="pedidosQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="pedidos"/>
+	</bean>
+
+	<bean id="colaFiller" class="ar.edu.utn.frba.tacs.mercadowarnessh.colas.ColaFiller" init-method="fill">
+		<property name="jmsTemplate" ref="jmsTemplate"/>
+		<property name="pedidosProvider" ref="pedidosProvider"/>
+	</bean>
+	
+	<bean id="pedidosProvider" class="ar.edu.utn.frba.tacs.mercadowarnessh.colas.PedidosProvider">
+		<property name="inputFile" value="WEB-INF/pedidos.xml"/>	
+	</bean>
+	
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="defaultDestination" ref="pedidosQueue"/>
+    </bean>    
+</beans>
