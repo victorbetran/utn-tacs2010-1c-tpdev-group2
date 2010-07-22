@@ -139,23 +139,42 @@ public class TestIntegracionServicioPedidos {
 		Assert.assertEquals(Status.SUCCESS_NO_CONTENT, response.getStatus());
 	}
 
+//	
+//	@Test
+//	public void codigoRespuestaEfectivizandoPedido() throws IOException {
+//		Response response = router.post("/pedido/" + this.unPedidoModeloConPieza.getId().toString() + "/accion/efectivizar", new StringRepresentation(""));
+//		Assert.assertEquals(Status.SUCCESS_NO_CONTENT, response.getStatus());
+//	}
+//	
+//	@Test
+//	public void codigoRespuestaEfectivizandoPedidoConDatosNoValidos() throws IOException {
+//		Response response = router.post("/pedido/" + this.unPedidoModeloConPieza.getId().toString() + "/accion/efectivvvvizar", new StringRepresentation(""));
+//		Assert.assertEquals(Status.CLIENT_ERROR_BAD_REQUEST, response.getStatus());
+//	}
+//	
+//	@Test
+//	public void codigoRespuestaCancelandoPedido() throws IOException {
+//		Response response = router.post("/pedido/" + this.unPedidoModeloConPieza.getId().toString() + "/accion/cancelar", new StringRepresentation(""));
+//		Assert.assertEquals(Status.SUCCESS_NO_CONTENT, response.getStatus());
+//	}
+	
 	
 	@Test
 	public void codigoRespuestaEfectivizandoPedido() throws IOException {
-		Response response = router.post("/pedido/" + this.unPedidoModeloConPieza.getId().toString() + "/accion/efectivizar", new StringRepresentation(""));
-		Assert.assertEquals(Status.SUCCESS_NO_CONTENT, response.getStatus());
+		Response response = router.put("/pedido/" + this.unPedidoModeloConPieza.getId().toString(), new StringRepresentation("ESTADO=" + EstadoPedido.getEfectivo()));
+		Assert.assertEquals(Status.SUCCESS_OK, response.getStatus());
 	}
 	
 	@Test
 	public void codigoRespuestaEfectivizandoPedidoConDatosNoValidos() throws IOException {
-		Response response = router.post("/pedido/" + this.unPedidoModeloConPieza.getId().toString() + "/accion/efectivvvvizar", new StringRepresentation(""));
+		Response response = router.put("/pedido/" + this.unPedidoModeloConPieza.getId().toString(), new StringRepresentation("ESTADO=" + EstadoPedido.getEfectivo() + "_FAKE"));
 		Assert.assertEquals(Status.CLIENT_ERROR_BAD_REQUEST, response.getStatus());
 	}
 	
 	@Test
 	public void codigoRespuestaCancelandoPedido() throws IOException {
-		Response response = router.post("/pedido/" + this.unPedidoModeloConPieza.getId().toString() + "/accion/cancelar", new StringRepresentation(""));
-		Assert.assertEquals(Status.SUCCESS_NO_CONTENT, response.getStatus());
+		Response response = router.put("/pedido/" + this.unPedidoModeloConPieza.getId().toString(), new StringRepresentation("ESTADO=" + EstadoPedido.getCancelado()));
+		Assert.assertEquals(Status.SUCCESS_OK, response.getStatus());
 	}
 	
 	//********************************************
@@ -196,9 +215,25 @@ public class TestIntegracionServicioPedidos {
 		Assert.assertTrue(pedidoGivenByService.getPiezas().contains(unaPiezaParaAgregar.getId().toString()));
 	}
 
+//	@Test
+//	public void efectivizarPedido() throws IOException {
+//		router.post("/pedido/" + this.unPedidoModeloConPieza.getId().toString() + "/accion/efectivizar", new StringRepresentation(""));
+//		
+//		Pedido pedido = pedidoDao.findByID(this.unPedidoModeloConPieza.getId());
+//		Assert.assertTrue(pedido.isEfectivo());
+//	}
+//	
+//	@Test
+//	public void cancelarPedido() throws IOException {
+//		router.post("/pedido/" + this.unPedidoModeloConPieza.getId().toString() + "/accion/cancelar", new StringRepresentation(""));
+//		
+//		Pedido pedido = pedidoDao.findByID(this.unPedidoModeloConPieza.getId());
+//		Assert.assertTrue(pedido.isCancelado());
+//	}
+	
 	@Test
 	public void efectivizarPedido() throws IOException {
-		router.post("/pedido/" + this.unPedidoModeloConPieza.getId().toString() + "/accion/efectivizar", new StringRepresentation(""));
+		router.put("/pedido/" + this.unPedidoModeloConPieza.getId().toString(), new StringRepresentation("ESTADO=" + EstadoPedido.getEfectivo()));
 		
 		Pedido pedido = pedidoDao.findByID(this.unPedidoModeloConPieza.getId());
 		Assert.assertTrue(pedido.isEfectivo());
@@ -206,7 +241,7 @@ public class TestIntegracionServicioPedidos {
 	
 	@Test
 	public void cancelarPedido() throws IOException {
-		router.post("/pedido/" + this.unPedidoModeloConPieza.getId().toString() + "/accion/cancelar", new StringRepresentation(""));
+		router.put("/pedido/" + this.unPedidoModeloConPieza.getId().toString(), new StringRepresentation("ESTADO=" + EstadoPedido.getCancelado()));
 		
 		Pedido pedido = pedidoDao.findByID(this.unPedidoModeloConPieza.getId());
 		Assert.assertTrue(pedido.isCancelado());
