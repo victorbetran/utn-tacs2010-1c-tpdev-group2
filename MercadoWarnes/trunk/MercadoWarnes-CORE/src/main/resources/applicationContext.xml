@@ -27,6 +27,12 @@
 		<constructor-arg>
 			<map>
 				<!--*******************-->
+				<!--- LOAD FAKE VALUES -->
+				<!--*******************-->
+				<entry key="/loadFakeValues">
+					<ref bean="fakeValuesLoaderEndpoint" />
+				</entry>
+				<!--*******************-->
 				<!--Consultas de Piezas-->
 				<!--*******************-->
 				<entry key="/pieza/{id-pieza}">
@@ -74,9 +80,9 @@
 		<lookup-method name="createResource" bean="pedidosResource" />
 	</bean>
 
-<!--	<bean id="pedidoManejadorEndpoint" class="org.restlet.ext.spring.SpringFinder">-->
-<!--		<lookup-method name="createResource" bean="pedidoManejadorResource" />-->
-<!--	</bean>-->
+	<bean id="fakeValuesLoaderEndpoint" class="org.restlet.ext.spring.SpringFinder">
+		<lookup-method name="createResource" bean="fakeValuesLoaderResource" />
+	</bean>
 	
 
 	<!--*************************-->

@@ -214,6 +214,11 @@ public class Pieza extends PersistentObject {
 	public double getPrecioEn(Moneda moneda) {
 		return this.precio.getValorEn(moneda);
 	}
+	
+	public Precio getPrecio(){
+		return this.precio;
+	}
+
 
 	/**
 	 * Necesario en el converter de JMS.
