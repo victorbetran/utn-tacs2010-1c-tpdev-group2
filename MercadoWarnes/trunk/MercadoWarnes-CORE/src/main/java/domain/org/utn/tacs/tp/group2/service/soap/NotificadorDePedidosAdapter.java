@@ -16,7 +16,6 @@ public class NotificadorDePedidosAdapter implements EfectivizacionPedidosObserve
 	//***********************************
 	//* ATRIBUTTES
 	//***********************************
-//	private static final NotificadorDePedidosAdapter INSTANCE = new NotificadorDePedidosAdapter();
 	private PedidosService pedidoServiceSOAP;
 	
 	
@@ -27,10 +26,6 @@ public class NotificadorDePedidosAdapter implements EfectivizacionPedidosObserve
 		PedidosServiceImplService service = new PedidosServiceImplService();  
 		this.pedidoServiceSOAP = service.getPort(PedidosService.class);  
 	}
-	
-//	public static NotificadorDePedidosAdapter getInstance(){
-//		return INSTANCE;
-//	}
 	
 	
 	//***********************************
@@ -55,7 +50,7 @@ public class NotificadorDePedidosAdapter implements EfectivizacionPedidosObserve
 	//*PRIVATE METHODS
 	//***********************************
 	/**
-	 * Convierte un medido de nuestro dominio a un pedido perteneciente a la aplicación SOAP-.
+	 * Convierte un pedido de nuestro dominio a un pedido perteneciente a la aplicación externa-.
 	 */
 	private ar.edu.utn.frba.tacs.mercadowarnessh.facturacion.Pedido myPedidoToYourSOAPPedido(org.utn.tacs.tp.group2.pedido.Pedido pedido){
 		ar.edu.utn.frba.tacs.mercadowarnessh.facturacion.Pedido pedidoSOAP = new ar.edu.utn.frba.tacs.mercadowarnessh.facturacion.Pedido();
@@ -64,7 +59,7 @@ public class NotificadorDePedidosAdapter implements EfectivizacionPedidosObserve
 			ar.edu.utn.frba.tacs.mercadowarnessh.facturacion.Pieza piezaSOAP = new ar.edu.utn.frba.tacs.mercadowarnessh.facturacion.Pieza();
 			piezaSOAP.setId(pieza.getId());
 			piezaSOAP.setDescripcion(pieza.getDescripcion());
-			piezaSOAP.setPrecio(Float.valueOf(1234)); //TODO: cambiar a pieza.getPrecio() cuando se termine el tema de las cotizaciones.
+			piezaSOAP.setPrecio(Double.valueOf(pieza.getPrecio().getValor()).floatValue());
 			pedidoSOAP.getPiezas().add(piezaSOAP);
 		}
 		return pedidoSOAP;
