@@ -133,7 +133,7 @@ public class PedidoResource extends Resource {
 
 	}
 
-	public String convertStreamToString(InputStream is) {
+	private String convertStreamToString(InputStream is) {
 		try{
 			if (is != null) {
 				StringBuilder sb = new StringBuilder();

@@ -1,6 +1,9 @@
 package org.utn.tacs.tp.group2.service.pieza;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.List;
 
@@ -51,8 +54,8 @@ public class TestIntegracionServicioPiezas {
 	
 	@Before
 	public void setUp() {
-		autoConPiezas = Auto.createAuto("EXP-074", "AK-47", 2009, new Date());
-		autoSinPiezas = Auto.createAuto("FAST", "BMW-001", 2001, new Date());
+		this.autoConPiezas = Auto.createAuto("EXP-074", "AK-47", 2009, new Date());
+		this.autoSinPiezas = Auto.createAuto("FAST", "BMW-001", 2001, new Date());
 		
 		this.unaPiezaModelo = new Pieza("PIEZA1",40,Moneda.PESO).setAutoOrigen(autoConPiezas);
 		this.unaPiezaModelo.setCategoria("MEDIUM");
@@ -113,6 +116,23 @@ public class TestIntegracionServicioPiezas {
 		Assert.assertEquals(Status.CLIENT_ERROR_BAD_REQUEST, response.getStatus());
 	}
 	
+	@Test
+	public void codigoRespuestaConsultandoPorcentajeDePiezasVendidas() throws IOException{
+		unaPiezaModelo.reservar();
+		unaPiezaModelo.vender();
+		
+		Response response = router.get("/porcentajePiezasPorAuto/" + this.autoConPiezas.getId());
+		Assert.assertEquals(Status.SUCCESS_OK, response.getStatus());
+	}
+	
+	@Test
+	public void codigoRespuestaConsultandoPorcentajeDePiezasVendidasDeUnAutoNoValido() throws IOException{
+		unaPiezaModelo.reservar();
+		unaPiezaModelo.vender();
+		
+		Response response = router.get("/porcentajePiezasPorAuto/" + "FAKE-ID");
+		Assert.assertEquals(Status.CLIENT_ERROR_BAD_REQUEST, response.getStatus());
+	}
 	
 	//********************************************
 	//** VALIDACION DE OBJETOS RESPUESTA
@@ -211,4 +231,38 @@ public class TestIntegracionServicioPiezas {
 		Assert.assertTrue(piezasGivenByService.isEmpty());
 	}
 	
+	@Test
+	public void respuestaConsultandoPorcentajeDePiezasVendidas() throws IOException{
+		unaPiezaModelo.reservar();
+		unaPiezaModelo.vender();
+		
+		Response response = router.get("/porcentajePiezasPorAuto/" + this.autoConPiezas.getId());
+		String value = convertStreamToString(response.getEntity().getStream());
+		
+		Assert.assertTrue(Integer.valueOf(value).equals(50));
+	}
+	
+	private String convertStreamToString(InputStream is) {
+		try{
+			if (is != null) {
+				StringBuilder sb = new StringBuilder();
+				String line;
+				try {
+					BufferedReader reader = new BufferedReader(	new InputStreamReader(is, "UTF-8"));
+					while ((line = reader.readLine()) != null) {
+						sb.append(line);
+					}
+				} finally {
+					is.close();
+				}
+				return sb.toString();
+			} else {
+				return "";
+			}
+		}
+		catch (Exception e) {
+			return "";
+		}
+	}
+
 }

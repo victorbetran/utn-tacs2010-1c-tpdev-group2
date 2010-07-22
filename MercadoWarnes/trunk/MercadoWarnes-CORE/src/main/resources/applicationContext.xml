@@ -35,6 +35,9 @@
 				<entry key="/pieza">
 					<ref bean="piezasEndpoint" />
 				</entry>
+				<entry key="/porcentajePiezasPorAuto/{id-auto}">
+					<ref bean="porcentajePiezasPorAutoEndpoint" />
+				</entry>
 				<!--*************************************-->
 				<!--Consultas de Pedidos + Creación + Uso-->
 				<!--*************************************-->
@@ -53,6 +56,10 @@
 
 	<bean id="piezaEndpoint" class="org.restlet.ext.spring.SpringFinder">
 		<lookup-method name="createResource" bean="piezaResource" />
+	</bean>
+
+	<bean id="porcentajePiezasPorAutoEndpoint" class="org.restlet.ext.spring.SpringFinder">
+		<lookup-method name="createResource" bean="porcentajePiezasAutoResource" />
 	</bean>
 
 	<bean id="piezasEndpoint" class="org.restlet.ext.spring.SpringFinder">
