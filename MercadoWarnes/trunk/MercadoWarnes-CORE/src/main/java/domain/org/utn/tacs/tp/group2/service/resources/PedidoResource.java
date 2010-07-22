@@ -80,6 +80,9 @@ public class PedidoResource extends Resource {
 				MediaType.TEXT_XML);
 	}
 
+	/**
+	 * POST
+	 */
 	@Override
 	public void acceptRepresentation(Representation entity)
 			throws ResourceException {
