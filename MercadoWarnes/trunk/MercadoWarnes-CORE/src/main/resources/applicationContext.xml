@@ -44,9 +44,9 @@
 				<entry key="/pedido">
 					<ref bean="pedidosEndpoint" />
 				</entry>
-				<entry key="/pedido/{id-pedido}/accion/{accion}">
-					<ref bean="pedidoManejadorEndpoint" />
-				</entry>
+<!--				<entry key="/pedido/{id-pedido}/accion/{accion}">-->
+<!--					<ref bean="pedidoManejadorEndpoint" />-->
+<!--				</entry>-->
 			</map>
 		</constructor-arg>
 	</bean>
@@ -67,9 +67,9 @@
 		<lookup-method name="createResource" bean="pedidosResource" />
 	</bean>
 
-	<bean id="pedidoManejadorEndpoint" class="org.restlet.ext.spring.SpringFinder">
-		<lookup-method name="createResource" bean="pedidoManejadorResource" />
-	</bean>
+<!--	<bean id="pedidoManejadorEndpoint" class="org.restlet.ext.spring.SpringFinder">-->
+<!--		<lookup-method name="createResource" bean="pedidoManejadorResource" />-->
+<!--	</bean>-->
 	
 
 	<!--*************************-->
