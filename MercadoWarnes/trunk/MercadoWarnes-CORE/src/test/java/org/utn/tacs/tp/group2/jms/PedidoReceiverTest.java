@@ -1,9 +1,14 @@
 package org.utn.tacs.tp.group2.jms;
 
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.command.ActiveMQQueue;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -25,6 +30,7 @@ public class PedidoReceiverTest {
 	@Autowired
 	private PedidoDAO pedidoDAO;
 	
+
 	@Before
 	public void setUp() {
 		this.pedido=Pedido.create();
@@ -37,8 +43,22 @@ public class PedidoReceiverTest {
 	@Transactional
 	public void ProcesarUnPedido()
 	{		
-		this.pedidoReceiver.procesarPedido(this.pedido);
+		this.pedidoReceiver.procesarPedido(this.pedido);		
 		Assert.assertTrue(this.pedido.isEfectivo());	
 		Assert.assertTrue(this.pedidoDAO.isPersisted(this.pedido));
+		
+				
 	}
+	@Test
+	public void ObtenerUnPedidoDeLaCola()
+	{
+		JmsTemplate jmsTemplate = new JmsTemplate();
+		jmsTemplate.setConnectionFactory(new ActiveMQConnectionFactory("tcp://localhost:61636"));
+		jmsTemplate.setDefaultDestination(new ActiveMQQueue("pedidos"));		
+		System.out.println(jmsTemplate.receiveAndConvert());;
+	}
+	
+	
+	
+	
 }
