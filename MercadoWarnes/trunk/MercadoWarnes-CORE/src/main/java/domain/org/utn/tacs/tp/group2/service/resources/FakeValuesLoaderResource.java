@@ -13,7 +13,9 @@ import org.restlet.resource.StringRepresentation;
 import org.restlet.resource.Variant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.utn.tacs.tp.group2.daos.interfaces.PedidoDAO;
 import org.utn.tacs.tp.group2.daos.interfaces.PiezaDAO;
+import org.utn.tacs.tp.group2.pedido.Pedido;
 import org.utn.tacs.tp.group2.pieza.Auto;
 import org.utn.tacs.tp.group2.pieza.Moneda;
 import org.utn.tacs.tp.group2.pieza.Pieza;
@@ -27,11 +29,15 @@ public class FakeValuesLoaderResource extends Resource{
 	private Pieza unaPiezaMediumDeAutoA;
 	private Pieza otraPiezaMediumDeAutoA;
 	private Pieza unaPiezaMediumDeAutoB;
+	private Pedido unPedido;
 	
 	private static boolean first = true;
 	
 	@Autowired
 	private PiezaDAO piezaDao;
+	
+	@Autowired
+	private PedidoDAO pedidoDao;
 	
 	public void init(Context context, Request request, Response response) {
 		super.init(context, request, response);
@@ -62,6 +68,10 @@ public class FakeValuesLoaderResource extends Resource{
 			this.piezaDao.save(unaPiezaMediumDeAutoA);
 			this.piezaDao.save(otraPiezaMediumDeAutoA);
 			this.piezaDao.save(unaPiezaMediumDeAutoB);
+			
+			this.unPedido = Pedido.create();
+			this.unPedido.addPieza(unaPiezaPremiumDeAutoA);
+			this.pedidoDao.save(this.unPedido);
 			
 			first = false;
 		}

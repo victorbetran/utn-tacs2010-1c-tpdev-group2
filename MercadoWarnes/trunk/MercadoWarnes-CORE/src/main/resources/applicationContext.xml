@@ -53,9 +53,6 @@
 				<entry key="/pedido">
 					<ref bean="pedidosEndpoint" />
 				</entry>
-<!--				<entry key="/pedido/{id-pedido}/accion/{accion}">-->
-<!--					<ref bean="pedidoManejadorEndpoint" />-->
-<!--				</entry>-->
 			</map>
 		</constructor-arg>
 	</bean>
