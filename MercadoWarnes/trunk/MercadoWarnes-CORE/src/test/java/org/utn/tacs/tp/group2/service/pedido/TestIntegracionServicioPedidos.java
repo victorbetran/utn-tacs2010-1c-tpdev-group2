@@ -85,7 +85,7 @@ public class TestIntegracionServicioPedidos {
 		PedidoDTO pedidoDTO = new PedidoDTO(Pedido.create());
 		pedidoDTO.setPiezas(piezaId);
 		
-		Response response = this.router.put("/pedido", new StringRepresentation(new XStream().toXML(pedidoDTO)));
+		Response response = this.router.post("/pedido", new StringRepresentation(new XStream().toXML(pedidoDTO)));
 		
 		Assert.assertEquals(Status.SUCCESS_CREATED, response.getStatus());
 	}
@@ -99,7 +99,7 @@ public class TestIntegracionServicioPedidos {
 		PedidoDTO pedidoDTO = new PedidoDTO(Pedido.create());
 		pedidoDTO.setPiezas(piezaId);
 		
-		Response response = this.router.put("/pedido", new StringRepresentation(new XStream().toXML(pedidoDTO)));
+		Response response = this.router.post("/pedido", new StringRepresentation(new XStream().toXML(pedidoDTO)));
 		
 		Assert.assertEquals(Status.CLIENT_ERROR_BAD_REQUEST, response.getStatus());
 	}
@@ -110,7 +110,7 @@ public class TestIntegracionServicioPedidos {
 		Assert.assertEquals(Status.SUCCESS_OK, response.getStatus());
 	}
 	
-	@Test()
+	@Test
 	public void codigoRespuestaConsultandoUnPedidoInexistentePorId() {
 		Response response = router.get("/pedido/" + Pedido.create().getId());
 		Assert.assertEquals(Status.CLIENT_ERROR_NOT_FOUND, response.getStatus());

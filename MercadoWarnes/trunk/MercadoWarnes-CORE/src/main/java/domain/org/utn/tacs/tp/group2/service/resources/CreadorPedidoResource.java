@@ -22,11 +22,8 @@ public class CreadorPedidoResource extends Resource{
 	}
 
 	@Override
-	public Representation represent(Variant variant) throws ResourceException {
-//		Pedido nuevoPedido = this.pedidoService.crearPedido();
-//		
-//		return new StringRepresentation(new XStream().toXML(new PedidoDTO(nuevoPedido)), MediaType.TEXT_XML);
-		return null;
+	public void acceptRepresentation(Representation entity)	throws ResourceException {
+		super.acceptRepresentation(entity);
 	}
 	
 }

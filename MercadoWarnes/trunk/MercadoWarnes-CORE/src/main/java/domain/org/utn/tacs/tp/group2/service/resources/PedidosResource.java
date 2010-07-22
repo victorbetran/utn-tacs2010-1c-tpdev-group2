@@ -44,12 +44,12 @@ public class PedidosResource extends Resource {
 
 	@Override
 	public boolean allowPost() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean allowPut() {
-		return true;
+		return false;
 	}
 	
 	private String estado;
@@ -66,15 +66,12 @@ public class PedidosResource extends Resource {
 		
 	}
 	
-	/**
-	 * PUT
-	 */
 	@Override
-	public void storeRepresentation(Representation entity) throws ResourceException {
+	public void acceptRepresentation(Representation entity)	throws ResourceException {
 		try {
 			PedidoDTO pedido;
 			pedido = (PedidoDTO) new XStream().fromXML(entity.getStream());
-
+			
 			this.pedidoService.crearPedido(pedido);
 			getResponse().setStatus(Status.SUCCESS_CREATED);
 		} catch (ComposicionPedidoInvalida e) {
