@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Class-Path: activation-1.1.jar activeio-core-3.1.2.jar activemq-core-5
+ .3.0.jar activemq-protobuf-1.0.jar antlr-2.7.6.jar aopalliance-1.0.ja
+ r asm-1.5.3.jar asm-attrs-1.5.3.jar avalon-framework-4.1.3.jar cglib-
+ 2.1_3.jar com.noelios.restlet-1.1-M4.jar com.noelios.restlet.ext.http
+ client-1.1-M4.jar com.noelios.restlet.ext.servlet-1.1-M4.jar com.noel
+ ios.restlet.ext.simple-1.1-M4.jar com.noelios.restlet.ext.spring-1.1-
+ M4.jar commons-beanutils-1.7.0.jar commons-codec-1.2.jar commons-coll
+ ections-2.1.jar commons-dbcp-1.2.1.jar commons-httpclient-3.1.jar com
+ mons-lang-2.3.jar commons-logging-1.1.jar commons-logging-api-1.1.jar
+  commons-net-2.0.jar commons-pool-1.2.jar cxf-api-2.2.1.jar cxf-commo
+ n-schemas-2.2.1.jar cxf-common-utilities-2.2.1.jar cxf-rt-bindings-so
+ ap-2.2.1.jar cxf-rt-bindings-xml-2.2.1.jar cxf-rt-core-2.2.1.jar cxf-
+ rt-databinding-jaxb-2.2.1.jar cxf-rt-frontend-jaxws-2.2.1.jar cxf-rt-
+ frontend-simple-2.2.1.jar cxf-rt-transports-http-2.2.1.jar cxf-rt-ws-
+ addr-2.2.1.jar cxf-tools-common-2.2.1.jar dom4j-1.6.1.jar dozer-3.3.1
+ .jar ehcache-1.2.3.jar ejb3-persistence-1.0.1.GA.jar FastInfoset-1.2.
+ 3.jar geronimo-activation_1.1_spec-1.0.2.jar geronimo-annotation_1.0_
+ spec-1.1.1.jar geronimo-j2ee-management_1.0_spec-1.0.jar geronimo-j2e
+ e-management_1.1_spec-1.0.1.jar geronimo-javamail_1.4_spec-1.6.jar ge
+ ronimo-jaxws_2.1_spec-1.0.jar geronimo-jms_1.1_spec-1.1.1.jar geronim
+ o-stax-api_1.0_spec-1.0.1.jar geronimo-ws-metadata_2.0_spec-1.1.2.jar
+  hibernate-3.2.6.ga.jar hibernate-annotations-3.3.1.GA.jar hibernate-
+ commons-annotations-3.0.0.ga.jar hsqldb-1.8.0.7.jar itext-1.3.1.jar j
+ axb-api-2.1.jar jaxb-impl-2.1.3.jar jms-1.1.jar jta-1.1.jar kahadb-5.
+ 3.0.jar log4j-1.2.15.jar logkit-1.0.1.jar neethi-2.0.4.jar org.json-2
+ .0.jar org.restlet-1.1-M4.jar org.restlet.ext.jaxb-1.1-M4.jar org.res
+ tlet.ext.json-1.1-M4.jar org.restlet.ext.spring-1.1-M4.jar org.simple
+ framework-3.1.3.jar persistence-api-1.0.jar saaj-api-1.3.jar saaj-imp
+ l-1.3.2.jar slf4j-api-1.6.0-alpha2.jar slf4j-log4j12-1.6.0.jar spring
+ -2.5.6.jar spring-beans-2.5.jar spring-context-2.5.6.jar spring-conte
+ xt-support-2.5.jar spring-core-2.5.jar spring-web-2.5.jar spring-webm
+ vc-2.5.jar stax-api-1.0-2.jar WarnesSimulator-Model.jar wsdl4j-1.6.2.
+ jar wstx-asl-3.2.8.jar xercesImpl-2.0.2.jar xml-apis-1.0.b2.jar xml-r
+ esolver-1.2.jar XmlSchema-1.4.5.jar xpp3_min-1.1.3.4.O.jar xstream-1.
+ 2.2.jar
+
