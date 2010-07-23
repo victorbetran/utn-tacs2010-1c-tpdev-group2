@@ -122,11 +122,24 @@
 	
 	
 	<!-- Connection con el Broker del Simulador de TACS -->
-<!--	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">-->
-<!--		<property name="brokerURL" value="tcp://localhost:61616" />-->
-<!--	</bean>-->
-
-
+	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="tcp://localhost:61616" />
+	</bean>
+	
+	<bean id="pedidosQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="pedidosQueue" />
+	</bean>
+	
+	<!-- Message Listener Container -->
+	<!--
+		Este bicho te dice cuando hay un mensaje nuevo en la cola de JMS, no
+		hace falta que hagas un receive manual.
+	-->
+	<bean class="org.springframework.jms.listener.SimpleMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="pedidosQueue" />
+		<property name="messageListener" ref="purePojoMdp" />
+	</bean>
 
 	<!-- Message Listener Adapter -->
 	<!--
@@ -147,6 +160,7 @@
 	<!-- Converter -->
 	<bean id="pedidoConverter" class="org.utn.tacs.tp.group2.jms.PedidoMessageConverter">
 	</bean>
+
 
 
 	<!--*************************-->
