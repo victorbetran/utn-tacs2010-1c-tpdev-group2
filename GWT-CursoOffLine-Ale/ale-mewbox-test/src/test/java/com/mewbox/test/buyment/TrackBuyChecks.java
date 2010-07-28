@@ -22,6 +22,7 @@ public class TrackBuyChecks extends BussinesTest{
 	@Test
 	public void buyWithoutUser() {
 		
+		
 	}
 
 	@Test
